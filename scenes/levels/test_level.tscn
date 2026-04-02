@@ -8,11 +8,12 @@
 [ext_resource type="PackedScene" uid="uid://dqy00primfpyv" path="res://assets/models/Pedestal.glb" id="6_cyt5c"]
 [ext_resource type="PackedScene" uid="uid://uigv2h0flxta" path="res://scenes/power_pellet.tscn" id="7_7x1jh"]
 [ext_resource type="PackedScene" uid="uid://dfyf2y41r0d4w" path="res://scenes/simple_ai.tscn" id="8_7x1jh"]
+[ext_resource type="PackedScene" uid="uid://cxyct5hpij8yg" path="res://assets/models/Torch.glb" id="9_hfwtw"]
 
 [sub_resource type="Environment" id="Environment_48ne7"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_7x1jh"]
-vertices = PackedVector3Array(-54.344086, 0.5, -49.5, -54.344086, 0.5, 49.5, 44.655914, 0.5, 49.5, 44.655914, 0.5, -49.5)
+vertices = PackedVector3Array(-53.844086, 0.5, -49, -53.844086, 0.5, 49, 44.155914, 0.5, 49, 44.155914, 0.5, -49)
 polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
 geometry_parsed_geometry_type = 0
 agent_height = 2.0
@@ -27,6 +28,9 @@ material = ExtResource("1_v45ci")
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fr1um"]
 albedo_texture = ExtResource("1_jbqir")
 uv1_triplanar = true
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hfwtw"]
+size = Vector3(1.8759766, 5.289856, 2.147461)
 
 [node name="TestLevel" type="Node3D" unique_id=1704524550]
 
@@ -116,3 +120,25 @@ material = SubResource("StandardMaterial3D_fr1um")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.262653, -0.25073242, 6.5)
 size = Vector3(24.505005, 0.49853516, 24)
 material = ExtResource("1_v45ci")
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="." unique_id=418717050]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.78497696, 3.9885283, 8.914627)
+light_color = Color(0.9568431, 0, 0.2683414, 1)
+light_energy = 10.0
+omni_range = 21.997
+omni_attenuation = 2.469
+omni_shadow_mode = 0
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=345831941]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.333313, 0.6906471, 13.732124)
+light_color = Color(1.1551381e-06, 0.592867, 0.5928671, 1)
+light_energy = 10.0
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=386974538]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7917471, 1, 8.843079)
+
+[node name="Torch" parent="StaticBody3D" unique_id=1295869314 instance=ExtResource("9_hfwtw")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1025527347]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.019042969, 1.7655334, -0.040527344)
+shape = SubResource("BoxShape3D_hfwtw")
