@@ -55,6 +55,10 @@ size = Vector2(0.1, 0.1)
 
 [sub_resource type="Skin" id="Skin_whylb"]
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_wekyt"]
+radius = 0.68603516
+height = 8.0
+
 [node name="Magic_Sword" unique_id=959874152 instance=ExtResource("1_wekyt")]
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="." index="1" unique_id=1954303435]
@@ -64,3 +68,9 @@ speed_scale = 1.5
 process_material = SubResource("ParticleProcessMaterial_wekyt")
 draw_pass_1 = SubResource("PlaneMesh_05djm")
 draw_skin = SubResource("Skin_whylb")
+
+[node name="Area3D" type="Area3D" parent="." index="2" unique_id=1330804404]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" index="0" unique_id=1468136713]
+transform = Transform3D(0.99999994, -7.1054274e-15, -9.325874e-15, 2.3557785e-14, -0.029055696, -0.9995778, 1.4901635e-14, 0.9995778, -0.029055696, -0.052487373, 0.05248723, 6)
+shape = SubResource("CapsuleShape3D_wekyt")
