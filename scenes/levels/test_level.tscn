@@ -4,6 +4,7 @@
 [ext_resource type="Material" uid="uid://bcpx75tdlp5a1" path="res://assets/textures/black.tres" id="1_v45ci"]
 [ext_resource type="Material" uid="uid://gca4wayvmo56" path="res://assets/textures/green.tres" id="3_48ne7"]
 [ext_resource type="Material" uid="uid://bbyao1xr7m16h" path="res://assets/textures/orange.tres" id="3_v45ci"]
+[ext_resource type="PackedScene" uid="uid://bx4kyblex8ucu" path="res://scenes/charcontrol.tscn" id="5_48ne7"]
 
 [sub_resource type="Environment" id="Environment_48ne7"]
 
@@ -72,3 +73,5 @@ material = SubResource("StandardMaterial3D_fr1um")
 transform = Transform3D(1, -4.3711925e-08, -1.0729195e-12, 4.371086e-08, 1, -4.3711392e-08, -1.080025e-12, 4.37114e-08, 1, 16.272808, 0.77760255, 7.2530317)
 size = Vector3(4.6697617, 0.49853516, 2.0821533)
 material = SubResource("StandardMaterial3D_fr1um")
+
+[node name="charcontrol" parent="." unique_id=1193498515 instance=ExtResource("5_48ne7")]
