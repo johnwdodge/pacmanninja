@@ -5,6 +5,8 @@
 [ext_resource type="Material" uid="uid://gca4wayvmo56" path="res://assets/textures/green.tres" id="3_48ne7"]
 [ext_resource type="Material" uid="uid://bbyao1xr7m16h" path="res://assets/textures/orange.tres" id="3_v45ci"]
 [ext_resource type="PackedScene" uid="uid://bx4kyblex8ucu" path="res://scenes/charcontrol.tscn" id="5_48ne7"]
+[ext_resource type="PackedScene" uid="uid://dqy00primfpyv" path="res://assets/models/Pedestal.glb" id="6_cyt5c"]
+[ext_resource type="PackedScene" uid="uid://uigv2h0flxta" path="res://scenes/power_pellet.tscn" id="7_7x1jh"]
 
 [sub_resource type="Environment" id="Environment_48ne7"]
 
@@ -75,3 +77,9 @@ size = Vector3(4.6697617, 0.49853516, 2.0821533)
 material = SubResource("StandardMaterial3D_fr1um")
 
 [node name="charcontrol" parent="." unique_id=1193498515 instance=ExtResource("5_48ne7")]
+
+[node name="PowerPellet" parent="." unique_id=1863329713 instance=ExtResource("7_7x1jh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.3449726, 0.8561417, 13.639487)
+
+[node name="Pedestal" parent="." unique_id=1248578068 instance=ExtResource("6_cyt5c")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 2.3360758, -0.0014657974, 13.603799)
