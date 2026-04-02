@@ -116,7 +116,7 @@ func _handle_dash(delta: float) -> void:
 
 # ── Crouch / Slide ────────────────────────────────────
 func _handle_slide(delta: float) -> void:
-	if Input.is_action_pressed("crouch"):
+	if Input.is_action_pressed("crouch") and is_on_floor():
 		if _is_sliding == false:
 			_is_sliding = true
 			_set_crouch(true)
