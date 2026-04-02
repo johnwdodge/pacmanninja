@@ -3,22 +3,18 @@ extends CharacterBody3D
 
 # ── Settings ──────────────────────────────────────────
 const ACCEL: float = 4.0
-const SPEED: float = 9.0
-const SPRINT_SPEED: float = 18.0
+const SPEED: float = 6.0
 const CROUCH_SPEED: float = 2.5
-const JUMP_VELOCITY: float = 4.5
+const JUMP_VELOCITY: float = 10.0
 const MOUSE_SENSITIVITY: float = 0.002
 const MAX_LOOK_ANGLE: float = 89.0
 const SLIDE_DURATION: float = 0.6
 const SLIDE_SPEED: float = 12.0
 const DASH_SPEED: float = 18.0
-const DASH_DURATION: float = 0.15
+const DASH_DURATION: float = 20.0
 const HEAD_STAND_HEIGHT: float = 1.8
 const HEAD_CROUCH_HEIGHT: float = 1.0
-const WALL_RUN_SPEED: float = 8.0
-const WALL_RUN_DURATION: float = 1.8
-const WALL_JUMP_VELOCITY: float = 5.0
-const WALL_JUMP_AWAY_FORCE: float = 6.0
+const WALL_JUMP_AWAY_FORCE: float = 10.0
 
 # ── References ────────────────────────────────────────
 @onready var _head: Node3D = $Head
@@ -30,19 +26,13 @@ const WALL_JUMP_AWAY_FORCE: float = 6.0
 var _gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 var _is_crouching: bool = false
 var _is_sliding: bool = false
-var _slide_timer: float = 0.0
-var _can_air_dash: bool = true
 var _is_dashing: bool = false
 var _is_wall_sliding: bool = false
-var _dash_timer: float = 0.0
+var _dash_timer: float = DASH_DURATION
 var _dash_velocity: Vector3 = Vector3.ZERO
 var _target_head_height: float = HEAD_STAND_HEIGHT
-var _is_wall_running: bool = false
-var _wall_run_timer: float = 0.0
-var _wall_normal: Vector3 = Vector3.ZERO
-var _wall_run_direction: Vector3 = Vector3.ZERO
-var _was_sprinting: bool = false
-var _current_weapon: Node3D = null
+var _trajectory: Vector3 = Vector3.ZERO
+var _direction: Vector3 = Vector3.ZERO
 # ── Ready ─────────────────────────────────────────────
 
 func _ready() -> void:
@@ -68,11 +58,16 @@ func _handle_mouse_look(event: InputEventMouseMotion) -> void:
 # ── Physics ───────────────────────────────────────────
 func _physics_process(delta: float) -> void:
 	_apply_gravity(delta)
-	_handle_jump()
+	if Input.is_action_just_pressed("jump") and is_on_floor():
+		_handle_jump()
 	_handle_slide(delta)
-	_handle_dash(delta)
+	if Input.is_action_just_pressed("sprint"):
+		_dash_timer = DASH_DURATION
+		_handle_dash(delta)
 	_handle_wall_slide(delta)
-	_handle_movement()
+	if Input.is_action_just_pressed("jump") and _is_wall_sliding:
+		_handle_wall_jump()
+	_handle_movement(delta)
 	_lerp_head(delta)
 	move_and_slide()
 
@@ -87,41 +82,50 @@ func _apply_gravity(delta: float) -> void:
 
 # ── Jump / Air Dash ───────────────────────────────────
 func _handle_jump() -> void:
-	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
-		_can_air_dash = true
 
 func _handle_wall_slide(delta) -> void:
-	if is_on_wall_only():
+	if is_on_wall_only() and velocity.y < 0:
 		_is_wall_sliding = true
-		velocity.y -= (_gravity * 0.25) * delta
+		velocity.y = -1
+	else:
+		_is_wall_sliding = false
 	
 
 func _handle_wall_jump() -> void:
-	if Input.is_action_just_pressed("jump") and _is_wall_sliding:
-		velocity.y = JUMP_VELOCITY
-		velocity.x += _wall_normal.x * WALL_JUMP_AWAY_FORCE
-		velocity.z += _wall_normal.z * WALL_JUMP_AWAY_FORCE
+	_trajectory = get_slide_collision(0).get_normal()
+	velocity.y = JUMP_VELOCITY
+	velocity.x += _trajectory.x * WALL_JUMP_AWAY_FORCE
+	velocity.z += _trajectory.z * WALL_JUMP_AWAY_FORCE
 
 # ── Dash ──────────────────────────────────────────────
 func _handle_dash(delta: float) -> void:
 	if not _is_dashing:
 		return
-	_dash_timer -= delta
-	if _dash_timer <= 0.0:
+	if _dash_timer >= 0.0:
+		_is_dashing = true
+		velocity.x = _direction.x * DASH_SPEED
+		velocity.z = _direction.z * DASH_SPEED
+		velocity.y = 0
+		_dash_timer -= delta
+	else:
 		_is_dashing = false
 		_dash_velocity = Vector3.ZERO
-	else:
-		velocity.x = _dash_velocity.x
-		velocity.z = _dash_velocity.z
-		velocity.y = 0
+
+			
 
 # ── Crouch / Slide ────────────────────────────────────
 func _handle_slide(delta: float) -> void:
-
-	if Input.is_action_pressed("crouch") and is_on_floor() and velocity.length() > SPEED:
-		_start_slide()
-		return
+	if Input.is_action_pressed("crouch"):
+		if _is_sliding == false:
+			_is_sliding = true
+			_set_crouch(true)
+		if _is_sliding and _direction:
+			velocity.x = _direction.x * SLIDE_SPEED
+			velocity.z = _direction.z * SLIDE_SPEED
+			return
+	else:
+		_is_sliding = false
 
 	if _has_ceiling_obstruction():
 		_set_crouch(true)
@@ -136,12 +140,7 @@ func _has_ceiling_obstruction() -> bool:
 	_standing_collision.disabled = true
 	return overlaps != null
 
-func _start_slide() -> void:
-	_is_sliding = true
-	_set_crouch(true)
-	var forward := -transform.basis.z.normalized()
-	velocity.x = forward.x * SLIDE_SPEED
-	velocity.z = forward.z * SLIDE_SPEED
+
 
 func _stop_slide() -> void:
 	_is_sliding = false
@@ -164,28 +163,21 @@ func _handle_accel(accel, current, max) -> float:
 		final = current + accel
 		return final
 	
-func _handle_movement() -> void:
+func _handle_movement(delta: float) -> void:
 	if _is_sliding or _is_dashing:
 		return
-
-	if is_on_floor():
-		_was_sprinting = Input.is_action_pressed("sprint")
-
+	
 	var input_dir := Input.get_vector("move_left", "move_right", "move_forward", "move_back")
-	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	_direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	var current_speed: float
 	if _is_crouching:
 		current_speed = CROUCH_SPEED
-	elif Input.is_action_pressed("spr") and is_on_floor():
-		current_speed = SPRINT_SPEED
-	elif not is_on_floor() and _was_sprinting:
-		current_speed = SPRINT_SPEED
 	else:
 		current_speed = SPEED
 
-	if direction:
-		velocity.x = direction.x * current_speed
-		velocity.z = direction.z * current_speed
+	if _direction:
+		velocity.x = _direction.x * current_speed
+		velocity.z = _direction.z * current_speed
 	else:
 		velocity.x = move_toward(velocity.x, 0, current_speed)
 		velocity.z = move_toward(velocity.z, 0, current_speed)
