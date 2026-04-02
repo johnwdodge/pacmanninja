@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://uigv2h0flxta"]
+
+[ext_resource type="Shader" uid="uid://cbauq5hk06yq" path="res://scenes/power_pellet.gdshader" id="1_igpl4"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_menol"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ktie4"]
+render_priority = 0
+shader = ExtResource("1_igpl4")
+shader_parameter/primary_color = Color(0, 0.6979521, 0.82650673, 1)
+shader_parameter/secondary_color = Color(0.33544502, 0.57774436, 0.63280463, 1)
+shader_parameter/density = 1.0
+shader_parameter/effect_strength = 2.0
+shader_parameter/wipe_scale = 3.0
+shader_parameter/wipe_speed = 0.5
+shader_parameter/wipe_blend = 0.7
+shader_parameter/signal_scale = 40.0
+shader_parameter/signal_speed = 1.0
+shader_parameter/signal_random_scale = 0.3
+shader_parameter/signal_blend = 1.0
+shader_parameter/noise_distort_amount = 0.1
+shader_parameter/noise_amount = 1.0
+shader_parameter/grain_amount = 0.4
+shader_parameter/displacement_amount = 1.0
+shader_parameter/flicker_amount = 0.3
+shader_parameter/flicker_speed = 10.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_t0onk"]
+material = SubResource("ShaderMaterial_ktie4")
+
+[node name="PowerPellet" type="Node3D" unique_id=1863329713]
+
+[node name="Area3D" type="Area3D" parent="." unique_id=684927336]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=899531127]
+shape = SubResource("SphereShape3D_menol")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Area3D" unique_id=1061955248]
+mesh = SubResource("SphereMesh_t0onk")

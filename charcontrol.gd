@@ -176,7 +176,7 @@ func _handle_movement() -> void:
 	var current_speed: float
 	if _is_crouching:
 		current_speed = CROUCH_SPEED
-	elif Input.is_action_pressed("spr") and is_on_floor():
+	elif Input.is_action_pressed("sprint") and is_on_floor():
 		current_speed = SPRINT_SPEED
 	elif not is_on_floor() and _was_sprinting:
 		current_speed = SPRINT_SPEED
