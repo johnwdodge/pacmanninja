@@ -60,6 +60,7 @@ size = Vector2(0.1, 0.1)
 [node name="GPUParticles3D" type="GPUParticles3D" parent="." index="1" unique_id=1954303435]
 transform = Transform3D(-4.371137e-08, 1, -3.7252903e-09, -0.99999994, -4.371138e-08, 9.488711e-15, -2.3980817e-14, 3.7252903e-09, 1, 0, 0.22306073, 6.052879)
 amount = 50
+speed_scale = 1.5
 process_material = SubResource("ParticleProcessMaterial_wekyt")
 draw_pass_1 = SubResource("PlaneMesh_05djm")
 draw_skin = SubResource("Skin_whylb")
