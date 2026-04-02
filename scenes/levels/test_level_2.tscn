@@ -1,3 +1,50 @@
 [gd_scene format=3 uid="uid://dfosx500gg7vs"]
 
+[ext_resource type="Material" uid="uid://bcpx75tdlp5a1" path="res://assets/textures/black.tres" id="1_goahl"]
+[ext_resource type="PackedScene" uid="uid://bx4kyblex8ucu" path="res://scenes/charcontrol.tscn" id="3_cxraw"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_5idrc"]
+sky_top_color = Color(0.6935256, 0.31889212, 0.25905758, 1)
+
+[sub_resource type="Sky" id="Sky_goahl"]
+sky_material = SubResource("ProceduralSkyMaterial_5idrc")
+
+[sub_resource type="Environment" id="Environment_722hl"]
+background_mode = 2
+sky = SubResource("Sky_goahl")
+ambient_light_color = Color(0.7683373, 0.50079125, 0.7542641, 1)
+
 [node name="test_level_2" type="Node3D" unique_id=1870202360]
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="." unique_id=1151746307]
+use_collision = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D" unique_id=1962540478]
+size = Vector3(50, 1, 50)
+material = ExtResource("1_goahl")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="CSGCombiner3D" unique_id=1621519059]
+transform = Transform3D(1, 0, 0, 0, 0.9381249, -0.34629717, 0, 0.34629717, 0.9381249, 22.370644, 1.6648741, -1.7807425)
+size = Vector3(5.195801, 1, 9.513184)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="CSGCombiner3D" unique_id=1528648922]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.370644, 3.2829692, -7.519198)
+size = Vector3(5.195801, 1, 2.985962)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="CSGCombiner3D" unique_id=1582965422]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.370644, 3.2829692, -15.500043)
+size = Vector3(5.195801, 1, 2.985962)
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="CSGCombiner3D" unique_id=294341802]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.466438, 3.2719178, -14.500269)
+size = Vector3(1.125061, 1, 14.822174)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="CSGCombiner3D" unique_id=1371567455]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.370644, 3.2829692, -22.909014)
+size = Vector3(5.195801, 1, 2.985962)
+
+[node name="charcontrol" parent="." unique_id=1193498515 instance=ExtResource("3_cxraw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.1062434, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=149384713]
+environment = SubResource("Environment_722hl")
