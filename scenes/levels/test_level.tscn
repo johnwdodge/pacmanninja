@@ -7,8 +7,22 @@
 [ext_resource type="PackedScene" uid="uid://bx4kyblex8ucu" path="res://scenes/charcontrol.tscn" id="5_48ne7"]
 [ext_resource type="PackedScene" uid="uid://dqy00primfpyv" path="res://assets/models/Pedestal.glb" id="6_cyt5c"]
 [ext_resource type="PackedScene" uid="uid://uigv2h0flxta" path="res://scenes/power_pellet.tscn" id="7_7x1jh"]
+[ext_resource type="PackedScene" uid="uid://dfyf2y41r0d4w" path="res://scenes/simple_ai.tscn" id="8_7x1jh"]
 
 [sub_resource type="Environment" id="Environment_48ne7"]
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_7x1jh"]
+vertices = PackedVector3Array(-54.344086, 0.5, -49.5, -54.344086, 0.5, 49.5, 44.655914, 0.5, 49.5, 44.655914, 0.5, -49.5)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
+geometry_parsed_geometry_type = 0
+agent_height = 2.0
+agent_radius = 1.0
+agent_max_climb = 1.0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_7x1jh"]
+material = ExtResource("1_v45ci")
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_hfwtw"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fr1um"]
 albedo_texture = ExtResource("1_jbqir")
@@ -22,13 +36,35 @@ environment = SubResource("Environment_48ne7")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment" unique_id=250324022]
 transform = Transform3D(0.9341235, 0.25077984, -0.25401327, 0, 0.7116215, 0.70256305, 0.35694996, -0.65628064, 0.6647424, 0, 1, 0)
 
-[node name="CSGCombiner3D" type="CSGCombiner3D" parent="." unique_id=550001377]
-use_collision = true
+[node name="charcontrol" parent="." unique_id=1193498515 instance=ExtResource("5_48ne7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4644067, 0)
 
-[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D" unique_id=1079001392]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.262653, -0.25073242, 6.5)
-size = Vector3(24.505005, 0.49853516, 24)
-material = ExtResource("1_v45ci")
+[node name="PowerPellet" parent="." unique_id=1863329713 instance=ExtResource("7_7x1jh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.3449726, 0.8561417, 13.639487)
+
+[node name="Pedestal" parent="." unique_id=1248578068 instance=ExtResource("6_cyt5c")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 2.3360758, -0.0014657974, 13.603799)
+
+[node name="SimpleAI" parent="." unique_id=970802604 instance=ExtResource("8_7x1jh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.119176, 1.243971, -3.276)
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=1963550358]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.844084, 0, 0)
+navigation_mesh = SubResource("NavigationMesh_7x1jh")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D" unique_id=1417380899]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.844084, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/StaticBody3D" unique_id=920610666]
+transform = Transform3D(50, 0, 0, 0, 50, 0, 0, 0, 50, 0, 0, 0)
+mesh = SubResource("PlaneMesh_7x1jh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/StaticBody3D" unique_id=1321535681]
+shape = SubResource("WorldBoundaryShape3D_hfwtw")
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="." unique_id=550001377 groups=["navigation"]]
+operation = 1
+use_collision = true
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="CSGCombiner3D" unique_id=1236064232]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.491917, -0.2513911, 0)
@@ -76,10 +112,7 @@ transform = Transform3D(1, -4.3711925e-08, -1.0729195e-12, 4.371086e-08, 1, -4.3
 size = Vector3(4.6697617, 0.49853516, 2.0821533)
 material = SubResource("StandardMaterial3D_fr1um")
 
-[node name="charcontrol" parent="." unique_id=1193498515 instance=ExtResource("5_48ne7")]
-
-[node name="PowerPellet" parent="." unique_id=1863329713 instance=ExtResource("7_7x1jh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.3449726, 0.8561417, 13.639487)
-
-[node name="Pedestal" parent="." unique_id=1248578068 instance=ExtResource("6_cyt5c")]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 2.3360758, -0.0014657974, 13.603799)
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D" unique_id=1079001392]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.262653, -0.25073242, 6.5)
+size = Vector3(24.505005, 0.49853516, 24)
+material = ExtResource("1_v45ci")

@@ -6,7 +6,7 @@
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_ea30i"]
 
-[node name="charcontrol" type="CharacterBody3D" unique_id=1193498515]
+[node name="charcontrol" type="CharacterBody3D" unique_id=1193498515 groups=["player"]]
 script = ExtResource("1_u6b33")
 
 [node name="StandingCollision" type="CollisionShape3D" parent="." unique_id=766601868]
