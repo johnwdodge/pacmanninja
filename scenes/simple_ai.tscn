@@ -9,7 +9,7 @@
 
 [node name="SimpleAI" type="CharacterBody3D" unique_id=970802604]
 script = ExtResource("1_rnssq")
-move_speed = 30.0
+move_speed = 40.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1665810567]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
