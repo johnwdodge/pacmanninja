@@ -155,7 +155,7 @@ func _handle_air(delta) -> void:
 	
 
 func _handle_jump() -> void:
-	if state == State.move or State.slide:
+	if is_on_floor():
 		velocity.y = JUMP_VELOCITY
 	if state == State.wall:
 		velocity.y = JUMP_VELOCITY
