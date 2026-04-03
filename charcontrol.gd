@@ -126,7 +126,7 @@ func _update_meter(delta) -> void:
 			_current_meter += METER_REFILL * 2
 		else: _current_meter += METER_REFILL
 	print(_current_meter)
-
+	_hud.set_meter(_current_meter, METER_SIZE)
 # ── Jump / Air ───────────────────────────────────
 
 func _handle_air(delta) -> void:
