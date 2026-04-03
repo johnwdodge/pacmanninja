@@ -7,13 +7,14 @@ const AIR_ACCEL: float = 1.5
 const DECEL: float = 14.0
 const MAX_SPEED: float = 15.0
 const CROUCH_SPEED: float = 2.5
-const JUMP_VELOCITY: float = 13.0
+const JUMP_VELOCITY: float = 11.0
 const MOUSE_SENSITIVITY: float = 0.002
 const MAX_LOOK_ANGLE: float = 89.0
 const SLIDE_DURATION: float = 5.0
 const SLIDE_SPEED: float = 20.0
 const DASH_SPEED: float = 35.0
 const DASH_DURATION: float = 0.15
+const WALL_LENIENCE: float = 0.1
 const HEAD_STAND_HEIGHT: float = 1.8
 const HEAD_CROUCH_HEIGHT: float = 1.0
 const WALL_JUMP_AWAY_FORCE: float = 6.0
@@ -21,16 +22,15 @@ const WALL_JUMP_AWAY_FORCE: float = 6.0
 # ── References ────────────────────────────────────────
 @onready var _head: Node3D = $Head
 @onready var _camera: Camera3D = $Head/Camera
-@onready var _wall_checker: RayCast3D = $WallChecker
 @onready var _standing_collision: CollisionShape3D = $StandingCollision
 @onready var _crouching_collision: CollisionShape3D = $CrouchingCollision
-
 @onready var _hud: Node = $"../HUD"
 
 # ── State ─────────────────────────────────────────────
 var _gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 var _is_crouching: bool = false
 var _dash_timer: float = DASH_DURATION
+var _wall_timer: float = WALL_LENIENCE
 var _target_head_height: float = HEAD_STAND_HEIGHT
 var _trajectory: Vector3 = Vector3.ZERO
 var _direction: Vector3 = Vector3.ZERO
@@ -93,6 +93,7 @@ func _handle_air(delta) -> void:
 	print("air state")
 	
 	if is_on_wall_only():
+		_wall_timer = WALL_LENIENCE
 		_trajectory = get_slide_collision(0).get_normal()
 		change_state(State.wall)
 	
@@ -124,14 +125,31 @@ func _handle_jump() -> void:
 	
 func _handle_wall_slide(delta) -> void:
 	print ("wall state")
+	var input_dir := Input.get_vector("move_left", "move_right", "move_forward", "move_back")
+	_direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if velocity.y < 0:
 		velocity.y = -1
-	else: _apply_gravity(delta)
+	else:
+		_apply_gravity(delta)
+	
+	if is_on_wall_only():
+		_wall_timer = WALL_LENIENCE
+		
+	if _direction:
+		velocity.x = lerp(velocity.x, _direction.x * MAX_SPEED, ACCEL * delta)
+		velocity.z = lerp(velocity.z, _direction.z * MAX_SPEED, ACCEL * delta)
+		if not is_on_wall_only():
+			_wall_timer -= delta
+
+	else:
+		_wall_timer -= delta
+		
+	if _wall_timer <= 0:
+		change_state(State.idle)
+	
 	if is_on_floor():
 		change_state(State.idle)
-	if Input.is_action_just_pressed("move_back") or Input.is_action_just_pressed("move_forward") or Input.is_action_just_pressed("move_left") or Input.is_action_just_pressed("move_right"):
-		await get_tree().create_timer(0.2).timeout
-		change_state(State.idle)
+		
 	move_and_slide()
 
 
