@@ -2,17 +2,17 @@
 extends CharacterBody3D
 
 # ── Settings ──────────────────────────────────────────
-const ACCEL: float = .1
-const AIR_ACCEL: float = .01
-const DECEL: float = 0.1
-const MAX_SPEED: float = 8.0
+const ACCEL: float = 7.0
+const AIR_ACCEL: float = 2
+const DECEL: float = 14.0
+const MAX_SPEED: float = 15.0
 const CROUCH_SPEED: float = 2.5
 const JUMP_VELOCITY: float = 10.0
 const MOUSE_SENSITIVITY: float = 0.002
 const MAX_LOOK_ANGLE: float = 89.0
 const SLIDE_DURATION: float = 5.0
-const SLIDE_SPEED: float = 12.0
-const DASH_SPEED: float = 20.0
+const SLIDE_SPEED: float = 20.0
+const DASH_SPEED: float = 35.0
 const DASH_DURATION: float = 0.15
 const HEAD_STAND_HEIGHT: float = 1.8
 const HEAD_CROUCH_HEIGHT: float = 1.0
@@ -99,9 +99,8 @@ func _handle_air(delta) -> void:
 	var input_dir := Input.get_vector("move_left", "move_right", "move_forward", "move_back")
 	_direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if _direction:
-		_current_speed += AIR_ACCEL
-		velocity.x = _direction.x * _current_speed
-		velocity.z = _direction.z * _current_speed
+		velocity.x = lerp(velocity.x, _direction.x * MAX_SPEED, AIR_ACCEL * delta)
+		velocity.z = lerp(velocity.z, _direction.z * MAX_SPEED, AIR_ACCEL * delta)
 	
 	move_and_slide()
 	
@@ -141,6 +140,8 @@ func _handle_dash(delta: float) -> void:
 		velocity.z = _direction.z * DASH_SPEED
 		velocity.y = 0
 	else:
+		velocity.x = _direction.x * MAX_SPEED
+		velocity.z = _direction.z * MAX_SPEED
 		change_state(State.idle)
 	move_and_slide()
 
@@ -198,11 +199,11 @@ func _handle_movement(delta: float) -> void:
 			
 
 	if _direction:
-		velocity.x = _direction.x * _current_speed
-		velocity.z = _direction.z * _current_speed
+		velocity.x = lerp(velocity.x, _direction.x * MAX_SPEED, ACCEL * delta)
+		velocity.z = lerp(velocity.z, _direction.z * MAX_SPEED, ACCEL * delta)
 	else:
-		velocity.x = move_toward(velocity.x, 0, _current_speed)
-		velocity.z = move_toward(velocity.z, 0, _current_speed)
+		velocity.x = lerp(velocity.x, 0.0, DECEL * delta)
+		velocity.z = lerp(velocity.z, 0.0, DECEL * delta)
 
 	if _has_ceiling_obstruction():
 		_set_crouch(true)
