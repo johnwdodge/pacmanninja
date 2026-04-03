@@ -1,6 +1,9 @@
 [gd_scene format=3 uid="uid://jk0gx3dkea44"]
 
+[ext_resource type="Script" uid="uid://bc3p5nk7xf6vu" path="res://hud.gd" id="1_37p78"]
+
 [node name="HUD" type="Node" unique_id=1202115306]
+script = ExtResource("1_37p78")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=592995193]
 
@@ -8,3 +11,8 @@
 offset_right = 40.0
 offset_bottom = 40.0
 value = 2.0
+
+[node name="Label" type="Label" parent="CanvasLayer" unique_id=1227660011]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "POWERED"

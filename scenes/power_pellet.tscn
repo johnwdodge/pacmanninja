@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://uigv2h0flxta"]
 
 [ext_resource type="Shader" uid="uid://cbauq5hk06yq" path="res://scenes/power_pellet.gdshader" id="1_igpl4"]
+[ext_resource type="Script" uid="uid://c0jdkn2q3n3h" path="res://scenes/power_pellet.gd" id="1_menol"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_menol"]
 
@@ -29,6 +30,7 @@ shader_parameter/flicker_speed = 10.0
 material = SubResource("ShaderMaterial_ktie4")
 
 [node name="PowerPellet" type="Node3D" unique_id=1863329713]
+script = ExtResource("1_menol")
 
 [node name="Area3D" type="Area3D" parent="." unique_id=684927336]
 

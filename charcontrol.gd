@@ -24,6 +24,8 @@ const WALL_JUMP_AWAY_FORCE: float = 10.0
 @onready var _standing_collision: CollisionShape3D = $StandingCollision
 @onready var _crouching_collision: CollisionShape3D = $CrouchingCollision
 
+@onready var _hud: Node = $"../HUD"
+
 # ── State ─────────────────────────────────────────────
 var _gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 var _is_crouching: bool = false
@@ -36,7 +38,9 @@ var _current_speed: float = 0.0
 
 enum State {move, dash, slide, air, wall, idle}
 var state = State.idle
-
+const POWER_DURATION: float = 10.0
+var _is_powered: bool = false
+var _power_timer: float = 0.0
 func change_state(newstate) -> void:
 	state = newstate
 # ── Ready ─────────────────────────────────────────────
@@ -66,6 +70,7 @@ func _physics_process(delta: float) -> void:
 			_handle_air(delta)
 		
 	_lerp_head(delta)
+	_tick_power(delta)
 
 func _lerp_head(delta: float) -> void:
 	_head.position.y = lerp(_head.position.y, _target_head_height, delta * 10.0)
@@ -108,10 +113,10 @@ func _handle_air(delta) -> void:
 func _handle_jump() -> void:
 	if state == State.move:
 		velocity.y = JUMP_VELOCITY
-	if state == State.wall:
-		velocity.y = JUMP_VELOCITY
-		velocity.x += _trajectory.x * WALL_JUMP_AWAY_FORCE
-		velocity.z += _trajectory.z * WALL_JUMP_AWAY_FORCE
+		if state == State.wall:
+			velocity.y = JUMP_VELOCITY
+			velocity.x += _trajectory.x * WALL_JUMP_AWAY_FORCE
+			velocity.z += _trajectory.z * WALL_JUMP_AWAY_FORCE
 	else:
 		return
 	change_state(State.air)
@@ -235,3 +240,17 @@ func _handle_mouse_look(event: InputEventMouseMotion) -> void:
 	rotate_y(-event.relative.x * MOUSE_SENSITIVITY)
 	_head.rotate_x(-event.relative.y * MOUSE_SENSITIVITY)
 	_head.rotation.x = clamp(_head.rotation.x, -deg_to_rad(MAX_LOOK_ANGLE), deg_to_rad(MAX_LOOK_ANGLE))
+
+func apply_power() -> void:
+	_is_powered = true
+	_power_timer = POWER_DURATION
+	_hud.set_powered(true)
+
+func _tick_power(delta: float) -> void:
+	if not _is_powered:
+		return
+	_power_timer -= delta
+	_hud.set_progress(_power_timer, POWER_DURATION)
+	if _power_timer <= 0.0:
+		_is_powered = false
+		_hud.set_powered(false)
