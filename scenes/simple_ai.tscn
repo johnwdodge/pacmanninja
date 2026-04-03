@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dfyf2y41r0d4w"]
 
 [ext_resource type="Script" uid="uid://l40tk0i18hyk" path="res://scenes/simple_ai.gd" id="1_rnssq"]
-[ext_resource type="PackedScene" uid="uid://dbsnhtxmys1wm" path="res://assets/models/Samurai.glb" id="2_ovxrf"]
+[ext_resource type="PackedScene" uid="uid://c76ys1i7nq0ao" path="res://scenes/samurai.tscn" id="2_ovxrf"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_ovxrf"]
 
@@ -9,6 +9,7 @@
 
 [node name="SimpleAI" type="CharacterBody3D" unique_id=970802604]
 script = ExtResource("1_rnssq")
+move_speed = 30.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1665810567]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -24,5 +25,5 @@ path_desired_distance = 0.5
 target_desired_distance = 0.5
 avoidance_enabled = true
 
-[node name="Samurai" parent="." unique_id=349841751 instance=ExtResource("2_ovxrf")]
-transform = Transform3D(-1.8, -7.868052e-08, -1.57361e-07, -7.86805e-08, 1.8, -7.86805e-08, 1.57361e-07, -7.868051e-08, -1.8, 0, 0, 0)
+[node name="Samurai" parent="." unique_id=242837925 instance=ExtResource("2_ovxrf")]
+transform = Transform3D(-2, 0, -3.019916e-07, 0, 2, 0, 3.019916e-07, 0, -2, 0, 0, 0)

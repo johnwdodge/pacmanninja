@@ -1,8 +1,9 @@
 extends CharacterBody3D
 
-@export var move_speed: float = 3.5
+@export var move_speed: float = 10
 @export var gravity: float = 9.8
 @export var stopping_distance: float = 2.0
+
 
 @onready var nav_agent: NavigationAgent3D = $NavigationAgent3D
 
@@ -54,6 +55,7 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity = desired_velocity
 		move_and_slide()
+
 		
 
 func _on_velocity_computed(safe_velocity: Vector3) -> void:
