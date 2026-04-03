@@ -2,18 +2,18 @@
 extends CharacterBody3D
 
 # ── Settings ──────────────────────────────────────────
-const ACCEL: float = 7.0
+const ACCEL: float = 9.0
 const AIR_ACCEL: float = 1.2
 const DECEL: float = 14.0
 const MAX_SPEED: float = 15.0
-const CROUCH_SPEED: float = 2.5
+const CROUCH_SPEED: float = 8
 const JUMP_VELOCITY: float = 11.0
 const MOUSE_SENSITIVITY: float = 0.002
 const MAX_LOOK_ANGLE: float = 89.0
 const SLIDE_DURATION: float = 5.0
 const SLIDE_SPEED: float = 20.0
-const DASH_SPEED: float = 35.0
-const DASH_DURATION: float = 0.15
+const DASH_SPEED: float = 40.0
+const DASH_DURATION: float = 0.2
 const WALL_LENIENCE: float = 0.15
 const HEAD_STAND_HEIGHT: float = 1.8
 const HEAD_CROUCH_HEIGHT: float = 1.0
@@ -159,6 +159,8 @@ func _handle_air(delta) -> void:
 func _handle_jump() -> void:
 	if is_on_floor():
 		velocity.y = JUMP_VELOCITY
+		if state == State.dash:
+			change_state(State.idle)
 	if state == State.wall:
 		if _current_meter > METER_SEGMENT:
 			_current_meter -= METER_SEGMENT
@@ -212,6 +214,7 @@ func _handle_dash(delta: float) -> void:
 		velocity.x = _direction.x * DASH_SPEED
 		velocity.z = _direction.z * DASH_SPEED
 		velocity.y = 0
+
 	else:
 		velocity.x = _direction.x * MAX_SPEED
 		velocity.z = _direction.z * MAX_SPEED
@@ -223,7 +226,8 @@ func _handle_dash(delta: float) -> void:
 func _handle_slide(delta: float) -> void:
 	if _current_meter > 0:
 		print ("slide state")
-		_current_meter -= SLIDE_DRAIN
+		if not _is_powered:
+			_current_meter -= SLIDE_DRAIN
 		_apply_gravity(delta)
 		_set_crouch(true)
 		velocity.x = _direction.x * SLIDE_SPEED
@@ -288,8 +292,12 @@ func _handle_movement(delta: float) -> void:
 			
 
 	if _direction:
-		velocity.x = lerp(velocity.x, _direction.x * MAX_SPEED, ACCEL * delta)
-		velocity.z = lerp(velocity.z, _direction.z * MAX_SPEED, ACCEL * delta)
+		if _direction.dot(-global_transform.basis.z.normalized()) > -0.1:
+			velocity.x = lerp(velocity.x, _direction.x * MAX_SPEED, ACCEL * delta)
+			velocity.z = lerp(velocity.z, _direction.z * MAX_SPEED, ACCEL * delta)
+		else:
+			velocity.x = lerp(velocity.x, _direction.x * (MAX_SPEED * 0.8), ACCEL * delta)
+			velocity.z = lerp(velocity.z, _direction.z * (MAX_SPEED * 0.8), ACCEL * delta)
 	else:
 		velocity.x = lerp(velocity.x, 0.0, DECEL * delta)
 		velocity.z = lerp(velocity.z, 0.0, DECEL * delta)
@@ -298,7 +306,7 @@ func _handle_movement(delta: float) -> void:
 		_set_crouch(true)
 	else:
 		_set_crouch(false)
-	
+	print(velocity)
 	move_and_slide()
 
 # ── Input ─────────────────────────────────────────────
