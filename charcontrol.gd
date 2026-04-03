@@ -3,11 +3,11 @@ extends CharacterBody3D
 
 # ── Settings ──────────────────────────────────────────
 const ACCEL: float = 7.0
-const AIR_ACCEL: float = 2
+const AIR_ACCEL: float = 1.5
 const DECEL: float = 14.0
 const MAX_SPEED: float = 15.0
 const CROUCH_SPEED: float = 2.5
-const JUMP_VELOCITY: float = 10.0
+const JUMP_VELOCITY: float = 13.0
 const MOUSE_SENSITIVITY: float = 0.002
 const MAX_LOOK_ANGLE: float = 89.0
 const SLIDE_DURATION: float = 5.0
@@ -16,11 +16,12 @@ const DASH_SPEED: float = 35.0
 const DASH_DURATION: float = 0.15
 const HEAD_STAND_HEIGHT: float = 1.8
 const HEAD_CROUCH_HEIGHT: float = 1.0
-const WALL_JUMP_AWAY_FORCE: float = 10.0
+const WALL_JUMP_AWAY_FORCE: float = 6.0
 
 # ── References ────────────────────────────────────────
 @onready var _head: Node3D = $Head
 @onready var _camera: Camera3D = $Head/Camera
+@onready var _wall_checker: RayCast3D = $WallChecker
 @onready var _standing_collision: CollisionShape3D = $StandingCollision
 @onready var _crouching_collision: CollisionShape3D = $CrouchingCollision
 
@@ -113,10 +114,10 @@ func _handle_air(delta) -> void:
 func _handle_jump() -> void:
 	if state == State.move:
 		velocity.y = JUMP_VELOCITY
-		if state == State.wall:
-			velocity.y = JUMP_VELOCITY
-			velocity.x += _trajectory.x * WALL_JUMP_AWAY_FORCE
-			velocity.z += _trajectory.z * WALL_JUMP_AWAY_FORCE
+	if state == State.wall:
+		velocity.y = JUMP_VELOCITY
+		velocity.x += _trajectory.x * WALL_JUMP_AWAY_FORCE
+		velocity.z += _trajectory.z * WALL_JUMP_AWAY_FORCE
 	else:
 		return
 	change_state(State.air)
@@ -155,6 +156,7 @@ func _handle_dash(delta: float) -> void:
 # ── Crouch / Slide ────────────────────────────────────
 func _handle_slide(delta: float) -> void:
 	print ("slide state")
+	_apply_gravity(delta)
 	_set_crouch(true)
 	velocity.x = _direction.x * SLIDE_SPEED
 	velocity.z = _direction.z * SLIDE_SPEED
@@ -223,7 +225,7 @@ func _input(event: InputEvent) -> void:
 		return
 	if event is InputEventKey or event is InputEventMouseButton:
 		if event.is_action_pressed("crouch"):
-			if state in [State.move, State.dash]:
+			if is_on_floor():
 				if _direction:
 					change_state(State.slide)
 		if event.is_action_pressed("sprint"):
