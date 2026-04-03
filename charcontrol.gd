@@ -3,7 +3,7 @@ extends CharacterBody3D
 
 # ── Settings ──────────────────────────────────────────
 const ACCEL: float = 7.0
-const AIR_ACCEL: float = 1.5
+const AIR_ACCEL: float = 1.2
 const DECEL: float = 14.0
 const MAX_SPEED: float = 15.0
 const CROUCH_SPEED: float = 2.5
@@ -14,19 +14,26 @@ const SLIDE_DURATION: float = 5.0
 const SLIDE_SPEED: float = 20.0
 const DASH_SPEED: float = 35.0
 const DASH_DURATION: float = 0.15
-const WALL_LENIENCE: float = 0.1
+const WALL_LENIENCE: float = 0.15
 const HEAD_STAND_HEIGHT: float = 1.8
 const HEAD_CROUCH_HEIGHT: float = 1.0
-const WALL_JUMP_AWAY_FORCE: float = 6.0
+const WALL_JUMP_AWAY_FORCE: float = 5.0
+const POWER_DURATION: float = 10.0
+const METER_REFILL: float = 1.0
+const METER_SIZE: float = 900
+const SLAM_UP: float = 0.1
+const SLAM_SPEED: float = 40.0
 
 # ── References ────────────────────────────────────────
+
 @onready var _head: Node3D = $Head
 @onready var _camera: Camera3D = $Head/Camera
 @onready var _standing_collision: CollisionShape3D = $StandingCollision
 @onready var _crouching_collision: CollisionShape3D = $CrouchingCollision
 @onready var _hud: Node = $"../HUD"
 
-# ── State ─────────────────────────────────────────────
+# ── Variables ─────────────────────────────────────────────
+
 var _gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 var _is_crouching: bool = false
 var _dash_timer: float = DASH_DURATION
@@ -34,27 +41,29 @@ var _wall_timer: float = WALL_LENIENCE
 var _target_head_height: float = HEAD_STAND_HEIGHT
 var _trajectory: Vector3 = Vector3.ZERO
 var _direction: Vector3 = Vector3.ZERO
-var _can_dash: bool = false
 var _current_speed: float = 0.0
-
-enum State {move, dash, slide, air, wall, idle}
-var state = State.idle
-const POWER_DURATION: float = 10.0
 var _is_powered: bool = false
 var _power_timer: float = 0.0
+var _current_meter: float = METER_SIZE
+var _slam_timer: float = SLAM_UP
+
+# ── State ─────────────────────────────────────────────
+
+enum State {move, dash, slide, air, wall, idle, slam}
+var state = State.idle
+
+
 func change_state(newstate) -> void:
 	state = newstate
+	
 # ── Ready ─────────────────────────────────────────────
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	_crouching_collision.disabled = true
 
-
-
-# ── Input ─────────────────────────────────────────────
-
 # ── Physics ───────────────────────────────────────────
+
 func _physics_process(delta: float) -> void:
 	match state:
 		State.idle:
@@ -69,6 +78,8 @@ func _physics_process(delta: float) -> void:
 			_handle_wall_slide(delta)
 		State.air:
 			_handle_air(delta)
+		State.slam:
+			_handle_slam(delta)
 		
 	_lerp_head(delta)
 	_tick_power(delta)
@@ -80,6 +91,7 @@ func _apply_gravity(delta: float) -> void:
 	velocity.y -= _gravity * delta
 
 # ── Idle ───────────────────────────────────
+
 func _handle_idle() -> void:
 	print("idle state")
 	if is_on_floor():
@@ -88,7 +100,33 @@ func _handle_idle() -> void:
 		change_state(State.air)
 	move_and_slide()
 
-# ── Jump / Air Dash ───────────────────────────────────
+# ── Power ───────────────────────────────────
+
+func apply_power() -> void:
+	_is_powered = true
+	_power_timer = POWER_DURATION
+	_hud.set_powered(true)
+
+func _tick_power(delta: float) -> void:
+	if not _is_powered:
+		return
+	_power_timer -= delta
+	_hud.set_progress(_power_timer, POWER_DURATION)
+	if _power_timer <= 0.0:
+		_is_powered = false
+		_hud.set_powered(false)
+
+# ── Meter ───────────────────────────────────
+
+func _update_meter(delta) -> void:
+	if _current_meter < METER_SIZE:
+		if _is_powered:
+			_current_meter += METER_REFILL * delta * 2
+		else: _current_meter += METER_REFILL * delta
+		
+
+# ── Jump / Air ───────────────────────────────────
+
 func _handle_air(delta) -> void:
 	print("air state")
 	
@@ -99,6 +137,10 @@ func _handle_air(delta) -> void:
 	
 	if is_on_floor():
 		change_state(State.move)
+	
+	if Input.is_action_just_pressed("crouch"):
+		_slam_timer = SLAM_UP
+		change_state(State.slam)
 	
 	_apply_gravity(delta)
 	
@@ -113,7 +155,7 @@ func _handle_air(delta) -> void:
 	
 
 func _handle_jump() -> void:
-	if state == State.move:
+	if state == State.move or State.slide:
 		velocity.y = JUMP_VELOCITY
 	if state == State.wall:
 		velocity.y = JUMP_VELOCITY
@@ -123,6 +165,8 @@ func _handle_jump() -> void:
 		return
 	change_state(State.air)
 	
+# ── Wall Slide ───────────────────────────────────
+
 func _handle_wall_slide(delta) -> void:
 	print ("wall state")
 	var input_dir := Input.get_vector("move_left", "move_right", "move_forward", "move_back")
@@ -140,10 +184,9 @@ func _handle_wall_slide(delta) -> void:
 		velocity.z = lerp(velocity.z, _direction.z * MAX_SPEED, ACCEL * delta)
 		if not is_on_wall_only():
 			_wall_timer -= delta
-
 	else:
 		_wall_timer -= delta
-		
+
 	if _wall_timer <= 0:
 		change_state(State.idle)
 	
@@ -152,10 +195,8 @@ func _handle_wall_slide(delta) -> void:
 		
 	move_and_slide()
 
-
-
-
 # ── Dash ──────────────────────────────────────────────
+
 func _handle_dash(delta: float) -> void:
 	print("dash state")
 	if _dash_timer > 0:
@@ -169,9 +210,8 @@ func _handle_dash(delta: float) -> void:
 		change_state(State.idle)
 	move_and_slide()
 
-			
-
 # ── Crouch / Slide ────────────────────────────────────
+
 func _handle_slide(delta: float) -> void:
 	print ("slide state")
 	_apply_gravity(delta)
@@ -199,16 +239,28 @@ func _set_crouch(crouching: bool) -> void:
 	_crouching_collision.disabled = not crouching
 	_target_head_height = HEAD_CROUCH_HEIGHT if crouching else HEAD_STAND_HEIGHT
 
-# ── Movement ──────────────────────────────────────────
-func _handle_accel(accel, current, max) -> float:
-	var final: float
-	if current >= max:
-		final = current - accel
-		return final
+# ── Ground Slam ──────────────────────────────────────────
+
+func _handle_slam(delta) -> void:
+	print("slam state")
+	if _slam_timer >= 0:
+		print("slam up")
+		velocity.y = 10
+		_slam_timer -= delta
 	else:
-		final = current + accel
-		return final
-	
+		print("slam down")
+		velocity.y = -SLAM_SPEED
+		velocity.z = 0
+		velocity.x = 0
+		if is_on_floor():
+			if Input.is_action_pressed("crouch"):
+				change_state(State.slide)
+				_direction = -global_transform.basis.z.normalized()
+			else: change_state(State.move)
+	move_and_slide()
+
+# ── Movement ──────────────────────────────────────────
+
 func _handle_movement(delta: float) -> void:
 	print("move state")
 	if not is_on_floor():
@@ -237,6 +289,8 @@ func _handle_movement(delta: float) -> void:
 	
 	move_and_slide()
 
+# ── Input ─────────────────────────────────────────────
+
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		_handle_mouse_look(event)
@@ -260,17 +314,3 @@ func _handle_mouse_look(event: InputEventMouseMotion) -> void:
 	rotate_y(-event.relative.x * MOUSE_SENSITIVITY)
 	_head.rotate_x(-event.relative.y * MOUSE_SENSITIVITY)
 	_head.rotation.x = clamp(_head.rotation.x, -deg_to_rad(MAX_LOOK_ANGLE), deg_to_rad(MAX_LOOK_ANGLE))
-
-func apply_power() -> void:
-	_is_powered = true
-	_power_timer = POWER_DURATION
-	_hud.set_powered(true)
-
-func _tick_power(delta: float) -> void:
-	if not _is_powered:
-		return
-	_power_timer -= delta
-	_hud.set_progress(_power_timer, POWER_DURATION)
-	if _power_timer <= 0.0:
-		_is_powered = false
-		_hud.set_powered(false)
