@@ -19,7 +19,7 @@ const HEAD_STAND_HEIGHT: float = 1.8
 const HEAD_CROUCH_HEIGHT: float = 1.0
 const WALL_JUMP_AWAY_FORCE: float = 5.0
 const POWER_DURATION: float = 10.0
-const METER_REFILL: float = 1.5
+const METER_REFILL: float = 2.5
 const SLIDE_DRAIN: float = 5
 const METER_SEGMENT: float = 200
 const METER_SIZE: float = 800
@@ -271,7 +271,8 @@ func _handle_slam(delta) -> void:
 		if is_on_floor():
 			if Input.is_action_pressed("crouch"):
 				change_state(State.slide)
-				_direction = -global_transform.basis.z.normalized()
+				var input_dir := Input.get_vector("move_left", "move_right", "move_forward", "move_back")
+				_direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 			else: change_state(State.move)
 	move_and_slide()
 
