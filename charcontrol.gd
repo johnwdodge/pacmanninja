@@ -19,8 +19,10 @@ const HEAD_STAND_HEIGHT: float = 1.8
 const HEAD_CROUCH_HEIGHT: float = 1.0
 const WALL_JUMP_AWAY_FORCE: float = 5.0
 const POWER_DURATION: float = 10.0
-const METER_REFILL: float = 1.0
-const METER_SIZE: float = 900
+const METER_REFILL: int = 1
+const SLIDE_DRAIN: int = 20
+const METER_SEGMENT: int = 200
+const METER_SIZE: int = 800
 const SLAM_UP: float = 0.1
 const SLAM_SPEED: float = 40.0
 
@@ -80,7 +82,7 @@ func _physics_process(delta: float) -> void:
 			_handle_air(delta)
 		State.slam:
 			_handle_slam(delta)
-		
+	_update_meter(delta)
 	_lerp_head(delta)
 	_tick_power(delta)
 
@@ -121,9 +123,9 @@ func _tick_power(delta: float) -> void:
 func _update_meter(delta) -> void:
 	if _current_meter < METER_SIZE:
 		if _is_powered:
-			_current_meter += METER_REFILL * delta * 2
-		else: _current_meter += METER_REFILL * delta
-		
+			_current_meter += METER_REFILL * 2
+		else: _current_meter += METER_REFILL
+	print(_current_meter)
 
 # ── Jump / Air ───────────────────────────────────
 
@@ -158,9 +160,14 @@ func _handle_jump() -> void:
 	if is_on_floor():
 		velocity.y = JUMP_VELOCITY
 	if state == State.wall:
-		velocity.y = JUMP_VELOCITY
-		velocity.x += _trajectory.x * WALL_JUMP_AWAY_FORCE
-		velocity.z += _trajectory.z * WALL_JUMP_AWAY_FORCE
+		if _current_meter > METER_SEGMENT:
+			_current_meter -= METER_SEGMENT
+			velocity.y = JUMP_VELOCITY
+			velocity.x += _trajectory.x * WALL_JUMP_AWAY_FORCE
+			velocity.z += _trajectory.z * WALL_JUMP_AWAY_FORCE
+		else:
+			return
+			#add screen shake logic
 	else:
 		return
 	change_state(State.air)
@@ -178,6 +185,7 @@ func _handle_wall_slide(delta) -> void:
 	
 	if is_on_wall_only():
 		_wall_timer = WALL_LENIENCE
+		_trajectory = get_slide_collision(0).get_normal()
 		
 	if _direction:
 		velocity.x = lerp(velocity.x, _direction.x * MAX_SPEED, ACCEL * delta)
@@ -213,16 +221,20 @@ func _handle_dash(delta: float) -> void:
 # ── Crouch / Slide ────────────────────────────────────
 
 func _handle_slide(delta: float) -> void:
-	print ("slide state")
-	_apply_gravity(delta)
-	_set_crouch(true)
-	velocity.x = _direction.x * SLIDE_SPEED
-	velocity.z = _direction.z * SLIDE_SPEED
-	if Input.is_action_just_released("crouch"):
+	if _current_meter > 0:
+		print ("slide state")
+		_current_meter -= SLIDE_DRAIN
+		_apply_gravity(delta)
+		_set_crouch(true)
+		velocity.x = _direction.x * SLIDE_SPEED
+		velocity.z = _direction.z * SLIDE_SPEED
+		if Input.is_action_just_released("crouch"):
+			change_state(State.idle)
+			return
+		move_and_slide()
+	else:
 		change_state(State.idle)
-		return
-	move_and_slide()
-		
+		move_and_slide()
 func _has_ceiling_obstruction() -> bool:
 	if not _is_crouching:
 		return false
@@ -303,8 +315,13 @@ func _input(event: InputEvent) -> void:
 		if event.is_action_pressed("sprint"):
 			if state not in [State.wall, State.slide, State.dash]:
 				if _direction:
-					_dash_timer = DASH_DURATION
-					change_state(State.dash)
+					if _current_meter > METER_SEGMENT:
+						_current_meter -= METER_SEGMENT
+						_dash_timer = DASH_DURATION
+						change_state(State.dash)
+					else:
+						pass
+						#add logic for screenshake
 		if event.is_action_pressed("jump"):
 			_handle_jump()
 		if event.is_action_pressed("ui_cancel"):
