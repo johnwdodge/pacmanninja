@@ -7,9 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bx4kyblex8ucu" path="res://scenes/charcontrol.tscn" id="5_48ne7"]
 [ext_resource type="PackedScene" uid="uid://dqy00primfpyv" path="res://assets/models/Pedestal.glb" id="6_cyt5c"]
 [ext_resource type="PackedScene" uid="uid://uigv2h0flxta" path="res://scenes/power_pellet.tscn" id="7_7x1jh"]
-[ext_resource type="PackedScene" uid="uid://dfyf2y41r0d4w" path="res://scenes/simple_ai.tscn" id="8_7x1jh"]
-[ext_resource type="PackedScene" uid="uid://cxyct5hpij8yg" path="res://assets/models/Torch.glb" id="9_hfwtw"]
-[ext_resource type="PackedScene" uid="uid://jk0gx3dkea44" path="res://hud.tscn" id="10_2mu0v"]
+[ext_resource type="PackedScene" uid="uid://baogvd37j7idx" path="res://hud.tscn" id="10_2mu0v"]
 
 [sub_resource type="Environment" id="Environment_48ne7"]
 
@@ -30,9 +28,6 @@ material = ExtResource("1_v45ci")
 albedo_texture = ExtResource("1_jbqir")
 uv1_triplanar = true
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_hfwtw"]
-size = Vector3(1.8759766, 5.289856, 2.147461)
-
 [node name="TestLevel" type="Node3D" unique_id=1704524550]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=376485838]
@@ -40,9 +35,6 @@ environment = SubResource("Environment_48ne7")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment" unique_id=250324022]
 transform = Transform3D(0.9341235, 0.25077984, -0.25401327, 0, 0.7116215, 0.70256305, 0.35694996, -0.65628064, 0.6647424, 0, 1, 0)
-
-[node name="charcontrol" parent="." unique_id=1193498515 instance=ExtResource("5_48ne7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4644067, 0)
 
 [node name="PowerPellet" parent="." unique_id=1863329713 instance=ExtResource("7_7x1jh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.903498, 8.005052, -29.473658)
@@ -55,9 +47,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.3569965, 1.086792, 13.66787
 
 [node name="Pedestal" parent="." unique_id=1248578068 instance=ExtResource("6_cyt5c")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 2.3360758, -0.0014657974, 13.603799)
-
-[node name="SimpleAI" parent="." unique_id=970802604 instance=ExtResource("8_7x1jh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.119176, 1.243971, -3.276)
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=1963550358]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.844084, 0, 0)
@@ -221,13 +210,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.333313, 0.6906471, 13.73212
 light_color = Color(1.1551381e-06, 0.592867, 0.5928671, 1)
 light_energy = 10.0
 
-[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=386974538]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7917471, 1, 8.843079)
-
-[node name="Torch" parent="StaticBody3D" unique_id=1295869314 instance=ExtResource("9_hfwtw")]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1025527347]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.019042969, 1.7655334, -0.040527344)
-shape = SubResource("BoxShape3D_hfwtw")
-
 [node name="HUD" parent="." unique_id=1202115306 instance=ExtResource("10_2mu0v")]
+
+[node name="charcontrol" parent="." unique_id=1193498515 instance=ExtResource("5_48ne7")]
