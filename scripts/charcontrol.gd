@@ -36,6 +36,7 @@ const SWORD_SCENE = preload("res://scenes/weapons/magic_sword.tscn")
 @onready var _hud: Node = $"../HUD"
 @onready var _attack_hurtbox: Area3D = $Head/AttackHurtbox
 @onready var _sword_anchor: Node3D = $Head/SwordAnchor
+@onready var hud: Node = $"../HUD"
 
 # ── Variables ─────────────────────────────────────────────
 
