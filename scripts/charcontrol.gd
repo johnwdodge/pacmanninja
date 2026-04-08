@@ -2,8 +2,9 @@ extends CharacterBody3D
 
 # ── Settings ──────────────────────────────────────────
 const ACCEL: float = 9.0
-const AIR_ACCEL: float = 1.5
-const DECEL: float = 14.0
+const AIR_ACCEL: float = 4
+const AIR_DECEL: float = 1
+const DECEL: float = 3.0
 const MAX_SPEED: float = 15.0
 const CROUCH_SPEED: float = 8.0
 const JUMP_VELOCITY: float = 13.0
@@ -11,6 +12,7 @@ const MOUSE_SENSITIVITY: float = 0.002
 const MAX_LOOK_ANGLE: float = 89.0
 const SLIDE_DURATION: float = 5.0
 const SLIDE_SPEED: float = 20.0
+const SLOPE_ACCEL: float = 1.3
 const DASH_SPEED: float = 50.0
 const DASH_DURATION: float = 0.125
 const WALL_LENIENCE: float = 0.15
@@ -22,8 +24,9 @@ const METER_REFILL: float = 2
 const SLIDE_DRAIN: float = 5
 const METER_SEGMENT: float = 200
 const METER_SIZE: float = 800
+const WALLJUMP_TIMEOUT: float = 0.15
 const SLAM_UP: float = 0.075
-const SLAM_SPEED: float = 60.0
+const SLAM_SPEED: float = 80.0
 const METER_REFILL_DELAY: float = 0.25
 const SWORD_SCENE = preload("res://scenes/weapons/magic_sword.tscn")
 
@@ -52,12 +55,15 @@ var _is_powered: bool = false
 var _power_timer: float = 0.0
 var _current_meter: float = METER_SIZE
 var _slam_timer: float = SLAM_UP
+var _walljump_timer: float = WALLJUMP_TIMEOUT
 var _sword_instance: Node3D = null
 var _meter_refill_delay: float = 0.0
+var _temp_vel: Vector3 = Vector3(velocity.x, 0, velocity.z)
+var _total_vel = _temp_vel.length()
 
 # ── State ─────────────────────────────────────────────
 
-enum State { move, dash, slide, air, wall, idle, slam }
+enum State { move, dash, slide, air, wall, idle, slam, walljump }
 var state = State.idle
 
 func change_state(newstate) -> void:
@@ -75,6 +81,8 @@ func _ready() -> void:
 # ── Physics ───────────────────────────────────────────
 
 func _physics_process(delta: float) -> void:
+	_temp_vel = Vector3(velocity.x, 0, velocity.z)
+	_total_vel = _temp_vel.length()
 	match state:
 		State.idle:
 			_handle_idle()
@@ -90,8 +98,10 @@ func _physics_process(delta: float) -> void:
 			_handle_air(delta)
 		State.slam:
 			_handle_slam(delta)
+		State.walljump:
+			_handle_walljump(delta)
 	_update_meter(delta)
-	print(velocity)
+	print(_total_vel)
 	_lerp_head(delta)
 	_tick_power(delta)
 
@@ -183,8 +193,12 @@ func _handle_air(delta) -> void:
 	var input_dir := Input.get_vector("move_left", "move_right", "move_forward", "move_back")
 	_direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if _direction:
-		velocity.x = lerp(velocity.x, _direction.x * MAX_SPEED, AIR_ACCEL * delta)
-		velocity.z = lerp(velocity.z, _direction.z * MAX_SPEED, AIR_ACCEL * delta)
+		if _total_vel < MAX_SPEED:
+			velocity.x = lerp(velocity.x, _direction.x * MAX_SPEED, AIR_ACCEL * delta)
+			velocity.z = lerp(velocity.z, _direction.z * MAX_SPEED, AIR_ACCEL * delta)
+		else:
+			velocity.x = lerp(velocity.x, _direction.x * MAX_SPEED, AIR_DECEL * delta)
+			velocity.z = lerp(velocity.z, _direction.z * MAX_SPEED, AIR_DECEL * delta)
 	move_and_slide()
 
 func _handle_jump() -> void:
@@ -198,11 +212,23 @@ func _handle_jump() -> void:
 			velocity.y = JUMP_VELOCITY
 			velocity.x += _trajectory.x * WALL_JUMP_AWAY_FORCE
 			velocity.z += _trajectory.z * WALL_JUMP_AWAY_FORCE
+			_walljump_timer = WALLJUMP_TIMEOUT
+			change_state(State.walljump)
+			return
 		else:
 			return
 	else:
 		return
 	change_state(State.air)
+	
+func _handle_walljump(delta) -> void:
+	if _walljump_timer > 0:
+		_walljump_timer -= delta
+		_apply_gravity(delta)
+		move_and_slide()
+	else:
+		change_state(State.air)
+		move_and_slide()
 
 # ── Wall Slide ────────────────────────────────────────
 
@@ -217,8 +243,12 @@ func _handle_wall_slide(delta) -> void:
 		_wall_timer = WALL_LENIENCE
 		_trajectory = get_slide_collision(0).get_normal()
 	if _direction:
-		velocity.x = lerp(velocity.x, _direction.x * MAX_SPEED, ACCEL * delta)
-		velocity.z = lerp(velocity.z, _direction.z * MAX_SPEED, ACCEL * delta)
+		if _total_vel < MAX_SPEED:
+			velocity.x = lerp(velocity.x, _direction.x * MAX_SPEED, ACCEL * delta)
+			velocity.z = lerp(velocity.z, _direction.z * MAX_SPEED, ACCEL * delta)
+		else:
+			velocity.x = lerp(velocity.x, _direction.x * MAX_SPEED, DECEL * delta)
+			velocity.z = lerp(velocity.z, _direction.z * MAX_SPEED, DECEL * delta)
 		if not is_on_wall_only():
 			_wall_timer -= delta
 	else:
@@ -238,8 +268,8 @@ func _handle_dash(delta: float) -> void:
 		velocity.z = _direction.z * DASH_SPEED
 		velocity.y = 0
 	else:
-		velocity.x = _direction.x * MAX_SPEED
-		velocity.z = _direction.z * MAX_SPEED
+		velocity.x = _direction.x * (MAX_SPEED + 10)
+		velocity.z = _direction.z * (MAX_SPEED + 10)
 		change_state(State.idle)
 	move_and_slide()
 
@@ -251,8 +281,23 @@ func _handle_slide(delta: float) -> void:
 			_consume_meter(SLIDE_DRAIN)
 		_apply_gravity(delta)
 		_set_crouch(true)
-		velocity.x = _direction.x * SLIDE_SPEED
-		velocity.z = _direction.z * SLIDE_SPEED
+		var floornorm = get_floor_normal()
+		floornorm.y = 0
+		if floornorm:
+			floornorm = floornorm.normalized()
+			if floornorm.dot(velocity.normalized()) > -0.1:
+				velocity.x = _direction.x * (SLIDE_SPEED * SLOPE_ACCEL)
+				velocity.z = _direction.z * (SLIDE_SPEED * SLOPE_ACCEL)
+				velocity.y = -10
+			else:
+				velocity.x = _direction.x * (SLIDE_SPEED / SLOPE_ACCEL)
+				velocity.z = _direction.z * (SLIDE_SPEED / SLOPE_ACCEL)
+		if _total_vel < SLIDE_SPEED:
+			velocity.x = _direction.x * SLIDE_SPEED
+			velocity.z = _direction.z * SLIDE_SPEED
+		else:
+			velocity.x = lerp(velocity.x, _direction.x * SLIDE_SPEED, AIR_DECEL * delta)
+			velocity.z = lerp(velocity.z, _direction.z * SLIDE_SPEED, AIR_DECEL * delta)
 		if Input.is_action_just_released("crouch"):
 			change_state(State.idle)
 			return
@@ -285,13 +330,14 @@ func _handle_slam(delta) -> void:
 		_slam_timer -= delta
 	else:
 		velocity.y = -SLAM_SPEED
-		velocity.z = 0
-		velocity.x = 0
 		if is_on_floor():
 			if Input.is_action_pressed("crouch"):
-				change_state(State.slide)
 				var input_dir := Input.get_vector("move_left", "move_right", "move_forward", "move_back")
 				_direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+				if _direction:
+					change_state(State.slide)
+				else:
+					change_state(State.move)
 			else:
 				change_state(State.move)
 	move_and_slide()
@@ -311,15 +357,23 @@ func _handle_movement(delta: float) -> void:
 		else:
 			_current_speed += ACCEL
 	if _direction:
-		if _direction.dot(-global_transform.basis.z.normalized()) > -0.1:
-			velocity.x = lerp(velocity.x, _direction.x * MAX_SPEED, ACCEL * delta)
-			velocity.z = lerp(velocity.z, _direction.z * MAX_SPEED, ACCEL * delta)
-		else:
-			velocity.x = lerp(velocity.x, _direction.x * (MAX_SPEED * 0.8), ACCEL * delta)
-			velocity.z = lerp(velocity.z, _direction.z * (MAX_SPEED * 0.8), ACCEL * delta)
+			if _direction.dot(-global_transform.basis.z.normalized()) > -0.1:
+				if _total_vel < MAX_SPEED:
+					velocity.x = lerp(velocity.x, _direction.x * MAX_SPEED, ACCEL * delta)
+					velocity.z = lerp(velocity.z, _direction.z * MAX_SPEED, ACCEL * delta)
+				else:
+					velocity.x = lerp(velocity.x, _direction.x * MAX_SPEED, DECEL * delta)
+					velocity.z = lerp(velocity.z, _direction.z * MAX_SPEED, DECEL * delta)
+			else:
+				if _total_vel < (MAX_SPEED * 0.8):
+					velocity.x = lerp(velocity.x, _direction.x * (MAX_SPEED * 0.8), ACCEL * delta)
+					velocity.z = lerp(velocity.z, _direction.z * (MAX_SPEED * 0.8), ACCEL * delta)
+				else:
+					velocity.x = lerp(velocity.x, _direction.x * (MAX_SPEED * 0.8), DECEL * delta)
+					velocity.z = lerp(velocity.z, _direction.z * (MAX_SPEED * 0.8), DECEL * delta)
 	else:
-		velocity.x = lerp(velocity.x, 0.0, DECEL * delta)
-		velocity.z = lerp(velocity.z, 0.0, DECEL * delta)
+		velocity.x = lerp(velocity.x, 0.0, ACCEL * delta)
+		velocity.z = lerp(velocity.z, 0.0, ACCEL * delta)
 	if _has_ceiling_obstruction():
 		_set_crouch(true)
 	else:

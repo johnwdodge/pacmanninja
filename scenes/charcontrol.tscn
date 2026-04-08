@@ -10,6 +10,7 @@
 height = 2.5092773
 
 [node name="charcontrol" type="CharacterBody3D" unique_id=1193498515 groups=["player"]]
+floor_snap_length = 0.23
 script = ExtResource("1_u6b33")
 
 [node name="StandingCollision" type="CollisionShape3D" parent="." unique_id=766601868]
