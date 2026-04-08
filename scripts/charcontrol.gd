@@ -2,15 +2,15 @@ extends CharacterBody3D
 
 # ── Settings ──────────────────────────────────────────
 const ACCEL: float = 9.0
-const AIR_ACCEL: float = 1.2
+const AIR_ACCEL: float = 1.5
 const DECEL: float = 14.0
-const MAX_SPEED: float = 12.0
-const CROUCH_SPEED: float = 6.0
+const MAX_SPEED: float = 15.0
+const CROUCH_SPEED: float = 8.0
 const JUMP_VELOCITY: float = 13.0
 const MOUSE_SENSITIVITY: float = 0.002
 const MAX_LOOK_ANGLE: float = 89.0
 const SLIDE_DURATION: float = 5.0
-const SLIDE_SPEED: float = 16.0
+const SLIDE_SPEED: float = 20.0
 const DASH_SPEED: float = 50.0
 const DASH_DURATION: float = 0.1
 const WALL_LENIENCE: float = 0.15
@@ -100,10 +100,10 @@ func _lerp_head(delta: float) -> void:
 
 func _apply_gravity(delta: float) -> void:
 	velocity.y -= _gravity * delta
-	if velocity.y <= 1:
+	if velocity.y < 0:
 		velocity.y -= _gravity * delta
-	if velocity.y < -30:
-		velocity.y = -30
+	if velocity.y < -20:
+		velocity.y = -20
 
 # ── Idle ──────────────────────────────────────────────
 
