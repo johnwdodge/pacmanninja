@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://dqy00primfpyv"
-path="res://.godot/imported/Pedestal.glb-35682ba63509dd41644cd3da8308d915.scn"
+path="res://.godot/imported/Pedestal.glb-dd495e4131666c98b55a7a1413240593.scn"
 
 [deps]
 
-source_file="res://assets/models/Pedestal.glb"
-dest_files=["res://.godot/imported/Pedestal.glb-35682ba63509dd41644cd3da8308d915.scn"]
+source_file="res://models/Pedestal.glb"
+dest_files=["res://.godot/imported/Pedestal.glb-dd495e4131666c98b55a7a1413240593.scn"]
 
 [params]
 

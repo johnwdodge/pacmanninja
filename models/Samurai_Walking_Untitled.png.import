@@ -2,17 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cntky7hfo7lmv"
-path.s3tc="res://.godot/imported/green_grid.png-9e97fcf2159dbba8d924555f03a446ac.s3tc.ctex"
+uid="uid://drj3sgulbsjv3"
+path.s3tc="res://.godot/imported/Samurai_Walking_Untitled.png-7b610b9a5c4b52f8ba9bca82da52773f.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
+generator_parameters={
+"md5": "9310589c0d9373bf3d09afed923d63c7"
+}
 
 [deps]
 
-source_file="res://textures/green_grid.png"
-dest_files=["res://.godot/imported/green_grid.png-9e97fcf2159dbba8d924555f03a446ac.s3tc.ctex"]
+source_file="res://models/Samurai_Walking_Untitled.png"
+dest_files=["res://.godot/imported/Samurai_Walking_Untitled.png-7b610b9a5c4b52f8ba9bca82da52773f.s3tc.ctex"]
 
 [params]
 

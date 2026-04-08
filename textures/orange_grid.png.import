@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bc7f3hwcpuwhe"
-path.s3tc="res://.godot/imported/orange_grid.png-50a57c63270530c0ef6a5e510cfbdc62.s3tc.ctex"
+path.s3tc="res://.godot/imported/orange_grid.png-225a45042b949a2fd934737af353a204.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/textures/orange_grid.png"
-dest_files=["res://.godot/imported/orange_grid.png-50a57c63270530c0ef6a5e510cfbdc62.s3tc.ctex"]
+source_file="res://textures/orange_grid.png"
+dest_files=["res://.godot/imported/orange_grid.png-225a45042b949a2fd934737af353a204.s3tc.ctex"]
 
 [params]
 

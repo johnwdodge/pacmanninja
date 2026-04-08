@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://3qhjmpbupvyq"
-path.s3tc="res://.godot/imported/Pedestal_concrete.png-8456d98e6884967c12fe1033cb2f495c.s3tc.ctex"
+path.s3tc="res://.godot/imported/Pedestal_concrete.png-579224dba95df498619d11c708c5f3e0.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -14,8 +14,8 @@ generator_parameters={
 
 [deps]
 
-source_file="res://assets/textures/Pedestal_concrete.png"
-dest_files=["res://.godot/imported/Pedestal_concrete.png-8456d98e6884967c12fe1033cb2f495c.s3tc.ctex"]
+source_file="res://textures/Pedestal_concrete.png"
+dest_files=["res://.godot/imported/Pedestal_concrete.png-579224dba95df498619d11c708c5f3e0.s3tc.ctex"]
 
 [params]
 

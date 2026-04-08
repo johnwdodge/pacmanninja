@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://jbi61i287mas"
-path.s3tc="res://.godot/imported/black_grid.png-8f4c49129977843e8fbd5fcb6f2f55f5.s3tc.ctex"
+path.s3tc="res://.godot/imported/black_grid.png-23d12f29f90c4d5876c28969bc5b5821.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/textures/black_grid.png"
-dest_files=["res://.godot/imported/black_grid.png-8f4c49129977843e8fbd5fcb6f2f55f5.s3tc.ctex"]
+source_file="res://textures/black_grid.png"
+dest_files=["res://.godot/imported/black_grid.png-23d12f29f90c4d5876c28969bc5b5821.s3tc.ctex"]
 
 [params]
 

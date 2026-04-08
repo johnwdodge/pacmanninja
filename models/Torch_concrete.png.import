@@ -2,17 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cntky7hfo7lmv"
-path.s3tc="res://.godot/imported/green_grid.png-9e97fcf2159dbba8d924555f03a446ac.s3tc.ctex"
+uid="uid://b1h2coxmwsiul"
+path.s3tc="res://.godot/imported/Torch_concrete.png-72d362c71918b09cc17cbbefb98228ff.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
+generator_parameters={
+"md5": "9a380a8557a532811bc4f2b3562688e4"
+}
 
 [deps]
 
-source_file="res://textures/green_grid.png"
-dest_files=["res://.godot/imported/green_grid.png-9e97fcf2159dbba8d924555f03a446ac.s3tc.ctex"]
+source_file="res://models/Torch_concrete.png"
+dest_files=["res://.godot/imported/Torch_concrete.png-72d362c71918b09cc17cbbefb98228ff.s3tc.ctex"]
 
 [params]
 

@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://dbsnhtxmys1wm"
-path="res://.godot/imported/Samurai.glb-c328f42bcfed45b3eecce40208b57f5b.scn"
+path="res://.godot/imported/Samurai.glb-ce53cbf4d55feced4bbab34d004ca170.scn"
 
 [deps]
 
-source_file="res://assets/models/Samurai.glb"
-dest_files=["res://.godot/imported/Samurai.glb-c328f42bcfed45b3eecce40208b57f5b.scn"]
+source_file="res://models/Samurai.glb"
+dest_files=["res://.godot/imported/Samurai.glb-ce53cbf4d55feced4bbab34d004ca170.scn"]
 
 [params]
 

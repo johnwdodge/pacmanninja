@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://cxyct5hpij8yg"
-path="res://.godot/imported/Torch.glb-b82adeb949188063a88791ad991c160e.scn"
+uid="uid://dctv3o31k83jg"
+path="res://.godot/imported/mapa_Pacman.fbx-541fa4fff6c06ea97e250f788561b1e8.scn"
 
 [deps]
 
-source_file="res://models/Torch.glb"
-dest_files=["res://.godot/imported/Torch.glb-b82adeb949188063a88791ad991c160e.scn"]
+source_file="res://mapa_Pacman.fbx"
+dest_files=["res://.godot/imported/mapa_Pacman.fbx-541fa4fff6c06ea97e250f788561b1e8.scn"]
 
 [params]
 
@@ -30,7 +30,7 @@ meshes/force_disable_compression=false
 skins/use_named_skins=true
 animation/import=true
 animation/fps=30
-animation/trimming=false
+animation/trimming=true
 animation/remove_immutable_tracks=true
 animation/import_rest_as_RESET=false
 import_script/path=""
@@ -38,5 +38,7 @@ materials/extract=0
 materials/extract_format=0
 materials/extract_path=""
 _subresources={}
-gltf/naming_version=2
-gltf/embedded_image_handling=1
+fbx/importer=0
+fbx/allow_geometry_helper_nodes=false
+fbx/embedded_image_handling=1
+fbx/naming_version=2

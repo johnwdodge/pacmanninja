@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://beehuocj1v6ck"
-path="res://.godot/imported/PacManLevel.glb-155491e7c1e74e10e4aab43bbc57a9b5.scn"
+path="res://.godot/imported/PacManLevel.glb-88fdac6fa107b49ec68c7d32e3addb1e.scn"
 
 [deps]
 
-source_file="res://assets/models/PacManLevel.glb"
-dest_files=["res://.godot/imported/PacManLevel.glb-155491e7c1e74e10e4aab43bbc57a9b5.scn"]
+source_file="res://models/PacManLevel.glb"
+dest_files=["res://.godot/imported/PacManLevel.glb-88fdac6fa107b49ec68c7d32e3addb1e.scn"]
 
 [params]
 
