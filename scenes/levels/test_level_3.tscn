@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cngkmijy0qyio"]
 
 [ext_resource type="PackedScene" uid="uid://xbemqr2spiol" path="res://scenes/hud.tscn" id="1_4krgp"]
+[ext_resource type="Script" uid="uid://c62ie4g6d3yu3" path="res://scenes/levels/levelgeneric.gd" id="1_46sh2"]
 [ext_resource type="Texture2D" uid="uid://jbi61i287mas" path="res://assets/textures/black_grid.png" id="1_xcwdp"]
 [ext_resource type="Material" uid="uid://bbyao1xr7m16h" path="res://assets/textures/orange.tres" id="2_vbqyu"]
 [ext_resource type="Material" uid="uid://gca4wayvmo56" path="res://assets/textures/green.tres" id="3_hfe0d"]
@@ -13,6 +14,7 @@ albedo_texture = ExtResource("1_xcwdp")
 uv1_triplanar = true
 
 [node name="test_level_3" type="Node3D" unique_id=932748570]
+script = ExtResource("1_46sh2")
 
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="." unique_id=1170746163]
 use_collision = true
@@ -609,10 +611,10 @@ material = ExtResource("3_vbqyu")
 [node name="charcontrol" parent="." unique_id=1193498515 instance=ExtResource("3_xcwdp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -45, 1.8277683, 0)
 
-[node name="HUD" parent="." unique_id=1202115306 instance=ExtResource("1_4krgp")]
-
 [node name="Pellet_Altar" parent="." unique_id=900777205 instance=ExtResource("7_ypoxe")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -40.02947, 0.4999962, 40.0997)
+
+[node name="HUD" parent="." unique_id=1202115306 instance=ExtResource("1_4krgp")]
 
 [node name="Lights" type="Node3D" parent="." unique_id=211607820]
 
@@ -620,3 +622,10 @@ transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -40.02947, 0.4999962, 40.0997
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -45, 8, 9)
 light_color = Color(0.9396389, 0, 0.37778094, 1)
 omni_range = 10.498
+
+[node name="MiniCam" type="Camera3D" parent="." unique_id=887153368]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 114.18286, 0)
+projection = 1
+fov = 78.8
+size = 100.0
+near = 0.082

@@ -2,11 +2,13 @@ extends Node
 
 @onready var _powered_label: Label = $CanvasLayer/Label
 @onready var _progress_bar: ProgressBar = $CanvasLayer/ProgressBar
-
+@onready var _subviewport: SubViewport = $CanvasLayer/MapContainer/MapPort
+@onready var _camera = $"../MiniCam"
 func _ready() -> void:
 	set_powered(false)
 	_progress_bar.max_value = 1.0
 	_progress_bar.value = 1.0
+	display_camera(_camera)
 
 func set_powered(powered: bool) -> void:
 	_powered_label.visible = powered
@@ -16,3 +18,6 @@ func set_meter(value: float, max_value: float) -> void:
 
 func set_progress(value: float, max_value: float) -> void:
 	_powered_label.text = "POWERED  %.1fs" % value
+
+func display_camera(camera: Camera3D) -> void:
+	camera.reparent(_subviewport)

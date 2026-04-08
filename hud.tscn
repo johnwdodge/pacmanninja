@@ -1,11 +1,22 @@
 [gd_scene format=3 uid="uid://baogvd37j7idx"]
 
-[ext_resource type="Script" path="res://scripts/hud.gd" id="1_37p78"]
+[ext_resource type="Script" uid="uid://bc3p5nk7xf6vu" path="res://scripts/hud.gd" id="1_37p78"]
 
 [node name="HUD" type="Node" unique_id=1202115306]
 script = ExtResource("1_37p78")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=592995193]
+
+[node name="MapContainer" type="SubViewportContainer" parent="CanvasLayer" unique_id=1225601728]
+offset_left = 852.0
+offset_top = 12.0
+offset_right = 1152.0
+offset_bottom = 312.0
+
+[node name="MapPort" type="SubViewport" parent="CanvasLayer/MapContainer" unique_id=1602605214]
+handle_input_locally = false
+size = Vector2i(300, 300)
+render_target_update_mode = 4
 
 [node name="Label" type="Label" parent="CanvasLayer" unique_id=1227660011]
 offset_right = 40.0

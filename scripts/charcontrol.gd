@@ -226,7 +226,6 @@ func _handle_jump() -> void:
 			return
 	else:
 		return
-	change_state(State.air)
 	
 func _handle_walljump(delta) -> void:
 	if _walljump_timer > 0:
