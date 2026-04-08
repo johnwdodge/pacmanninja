@@ -18,13 +18,13 @@ const DASH_DURATION: float = 0.125
 const WALL_LENIENCE: float = 0.15
 const HEAD_STAND_HEIGHT: float = 1.8
 const HEAD_CROUCH_HEIGHT: float = 1.0
-const WALL_JUMP_AWAY_FORCE: float = 5.0
+const WALL_JUMP_AWAY_FORCE: float = 12.0
 const POWER_DURATION: float = 10.0
 const METER_REFILL: float = 2
 const SLIDE_DRAIN: float = 5
 const METER_SEGMENT: float = 200
 const METER_SIZE: float = 800
-const WALLJUMP_TIMEOUT: float = 0.15
+const WALLJUMP_TIMEOUT: float = 0.03
 const SLAM_UP: float = 0.075
 const SLAM_SPEED: float = 80.0
 const METER_REFILL_DELAY: float = 0.25
@@ -288,7 +288,6 @@ func _handle_slide(delta: float) -> void:
 			if floornorm.dot(velocity.normalized()) > -0.1:
 				velocity.x = _direction.x * (SLIDE_SPEED * SLOPE_ACCEL)
 				velocity.z = _direction.z * (SLIDE_SPEED * SLOPE_ACCEL)
-				velocity.y = -10
 			else:
 				velocity.x = _direction.x * (SLIDE_SPEED / SLOPE_ACCEL)
 				velocity.z = _direction.z * (SLIDE_SPEED / SLOPE_ACCEL)
