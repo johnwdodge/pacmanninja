@@ -2,6 +2,7 @@ extends Node
 
 @onready var _powered_label: Label = $CanvasLayer/Label
 @onready var _progress_bar: ProgressBar = $CanvasLayer/ProgressBar
+@onready var hud: Node = $"."
 
 func _ready() -> void:
 	set_powered(false)
