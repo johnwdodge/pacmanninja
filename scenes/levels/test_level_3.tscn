@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://cngkmijy0qyio"]
+
+[ext_resource type="Script" path="res://scripts/charcontrol.gd" id="1_0854k"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_nxqe8"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ea30i"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_u6b33"]
+height = 2.5092773
+
+[node name="charcontrol" type="CharacterBody3D" unique_id=1193498515 groups=["player"]]
+floor_snap_length = 0.23
+script = ExtResource("1_0854k")
+
+[node name="StandingCollision" type="CollisionShape3D" parent="." unique_id=766601868]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_nxqe8")
+
+[node name="CrouchingCollision" type="CollisionShape3D" parent="." unique_id=1116034742]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.501361, 0)
+shape = SubResource("SphereShape3D_ea30i")
+
+[node name="Head" type="Node3D" parent="." unique_id=1678947778]
+
+[node name="Camera" type="Camera3D" parent="Head" unique_id=1395685839]
+
+[node name="SwordAnchor" type="Node3D" parent="Head" unique_id=311773373]
+transform = Transform3D(0.09704686, 0.021947276, 0.0100112045, -0.02412275, 0.088294834, 0.040275503, 0, -0.04150109, 0.09098165, 0.13877034, -0.121343136, -0.44938323)
+
+[node name="AttackHurtbox" type="Area3D" parent="Head" unique_id=1621177623]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Head/AttackHurtbox" unique_id=1079102612]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, -1.113061e-08, -1.2702909)
+shape = SubResource("CapsuleShape3D_u6b33")
