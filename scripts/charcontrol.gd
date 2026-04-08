@@ -29,6 +29,7 @@ const SLAM_UP: float = 0.075
 const SLAM_SPEED: float = 80.0
 const METER_REFILL_DELAY: float = 0.25
 const SWORD_SCENE = preload("res://scenes/weapons/magic_sword.tscn")
+const COYOTE_TIME: float = 0.2
 
 # ── References ────────────────────────────────────────
 
@@ -60,6 +61,7 @@ var _sword_instance: Node3D = null
 var _meter_refill_delay: float = 0.0
 var _temp_vel: Vector3 = Vector3(velocity.x, 0, velocity.z)
 var _total_vel = _temp_vel.length()
+var _coyote_timer: float = COYOTE_TIME
 
 # ── State ─────────────────────────────────────────────
 
@@ -102,6 +104,10 @@ func _physics_process(delta: float) -> void:
 			_handle_walljump(delta)
 	_update_meter(delta)
 	print(_total_vel)
+	if is_on_floor():
+		_coyote_timer = COYOTE_TIME
+	else:
+		_coyote_timer -= delta
 	_lerp_head(delta)
 	_tick_power(delta)
 
@@ -202,7 +208,8 @@ func _handle_air(delta) -> void:
 	move_and_slide()
 
 func _handle_jump() -> void:
-	if is_on_floor():
+	if _coyote_timer > 0:
+		_coyote_timer = 0
 		velocity.y = JUMP_VELOCITY
 		if state == State.dash:
 			change_state(State.idle)
