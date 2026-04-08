@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bx4kyblex8ucu" path="res://scenes/charcontrol.tscn" id="5_48ne7"]
 [ext_resource type="PackedScene" uid="uid://dqy00primfpyv" path="res://assets/models/Pedestal.glb" id="6_cyt5c"]
 [ext_resource type="PackedScene" uid="uid://uigv2h0flxta" path="res://scenes/power_pellet.tscn" id="7_7x1jh"]
+[ext_resource type="PackedScene" uid="uid://dfyf2y41r0d4w" path="res://scenes/simple_ai.tscn" id="9_hfwtw"]
 [ext_resource type="PackedScene" uid="uid://baogvd37j7idx" path="res://hud.tscn" id="10_2mu0v"]
 
 [sub_resource type="Environment" id="Environment_48ne7"]
@@ -213,3 +214,8 @@ light_energy = 10.0
 [node name="HUD" parent="." unique_id=1202115306 instance=ExtResource("10_2mu0v")]
 
 [node name="charcontrol" parent="." unique_id=1193498515 instance=ExtResource("5_48ne7")]
+
+[node name="SimpleAI" parent="." unique_id=970802604 instance=ExtResource("9_hfwtw")]
+
+[node name="SimpleAI2" parent="." unique_id=767797233 instance=ExtResource("9_hfwtw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.03609, 0.8249316, 11.432221)

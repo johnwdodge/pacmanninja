@@ -1,4 +1,3 @@
-
 extends CharacterBody3D
 
 # ── Settings ──────────────────────────────────────────
@@ -25,6 +24,8 @@ const METER_SEGMENT: float = 200
 const METER_SIZE: float = 800
 const SLAM_UP: float = 0.1
 const SLAM_SPEED: float = 40.0
+const METER_REFILL_DELAY: float = 0.25
+const SWORD_SCENE = preload("res://scenes/weapons/magic_sword.tscn")
 
 # ── References ────────────────────────────────────────
 
@@ -33,6 +34,8 @@ const SLAM_SPEED: float = 40.0
 @onready var _standing_collision: CollisionShape3D = $StandingCollision
 @onready var _crouching_collision: CollisionShape3D = $CrouchingCollision
 @onready var _hud: Node = $"../HUD"
+@onready var _attack_hurtbox: Area3D = $Head/AttackHurtbox
+@onready var _sword_anchor: Node3D = $Head/SwordAnchor
 
 # ── Variables ─────────────────────────────────────────────
 
@@ -48,21 +51,25 @@ var _is_powered: bool = false
 var _power_timer: float = 0.0
 var _current_meter: float = METER_SIZE
 var _slam_timer: float = SLAM_UP
+var _sword_instance: Node3D = null
+var _meter_refill_delay: float = 0.0
 
 # ── State ─────────────────────────────────────────────
 
-enum State {move, dash, slide, air, wall, idle, slam}
+enum State { move, dash, slide, air, wall, idle, slam }
 var state = State.idle
-
 
 func change_state(newstate) -> void:
 	state = newstate
-	
+
 # ── Ready ─────────────────────────────────────────────
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	_crouching_collision.disabled = true
+	_attack_hurtbox.monitoring = false
+	_attack_hurtbox.monitorable = false
+	_attack_hurtbox.body_entered.connect(_on_hurtbox_body_entered)
 
 # ── Physics ───────────────────────────────────────────
 
@@ -92,22 +99,25 @@ func _lerp_head(delta: float) -> void:
 func _apply_gravity(delta: float) -> void:
 	velocity.y -= _gravity * delta
 
-# ── Idle ───────────────────────────────────
+# ── Idle ──────────────────────────────────────────────
 
 func _handle_idle() -> void:
-	print("idle state")
 	if is_on_floor():
 		change_state(State.move)
 	else:
 		change_state(State.air)
 	move_and_slide()
 
-# ── Power ───────────────────────────────────
+# ── Power ─────────────────────────────────────────────
 
 func apply_power() -> void:
 	_is_powered = true
 	_power_timer = POWER_DURATION
 	_hud.set_powered(true)
+	if _sword_instance == null:
+		_sword_instance = SWORD_SCENE.instantiate()
+		_sword_anchor.add_child(_sword_instance)
+		_sword_instance.slash_finished.connect(_on_slash_finished)
 
 func _tick_power(delta: float) -> void:
 	if not _is_powered:
@@ -117,44 +127,59 @@ func _tick_power(delta: float) -> void:
 	if _power_timer <= 0.0:
 		_is_powered = false
 		_hud.set_powered(false)
+		_attack_hurtbox.monitoring = false
+		_attack_hurtbox.monitorable = false
+		if _sword_instance:
+			_sword_instance.queue_free()
+			_sword_instance = null
 
-# ── Meter ───────────────────────────────────
+# ── Attack ────────────────────────────────────────────
 
-func _update_meter(delta) -> void:
+func _on_slash_finished() -> void:
+	_attack_hurtbox.monitoring = false
+	_attack_hurtbox.monitorable = false
+
+func _on_hurtbox_body_entered(body: Node3D) -> void:
+	if body.has_method("take_damage"):
+		body.take_damage()
+
+# ── Meter ─────────────────────────────────────────────
+
+func _consume_meter(amount: float) -> void:
+	_current_meter -= amount
+	_meter_refill_delay = METER_REFILL_DELAY
+
+func _update_meter(delta: float) -> void:
+	if _meter_refill_delay > 0.0 and not _is_powered:
+		_meter_refill_delay -= delta
+		_hud.set_meter(_current_meter, METER_SIZE)
+		return
 	if _current_meter < METER_SIZE:
 		if _is_powered:
 			_current_meter += METER_REFILL * 2
-		else: _current_meter += METER_REFILL
-	print(_current_meter)
+		else:
+			_current_meter += METER_REFILL
 	_hud.set_meter(_current_meter, METER_SIZE)
-# ── Jump / Air ───────────────────────────────────
+
+# ── Jump / Air ────────────────────────────────────────
 
 func _handle_air(delta) -> void:
-	print("air state")
-	
 	if is_on_wall_only():
 		_wall_timer = WALL_LENIENCE
 		_trajectory = get_slide_collision(0).get_normal()
 		change_state(State.wall)
-	
 	if is_on_floor():
 		change_state(State.move)
-	
 	if Input.is_action_just_pressed("crouch"):
 		_slam_timer = SLAM_UP
 		change_state(State.slam)
-	
 	_apply_gravity(delta)
-	
-	
 	var input_dir := Input.get_vector("move_left", "move_right", "move_forward", "move_back")
 	_direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if _direction:
 		velocity.x = lerp(velocity.x, _direction.x * MAX_SPEED, AIR_ACCEL * delta)
 		velocity.z = lerp(velocity.z, _direction.z * MAX_SPEED, AIR_ACCEL * delta)
-	
 	move_and_slide()
-	
 
 func _handle_jump() -> void:
 	if is_on_floor():
@@ -163,32 +188,28 @@ func _handle_jump() -> void:
 			change_state(State.idle)
 	if state == State.wall:
 		if _current_meter > METER_SEGMENT:
-			_current_meter -= METER_SEGMENT
+			_consume_meter(METER_SEGMENT)
 			velocity.y = JUMP_VELOCITY
 			velocity.x += _trajectory.x * WALL_JUMP_AWAY_FORCE
 			velocity.z += _trajectory.z * WALL_JUMP_AWAY_FORCE
 		else:
 			return
-			#add screen shake logic
 	else:
 		return
 	change_state(State.air)
-	
-# ── Wall Slide ───────────────────────────────────
+
+# ── Wall Slide ────────────────────────────────────────
 
 func _handle_wall_slide(delta) -> void:
-	print ("wall state")
 	var input_dir := Input.get_vector("move_left", "move_right", "move_forward", "move_back")
 	_direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if velocity.y < 0:
 		velocity.y = -1
 	else:
 		_apply_gravity(delta)
-	
 	if is_on_wall_only():
 		_wall_timer = WALL_LENIENCE
 		_trajectory = get_slide_collision(0).get_normal()
-		
 	if _direction:
 		velocity.x = lerp(velocity.x, _direction.x * MAX_SPEED, ACCEL * delta)
 		velocity.z = lerp(velocity.z, _direction.z * MAX_SPEED, ACCEL * delta)
@@ -196,25 +217,20 @@ func _handle_wall_slide(delta) -> void:
 			_wall_timer -= delta
 	else:
 		_wall_timer -= delta
-
 	if _wall_timer <= 0:
 		change_state(State.idle)
-	
 	if is_on_floor():
 		change_state(State.idle)
-		
 	move_and_slide()
 
 # ── Dash ──────────────────────────────────────────────
 
 func _handle_dash(delta: float) -> void:
-	print("dash state")
 	if _dash_timer > 0:
 		_dash_timer -= delta
 		velocity.x = _direction.x * DASH_SPEED
 		velocity.z = _direction.z * DASH_SPEED
 		velocity.y = 0
-
 	else:
 		velocity.x = _direction.x * MAX_SPEED
 		velocity.z = _direction.z * MAX_SPEED
@@ -225,9 +241,8 @@ func _handle_dash(delta: float) -> void:
 
 func _handle_slide(delta: float) -> void:
 	if _current_meter > 0:
-		print ("slide state")
 		if not _is_powered:
-			_current_meter -= SLIDE_DRAIN
+			_consume_meter(SLIDE_DRAIN)
 		_apply_gravity(delta)
 		_set_crouch(true)
 		velocity.x = _direction.x * SLIDE_SPEED
@@ -239,6 +254,7 @@ func _handle_slide(delta: float) -> void:
 	else:
 		change_state(State.idle)
 		move_and_slide()
+
 func _has_ceiling_obstruction() -> bool:
 	if not _is_crouching:
 		return false
@@ -255,16 +271,13 @@ func _set_crouch(crouching: bool) -> void:
 	_crouching_collision.disabled = not crouching
 	_target_head_height = HEAD_CROUCH_HEIGHT if crouching else HEAD_STAND_HEIGHT
 
-# ── Ground Slam ──────────────────────────────────────────
+# ── Ground Slam ───────────────────────────────────────
 
 func _handle_slam(delta) -> void:
-	print("slam state")
 	if _slam_timer >= 0:
-		print("slam up")
 		velocity.y = 10
 		_slam_timer -= delta
 	else:
-		print("slam down")
 		velocity.y = -SLAM_SPEED
 		velocity.z = 0
 		velocity.x = 0
@@ -273,13 +286,13 @@ func _handle_slam(delta) -> void:
 				change_state(State.slide)
 				var input_dir := Input.get_vector("move_left", "move_right", "move_forward", "move_back")
 				_direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-			else: change_state(State.move)
+			else:
+				change_state(State.move)
 	move_and_slide()
 
 # ── Movement ──────────────────────────────────────────
 
 func _handle_movement(delta: float) -> void:
-	print("move state")
 	if not is_on_floor():
 		change_state(State.idle)
 	var input_dir := Input.get_vector("move_left", "move_right", "move_forward", "move_back")
@@ -289,9 +302,8 @@ func _handle_movement(delta: float) -> void:
 	else:
 		if _current_speed > MAX_SPEED:
 			_current_speed -= DECEL
-		else: _current_speed += ACCEL
-			
-
+		else:
+			_current_speed += ACCEL
 	if _direction:
 		if _direction.dot(-global_transform.basis.z.normalized()) > -0.1:
 			velocity.x = lerp(velocity.x, _direction.x * MAX_SPEED, ACCEL * delta)
@@ -302,12 +314,10 @@ func _handle_movement(delta: float) -> void:
 	else:
 		velocity.x = lerp(velocity.x, 0.0, DECEL * delta)
 		velocity.z = lerp(velocity.z, 0.0, DECEL * delta)
-
 	if _has_ceiling_obstruction():
 		_set_crouch(true)
 	else:
 		_set_crouch(false)
-	print(velocity)
 	move_and_slide()
 
 # ── Input ─────────────────────────────────────────────
@@ -318,27 +328,23 @@ func _input(event: InputEvent) -> void:
 		return
 	if event is InputEventKey or event is InputEventMouseButton:
 		if event.is_action_pressed("crouch"):
-			if is_on_floor():
-				if _direction:
-					if _current_meter > METER_SEGMENT:
-						change_state(State.slide)
-					else:
-						pass
-						#put in screen shake logic
+			if is_on_floor() and _direction and _current_meter > METER_SEGMENT:
+				change_state(State.slide)
 		if event.is_action_pressed("sprint"):
 			if state not in [State.wall, State.slide, State.dash]:
-				if _direction:
-					if _current_meter > METER_SEGMENT:
-						_current_meter -= METER_SEGMENT
-						_dash_timer = DASH_DURATION
-						change_state(State.dash)
-					else:
-						pass
-						#add logic for screenshake
+				if _direction and _current_meter > METER_SEGMENT:
+					_consume_meter(METER_SEGMENT)
+					_dash_timer = DASH_DURATION
+					change_state(State.dash)
 		if event.is_action_pressed("jump"):
 			_handle_jump()
 		if event.is_action_pressed("ui_cancel"):
 			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+		if event.is_action_pressed("attack"):
+			if _sword_instance != null:
+				_attack_hurtbox.monitoring = true
+				_attack_hurtbox.monitorable = true
+				_sword_instance.slash()
 
 func _handle_mouse_look(event: InputEventMouseMotion) -> void:
 	rotate_y(-event.relative.x * MOUSE_SENSITIVITY)

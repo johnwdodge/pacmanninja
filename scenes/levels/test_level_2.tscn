@@ -4,7 +4,7 @@
 [ext_resource type="Material" uid="uid://gca4wayvmo56" path="res://assets/textures/green.tres" id="2_722hl"]
 [ext_resource type="PackedScene" uid="uid://bx4kyblex8ucu" path="res://scenes/charcontrol.tscn" id="3_cxraw"]
 [ext_resource type="Material" uid="uid://bbyao1xr7m16h" path="res://assets/textures/orange.tres" id="3_gwqs1"]
-[ext_resource type="PackedScene" uid="uid://jk0gx3dkea44" path="res://hud.tscn" id="6_gwqs1"]
+[ext_resource type="PackedScene" uid="uid://baogvd37j7idx" path="res://hud.tscn" id="6_gwqs1"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_5idrc"]
 sky_top_color = Color(0.6935256, 0.31889212, 0.25905758, 1)

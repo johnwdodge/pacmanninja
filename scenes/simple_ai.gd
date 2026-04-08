@@ -3,18 +3,29 @@ extends CharacterBody3D
 @export var move_speed: float = 10
 @export var gravity: float = 9.8
 @export var stopping_distance: float = 2.0
-
+@export var max_health: int = 1  
 
 @onready var nav_agent: NavigationAgent3D = $NavigationAgent3D
 
 var player: CharacterBody3D
 var _path_timer: float = 0.0
+var _health: int
+
 const PATH_UPDATE_RATE: float = 0.2
 
 func _ready() -> void:
+	_health = max_health
 	player = get_tree().get_first_node_in_group("player")
 	NavigationServer3D.map_changed.connect(_on_map_ready)
 	nav_agent.velocity_computed.connect(_on_velocity_computed)
+
+func take_damage() -> void:
+	_health -= 1
+	if _health <= 0:
+		_die()
+
+func _die() -> void:
+	queue_free()
 
 func _on_map_ready(map_rid: RID) -> void:
 	NavigationServer3D.map_changed.disconnect(_on_map_ready)
@@ -43,7 +54,6 @@ func _physics_process(delta: float) -> void:
 		return
 	var next_pos: Vector3 = nav_agent.get_next_path_position()
 	var direction: Vector3 = (next_pos - global_position).normalized()
-	# Rotation
 	var flat_direction := Vector3(direction.x, 0.0, direction.z)
 	if flat_direction.length() > 0.1:
 		var target_basis = Basis.looking_at(flat_direction)
@@ -56,9 +66,7 @@ func _physics_process(delta: float) -> void:
 		velocity = desired_velocity
 		move_and_slide()
 
-		
-
 func _on_velocity_computed(safe_velocity: Vector3) -> void:
-	safe_velocity.y = velocity.y 
+	safe_velocity.y = velocity.y
 	velocity = safe_velocity
 	move_and_slide()

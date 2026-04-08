@@ -1,9 +1,12 @@
 [gd_scene format=3 uid="uid://dfyf2y41r0d4w"]
 
 [ext_resource type="Script" uid="uid://l40tk0i18hyk" path="res://scenes/simple_ai.gd" id="1_rnssq"]
-[ext_resource type="PackedScene" uid="uid://c76ys1i7nq0ao" path="res://scenes/samurai.tscn" id="2_ovxrf"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rnssq"]
+albedo_color = Color(1, 0.12156863, 0.16862746, 1)
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_ovxrf"]
+material = SubResource("StandardMaterial3D_rnssq")
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rcxqm"]
 
@@ -13,7 +16,6 @@ move_speed = 40.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1665810567]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-visible = false
 mesh = SubResource("CapsuleMesh_ovxrf")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=484540894]
@@ -24,6 +26,5 @@ shape = SubResource("CapsuleShape3D_rcxqm")
 path_desired_distance = 0.5
 target_desired_distance = 0.5
 avoidance_enabled = true
-
-[node name="Samurai" parent="." unique_id=242837925 instance=ExtResource("2_ovxrf")]
-transform = Transform3D(-2, 0, -3.019916e-07, 0, 2, 0, 3.019916e-07, 0, -2, 0, 0, 0)
+height = 5.0
+radius = 3.0
