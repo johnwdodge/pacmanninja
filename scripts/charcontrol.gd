@@ -4,15 +4,15 @@ extends CharacterBody3D
 const ACCEL: float = 9.0
 const AIR_ACCEL: float = 1.2
 const DECEL: float = 14.0
-const MAX_SPEED: float = 15.0
-const CROUCH_SPEED: float = 8
-const JUMP_VELOCITY: float = 11.0
+const MAX_SPEED: float = 12.0
+const CROUCH_SPEED: float = 6.0
+const JUMP_VELOCITY: float = 13.0
 const MOUSE_SENSITIVITY: float = 0.002
 const MAX_LOOK_ANGLE: float = 89.0
 const SLIDE_DURATION: float = 5.0
-const SLIDE_SPEED: float = 20.0
-const DASH_SPEED: float = 40.0
-const DASH_DURATION: float = 0.2
+const SLIDE_SPEED: float = 16.0
+const DASH_SPEED: float = 50.0
+const DASH_DURATION: float = 0.1
 const WALL_LENIENCE: float = 0.15
 const HEAD_STAND_HEIGHT: float = 1.8
 const HEAD_CROUCH_HEIGHT: float = 1.0
@@ -22,8 +22,8 @@ const METER_REFILL: float = 2
 const SLIDE_DRAIN: float = 5
 const METER_SEGMENT: float = 200
 const METER_SIZE: float = 800
-const SLAM_UP: float = 0.1
-const SLAM_SPEED: float = 40.0
+const SLAM_UP: float = 0.075
+const SLAM_SPEED: float = 60.0
 const METER_REFILL_DELAY: float = 0.25
 const SWORD_SCENE = preload("res://scenes/weapons/magic_sword.tscn")
 
@@ -90,6 +90,7 @@ func _physics_process(delta: float) -> void:
 		State.slam:
 			_handle_slam(delta)
 	_update_meter(delta)
+	print(velocity)
 	_lerp_head(delta)
 	_tick_power(delta)
 
@@ -98,6 +99,10 @@ func _lerp_head(delta: float) -> void:
 
 func _apply_gravity(delta: float) -> void:
 	velocity.y -= _gravity * delta
+	if velocity.y <= 1:
+		velocity.y -= _gravity * delta
+	if velocity.y < -30:
+		velocity.y = -30
 
 # ── Idle ──────────────────────────────────────────────
 
