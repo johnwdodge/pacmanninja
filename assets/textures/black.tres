@@ -1,9 +1,0 @@
-[gd_resource type="StandardMaterial3D" format=3 uid="uid://bcpx75tdlp5a1"]
-
-[ext_resource type="Texture2D" uid="uid://jbi61i287mas" path="res://assets/textures/black_grid.png" id="1_if6p1"]
-
-[resource]
-albedo_texture = ExtResource("1_if6p1")
-uv1_scale = Vector3(5, 5, 5)
-uv1_triplanar = true
-uv2_triplanar = true
