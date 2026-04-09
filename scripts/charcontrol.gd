@@ -274,8 +274,8 @@ func _handle_dash(delta: float) -> void:
 		velocity.z = _direction.z * DASH_SPEED
 		velocity.y = 0
 	else:
-		velocity.x = _direction.x * (MAX_SPEED + 10)
-		velocity.z = _direction.z * (MAX_SPEED + 10)
+		velocity.x = _direction.x * (MAX_SPEED + 7)
+		velocity.z = _direction.z * (MAX_SPEED + 7)
 		change_state(State.idle)
 	move_and_slide()
 
