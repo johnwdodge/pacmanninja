@@ -244,7 +244,7 @@ func _handle_wall_slide(delta) -> void:
 	var input_dir := Input.get_vector("move_left", "move_right", "move_forward", "move_back")
 	_direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if velocity.y < 0:
-		velocity.y = -1
+		velocity.y = -2
 	else:
 		_apply_gravity(delta)
 	if is_on_wall_only():
