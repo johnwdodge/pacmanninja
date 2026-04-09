@@ -117,9 +117,7 @@ func _lerp_head(delta: float) -> void:
 func _apply_gravity(delta: float) -> void:
 	velocity.y -= _gravity * delta
 	if velocity.y < 0:
-		velocity.y -= _gravity * delta
-	if velocity.y < -20:
-		velocity.y = -20
+		velocity.y -= (_gravity * 0.7) * delta
 
 # ── Idle ──────────────────────────────────────────────
 
