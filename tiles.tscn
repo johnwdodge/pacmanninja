@@ -49,19 +49,19 @@ data = PackedVector3Array(1, 0.099999994, -1, -1, 0.099999994, 1, -1, 0.09999999
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_27d7y"]
 resource_name = "Material.002"
 cull_mode = 2
-albedo_color = Color(0.9063318, 0.9063318, 0.9063318, 1)
+albedo_color = Color(0.32915813, 0.3291586, 0.32915804, 1)
 roughness = 0.5
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b802g"]
 resource_name = "Material.008"
 cull_mode = 2
-albedo_color = Color(0.9063318, 0.9063318, 0.9063318, 1)
+albedo_color = Color(0.7371929, 0.73719305, 0.7371925, 1)
 roughness = 0.5
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fnd12"]
 resource_name = "Material.009"
 cull_mode = 2
-albedo_color = Color(0.9063318, 0.9063318, 0.9063318, 1)
+albedo_color = Color(0.40451106, 0.40451124, 0.4045107, 1)
 roughness = 0.5
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_bep2p"]
@@ -146,19 +146,18 @@ data = PackedVector3Array(1, 0, 1, 1, 2, -1, 1, 0, -1, 1, 0, 1, 1, 2, 1, 1, 2, -
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6o2e7"]
 resource_name = "Material.003"
 cull_mode = 2
-albedo_color = Color(0.9063318, 0.9063318, 0.9063318, 1)
+albedo_color = Color(0.1979371, 0.19793731, 0.19793692, 1)
 roughness = 0.5
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qk6v2"]
 resource_name = "Material.004"
 cull_mode = 2
-albedo_color = Color(0.9063318, 0.9063318, 0.9063318, 1)
+albedo_color = Color(0.2629322, 0.26293266, 0.26293206, 1)
 roughness = 0.5
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2nv5p"]
 resource_name = "Material.005"
 cull_mode = 2
-albedo_color = Color(0.9063318, 0.9063318, 0.9063318, 1)
 roughness = 0.5
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_6fyfl"]
@@ -240,19 +239,18 @@ shadow_mesh = SubResource("ArrayMesh_6fyfl")
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_d6bvg"]
 data = PackedVector3Array(1, 0, -1, -1, 2, -1, -1, 0, -1, 1, 0, -1, 1, 2, -1, -1, 2, -1, 1, 2, -0.9, -1, 2, -1, 1, 2, -1, 1, 2, -0.9, -1, 2, -0.9, -1, 2, -1, -1, 2, -0.9, -1, 0, -1, -1, 2, -1, -1, 2, -0.9, -1, 0, -0.9, -1, 0, -1, -1, 0, -0.9, 1, 2, -0.9, 1, 0, -0.9, -1, 0, -0.9, -1, 2, -0.9, 1, 2, -0.9, 1, 0, -0.9, 1, 2, -1, 1, 0, -1, 1, 0, -0.9, 1, 2, -0.9, 1, 2, -1, -1, 0, -0.9, 1, 0, -1, -1, 0, -1, -1, 0, -0.9, 1, 0, -0.9, 1, 0, -1, -1, 0, 1, 1, 2, 1, 1, 0, 1, -1, 0, 1, -1, 2, 1, 1, 2, 1, -1, 2, 0.9, 1, 2, 1, -1, 2, 1, -1, 2, 0.9, 1, 2, 0.9, 1, 2, 1, 1, 2, 0.9, 1, 0, 1, 1, 2, 1, 1, 2, 0.9, 1, 0, 0.9, 1, 0, 1, 1, 0, 0.9, -1, 2, 0.9, -1, 0, 0.9, 1, 0, 0.9, 1, 2, 0.9, -1, 2, 0.9, -1, 0, 0.9, -1, 2, 1, -1, 0, 1, -1, 0, 0.9, -1, 2, 0.9, -1, 2, 1, 1, 0, 0.9, -1, 0, 1, 1, 0, 1, 1, 0, 0.9, -1, 0, 0.9, -1, 0, 1, 1, 0.099999994, -1, -1, 0.099999994, 1, -1, 0.099999994, -1, 1, 0.099999994, -1, 1, 0.099999994, 1, -1, 0.099999994, 1, 1, 0, 1, -1, 0.099999994, 1, 1, 0.099999994, 1, 1, 0, 1, -1, 0, 1, -1, 0.099999994, 1, -1, 0, 1, -1, 0.099999994, -1, -1, 0.099999994, 1, -1, 0, 1, -1, 0, -1, -1, 0.099999994, -1, -1, 0, -1, 1, 0, 1, 1, 0, -1, -1, 0, -1, -1, 0, 1, 1, 0, 1, 1, 0, -1, 1, 0.099999994, 1, 1, 0.099999994, -1, 1, 0, -1, 1, 0, 1, 1, 0.099999994, 1, -1, 0, -1, 1, 0.099999994, -1, -1, 0.099999994, -1, -1, 0, -1, 1, 0, -1, 1, 0.099999994, -1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jg5mh"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2tvsy"]
 resource_name = "Material.010"
 cull_mode = 2
-albedo_color = Color(0.9063318, 0.9063318, 0.9063318, 1)
+albedo_color = Color(0.20152643, 0.20152667, 0.20152625, 1)
 roughness = 0.5
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1vgrf"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_whqpb"]
 resource_name = "Material.011"
 cull_mode = 2
-albedo_color = Color(0.9063318, 0.9063318, 0.9063318, 1)
 roughness = 0.5
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_ryi65"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_6x6we"]
 _surfaces = [{
 "aabb": AABB(-0.9999999, -7.549787e-09, 0.8999998, 2, 2, 0.10000044),
 "format": 34896613377,
@@ -294,7 +292,7 @@ _surfaces = [{
 "format": 34896613399,
 "index_count": 72,
 "index_data": PackedByteArray("AAABAAIAAwACAAEAAwABAAQABQADAAQAAAAFAAEAAQAFAAYABQAHAAMABQAAAAcACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEwASABEAEwARABQAFQATABQAEAAVABEAEQAVABYAFQAXABMAFQAQABcAGAAZABoAGAAbABkAHAAdAB4AHAAfAB0A"),
-"material": SubResource("StandardMaterial3D_jg5mh"),
+"material": SubResource("StandardMaterial3D_2tvsy"),
 "name": "Material.010",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
@@ -306,7 +304,7 @@ _surfaces = [{
 "format": 34896613399,
 "index_count": 36,
 "index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUA"),
-"material": SubResource("StandardMaterial3D_1vgrf"),
+"material": SubResource("StandardMaterial3D_whqpb"),
 "name": "Material.011",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
@@ -318,7 +316,7 @@ _surfaces = [{
 "format": 34896613399,
 "index_count": 24,
 "index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0A"),
-"material": SubResource("StandardMaterial3D_1vgrf"),
+"material": SubResource("StandardMaterial3D_whqpb"),
 "name": "Material.011",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
@@ -326,21 +324,20 @@ _surfaces = [{
 "vertex_data": PackedByteArray("AAD/////qioAAAAAAACqKgAAAAD//6oqAAD//wAAqir//wAAAACqKv/////+/6oq//8AAP7/qir/////AACqKgAAAAAAAP8///8AAP7//z8AAAAA////P///AAAAAP8///////7/AAAAAP//AAAAAAAA/////wAA/////wAAAACqKqoqqiqqKqoqqiqqKqoqVNVU1VTVVNVU1VTVVNVU1f///3////9/////f////3//f/8//3//P/9//z//f/8/")
 }]
 blend_shape_mode = 0
-shadow_mesh = SubResource("ArrayMesh_ryi65")
+shadow_mesh = SubResource("ArrayMesh_6x6we")
 
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_7ivye"]
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_hrjf4"]
 data = PackedVector3Array(0.29999998, 0.39999998, 1, 1, 0, 1, 0.29999998, 0.099999994, 1, -0.29999998, 0.099999994, 1, 0.29999998, 0.099999994, 1, 1, 0, 1, -0.29999998, 0.099999994, 1, 1, 0, 1, -1, 0, 1, -1, 2, 1, -0.29999998, 0.099999994, 1, -1, 0, 1, 0.29999998, 0.39999998, 1, -1, 2, 1, 1, 0, 1, 1, 0, 1, -1, 2, 1, 1, 2, 1, -1, 2, 1, -0.29999998, 0.39999998, 1, -0.29999998, 0.099999994, 1, -1, 2, 1, 0.29999998, 0.39999998, 1, -0.29999998, 0.39999998, 1, -1, 2, 0.9, 1, 2, 1, -1, 2, 1, -1, 2, 0.9, 1, 2, 0.9, 1, 2, 1, 1, 2, 0.9, 1, 0, 1, 1, 2, 1, 1, 2, 0.9, 1, 0, 0.9, 1, 0, 1, -0.29999998, 0.39999998, 0.9, -1, 0, 0.9, -0.29999998, 0.099999994, 0.9, 0.29999998, 0.099999994, 0.9, -0.29999998, 0.099999994, 0.9, -1, 0, 0.9, 0.29999998, 0.099999994, 0.9, -1, 0, 0.9, 1, 0, 0.9, 1, 2, 0.9, 0.29999998, 0.099999994, 0.9, 1, 0, 0.9, -0.29999998, 0.39999998, 0.9, 1, 2, 0.9, -1, 0, 0.9, -1, 0, 0.9, 1, 2, 0.9, -1, 2, 0.9, 1, 2, 0.9, 0.29999998, 0.39999998, 0.9, 0.29999998, 0.099999994, 0.9, 1, 2, 0.9, -0.29999998, 0.39999998, 0.9, 0.29999998, 0.39999998, 0.9, -1, 0, 0.9, -1, 2, 1, -1, 0, 1, -1, 0, 0.9, -1, 2, 0.9, -1, 2, 1, 1, 0, 0.9, -1, 0, 1, 1, 0, 1, 1, 0, 0.9, -1, 0, 0.9, -1, 0, 1, 1, 0.099999994, -1, -1, 0.099999994, 1, -1, 0.099999994, -1, 1, 0.099999994, -1, 1, 0.099999994, 1, -1, 0.099999994, 1, 1, 0, 1, -1, 0.099999994, 1, 1, 0.099999994, 1, 1, 0, 1, -1, 0, 1, -1, 0.099999994, 1, -1, 0, 1, -1, 0.099999994, -1, -1, 0.099999994, 1, -1, 0, 1, -1, 0, -1, -1, 0.099999994, -1, -1, 0, -1, 1, 0, 1, 1, 0, -1, -1, 0, -1, -1, 0, 1, 1, 0, 1, 1, 0, -1, 1, 0.099999994, 1, 1, 0.099999994, -1, 1, 0, -1, 1, 0, 1, 1, 0.099999994, 1, -1, 0, -1, 1, 0.099999994, -1, -1, 0.099999994, -1, -1, 0, -1, 1, 0, -1, 1, 0.099999994, -1, -0.29999998, 0.39999998, 1, -0.29999998, 0.099999994, 0.9, -0.29999998, 0.099999994, 1, -0.29999998, 0.39999998, 1, -0.29999998, 0.39999998, 0.9, -0.29999998, 0.099999994, 0.9, 0.29999998, 0.099999994, 0.9, 0.29999998, 0.39999998, 1, 0.29999998, 0.099999994, 1, 0.29999998, 0.099999994, 0.9, 0.29999998, 0.39999998, 0.9, 0.29999998, 0.39999998, 1, -0.29999998, 0.099999994, 0.9, 0.29999998, 0.099999994, 1, -0.29999998, 0.099999994, 1, -0.29999998, 0.099999994, 0.9, 0.29999998, 0.099999994, 0.9, 0.29999998, 0.099999994, 1, 0.29999998, 0.39999998, 1, -0.29999998, 0.39999998, 0.9, -0.29999998, 0.39999998, 1, 0.29999998, 0.39999998, 1, 0.29999998, 0.39999998, 0.9, -0.29999998, 0.39999998, 0.9)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1kxky"]
 resource_name = "Material.006"
 cull_mode = 2
-albedo_color = Color(0.9063318, 0.9063318, 0.9063318, 1)
+albedo_color = Color(0.31801948, 0.31802, 0.3180194, 1)
 roughness = 0.5
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i6g4m"]
 resource_name = "Material.007"
 cull_mode = 2
-albedo_color = Color(0.9063318, 0.9063318, 0.9063318, 1)
 roughness = 0.5
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_kfise"]
@@ -432,7 +429,7 @@ mesh = SubResource("ArrayMesh_oyorb")
 [node name="StaticBody3D" type="StaticBody3D" parent="Single_wall_Hole" unique_id=878442439]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Single_wall_Hole/StaticBody3D" unique_id=1769290780]
-shape = SubResource("ConcavePolygonShape3D_7ivye")
+shape = SubResource("ConcavePolygonShape3D_hrjf4")
 
 [node name="Single_wall" type="MeshInstance3D" parent="." unique_id=864326105]
 mesh = SubResource("ArrayMesh_6v1bt")
