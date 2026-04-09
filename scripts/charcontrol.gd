@@ -30,6 +30,7 @@ const SLAM_SPEED: float = 80.0
 const METER_REFILL_DELAY: float = 0.35
 const SWORD_SCENE = preload("res://scenes/weapons/magic_sword.tscn")
 const COYOTE_TIME: float = 0.2
+const AIRYOTE_TIME: float = 0.2
 
 # ── References ────────────────────────────────────────
 
@@ -62,6 +63,7 @@ var _meter_refill_delay: float = 0.0
 var _temp_vel: Vector3 = Vector3(velocity.x, 0, velocity.z)
 var _total_vel = _temp_vel.length()
 var _coyote_timer: float = COYOTE_TIME
+var _airyote_timer: float = AIRYOTE_TIME
 
 # ── State ─────────────────────────────────────────────
 
@@ -184,6 +186,7 @@ func _update_meter(delta: float) -> void:
 # ── Jump / Air ────────────────────────────────────────
 
 func _handle_air(delta) -> void:
+	_airyote_timer -= delta
 	if is_on_wall_only():
 		_trajectory = get_slide_collision(0).get_normal()
 		change_state(State.wall)
@@ -211,7 +214,7 @@ func _handle_jump() -> void:
 		if state == State.dash:
 			_current_meter -= METER_SEGMENT
 			change_state(State.idle)
-	if state == State.wall:
+	if _airyote_timer > 0:
 		if _current_meter > METER_SEGMENT:
 			_consume_meter(METER_SEGMENT)
 			velocity.y = JUMP_VELOCITY
@@ -245,8 +248,10 @@ func _handle_wall_slide(delta) -> void:
 		_apply_gravity(delta)
 	if is_on_wall_only():
 		_trajectory = get_slide_collision(0).get_normal()
+		_airyote_timer = AIRYOTE_TIME
 		if Input.is_action_pressed("move_back") or Input.is_action_pressed("move_left") or Input.is_action_pressed("move_right"):
 			_wall_timer = WALL_LENIENCE
+	else: _airyote_timer -= delta
 	if _direction:
 		if _total_vel < MAX_SPEED:
 			velocity.x = lerp(velocity.x, _direction.x * MAX_SPEED, ACCEL * delta)
@@ -353,6 +358,7 @@ func _handle_slam(delta) -> void:
 # ── Movement ──────────────────────────────────────────
 
 func _handle_movement(delta: float) -> void:
+	_airyote_timer -= delta
 	if not is_on_floor():
 		change_state(State.idle)
 	var input_dir := Input.get_vector("move_left", "move_right", "move_forward", "move_back")
