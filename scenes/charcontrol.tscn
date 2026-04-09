@@ -18,7 +18,7 @@ emission = Color(1.4439226e-07, 0.57958215, 0.54132295, 1)
 material = SubResource("StandardMaterial3D_u6b33")
 
 [node name="charcontrol" type="CharacterBody3D" unique_id=1193498515 groups=["player"]]
-floor_snap_length = 0.23
+floor_snap_length = 0.4
 script = ExtResource("1_u6b33")
 
 [node name="StandingCollision" type="CollisionShape3D" parent="." unique_id=766601868]
