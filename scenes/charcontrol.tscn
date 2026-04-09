@@ -9,7 +9,13 @@
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_u6b33"]
 height = 2.5092773
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u6b33"]
+albedo_color = Color(0, 1, 1, 1)
+emission_enabled = true
+emission = Color(1.4439226e-07, 0.57958215, 0.54132295, 1)
+
 [sub_resource type="PrismMesh" id="PrismMesh_u6b33"]
+material = SubResource("StandardMaterial3D_u6b33")
 
 [node name="charcontrol" type="CharacterBody3D" unique_id=1193498515 groups=["player"]]
 floor_snap_length = 0.23
