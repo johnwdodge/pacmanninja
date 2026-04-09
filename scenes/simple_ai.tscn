@@ -27,4 +27,4 @@ path_desired_distance = 0.5
 target_desired_distance = 0.5
 avoidance_enabled = true
 height = 5.0
-radius = 3.0
+radius = 5.0
