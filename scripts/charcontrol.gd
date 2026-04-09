@@ -7,7 +7,7 @@ const AIR_DECEL: float = 1
 const DECEL: float = 3.0
 const MAX_SPEED: float = 15.0
 const CROUCH_SPEED: float = 8.0
-const JUMP_VELOCITY: float = 13.0
+const JUMP_VELOCITY: float = 12.0
 const MOUSE_SENSITIVITY: float = 0.002
 const MAX_LOOK_ANGLE: float = 89.0
 const SLIDE_DURATION: float = 5.0
@@ -18,7 +18,7 @@ const DASH_DURATION: float = 0.125
 const WALL_LENIENCE: float = 0.15
 const HEAD_STAND_HEIGHT: float = 1.8
 const HEAD_CROUCH_HEIGHT: float = 1.0
-const WALL_JUMP_AWAY_FORCE: float = 12.0
+const WALL_JUMP_AWAY_FORCE: float = 10.0
 const POWER_DURATION: float = 10.0
 const METER_REFILL: float = 2
 const SLIDE_DRAIN: float = 5
@@ -216,6 +216,7 @@ func _handle_jump() -> void:
 			change_state(State.idle)
 	if _airyote_timer > 0 and ((state == State.air) or (state == State.wall)):
 		if _current_meter > METER_SEGMENT:
+			_airyote_timer = 0
 			_consume_meter(METER_SEGMENT)
 			velocity.y = JUMP_VELOCITY
 			velocity.x += _trajectory.x * WALL_JUMP_AWAY_FORCE
