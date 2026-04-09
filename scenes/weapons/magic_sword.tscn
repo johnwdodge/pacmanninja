@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://2imeuhxooc4o"]
 
-[ext_resource type="PackedScene" uid="uid://buhe7ic2k07ut" path="res://assets/models/Magic_Sword.glb" id="1_wekyt"]
+[ext_resource type="PackedScene" uid="uid://buhe7ic2k07ut" path="res://models/Magic_Sword.glb" id="1_wekyt"]
 [ext_resource type="Script" uid="uid://bvthbag5nrups" path="res://scenes/weapons/magic_sword.gd" id="2_hoh20"]
 
 [sub_resource type="Gradient" id="Gradient_wekyt"]
@@ -98,7 +98,7 @@ _data = {
 transform = Transform3D(0.9999998, 0, 0, 0, 1, 0, 0, 0, 0.9999999, -3.2979214, 0, 0.9097681)
 script = ExtResource("2_hoh20")
 
-[node name="Cube_001" parent="." index="0" unique_id=1130820702]
+[node name="Cube_001" parent="." index="0" unique_id=577869141]
 transform = Transform3D(-4.371139e-09, 0.1, 0, -0.1, -4.371139e-09, 0, 0, 0, 0.1, -0.100241065, -0.5140162, 0)
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="." index="1" unique_id=1954303435]

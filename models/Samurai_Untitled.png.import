@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://bf3ec1xcpwq7y"
 path.s3tc="res://.godot/imported/Samurai_Untitled.png-c5dac3f9e83b5529a2ceb081e80d7b38.s3tc.ctex"
+path.etc2="res://.godot/imported/Samurai_Untitled.png-c5dac3f9e83b5529a2ceb081e80d7b38.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://models/Samurai_Untitled.png"
-dest_files=["res://.godot/imported/Samurai_Untitled.png-c5dac3f9e83b5529a2ceb081e80d7b38.s3tc.ctex"]
+dest_files=["res://.godot/imported/Samurai_Untitled.png-c5dac3f9e83b5529a2ceb081e80d7b38.s3tc.ctex", "res://.godot/imported/Samurai_Untitled.png-c5dac3f9e83b5529a2ceb081e80d7b38.etc2.ctex"]
 
 [params]
 
