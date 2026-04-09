@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://clt8s6bxks5e"
-path="res://.godot/imported/Single_Wall_Tile.glb-8bb5dd870f2cb04f722359d431dea04c.scn"
+uid="uid://dei28rr754bb3"
+path="res://.godot/imported/Single_Wall_Hole.glb-1cc0bae6da30ebc9f69f134459eed39d.scn"
 
 [deps]
 
-source_file="res://models/tiles/Single_Wall_Tile.glb"
-dest_files=["res://.godot/imported/Single_Wall_Tile.glb-8bb5dd870f2cb04f722359d431dea04c.scn"]
+source_file="res://models/tiles/Single_Wall_Hole.glb"
+dest_files=["res://.godot/imported/Single_Wall_Hole.glb-1cc0bae6da30ebc9f69f134459eed39d.scn"]
 
 [params]
 
