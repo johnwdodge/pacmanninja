@@ -27,7 +27,7 @@ const METER_SIZE: float = 800
 const WALLJUMP_TIMEOUT: float = 0.03
 const SLAM_UP: float = 0.075
 const SLAM_SPEED: float = 80.0
-const METER_REFILL_DELAY: float = 0.25
+const METER_REFILL_DELAY: float = 0.35
 const SWORD_SCENE = preload("res://scenes/weapons/magic_sword.tscn")
 const COYOTE_TIME: float = 0.2
 
@@ -210,6 +210,7 @@ func _handle_jump() -> void:
 		_coyote_timer = 0
 		velocity.y = JUMP_VELOCITY
 		if state == State.dash:
+			_current_meter -= METER_SEGMENT
 			change_state(State.idle)
 	if state == State.wall:
 		if _current_meter > METER_SEGMENT:
@@ -285,11 +286,13 @@ func _handle_slide(delta: float) -> void:
 			_consume_meter(SLIDE_DRAIN)
 		_apply_gravity(delta)
 		_set_crouch(true)
+		velocity.y -= 2
 		var floornorm = get_floor_normal()
 		floornorm.y = 0
 		if floornorm:
 			floornorm = floornorm.normalized()
 			if floornorm.dot(velocity.normalized()) > -0.1:
+				apply_floor_snap()
 				velocity.x = _direction.x * (SLIDE_SPEED * SLOPE_ACCEL)
 				velocity.z = _direction.z * (SLIDE_SPEED * SLOPE_ACCEL)
 			else:
