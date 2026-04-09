@@ -25,8 +25,8 @@ const SLIDE_DRAIN: float = 5
 const METER_SEGMENT: float = 200
 const METER_SIZE: float = 800
 const WALLJUMP_TIMEOUT: float = 0.03
-const SLAM_UP: float = 0.075
-const SLAM_SPEED: float = 80.0
+const SLAM_UP: float = 0.05
+const SLAM_SPEED: float = 100.0
 const METER_REFILL_DELAY: float = 0.35
 const SWORD_SCENE = preload("res://scenes/weapons/magic_sword.tscn")
 const COYOTE_TIME: float = 0.2
@@ -214,7 +214,7 @@ func _handle_jump() -> void:
 		if state == State.dash:
 			_current_meter -= METER_SEGMENT
 			change_state(State.idle)
-	if _airyote_timer > 0:
+	if _airyote_timer > 0 and ((state == State.air) or (state == State.wall)):
 		if _current_meter > METER_SEGMENT:
 			_consume_meter(METER_SEGMENT)
 			velocity.y = JUMP_VELOCITY

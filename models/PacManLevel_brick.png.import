@@ -4,9 +4,8 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://dpmjuoeb58tsb"
 path.s3tc="res://.godot/imported/PacManLevel_brick.png-0467250a9d1f1e48abcd19536e56bf42.s3tc.ctex"
-path.etc2="res://.godot/imported/PacManLevel_brick.png-0467250a9d1f1e48abcd19536e56bf42.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc", "etc2_astc"],
+"imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -16,7 +15,7 @@ generator_parameters={
 [deps]
 
 source_file="res://models/PacManLevel_brick.png"
-dest_files=["res://.godot/imported/PacManLevel_brick.png-0467250a9d1f1e48abcd19536e56bf42.s3tc.ctex", "res://.godot/imported/PacManLevel_brick.png-0467250a9d1f1e48abcd19536e56bf42.etc2.ctex"]
+dest_files=["res://.godot/imported/PacManLevel_brick.png-0467250a9d1f1e48abcd19536e56bf42.s3tc.ctex"]
 
 [params]
 

@@ -4,16 +4,15 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://bc7f3hwcpuwhe"
 path.s3tc="res://.godot/imported/orange_grid.png-225a45042b949a2fd934737af353a204.s3tc.ctex"
-path.etc2="res://.godot/imported/orange_grid.png-225a45042b949a2fd934737af353a204.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc", "etc2_astc"],
+"imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://textures/orange_grid.png"
-dest_files=["res://.godot/imported/orange_grid.png-225a45042b949a2fd934737af353a204.s3tc.ctex", "res://.godot/imported/orange_grid.png-225a45042b949a2fd934737af353a204.etc2.ctex"]
+dest_files=["res://.godot/imported/orange_grid.png-225a45042b949a2fd934737af353a204.s3tc.ctex"]
 
 [params]
 
