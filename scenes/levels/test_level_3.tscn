@@ -2,11 +2,11 @@
 
 [ext_resource type="PackedScene" uid="uid://xbemqr2spiol" path="res://scenes/hud.tscn" id="1_4krgp"]
 [ext_resource type="Script" uid="uid://c62ie4g6d3yu3" path="res://scenes/levels/levelgeneric.gd" id="1_46sh2"]
-[ext_resource type="Texture2D" uid="uid://jbi61i287mas" path="res://textures/black_grid.png" id="1_xcwdp"]
 [ext_resource type="Material" uid="uid://bbyao1xr7m16h" path="res://textures/orange.tres" id="2_vbqyu"]
 [ext_resource type="Material" uid="uid://gca4wayvmo56" path="res://textures/green.tres" id="3_hfe0d"]
 [ext_resource type="Material" uid="uid://bcpx75tdlp5a1" path="res://textures/black.tres" id="3_vbqyu"]
 [ext_resource type="PackedScene" uid="uid://bx4kyblex8ucu" path="res://scenes/charcontrol.tscn" id="3_xcwdp"]
+[ext_resource type="Texture2D" uid="uid://oa8nkex3wrj3" path="res://textures/Tile_17-256x256.png" id="7_stub3"]
 [ext_resource type="PackedScene" uid="uid://dpte47om4tgm8" path="res://scenes/pellet_altar.tscn" id="7_ypoxe"]
 [ext_resource type="PackedScene" uid="uid://dfyf2y41r0d4w" path="res://scenes/simple_ai.tscn" id="9_stub3"]
 
@@ -27,8 +27,10 @@ agent_radius = 1.0
 agent_max_slope = 60.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hfe0d"]
-albedo_texture = ExtResource("1_xcwdp")
+albedo_texture = ExtResource("7_stub3")
+uv1_scale = Vector3(0.47, 0.47, 0.47)
 uv1_triplanar = true
+uv1_triplanar_sharpness = 0.784584
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_10dhc"]
 _surfaces = [{

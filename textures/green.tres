@@ -1,7 +1,8 @@
 [gd_resource type="StandardMaterial3D" format=3 uid="uid://gca4wayvmo56"]
 
-[ext_resource type="Texture2D" uid="uid://cntky7hfo7lmv" path="res://assets/textures/green_grid.png" id="1_0gqso"]
+[ext_resource type="Texture2D" uid="uid://c4o8cupgqyhdj" path="res://textures/Bricks_15-256x256.png" id="1_a7jil"]
 
 [resource]
-albedo_texture = ExtResource("1_0gqso")
+albedo_texture = ExtResource("1_a7jil")
+uv1_scale = Vector3(0.365, 0.365, 0.365)
 uv1_triplanar = true
