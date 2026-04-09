@@ -4,6 +4,7 @@ extends Node3D
 @onready var minimap = $MiniCam
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	minimap.size = 110
 	hud.display_camera(minimap)
 	pass # Replace with function body.
 
