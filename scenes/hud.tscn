@@ -8,6 +8,7 @@ script = ExtResource("1_ahhtf")
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=592995193]
 
 [node name="MapContainer" type="SubViewportContainer" parent="CanvasLayer" unique_id=2052695426]
+modulate = Color(1, 1, 1, 0.7294118)
 self_modulate = Color(1, 1, 1, 0.7019608)
 offset_left = 283.0
 offset_right = 933.0
