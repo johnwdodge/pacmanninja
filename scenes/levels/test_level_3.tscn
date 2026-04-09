@@ -6,19 +6,26 @@
 [ext_resource type="Material" uid="uid://gca4wayvmo56" path="res://textures/green.tres" id="3_hfe0d"]
 [ext_resource type="Material" uid="uid://bcpx75tdlp5a1" path="res://textures/black.tres" id="3_vbqyu"]
 [ext_resource type="PackedScene" uid="uid://bx4kyblex8ucu" path="res://scenes/charcontrol.tscn" id="3_xcwdp"]
+[ext_resource type="Texture2D" uid="uid://c6s0otiqwgic6" path="res://textures/Wood_09-256x256.png" id="5_uymkn"]
 [ext_resource type="Texture2D" uid="uid://oa8nkex3wrj3" path="res://textures/Tile_17-256x256.png" id="7_stub3"]
 [ext_resource type="PackedScene" uid="uid://dpte47om4tgm8" path="res://scenes/pellet_altar.tscn" id="7_ypoxe"]
 [ext_resource type="PackedScene" uid="uid://dfyf2y41r0d4w" path="res://scenes/simple_ai.tscn" id="9_stub3"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_10dhc"]
+albedo_texture = ExtResource("5_uymkn")
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_7jw5c"]
+material = SubResource("StandardMaterial3D_10dhc")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8vb2c"]
+albedo_color = Color(0.8195887, 0.19185251, 0.2649208, 1)
+emission_enabled = true
+emission = Color(0.7996153, 0.1081396, 0.37022817, 1)
+
 [sub_resource type="BoxMesh" id="BoxMesh_stub3"]
-
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_46sh2"]
-
-[sub_resource type="Sky" id="Sky_46sh2"]
-sky_material = SubResource("ProceduralSkyMaterial_46sh2")
+material = SubResource("StandardMaterial3D_8vb2c")
 
 [sub_resource type="Environment" id="Environment_46sh2"]
-sky = SubResource("Sky_46sh2")
 ambient_light_source = 3
 ambient_light_color = Color(0.6682104, 0.32962298, 0.26733702, 1)
 
@@ -124,13 +131,23 @@ transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 38.97053, 0.4999962, -40.9003
 [node name="Lights" type="Node3D" parent="." unique_id=211607820]
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Lights" unique_id=166540535]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -45, 8, 9)
-light_color = Color(0.9396389, 0, 0.37778094, 1)
-omni_range = 15.0
+transform = Transform3D(1, -2.9802319e-08, 0, 2.9802319e-08, 1, 0, 0, 0, 1, -12.484051, 4.5300875, 6)
+light_color = Color(0.9360267, 0.14430782, 0.14157176, 1)
+light_energy = 2.0
+light_indirect_energy = 10.0
+omni_range = 30.0
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Lights" unique_id=65699995]
-transform = Transform3D(0.3, 0, 0, 0, 1, 0, 0, 0, 0.19999999, -13, 3, 7)
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Lights/OmniLight3D" unique_id=65699995]
+transform = Transform3D(0.2078461, 0.30000004, 0, -0.12000001, 0.51961523, 0, 0, 0, 0.19999997, -0.36304379, -0.58286333, 0)
+mesh = SubResource("CylinderMesh_7jw5c")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Lights/OmniLight3D/MeshInstance3D" unique_id=772843199]
+transform = Transform3D(1.0000001, 0, 0, 0, 0.33333334, 0, 0, 0, 1.0000002, 0.079120636, 0.88964033, 0)
 mesh = SubResource("BoxMesh_stub3")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Lights" unique_id=2004599847]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 8, 0)
+layers = 2
 
 [node name="MiniCam" type="Camera3D" parent="." unique_id=887153368]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 114.18286, 0)
@@ -140,9 +157,6 @@ size = 100.0
 near = 0.082
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=218248980]
-environment = SubResource("Environment_46sh2")
-
-[node name="WorldEnvironment2" type="WorldEnvironment" parent="." unique_id=1077186068]
 environment = SubResource("Environment_46sh2")
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=594404222]
