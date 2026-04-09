@@ -959,6 +959,7 @@ environment = SubResource("Environment_46sh2")
 environment = SubResource("Environment_46sh2")
 
 [node name="CSGCombiner3D2" type="CSGCombiner3D" parent="." unique_id=990483541]
+use_collision = true
 
 [node name="CSGBox3D156" type="CSGBox3D" parent="CSGCombiner3D2" unique_id=351778881]
 transform = Transform3D(-1, -2.9802315e-08, -8.742278e-08, 2.9802322e-08, -1, -8.742278e-08, -8.742278e-08, -8.742278e-08, 1, -40.5223, 9.98, 32.84039)
