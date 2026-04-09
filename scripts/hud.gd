@@ -8,7 +8,6 @@ func _ready() -> void:
 	set_powered(false)
 	_progress_bar.max_value = 1.0
 	_progress_bar.value = 1.0
-	display_camera(_camera)
 
 func set_powered(powered: bool) -> void:
 	_powered_label.visible = powered
