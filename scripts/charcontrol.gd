@@ -185,7 +185,6 @@ func _update_meter(delta: float) -> void:
 
 func _handle_air(delta) -> void:
 	if is_on_wall_only():
-		_wall_timer = WALL_LENIENCE
 		_trajectory = get_slide_collision(0).get_normal()
 		change_state(State.wall)
 	if is_on_floor():
@@ -245,8 +244,9 @@ func _handle_wall_slide(delta) -> void:
 	else:
 		_apply_gravity(delta)
 	if is_on_wall_only():
-		_wall_timer = WALL_LENIENCE
 		_trajectory = get_slide_collision(0).get_normal()
+		if Input.is_action_pressed("move_back") or Input.is_action_pressed("move_left") or Input.is_action_pressed("move_right"):
+			_wall_timer = WALL_LENIENCE
 	if _direction:
 		if _total_vel < MAX_SPEED:
 			velocity.x = lerp(velocity.x, _direction.x * MAX_SPEED, ACCEL * delta)
@@ -262,6 +262,8 @@ func _handle_wall_slide(delta) -> void:
 		change_state(State.idle)
 	if is_on_floor():
 		change_state(State.idle)
+	if Input.is_action_just_pressed("crouch"):
+		change_state(State.slam)
 	move_and_slide()
 
 # ── Dash ──────────────────────────────────────────────
@@ -286,13 +288,13 @@ func _handle_slide(delta: float) -> void:
 			_consume_meter(SLIDE_DRAIN)
 		_apply_gravity(delta)
 		_set_crouch(true)
-		velocity.y -= 2
 		var floornorm = get_floor_normal()
 		floornorm.y = 0
 		if floornorm:
 			floornorm = floornorm.normalized()
 			if floornorm.dot(velocity.normalized()) > -0.1:
 				apply_floor_snap()
+				velocity.y -= 2
 				velocity.x = _direction.x * (SLIDE_SPEED * SLOPE_ACCEL)
 				velocity.z = _direction.z * (SLIDE_SPEED * SLOPE_ACCEL)
 			else:
