@@ -10,6 +10,8 @@
 [ext_resource type="PackedScene" uid="uid://dpte47om4tgm8" path="res://scenes/pellet_altar.tscn" id="7_ypoxe"]
 [ext_resource type="PackedScene" uid="uid://dfyf2y41r0d4w" path="res://scenes/simple_ai.tscn" id="9_stub3"]
 
+[sub_resource type="BoxMesh" id="BoxMesh_stub3"]
+
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_46sh2"]
 
 [sub_resource type="Sky" id="Sky_46sh2"]
@@ -125,6 +127,10 @@ transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 38.97053, 0.4999962, -40.9003
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -45, 8, 9)
 light_color = Color(0.9396389, 0, 0.37778094, 1)
 omni_range = 15.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Lights" unique_id=65699995]
+transform = Transform3D(0.3, 0, 0, 0, 1, 0, 0, 0, 0.19999999, -13, 3, 7)
+mesh = SubResource("BoxMesh_stub3")
 
 [node name="MiniCam" type="Camera3D" parent="." unique_id=887153368]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 114.18286, 0)
