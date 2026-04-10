@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://cngkmijy0qyio"]
 
 [ext_resource type="PackedScene" uid="uid://xbemqr2spiol" path="res://scenes/hud.tscn" id="1_4krgp"]
-[ext_resource type="Script" uid="uid://c62ie4g6d3yu3" path="res://scenes/levels/levelgeneric.gd" id="1_46sh2"]
 [ext_resource type="Material" uid="uid://bbyao1xr7m16h" path="res://textures/orange.tres" id="2_vbqyu"]
 [ext_resource type="Material" uid="uid://gca4wayvmo56" path="res://textures/green.tres" id="3_hfe0d"]
 [ext_resource type="Material" uid="uid://bcpx75tdlp5a1" path="res://textures/black.tres" id="3_vbqyu"]
@@ -42,7 +41,6 @@ uv1_triplanar = true
 uv1_triplanar_sharpness = 0.784584
 
 [node name="test_level_3" type="Node3D" unique_id=932748570]
-script = ExtResource("1_46sh2")
 
 [node name="charcontrol" parent="." unique_id=1193498515 instance=ExtResource("3_xcwdp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.8277683, 0)
