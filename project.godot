@@ -13,7 +13,7 @@ config_version=5
 config/name="Ninja Pac Man"
 run/main_scene="uid://cngkmijy0qyio"
 config/features=PackedStringArray("4.6", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="uid://ba7f7bac8lh6j"
 
 [global_group]
 
