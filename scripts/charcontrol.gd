@@ -105,7 +105,7 @@ func _physics_process(delta: float) -> void:
 		State.walljump:
 			_handle_walljump(delta)
 	_update_meter(delta)
-	print(_total_vel)
+	#print(_total_vel)
 	if is_on_floor():
 		_coyote_timer = COYOTE_TIME
 	else:

@@ -5,7 +5,7 @@
 [ext_resource type="MeshLibrary" uid="uid://cwdmb4l2fk8le" path="res://tiles.meshlib" id="3_goahl"]
 [ext_resource type="PackedScene" uid="uid://dpte47om4tgm8" path="res://scenes/pellet_altar.tscn" id="5_cxraw"]
 [ext_resource type="PackedScene" uid="uid://baogvd37j7idx" path="res://hud.tscn" id="6_gwqs1"]
-[ext_resource type="PackedScene" uid="uid://55dik0higonf" path="res://ziggurat.tscn" id="6_qd2ch"]
+[ext_resource type="PackedScene" path="res://ziggurat.tscn" id="6_qd2ch"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_5idrc"]
 sky_top_color = Color(0.6935256, 0.31889212, 0.25905758, 1)
