@@ -57,7 +57,7 @@ func _ready() -> void:
 					if not full[k][j].back():
 						full[k][j].append(zsort[k][j][i])
 					elif abs(zsort[k][j][i][0].origin.x - full[k][j].back()[0].origin.x) > 6:
-						var blanks = (abs(zsort[k][j][i][0].origin.x - full[k][j][0][0].origin.x) / 6) - 1
+						var blanks = (abs(zsort[k][j][i][0].origin.x - full[k][j].back()[0].origin.x) / 6) - 1
 						for l in blanks:
 							full[k][j].append([])
 						full[k][j].append(zsort[k][j][i])
@@ -76,8 +76,8 @@ func _ready() -> void:
 	minimap.size = 90
 	hud.display_camera(minimap)
 	hud.camerahide()
-	var gay = []
-	print(gay[1])
+#	var gay = []
+#	print(gay[1])
 	pass # Replace with function body.
 func sorty(a, b):
 	if a[0].origin.y < b[0].origin.y:
