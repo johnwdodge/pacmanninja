@@ -3,13 +3,13 @@ extends Node3D
 @onready var hud = $HUD
 @onready var gridmap = $GridMap
 @onready var minimap = $MiniCam
+var full = []
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	var grid = gridmap.get_meshes()
 	var vectors = []
 	var ysort = []
 	var zsort = []
-	var full = []
 	var counter = 0
 	for i in range(grid.size()):
 		if (i%2) == 0:
