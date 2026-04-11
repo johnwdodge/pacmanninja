@@ -36,26 +36,41 @@ func _ready() -> void:
 			if i == 0:
 				zsort[j].append([ysort[j][i]])
 			else:
-				if not zsort[j][counter]:
-					counter += 1
-					zsort[j].append([ysort[j][i]])
-				elif zsort[j][counter][0][0].origin.z != ysort[j][i][0].origin.z:
-					if abs(ysort[j][i][0].origin.z - zsort[j][counter][0][0].origin.z) > 6:
-						var blanks = (abs(ysort[j][i][0].origin.z - zsort[j][counter][0][0].origin.z) / 6) - 1
-						for k in blanks:
-							counter += 1
-							zsort[j].append([])
-					else:
+				if zsort[j][counter][0][0].origin.z != ysort[j][i][0].origin.z:
 						counter += 1
 						zsort[j].append([ysort[j][i]])
 				else:
 					zsort[j][counter].append(ysort[j][i])
+
+	for k in range(zsort.size()):
+		counter = 0
+		full.append([])
+		for j in range(zsort[k].size()):
+			full[k].append([])
+			zsort[k][j].sort_custom(sortx)
+			counter = 0
+			#################################################
+			for i in range(zsort[k][j].size()):
+				if i == 0:
+					full[k][j].append(zsort[k][j][i])
+				else:
+					if not full[k][j].back():
+						full[k][j].append(zsort[k][j][i])
+					elif abs(zsort[k][j][i][0].origin.x - full[k][j].back()[0].origin.x) > 6:
+						var blanks = (abs(zsort[k][j][i][0].origin.x - full[k][j][0][0].origin.x) / 6) - 1
+						for l in blanks:
+							full[k][j].append([])
+						full[k][j].append(zsort[k][j][i])
+					else:
+						full[k][j].append(zsort[k][j][i])
 	
-	for i in range(zsort.size()):
-		print(zsort[i].size())
-	print("i am gay and done")
-	for i in range(zsort[0].size()):
-		print(zsort[0][i].size())
+	print(full[4])
+#	for i in range(full.size()):
+#		print(zsort[i].size())
+#	print("i am gay and done")
+#	for i in range(full.size()):
+#		for j in range(full[i].size()):
+#			print(full[i].size())
 		
 	
 	minimap.size = 90
