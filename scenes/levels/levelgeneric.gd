@@ -76,6 +76,8 @@ func _ready() -> void:
 	minimap.size = 90
 	hud.display_camera(minimap)
 	hud.camerahide()
+	var gay = []
+	print(gay[1])
 	pass # Replace with function body.
 func sorty(a, b):
 	if a[0].origin.y < b[0].origin.y:
