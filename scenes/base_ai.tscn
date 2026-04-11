@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://d0q8yegn5n15n"]
 
-[ext_resource type="Script" uid="uid://b8ttdtj127f28" path="res://ai_base.gd" id="1_jnkxd"]
+[ext_resource type="Script" path="res://ai_base.gd" id="1_jnkxd"]
 [ext_resource type="Script" uid="uid://dofs6ulx1y0pd" path="res://scenes/blinky.gd" id="2_thg4o"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_thg4o"]

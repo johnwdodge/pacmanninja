@@ -21,5 +21,7 @@ func _handle_ai_move(delta):
 			if pointpath.size() > 1:
 				global_position = pointpath[1]
 			movetimer = MOVE_TIME
+		else:
+			movetimer = MOVE_TIME
 		
 		
