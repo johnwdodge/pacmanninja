@@ -5,8 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://baogvd37j7idx" path="res://hud.tscn" id="3_enehx"]
 [ext_resource type="PackedScene" uid="uid://dpte47om4tgm8" path="res://scenes/pellet_altar.tscn" id="4_0vaje"]
 [ext_resource type="MeshLibrary" uid="uid://cwdmb4l2fk8le" path="res://tiles.meshlib" id="5_grjq0"]
-[ext_resource type="Script" uid="uid://cosgfceokshdw" path="res://scenes/levels/AI.gd" id="6_eff3k"]
-[ext_resource type="Script" uid="uid://calywhlfn4qp5" path="res://scenes/levels/enemyai.gd" id="7_coapn"]
+[ext_resource type="PackedScene" uid="uid://d0q8yegn5n15n" path="res://scenes/base_ai.tscn" id="6_hu0w6"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_5idrc"]
 sky_top_color = Color(0.6935256, 0.31889212, 0.25905758, 1)
@@ -18,10 +17,6 @@ sky_material = SubResource("ProceduralSkyMaterial_5idrc")
 background_mode = 2
 sky = SubResource("Sky_goahl")
 ambient_light_color = Color(0.7683373, 0.50079125, 0.7542641, 1)
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_jrjue"]
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ra48x"]
 
 [node name="Level_1" type="Node3D" unique_id=1870202360]
 script = ExtResource("1_dojlu")
@@ -48,21 +43,9 @@ cell_size = Vector3(6, 6, 6)
 cell_center_y = false
 cell_scale = 3.0
 data = {
-"cells": PackedInt32Array(65533, 65532, 1048576, 1, 65532, 1048576, 0, 65532, 1048576, 65535, 65532, 1048576, 65534, 65532, 1048576, 1, 4, 1048579, 1, 5, 1048579, 0, 5, 1441795, 65535, 5, 1048579, 65534, 5, 1441795, 65533, 5, 1048579, 65534, 3, 1441795, 65533, 3, 1048579, 65533, 4, 1048579, 65534, 4, 1441795, 65535, 4, 1048579, 0, 4, 1441795, 0, 2, 1441795, 1, 2, 1048579, 1, 3, 1048579, 0, 3, 1441795, 65535, 3, 1048579, 65535, 2, 1048579, 65534, 2, 1441795, 65533, 2, 1048579, 1, 1, 1048579, 0, 1, 1441795, 65535, 1, 1048579, 65534, 1, 1441795, 65533, 1, 1048579, 65533, 0, 1048579, 65534, 0, 1441795, 65535, 0, 1048579, 0, 0, 1441795, 1, 0, 1048579, 1, 65535, 1048579, 0, 65535, 1441795, 65535, 65535, 1048579, 65534, 65535, 1441795, 65533, 65535, 1048579, 65533, 65534, 1048576, 65534, 65534, 1048576, 65535, 65534, 1048576, 0, 65534, 1048576, 1, 65534, 1048576, 1, 65533, 1048576, 0, 65533, 1048576, 65535, 65533, 1048576, 65534, 65533, 1048576, 65533, 65533, 1048576)
+"cells": PackedInt32Array(65533, 65533, 13, 65534, 65533, 14, 65533, 65534, 16, 65534, 65534, 15, 65535, 65534, 17)
 }
 metadata/_editor_floor_ = Vector3(0, 0, 0)
 
-[node name="AI" type="Node3D" parent="." unique_id=1785274375]
-script = ExtResource("6_eff3k")
-
-[node name="CharacterBody3D" type="CharacterBody3D" parent="AI" unique_id=794080134]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.8026257, 3.424778, 33.113472)
-script = ExtResource("7_coapn")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="AI/CharacterBody3D" unique_id=502358980]
-transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
-mesh = SubResource("CapsuleMesh_jrjue")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="AI/CharacterBody3D" unique_id=1031724327]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.51499)
-shape = SubResource("CapsuleShape3D_ra48x")
+[node name="Base_AI" parent="." unique_id=1594229394 instance=ExtResource("6_hu0w6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.323195, 1.3297455, -15.6721325)
