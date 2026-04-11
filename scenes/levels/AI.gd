@@ -42,6 +42,7 @@ func sortx(a,b):
 
 func _build_array():
 	var grid = gridmap.get_meshes()
+	print(grid)
 	var vectors = []
 	var ysort = []
 	var zsort = []
@@ -113,8 +114,7 @@ func _populate_astar():
 #						print(full[i][j][k][1].resource_name)
 #						print(counter)
 					else: full[i][j][k].append([])
-func _neighbor_find():
-	print(full[1][1].size())
+func _neighbor_find():	
 	for i in range(full.size()):
 		for j in range(full[i].size()):
 			for k in range(full[i][j].size()):
@@ -162,30 +162,31 @@ func _neighbor_find():
 									astar.connect_points(current[2], down[2])
 								if left:
 									astar.connect_points(current[2], left[2])
-								if right:
-									astar.connect_points(current[2], right[2])
+								if up:
+									astar.connect_points(current[2], up[2])
 							elif current[0].basis.z.x < 0:
 								#up right left
 								if up:
 									astar.connect_points(current[2], up[2])
 								if right:
 									astar.connect_points(current[2], right[2])
-								if left:
-									astar.connect_points(current[2], left[2])
-							elif current[0].basis.z.z > 0:
-								#down up right
 								if down:
 									astar.connect_points(current[2], down[2])
+							elif current[0].basis.z.z > 0:
+								#down up right
+								print("say the line bart!")
 								if up:
 									astar.connect_points(current[2], up[2])
+								if left:
+									astar.connect_points(current[2], left[2])
 								if right:
 									astar.connect_points(current[2], right[2])
 							elif current[0].basis.z.z < 0:
 								#down up left
+								if right:
+									astar.connect_points(current[2], right[2])
 								if down:
 									astar.connect_points(current[2], down[2])
-								if up:
-									astar.connect_points(current[2], up[2])
 								if left:
 									astar.connect_points(current[2], left[2])
 							else:

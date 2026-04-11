@@ -64,7 +64,6 @@ func _ready() -> void:
 					else:
 						full[k][j].append(zsort[k][j][i])
 	
-	print(full[4])
 #	for i in range(full.size()):
 #		print(zsort[i].size())
 #	print("i am gay and done")

@@ -17,8 +17,9 @@ func _handle_ai_move(delta):
 		var mypos = astar.get_closest_point(global_position)
 		
 		if astar.get_point_path(mypos, playerpos):
-			pointpath = astar.get_point_path(mypos, playerpos)[1]
-			global_position = pointpath
+			pointpath = astar.get_point_path(mypos, playerpos)
+			if pointpath.size() > 1:
+				global_position = pointpath[1]
 			movetimer = MOVE_TIME
 		
 		
