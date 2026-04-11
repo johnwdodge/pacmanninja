@@ -7,7 +7,7 @@ var up = false
 var down = false
 var left = false
 var right = false
-var movetimer = 1.0
+var MOVE_TIME = 0.5
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	_build_array()
