@@ -1,11 +1,13 @@
 extends Node3D
 @onready var gridmap = $"../GridMap"
+@onready var player = $"../charcontrol"
 var astar = AStar3D.new()
 var full = []
 var up = false
 var down = false
 var left = false
 var right = false
+var movetimer = 1.0
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	_build_array()
@@ -16,8 +18,13 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
 	
+	
+	pass
+
+
+#--------- array creation --------------------------------------------------------------
+
 func sorty(a, b):
 	if a[0].origin.y < b[0].origin.y:
 		return true
@@ -90,7 +97,9 @@ func _build_array():
 						full[k][j].append(zsort[k][j][i])
 					else:
 						full[k][j].append(zsort[k][j][i])
-	
+
+#----- astar shit -----------------------------------------------------------
+
 func _populate_astar():
 	var counter = 1
 	for i in range(full.size()):
@@ -101,7 +110,7 @@ func _populate_astar():
 						counter += 1
 						astar.add_point(counter, full[i][j][k][0].origin, 1.0)
 						full[i][j][k].append(counter)
-						print(full[i][j][k][1].resource_name)
+#						print(full[i][j][k][1].resource_name)
 #						print(counter)
 					else: full[i][j][k].append([])
 func _neighbor_find():
@@ -219,4 +228,5 @@ func _neighbor_find():
 									astar.connect_points(current[2], right[2])
 							else:
 								print("YOU HAVE FUCKED UP")
-	
+
+#----- AI functions --------------------------------------------------
