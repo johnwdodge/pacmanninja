@@ -1,10 +1,11 @@
-[gd_scene format=3 uid="uid://dsyn7xs5eicaf"]
+[gd_scene format=3 uid="uid://dfosx500gg7vs"]
 
 [ext_resource type="Script" uid="uid://c62ie4g6d3yu3" path="res://scenes/levels/levelgeneric.gd" id="1_u8eek"]
 [ext_resource type="PackedScene" uid="uid://bx4kyblex8ucu" path="res://scenes/charcontrol.tscn" id="2_t1jjp"]
 [ext_resource type="PackedScene" uid="uid://baogvd37j7idx" path="res://hud.tscn" id="3_50olt"]
 [ext_resource type="MeshLibrary" uid="uid://cwdmb4l2fk8le" path="res://tiles.meshlib" id="4_u84xi"]
 [ext_resource type="PackedScene" uid="uid://dpte47om4tgm8" path="res://scenes/pellet_altar.tscn" id="5_jrjue"]
+[ext_resource type="PackedScene" uid="uid://d0q8yegn5n15n" path="res://scenes/base_ai.tscn" id="7_t1jjp"]
 [ext_resource type="Script" uid="uid://calywhlfn4qp5" path="res://scenes/levels/enemyai.gd" id="9_u84xi"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_5idrc"]
@@ -286,6 +287,7 @@ data = {
 metadata/_editor_floor_ = Vector3(0, 0, 0)
 
 [node name="AI" type="Node3D" parent="." unique_id=1785274375]
+visible = false
 script = SubResource("GDScript_u8eek")
 
 [node name="CharacterBody3D" type="CharacterBody3D" parent="AI" unique_id=794080134]
@@ -299,3 +301,6 @@ mesh = SubResource("CapsuleMesh_jrjue")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="AI/CharacterBody3D" unique_id=1031724327]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.51499)
 shape = SubResource("CapsuleShape3D_ra48x")
+
+[node name="Base_AI" parent="." unique_id=1594229394 instance=ExtResource("7_t1jjp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.00749, 0.29999924, -7.516738)
