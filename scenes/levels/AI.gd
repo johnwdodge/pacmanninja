@@ -42,9 +42,9 @@ func sortx(a,b):
 
 func _build_array():
 	var grid = gridmap.get_meshes()
-	print(grid)
 	var vectors = []
 	var ysort = []
+	print(grid)
 	var zsort = []
 	var counter = 0
 	for i in range(grid.size()):
@@ -52,6 +52,9 @@ func _build_array():
 			vectors.append([grid[i]])
 		else:
 			vectors[(i-1)/2].append(grid[i])
+	for i in vectors:
+		if i[1].resource_name != "Single_Wall_Tile_Cube_006":
+			print(i[1].resource_name)
 	for i in range(vectors.size()):
 		vectors.sort_custom(sorty)
 	for i in range(vectors.size()):
@@ -204,7 +207,7 @@ func _neighbor_find():
 									astar.connect_points(current[2], right[2])
 							else:
 								print("YOU HAVE FUCKED UP")
-						if current[1].resource_name == "Corner_Tile_Cube_002":
+						if current[1].resource_name in ["Corner_Tile_Cube_002", "Corner_Hole_One_Cube_002", "Corner_Hole_Two_Cube_005"]:
 							if current[0].basis.z.z > 0:
 								#up and left
 								if up:

@@ -162,20 +162,20 @@ func _neighbor_find():
 									astar.connect_points(current[2], down[2])
 								if left:
 									astar.connect_points(current[2], left[2])
-								if right:
-									astar.connect_points(current[2], right[2])
+								if up:
+									astar.connect_points(current[2], up[2])
 							elif current[0].basis.z.x < 0:
 								#up right left
 								if up:
 									astar.connect_points(current[2], up[2])
 								if right:
 									astar.connect_points(current[2], right[2])
-								if left:
-									astar.connect_points(current[2], left[2])
-							elif current[0].basis.z.z > 0:
-								#down up right
 								if down:
 									astar.connect_points(current[2], down[2])
+							elif current[0].basis.z.z > 0:
+								#down up right
+								if left:
+									astar.connect_points(current[2], left[2])
 								if up:
 									astar.connect_points(current[2], up[2])
 								if right:
@@ -184,8 +184,8 @@ func _neighbor_find():
 								#down up left
 								if down:
 									astar.connect_points(current[2], down[2])
-								if up:
-									astar.connect_points(current[2], up[2])
+								if right:
+									astar.connect_points(current[2], right[2])
 								if left:
 									astar.connect_points(current[2], left[2])
 							else:
@@ -203,7 +203,7 @@ func _neighbor_find():
 									astar.connect_points(current[2], right[2])
 							else:
 								print("YOU HAVE FUCKED UP")
-						if current[1].resource_name == "Corner_Tile_Cube_002":
+						if current[1].resource_name in ["Corner_Tile_Cube_002", "Corner_Hole_One_Cube_002", "Corner_Hole_Two_Cube_005"]:
 							if current[0].basis.z.z > 0:
 								#up and left
 								if up:
