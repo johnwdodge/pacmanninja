@@ -247,17 +247,28 @@ func _neighbor_find():
 							else:
 								print("YOU HAVE FUCKED UP")
 							
-							if current[1].resource_name in ["Pagoda_Ramp_Lower_Cube_019", "2x3_Ramp_Bottom_Cube_024, 2x3_Ramp_Middle_Cube_028"]:
-								if abs(current[0].basis.z.z) > 0:
-									if up:
-										astar.connect_points(current[2], up[2], true)
-									if down:
-										astar.connect_points(current[2], down[2], true)
-								elif abs(current[0].basis.z.x) > 0:
-									if left:
-										astar.connect_points(current[2], left[2], true)
-									if right:
-										astar.connect_points(current[2], right[2], true)
-								else:
-									print("YOU HAVE FUCKED UP")
+						if current[1].resource_name in ["Pagoda_Ramp_Lower_Cube_019", "2x3_Ramp_Bottom_Cube_024, 2x3_Ramp_Middle_Cube_028"]:
+							if abs(current[0].basis.z.z) > 0:
+								if up:
+									astar.connect_points(current[2], up[2], true)
+								if down:
+									astar.connect_points(current[2], down[2], true)
+							elif abs(current[0].basis.z.x) > 0:
+								if left:
+									astar.connect_points(current[2], left[2], true)
+								if right:
+									astar.connect_points(current[2], right[2], true)
+							else:
+								print("YOU HAVE FUCKED UP")
+						if current[1].resource_name == "Pagoda_Ramp_Upper_Cube_016":
+							if current[0].basis.z.z > 0:
+								astar.connect_points(current[2], full[i+1][j+1][k][2])
+							elif current[0].basis.z.z < 0:
+								astar.connect_points(current[2], full[i+1][j-1][k][2])
+							elif current[0].basis.z.x > 0:
+								astar.connect_points(current[2], full[i+1][j][k+1][2])
+							elif current[0].basis.z.x < 0:
+								astar.connect_points(current[2], full[i+1][j][k-1][2])
+							else:
+								print("YOU HAVE FUCKED UP")
 #----- AI functions --------------------------------------------------
