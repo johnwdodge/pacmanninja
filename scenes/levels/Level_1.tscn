@@ -1,11 +1,11 @@
-[gd_scene format=3 uid="uid://dfosx500gg7vs"]
+[gd_scene format=3 uid="uid://dsyn7xs5eicaf"]
 
 [ext_resource type="Script" uid="uid://c62ie4g6d3yu3" path="res://scenes/levels/levelgeneric.gd" id="1_u8eek"]
 [ext_resource type="PackedScene" uid="uid://bx4kyblex8ucu" path="res://scenes/charcontrol.tscn" id="2_t1jjp"]
 [ext_resource type="PackedScene" uid="uid://baogvd37j7idx" path="res://hud.tscn" id="3_50olt"]
 [ext_resource type="MeshLibrary" uid="uid://cwdmb4l2fk8le" path="res://tiles.meshlib" id="4_u84xi"]
 [ext_resource type="PackedScene" uid="uid://dpte47om4tgm8" path="res://scenes/pellet_altar.tscn" id="5_jrjue"]
-[ext_resource type="Script" path="res://scenes/levels/ai.gd" id="8_50olt"]
+[ext_resource type="Script" uid="uid://dnbbmhk4o6osm" path="res://scenes/levels/ai.gd" id="8_50olt"]
 [ext_resource type="Script" uid="uid://calywhlfn4qp5" path="res://scenes/levels/enemyai.gd" id="9_u84xi"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_5idrc"]
