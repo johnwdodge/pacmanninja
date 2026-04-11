@@ -1,10 +1,11 @@
-[gd_scene format=3 uid="uid://dsyn7xs5eicaf"]
+[gd_scene format=3 uid="uid://dfosx500gg7vs"]
 
 [ext_resource type="Script" uid="uid://c62ie4g6d3yu3" path="res://scenes/levels/levelgeneric.gd" id="1_u8eek"]
 [ext_resource type="PackedScene" uid="uid://bx4kyblex8ucu" path="res://scenes/charcontrol.tscn" id="2_t1jjp"]
 [ext_resource type="PackedScene" uid="uid://baogvd37j7idx" path="res://hud.tscn" id="3_50olt"]
 [ext_resource type="MeshLibrary" uid="uid://cwdmb4l2fk8le" path="res://tiles.meshlib" id="4_u84xi"]
 [ext_resource type="PackedScene" uid="uid://dpte47om4tgm8" path="res://scenes/pellet_altar.tscn" id="5_jrjue"]
+[ext_resource type="PackedScene" uid="uid://crvcqm8a1iodv" path="res://models/Rock_Maze.glb" id="7_50olt"]
 [ext_resource type="PackedScene" uid="uid://d0q8yegn5n15n" path="res://scenes/base_ai.tscn" id="7_t1jjp"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_5idrc"]
@@ -37,6 +38,7 @@ size = 90.0
 transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, -39.952705, 12.307938, -40.20575)
 
 [node name="GridMap" type="GridMap" parent="." unique_id=545385537]
+visible = false
 mesh_library = ExtResource("4_u84xi")
 cell_size = Vector3(6, 6, 6)
 cell_center_y = false
@@ -48,3 +50,5 @@ metadata/_editor_floor_ = Vector3(0, 0, 0)
 
 [node name="Base_AI" parent="." unique_id=1594229394 instance=ExtResource("7_t1jjp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.00749, 0.29999924, -7.516738)
+
+[node name="Rock_Maze" parent="." unique_id=646958150 instance=ExtResource("7_50olt")]
