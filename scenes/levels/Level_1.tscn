@@ -38,7 +38,6 @@ size = 90.0
 transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, -39.952705, 12.307938, -40.20575)
 
 [node name="GridMap" type="GridMap" parent="." unique_id=545385537]
-visible = false
 mesh_library = ExtResource("4_u84xi")
 cell_size = Vector3(6, 6, 6)
 cell_center_y = false
@@ -52,3 +51,4 @@ metadata/_editor_floor_ = Vector3(0, 0, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.00749, 0.29999924, -7.516738)
 
 [node name="Rock_Maze" parent="." unique_id=646958150 instance=ExtResource("7_50olt")]
+visible = false
