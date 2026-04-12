@@ -8,8 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://crvcqm8a1iodv" path="res://models/Rock_Maze.glb" id="7_50olt"]
 [ext_resource type="PackedScene" uid="uid://d0q8yegn5n15n" path="res://scenes/base_ai.tscn" id="7_t1jjp"]
 [ext_resource type="PackedScene" uid="uid://0a4onxq3i78v" path="res://scenes/lantern_light.tscn" id="7_u84xi"]
-[ext_resource type="PackedScene" uid="uid://cp5bild4i70tr" path="res://models/Rock_Outer.glb" id="8_50olt"]
 [ext_resource type="PackedScene" uid="uid://55dik0higonf" path="res://ziggurat.tscn" id="10_jrjue"]
+[ext_resource type="PackedScene" uid="uid://b1ew684gw7ovl" path="res://scenes/weapons/rock_outer.tscn" id="10_ra48x"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_5idrc"]
 sky_top_color = Color(0.37023658, 0.14835694, 0.11441777, 1)
@@ -62,10 +62,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.089531, 0.29999924, -9.02
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Lights" unique_id=1987871435]
 transform = Transform3D(0.7514701, -0.25014532, 0.6105081, -0.11337121, 0.8626167, 0.4929903, -0.6499537, -0.43968147, 0.6198713, -73.714966, 100.19334, 0)
+layers = 5
 light_color = Color(0.66555846, 0.16860592, 0, 1)
-light_energy = 0.3
+light_energy = 0.5
 light_specular = 0.211
 light_bake_mode = 1
+light_cull_mask = 4294967294
 
 [node name="Lantern_Light" parent="Lights" unique_id=1191342081 instance=ExtResource("7_u84xi")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 17, 0)
@@ -151,8 +153,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.83155, 17, -40.419315)
 [node name="Lantern_Light3" parent="Lights" unique_id=1081464769 instance=ExtResource("7_u84xi")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.078285, 17, -18.200638)
 
-[node name="Rock_Outer2" parent="." unique_id=1554373848 instance=ExtResource("8_50olt")]
-
 [node name="Altars" type="Node3D" parent="." unique_id=666046499]
 
 [node name="Pellet_Altar" parent="Altars" unique_id=900777205 groups=["pellet_altar"] instance=ExtResource("5_jrjue")]
@@ -169,3 +169,6 @@ transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, -38.84905, 12.775177, 2
 
 [node name="ziggurat" parent="." unique_id=1971136172 instance=ExtResource("10_jrjue")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -9, 0, -9)
+
+[node name="Rock_Outer2" parent="." unique_id=1554373848 instance=ExtResource("10_ra48x")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.3914185, 0, 0)

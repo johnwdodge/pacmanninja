@@ -1,5 +1,7 @@
 extends Node3D
 
+@onready var omni_light_3d: OmniLight3D = $"../OmniLight3D"
+
 signal pellet_collected
 var _is_hidden: bool = false
 
@@ -16,6 +18,7 @@ func _hide_pellet() -> void:
 	_is_hidden = true
 	$Area3D/CollisionShape3D.disabled = true
 	$Area3D/MeshInstance3D.visible = false
+	$"../OmniLight3D".visible = false
 	print("Pellet hidden, waiting 30s...")
 	await get_tree().create_timer(10.0).timeout
 	print("Timer done, respawning")
@@ -24,4 +27,5 @@ func _hide_pellet() -> void:
 func _respawn() -> void:
 	$Area3D/CollisionShape3D.disabled = false
 	$Area3D/MeshInstance3D.visible = true
+	$"../OmniLight3D".visible = true
 	_is_hidden = false

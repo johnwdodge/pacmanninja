@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://b1ew684gw7ovl"]
+
+[ext_resource type="PackedScene" uid="uid://cp5bild4i70tr" path="res://models/Rock_Outer.glb" id="1_w88u8"]
+
+[node name="Rock_Outer2" unique_id=1554373848 instance=ExtResource("1_w88u8")]
+
+[node name="Rock_Outer" parent="." index="0" unique_id=755744745]
+layers = 4
