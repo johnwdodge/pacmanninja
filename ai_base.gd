@@ -1,7 +1,7 @@
 extends Node3D
 @onready var gridmap = $"../GridMap"
 @onready var player = $"../charcontrol"
-const MOVE_TIME = 0.5
+const MOVE_TIME = 0.4
 var astar = AStar3D.new()
 var full = []
 var up = false
