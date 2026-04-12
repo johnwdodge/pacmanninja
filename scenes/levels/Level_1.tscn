@@ -107,14 +107,14 @@ visible = false
 
 [node name="Altars" type="Node3D" parent="." unique_id=666046499]
 
-[node name="Pellet_Altar" parent="Altars" unique_id=900777205 instance=ExtResource("5_jrjue")]
+[node name="Pellet_Altar" parent="Altars" unique_id=900777205 groups=["pellet_altar"] instance=ExtResource("5_jrjue")]
 transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, -39.952705, 12.307938, -40.20575)
 
-[node name="Pellet_Altar2" parent="Altars" unique_id=2095753728 instance=ExtResource("5_jrjue")]
+[node name="Pellet_Altar2" parent="Altars" unique_id=2095753728 groups=["pellet_altar"] instance=ExtResource("5_jrjue")]
 transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 24.047295, 12.801557, -40.20575)
 
-[node name="Pellet_Altar3" parent="Altars" unique_id=618253572 instance=ExtResource("5_jrjue")]
+[node name="Pellet_Altar3" parent="Altars" unique_id=618253572 groups=["pellet_altar"] instance=ExtResource("5_jrjue")]
 transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 24.047295, 12.307938, 18.79425)
 
-[node name="Pellet_Altar4" parent="Altars" unique_id=2120887759 instance=ExtResource("5_jrjue")]
+[node name="Pellet_Altar4" parent="Altars" unique_id=2120887759 groups=["pellet_altar"] instance=ExtResource("5_jrjue")]
 transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, -38.84905, 12.775177, 23.609947)
