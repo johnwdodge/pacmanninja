@@ -4,8 +4,13 @@
 [ext_resource type="Texture2D" uid="uid://y5up2bocrrs4" path="res://models/Samurai_Animations_Untitled.png" id="2_glbyl"]
 [ext_resource type="Animation" uid="uid://bj4j4ijagm41w" path="res://models/anims/Sam_Attack.anim" id="3_j6umr"]
 [ext_resource type="Animation" uid="uid://chmimm27xaxnc" path="res://models/anims/Sam_Death.anim" id="4_244wk"]
+<<<<<<< Updated upstream
 [ext_resource type="Animation" uid="uid://dkyi5htw3hgdu" path="res://models/anims/T_Pose.res" id="5_aohrj"]
 [ext_resource type="Animation" uid="uid://btp2nto4yrint" path="res://models/anims/Sam_Walking.anim" id="6_tfpyu"]
+=======
+[ext_resource type="Animation" uid="uid://caxa06ac07tb5" path="res://models/anims/T_Pose.res" id="5_aohrj"]
+[ext_resource type="Animation" uid="uid://4wvsgxoqbb1o" path="res://models/anims/Sam_Walking.anim" id="6_tfpyu"]
+>>>>>>> Stashed changes
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3jpau"]
 resource_name = "Material.001"
@@ -47,6 +52,7 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_csae2")
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_o75o6"]
+height = 2.4624023
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w650a"]
 albedo_color = Color(1, 0.3019608, 0, 1)
@@ -204,7 +210,7 @@ visible = false
 mesh = SubResource("ArrayMesh_1qps3")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1689521801]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 1.8, 0)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 2.2624023, 0)
 shape = SubResource("CapsuleShape3D_o75o6")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1860647448]
@@ -213,7 +219,7 @@ layers = 2
 mesh = SubResource("SphereMesh_w650a")
 
 [node name="Samurai_Animations" type="Node3D" parent="." unique_id=46829534]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0, 0, 0)
 
 [node name="Armature" type="Node3D" parent="Samurai_Animations" unique_id=1610206345]
 transform = Transform3D(0.01, 0, 0, 0, 0, -0.01, 0, 0.01, 0, 0, 0, 0)
