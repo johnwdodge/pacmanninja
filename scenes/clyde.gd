@@ -2,14 +2,16 @@ extends CharacterBody3D
 
 @onready var astar = get_parent().astar
 @onready var player = $"../../../charcontrol"
-#@onready var MOVE_TIME = get_parent().movetimer
 @onready var manager = $"../../../GameManager"
-@onready var active = manager._active_altar
+@onready var anim_player: AnimationPlayer = $Samurai_Animations/AnimationPlayer
 
 var pointpath = []
 var lastpoint = 0
 var scatter = true
 var scatterpath = []
+
+func _ready() -> void:
+	anim_player.play("Walking")
 
 func _process(delta: float) -> void:
 	if get_parent().movetimer > 0:
@@ -27,27 +29,34 @@ func _handle_scatter(point):
 	if not scatterpath:
 		scatterpath = astar.get_id_path(mypos, point)
 		scatterpath.remove_at(0)
-		global_position = astar.get_point_position(scatterpath[0])
+		_play_anim("Walking")
+		var next_pos = astar.get_point_position(scatterpath[0])
+		_face_direction(global_position, next_pos)
+		global_position = next_pos
 		scatterpath.remove_at(0)
 	else:
-		global_position = astar.get_point_position(scatterpath[0])
+		var next_pos = astar.get_point_position(scatterpath[0])
+		_face_direction(global_position, next_pos)
+		global_position = next_pos
 		scatterpath.remove_at(0)
 		if scatterpath.size() < 3:
 			scatterpath = []
 			scatter = false
 
-
 func _handle_ai_move(delta):
-
+	var active = manager._active_altar
 	var playerpos = astar.get_closest_point(player.global_position)
 	var mypos = astar.get_closest_point(global_position)
 	var options = astar.get_point_connections(mypos)
+
 	if options.size() == 2:
 		for i in options:
 			if i != lastpoint:
-				global_position = astar.get_point_position(i)
+				_play_anim("Walking")
+				var next_pos = astar.get_point_position(i)
+				_face_direction(global_position, next_pos)
+				global_position = next_pos
 				lastpoint = mypos
-#				movetimer = MOVE_TIME
 				break
 	elif astar.get_point_path(mypos, playerpos):
 		astar.set_point_weight_scale(lastpoint, 100.0)
@@ -57,10 +66,27 @@ func _handle_ai_move(delta):
 		if pointpath.size() > 1:
 			astar.set_point_weight_scale(lastpoint, 1.0)
 			lastpoint = mypos
-			global_position = pointpath[1]
-#		movetimer = MOVE_TIME
+			var next_pos = pointpath[1]
+			_face_direction(global_position, next_pos)
+			global_position = next_pos
+
+		if pointpath.size() <= 3:
+			_play_anim("Attack")
+		else:
+			_play_anim("Walking")
 	else:
 		pass
-#			movetimer = MOVE_TIME
-		
-		
+
+func die() -> void:
+	_play_anim("Death")
+	set_process(false)
+
+func _play_anim(anim_name: String) -> void:
+	if anim_player.current_animation != anim_name:
+		anim_player.play(anim_name)
+
+func _face_direction(from: Vector3, to: Vector3) -> void:
+	var diff = to - from
+	if diff.length() > 0.01:
+		var angle = atan2(diff.x, diff.z)
+		rotation.y = angle
