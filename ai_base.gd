@@ -24,6 +24,8 @@ var movetimer = MOVE_TIME
 var scattertimer = SCATTER_TIMER
 var spawntimer = SPAWN_TIMER
 
+var reserved_points: Dictionary = {}
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	_build_array()
@@ -38,6 +40,7 @@ func _process(delta: float) -> void:
 		movetimer -= delta
 	else:
 		movetimer = MOVE_TIME
+		reserved_points.clear()
 		scattertimer -= 1
 		spawntimer -= 1
 		if not has_node("Blinky"):
@@ -58,6 +61,16 @@ func _process(delta: float) -> void:
 		spawntimer = SPAWN_TIMER
 	pass
 
+func try_reserve(id, ai):
+	if reserved_points.has(id):
+		return false
+	reserved_points[id] = ai
+	return true
+	
+func release_point(id, ai):
+	if reserved_points.get(id) == ai:
+		reserved_points.erase(id)
+		
 
 #--------- array creation --------------------------------------------------------------
 

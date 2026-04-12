@@ -1,6 +1,7 @@
 extends CharacterBody3D
 
 @onready var astar = get_parent().astar
+@onready var ai = get_parent()
 @onready var player = $"../../../charcontrol"
 @onready var manager = $"../../../GameManager"
 @onready var anim_player: AnimationPlayer = $Samurai_Animations/AnimationPlayer
@@ -52,12 +53,14 @@ func _handle_scatter(point):
 		_play_anim("Walking")
 		var next_pos = astar.get_point_position(scatterpath[0])
 		_face_direction(global_position, next_pos)
-		nextposition = next_pos
+		if ai.try_reserve(next_pos, self):
+				nextposition = astar.get_point_position(scatterpath[0])
 		scatterpath.remove_at(0)
 	else:
 		var next_pos = astar.get_point_position(scatterpath[0])
 		_face_direction(global_position, next_pos)
-		nextposition = next_pos
+		if ai.try_reserve(next_pos, self):
+				nextposition = astar.get_point_position(scatterpath[0])
 		scatterpath.remove_at(0)
 		if scatterpath.size() < 3:
 			scatterpath = []
@@ -78,7 +81,8 @@ func _handle_ai_move(delta):
 			lastpoint = mypos
 			var next_pos = pointpath[1]
 			_face_direction(global_position, next_pos)
-			nextposition = next_pos
+			if ai.try_reserve(next_pos, self):
+				nextposition = next_pos
 		else:
 			pointpath = astar.get_point_path(mypos, playerpos)
 			if pointpath.size() > 1:
@@ -86,14 +90,15 @@ func _handle_ai_move(delta):
 				lastpoint = mypos
 				var next_pos = pointpath[1]
 				_face_direction(global_position, next_pos)
-				nextposition = next_pos
+				if ai.try_reserve(next_pos, self):
+					nextposition = next_pos
 				
 		if pointpath.size() <= 3:
 			_play_anim("Attack")
 		else:
 			_play_anim("Walking")
 	else:
-		pass
+		ai.try_reserve(mypos, self)
 
 
 
