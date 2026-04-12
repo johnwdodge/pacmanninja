@@ -43,7 +43,13 @@ shadow_mesh = SubResource("ArrayMesh_csae2")
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rnfna"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0www3"]
+albedo_color = Color(1, 0, 1, 1)
+emission_enabled = true
+emission = Color(1, 0, 1, 1)
+
 [sub_resource type="SphereMesh" id="SphereMesh_0www3"]
+material = SubResource("StandardMaterial3D_0www3")
 
 [node name="Pinky" type="CharacterBody3D" unique_id=739864106]
 script = ExtResource("1_o40jm")

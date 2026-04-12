@@ -43,7 +43,13 @@ shadow_mesh = SubResource("ArrayMesh_csae2")
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_o75o6"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w650a"]
+albedo_color = Color(1, 0.3019608, 0, 1)
+emission_enabled = true
+emission = Color(0.7362152, 0.35682046, 5.7756904e-07, 1)
+
 [sub_resource type="SphereMesh" id="SphereMesh_w650a"]
+material = SubResource("StandardMaterial3D_w650a")
 
 [node name="Clyde" type="CharacterBody3D" unique_id=273873120]
 script = ExtResource("1_47ye3")

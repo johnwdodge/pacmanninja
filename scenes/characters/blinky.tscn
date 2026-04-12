@@ -44,7 +44,13 @@ shadow_mesh = SubResource("ArrayMesh_csae2")
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_tcu7v"]
 height = 1.8642578
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1mary"]
+albedo_color = Color(1, 0, 0, 1)
+emission_enabled = true
+emission = Color(1, 0, 0, 1)
+
 [sub_resource type="SphereMesh" id="SphereMesh_1mary"]
+material = SubResource("StandardMaterial3D_1mary")
 
 [node name="Blinky" type="CharacterBody3D" unique_id=18759844]
 script = ExtResource("1_sui20")
