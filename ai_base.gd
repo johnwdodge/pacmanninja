@@ -126,6 +126,18 @@ func _populate_astar():
 							var temp = full[i][j][k][0].origin
 							temp.y += 4.5
 							astar.add_point(counter, temp, 1.0)
+						elif full[i][j][k][1].resource_name == "2x3_Ramp_Bottom_Cube_024":
+							var temp = full[i][j][k][0].origin
+							temp.y += 2.3
+							astar.add_point(counter, temp, 1.0)
+						elif full[i][j][k][1].resource_name == "2x3_Ramp_Middle_Cube_028":
+							var temp = full[i][j][k][0].origin
+							temp.y += 6.2
+							astar.add_point(counter, temp, 1.0)
+						elif full[i][j][k][1].resource_name == "2x3_Ramp_Top_Cube_029":
+							var temp = full[i][j][k][0].origin
+							temp.y += 10.1
+							astar.add_point(counter, temp, 1.0)
 						else:
 							astar.add_point(counter, full[i][j][k][0].origin, 1.0)
 						full[i][j][k].append(counter)
@@ -247,7 +259,7 @@ func _neighbor_find():
 							else:
 								print("YOU HAVE FUCKED UP")
 							
-						if current[1].resource_name in ["Pagoda_Ramp_Lower_Cube_019", "2x3_Ramp_Bottom_Cube_024, 2x3_Ramp_Middle_Cube_028"]:
+						if current[1].resource_name in ["Pagoda_Ramp_Lower_Cube_019", "2x3_Ramp_Bottom_Cube_024", "2x3_Ramp_Middle_Cube_028"]:
 							if abs(current[0].basis.z.z) > 0:
 								if up:
 									astar.connect_points(current[2], up[2], true)
@@ -269,6 +281,18 @@ func _neighbor_find():
 								astar.connect_points(current[2], full[i+1][j][k+1][2])
 							elif current[0].basis.z.x < 0:
 								astar.connect_points(current[2], full[i+1][j][k-1][2])
+							else:
+								print("YOU HAVE FUCKED UP")
+								
+						if current[1].resource_name == "2x3_Ramp_Top_Cube_029":
+							if current[0].basis.z.z > 0:
+								astar.connect_points(current[2], full[i+2][j+1][k][2])
+							elif current[0].basis.z.z < 0:
+								astar.connect_points(current[2], full[i+2][j-1][k][2])
+							elif current[0].basis.z.x > 0:
+								astar.connect_points(current[2], full[i+2][j][k+1][2])
+							elif current[0].basis.z.x < 0:
+								astar.connect_points(current[2], full[i+2][j][k-1][2])
 							else:
 								print("YOU HAVE FUCKED UP")
 #----- AI functions --------------------------------------------------

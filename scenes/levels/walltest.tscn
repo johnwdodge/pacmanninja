@@ -48,4 +48,14 @@ data = {
 metadata/_editor_floor_ = Vector3(0, 0, 0)
 
 [node name="Base_AI" parent="." unique_id=1594229394 instance=ExtResource("6_hu0w6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.323195, 1.3297455, -15.6721325)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.8454828, 10.143265, -9)
+
+[node name="GridMap" type="GridMap" parent="Base_AI" unique_id=1243021172]
+mesh_library = ExtResource("5_grjq0")
+cell_size = Vector3(6, 6, 6)
+cell_center_y = false
+cell_scale = 3.0
+data = {
+"cells": PackedInt32Array(65533, 65532, 1048576, 65534, 65532, 0, 0, 65532, 1441792, 2, 65532, 655360)
+}
+metadata/_editor_floor_ = Vector3(0, 0, 0)
