@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://dfosx500gg7vs"]
+[gd_scene format=3 uid="uid://dsyn7xs5eicaf"]
 
 [ext_resource type="Script" uid="uid://c62ie4g6d3yu3" path="res://scenes/levels/levelgeneric.gd" id="1_u8eek"]
 [ext_resource type="PackedScene" uid="uid://bx4kyblex8ucu" path="res://scenes/charcontrol.tscn" id="2_t1jjp"]
@@ -7,10 +7,10 @@
 [ext_resource type="PackedScene" uid="uid://dpte47om4tgm8" path="res://scenes/pellet_altar.tscn" id="5_jrjue"]
 [ext_resource type="PackedScene" uid="uid://crvcqm8a1iodv" path="res://models/Rock_Maze.glb" id="7_50olt"]
 [ext_resource type="PackedScene" uid="uid://d0q8yegn5n15n" path="res://scenes/base_ai.tscn" id="7_t1jjp"]
-[ext_resource type="PackedScene" uid="uid://0a4onxq3i78v" path="res://scenes/lantern_light.tscn" id="7_u84xi"]
-[ext_resource type="PackedScene" uid="uid://55dik0higonf" path="res://ziggurat.tscn" id="10_jrjue"]
-[ext_resource type="PackedScene" uid="uid://b1ew684gw7ovl" path="res://scenes/weapons/rock_outer.tscn" id="10_ra48x"]
-[ext_resource type="Script" uid="uid://y7bs3rqtj480" path="res://scenes/levels/gamemanager.gd" id="11_ra48x"]
+[ext_resource type="PackedScene" path="res://scenes/lantern_light.tscn" id="7_u84xi"]
+[ext_resource type="PackedScene" path="res://ziggurat.tscn" id="10_jrjue"]
+[ext_resource type="PackedScene" path="res://scenes/weapons/rock_outer.tscn" id="10_ra48x"]
+[ext_resource type="Script" path="res://scenes/levels/gamemanager.gd" id="11_ra48x"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_5idrc"]
 sky_top_color = Color(0.37023658, 0.14835694, 0.11441777, 1)
