@@ -4,7 +4,7 @@ extends Node3D
 @onready var pelletcontrol = $"../Altars"
 @onready var altars = pelletcontrol.get_children()
 var MOVE_TIME = 0.5
-var SCATTER_TIMER = 120
+var SCATTER_TIMER = 160
 var SPAWN_TIMER = 40
 
 const AI_SCENES: Dictionary = {
