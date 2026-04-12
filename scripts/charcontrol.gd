@@ -64,6 +64,7 @@ var _temp_vel: Vector3 = Vector3(velocity.x, 0, velocity.z)
 var _total_vel = _temp_vel.length()
 var _coyote_timer: float = COYOTE_TIME
 var _airyote_timer: float = AIRYOTE_TIME
+var _is_dead: bool = false
 
 # ── State ─────────────────────────────────────────────
 
@@ -162,9 +163,21 @@ func _on_slash_finished() -> void:
 	_attack_hurtbox.monitorable = false
 
 func _on_hurtbox_body_entered(body: Node3D) -> void:
+	if body == self:
+		return
 	if body.has_method("take_damage"):
 		body.take_damage()
+func take_damage() -> void:
+	if _is_dead:
+		return
+	_die()
 
+func _die() -> void:
+	_is_dead = true
+	set_physics_process(false)
+	set_process_input(false)
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	_hud.show_death_screen()
 # ── Meter ─────────────────────────────────────────────
 
 func _consume_meter(amount: float) -> void:

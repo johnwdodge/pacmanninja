@@ -1,17 +1,15 @@
 extends Node3D
 @onready var gridmap = $"../../GridMap"
 @onready var player = $"../../charcontrol"
-@onready var pelletcontrol = $"../../Altars"
-@onready var altars = pelletcontrol.get_children()
-var MOVE_TIME = 0.5
-var SCATTER_TIMER = 160
-var SPAWN_TIMER = 40
+@onready var manager = $"../../GameManager"
 
 const AI_SCENES: Dictionary = {
 	"blinky":   preload("res://scenes/characters/blinky.tscn"),
 	"pinky":    preload("res://scenes/characters/pinky.tscn"),
 	"clyde":    preload("res://scenes/characters/clyde.tscn")
 }
+
+var SCATTER_TIMER = 160
 
 var astar = AStar3D.new()
 var scatter = false
@@ -20,46 +18,43 @@ var up = false
 var down = false
 var left = false
 var right = false
-var movetimer = MOVE_TIME
+var movetimer: float = 0.5
 var scattertimer = SCATTER_TIMER
-var spawntimer = SPAWN_TIMER
+var spawntimer: int = 40
 
 var reserved_points: Dictionary = {}
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	_build_array()
 	_populate_astar()
 	_neighbor_find()
-	pass # Replace with function body.
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if movetimer > 0:
 		movetimer -= delta
 	else:
-		movetimer = MOVE_TIME
+		movetimer = manager.get_move_time()
 		reserved_points.clear()
 		scattertimer -= 1
 		spawntimer -= 1
 		if not has_node("Blinky"):
-			add_child(AI_SCENES["blinky"].instantiate())
+			_spawn_ai("blinky")
 		elif not has_node("Pinky"):
-			add_child(AI_SCENES["pinky"].instantiate())
+			_spawn_ai("pinky")
 		elif not has_node("Clyde"):
-			add_child(AI_SCENES["clyde"].instantiate())
+			_spawn_ai("clyde")
 	if scattertimer < 1:
 		scatter = true
 	if scattertimer < 0:
 		scatter = false
 		scattertimer = SCATTER_TIMER
 	if spawntimer < 0:
-		var size = AI_SCENES.size()
-		var random_key = AI_SCENES.keys()[randi() % size]
-		add_child(AI_SCENES[random_key].instantiate())
-		spawntimer = SPAWN_TIMER
-	pass
+		spawntimer = manager.get_spawn_timer()
+		_spawn_ai(manager.next_ai_type())
+
+func _spawn_ai(type: String) -> void:
+	var ai_instance = AI_SCENES[type].instantiate()
+	add_child(ai_instance)
 
 func try_reserve(id, ai):
 	if reserved_points.has(id):
@@ -70,7 +65,7 @@ func try_reserve(id, ai):
 func release_point(id, ai):
 	if reserved_points.get(id) == ai:
 		reserved_points.erase(id)
-		
+
 
 #--------- array creation --------------------------------------------------------------
 
@@ -166,7 +161,6 @@ func _populate_astar():
 				if full[i][j][k]:
 					if (full[i][j][k][1].resource_name != "Bound_Wall_Cube_013") and (full[i][j][k][1].resource_name != "Pagoda_Wall_Window_Corner_Cube_031"):
 						counter += 1
-						#1.3 and 4.5
 						if full[i][j][k][1].resource_name == "Pagoda_Ramp_Lower_Cube_019":
 							var temp = full[i][j][k][0].origin
 							temp.y += 1.3
@@ -191,8 +185,8 @@ func _populate_astar():
 							astar.add_point(counter, full[i][j][k][0].origin, 1.0)
 						full[i][j][k].append(counter)
 						print(full[i][j][k][1].resource_name)
-#						print(counter)
 					else: full[i][j][k].append([])
+
 func _neighbor_find():
 	for i in range(full.size()):
 		for j in range(full[i].size()):
@@ -221,22 +215,16 @@ func _neighbor_find():
 				if current:
 					if current[2]:
 						if current[1].resource_name == "Floor_Tile_Cube":
-#							print(current)
-							#down
 							if down and rampcheck(down[1]):
 								astar.connect_points(current[2], down[2])
-							#up
 							if up and rampcheck(up[1]):
 								astar.connect_points(current[2], up[2])
-							#right
 							if right and rampcheck(right[1]):
 								astar.connect_points(current[2], right[2])
-							#left
 							if left:
 								astar.connect_points(current[2], left[2])
 						if current[1].resource_name == "Single_Wall_Tile_Cube_006":
 							if current[0].basis.z.x > 0:
-								#down left and right
 								if down and rampcheck(down[1]):
 									astar.connect_points(current[2], down[2])
 								if left and rampcheck(left[1]):
@@ -244,7 +232,6 @@ func _neighbor_find():
 								if up and rampcheck(up[1]):
 									astar.connect_points(current[2], up[2])
 							elif current[0].basis.z.x < 0:
-								#up right left
 								if up and rampcheck(up[1]):
 									astar.connect_points(current[2], up[2])
 								if right and rampcheck(right[1]):
@@ -252,7 +239,6 @@ func _neighbor_find():
 								if down and rampcheck(down[1]):
 									astar.connect_points(current[2], down[2])
 							elif current[0].basis.z.z > 0:
-								#down up right
 								if left and rampcheck(left[1]):
 									astar.connect_points(current[2], left[2])
 								if up and rampcheck(up[1]):
@@ -260,7 +246,6 @@ func _neighbor_find():
 								if right and rampcheck(right[1]):
 									astar.connect_points(current[2], right[2])
 							elif current[0].basis.z.z < 0:
-								#down up left
 								if down and rampcheck(down[1]):
 									astar.connect_points(current[2], down[2])
 								if right and rampcheck(right[1]):
@@ -284,13 +269,11 @@ func _neighbor_find():
 								print("YOU HAVE FUCKED UP")
 						if current[1].resource_name in ["Corner_Tile_Cube_002", "Corner_Hole_One_Cube_002", "Corner_Hole_Two_Cube_005"]:
 							if current[0].basis.z.z > 0:
-								#up and left
 								if up and rampcheck(up[1]):
 									astar.connect_points(current[2], up[2])
 								if left and rampcheck(left[1]):
 									astar.connect_points(current[2], left[2])
 							elif current[0].basis.z.z < 0:
-								#down left
 								if down and rampcheck(down[1]):
 									astar.connect_points(current[2], down[2])
 								if right and rampcheck(right[1]):
@@ -307,7 +290,6 @@ func _neighbor_find():
 									astar.connect_points(current[2], right[2])
 							else:
 								print("YOU HAVE FUCKED UP")
-							
 						if current[1].resource_name in ["Pagoda_Ramp_Lower_Cube_019", "2x3_Ramp_Bottom_Cube_024", "2x3_Ramp_Middle_Cube_028"]:
 							if abs(current[0].basis.z.z) > 0:
 								if up:
@@ -332,7 +314,6 @@ func _neighbor_find():
 								astar.connect_points(current[2], full[i+1][j][k-1][2])
 							else:
 								print("YOU HAVE FUCKED UP")
-								
 						if current[1].resource_name == "2x3_Ramp_Top_Cube_029":
 							if current[0].basis.z.z > 0:
 								astar.connect_points(current[2], full[i+2][j+1][k][2])
@@ -344,4 +325,5 @@ func _neighbor_find():
 								astar.connect_points(current[2], full[i+2][j][k-1][2])
 							else:
 								print("YOU HAVE FUCKED UP")
+
 #----- AI functions --------------------------------------------------

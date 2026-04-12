@@ -491,8 +491,11 @@ bone_idx = 14
 transform = Transform3D(-0.7956499, -1.3739829, 1.2245963, -1.8090895, 0.3383795, -0.7957506, 0.33861724, -1.4206318, -1.373924, 6.771553, 20.366749, -0.15243149)
 mesh = SubResource("ArrayMesh_q00r8")
 
-[node name="Attack_Collision" type="CollisionShape3D" parent="Samurai_Animations/Armature/Skeleton3D/BoneAttachment3D/Cube" unique_id=1217437998]
-transform = Transform3D(-0.037062973, 0.9979942, 0.05130042, -0.6544672, 0.014552683, -0.755947, -0.7551751, -0.06159222, 0.6526147, -18.509422, 0.3485756, 1.0115166)
+[node name="Attack_Collision" type="Area3D" parent="Samurai_Animations/Armature/Skeleton3D/BoneAttachment3D/Cube" unique_id=985338606]
+transform = Transform3D(-0.03706295, 0.9979943, 0.05130042, -0.6544672, 0.014552679, -0.755947, -0.7551751, -0.06159223, 0.6526148, -18.509422, 0.34857512, 1.0115166)
+
+[node name="CollisionShape" type="CollisionShape3D" parent="Samurai_Animations/Armature/Skeleton3D/BoneAttachment3D/Cube/Attack_Collision" unique_id=1217437998]
+transform = Transform3D(1, 5.5879354e-09, 2.9802322e-08, -1.4901161e-08, 0.9999999, 4.284084e-08, 0, -2.6077032e-08, 1, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_j6umr")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Samurai_Animations" unique_id=1928124497]

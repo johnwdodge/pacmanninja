@@ -30,3 +30,41 @@ offset_top = 23.0
 offset_right = 261.0
 offset_bottom = 50.0
 max_value = 800.0
+
+[node name="Score" type="Label" parent="CanvasLayer" unique_id=1171843681]
+offset_left = 1029.0
+offset_top = 3.0
+offset_right = 1069.0
+offset_bottom = 26.0
+
+[node name="DeathScreen" type="Control" parent="CanvasLayer" unique_id=638013351]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/DeathScreen" unique_id=91616452]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0, 0, 0, 0.003921569)
+
+[node name="Label" type="Label" parent="CanvasLayer/DeathScreen" unique_id=1662549188]
+layout_mode = 0
+offset_left = 487.0
+offset_top = 280.0
+offset_right = 731.0
+offset_bottom = 394.0
+theme_override_font_sizes/font_size = 50
+text = "YOU DIED"
+
+[node name="Label2" type="Label" parent="CanvasLayer/DeathScreen" unique_id=479728749]
+layout_mode = 0
+offset_left = 497.0
+offset_top = 356.0
+offset_right = 704.0
+offset_bottom = 387.0
+theme_override_font_sizes/font_size = 22
+text = "Press R to Respawn"

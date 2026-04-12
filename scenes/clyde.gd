@@ -5,7 +5,7 @@ extends CharacterBody3D
 @onready var player = $"../../../charcontrol"
 @onready var manager = $"../../../GameManager"
 @onready var anim_player: AnimationPlayer = $Samurai_Animations/AnimationPlayer
-@export var max_health: int = 1  
+@export var max_health: int = 1
 @onready var collision_shape_3d: CollisionShape3D = $Samurai_Animations/Armature/Skeleton3D/Base_002/StaticBody3D/CollisionShape3D
 
 var pointpath = []
@@ -14,20 +14,29 @@ var scatter = true
 var scatterpath = []
 var nextposition = Vector3.ZERO
 var _health: int
+@onready var attack_collision: Area3D = $Samurai_Animations/Armature/Skeleton3D/BoneAttachment3D/Cube/Attack_Collision
+
+
 
 func _ready() -> void:
 	anim_player.play("Walking")
+	max_health = manager.get_ai_health()
 	_health = max_health
+	attack_collision.body_entered.connect(_on_attack_hit)
 
+func _on_attack_hit(body: Node3D) -> void:
+	if body.is_in_group("player"):
+		body.take_damage()
 func take_damage() -> void:
 	_health -= 1
 	if _health <= 0:
 		_die()
 
 func _die() -> void:
+	manager.add_score(1)
 	_play_anim("Death")
 	set_process(false)
-	collision_shape_3d.set_deferred("disabled", true)  # stop collisions immediately
+	collision_shape_3d.set_deferred("disabled", true)
 	await anim_player.animation_finished
 	queue_free()
 
@@ -38,12 +47,11 @@ func _process(delta: float) -> void:
 		if get_parent().scatter:
 			scatter = true
 		if scatter:
-			_handle_scatter(astar.get_closest_point(get_parent().altars.pick_random().global_position))
+			_handle_scatter(astar.get_closest_point(manager.altars.pick_random().global_position))
 		else:
 			_handle_ai_move(delta)
 	global_position = global_position.lerp(nextposition, .1)
-	
-	
+
 func _handle_scatter(point):
 	var mypos = astar.get_closest_point(global_position)
 	if not scatterpath:
@@ -54,13 +62,13 @@ func _handle_scatter(point):
 		var next_pos = astar.get_point_position(scatterpath[0])
 		_face_direction(global_position, next_pos)
 		if ai.try_reserve(next_pos, self):
-				nextposition = astar.get_point_position(scatterpath[0])
+			nextposition = astar.get_point_position(scatterpath[0])
 		scatterpath.remove_at(0)
 	else:
 		var next_pos = astar.get_point_position(scatterpath[0])
 		_face_direction(global_position, next_pos)
 		if ai.try_reserve(next_pos, self):
-				nextposition = astar.get_point_position(scatterpath[0])
+			nextposition = astar.get_point_position(scatterpath[0])
 		scatterpath.remove_at(0)
 		if scatterpath.size() < 3:
 			scatterpath = []
@@ -75,7 +83,7 @@ func _handle_ai_move(delta):
 		astar.set_point_weight_scale(lastpoint, 5.0)
 		pointpath = astar.get_point_path(mypos, playerpos)
 		if pointpath.size() > 12:
-			pointpath = astar.get_point_path(mypos, astar.get_closest_point(active.global_position))
+				pointpath = astar.get_point_path(mypos, astar.get_closest_point(active.global_position))
 		if pointpath.size() > 1:
 			astar.set_point_weight_scale(lastpoint, 1.0)
 			lastpoint = mypos
@@ -92,15 +100,12 @@ func _handle_ai_move(delta):
 				_face_direction(global_position, next_pos)
 				if ai.try_reserve(next_pos, self):
 					nextposition = next_pos
-				
 		if pointpath.size() <= 1:
 			_play_anim("Attack")
 		else:
 			_play_anim("Walking")
 	else:
 		ai.try_reserve(mypos, self)
-
-
 
 func _play_anim(anim_name: String) -> void:
 	if anim_player.current_animation != anim_name:

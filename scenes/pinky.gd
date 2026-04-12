@@ -15,6 +15,7 @@ var _health: int
 
 func _ready() -> void:
 	anim_player.play("Walking")
+	max_health = manager.get_ai_health()
 	_health = max_health
 
 func take_damage() -> void:
@@ -23,6 +24,7 @@ func take_damage() -> void:
 		_die()
 
 func _die() -> void:
+	manager.add_score(1)
 	_play_anim("Death")
 	set_process(false)
 	collision_shape_3d.set_deferred("disabled", true)
@@ -36,7 +38,7 @@ func _process(delta: float) -> void:
 		if get_parent().scatter:
 			scatter = true
 		if scatter:
-			_handle_scatter(astar.get_closest_point(get_parent().altars.pick_random().global_position))
+			_handle_scatter(astar.get_closest_point(manager.altars.pick_random().global_position))
 		else:
 			_handle_ai_move(delta)
 	global_position = global_position.lerp(nextposition, .1)
@@ -89,9 +91,8 @@ func _handle_ai_move(delta):
 				_face_direction(global_position, next_pos)
 				if ai.try_reserve(next_pos, self):
 					nextposition = next_pos
-
 		if pointpath.size() <= 1:
-			_face_direction(global_position, player.global_position)  # ← here
+			_face_direction(global_position, player.global_position)
 			_play_anim("Attack")
 		else:
 			_play_anim("Walking")
