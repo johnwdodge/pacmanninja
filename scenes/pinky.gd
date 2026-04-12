@@ -65,7 +65,7 @@ func _handle_scatter(point):
 
 func _handle_ai_move(delta):
 	var playerspot = player.global_position
-	var playerbasis = (-player.basis.z.normalized()) * 18
+	var playerbasis = (-player.basis.z.normalized()) * 24
 	var playerpos = astar.get_closest_point(player.global_position)
 	playerspot += playerbasis
 	var playerlook = astar.get_closest_point(playerspot)
