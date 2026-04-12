@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Ninja Pac Man"
-run/main_scene="uid://cngkmijy0qyio"
+run/main_scene="uid://dfosx500gg7vs"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="uid://ba7f7bac8lh6j"
 

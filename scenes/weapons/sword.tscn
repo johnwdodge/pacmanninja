@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://b66d0qod7omu7"]
+
+[ext_resource type="PackedScene" uid="uid://buhe7ic2k07ut" path="res://models/Magic_Sword.glb" id="1_o616w"]
+
+[node name="Magic_Sword" unique_id=242301032 instance=ExtResource("1_o616w")]

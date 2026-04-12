@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://0a4onxq3i78v"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f5fu2"]
+albedo_color = Color(0.9060468, 0.6169746, 0.48053724, 1)
+emission_enabled = true
+emission = Color(0.6448854, 0.33668673, 0.23954871, 1)
+emission_energy_multiplier = 6.85
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_fatf2"]
+material = SubResource("StandardMaterial3D_f5fu2")
+
+[node name="Lantern_Light" type="Node3D" unique_id=1191342081]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=334912928]
+transform = Transform3D(1, 0, 0, 0, 0.705, 0, 0, 0, 1, 0, 0.7149341, 0)
+mesh = SubResource("CylinderMesh_fatf2")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=972980797]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+light_color = Color(0.87424874, 0.3573443, 0.0990564, 1)
+light_energy = 10.0
+spot_range = 27.5
+spot_angle = 38.0
