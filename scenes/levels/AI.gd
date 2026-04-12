@@ -1,6 +1,7 @@
 extends Node3D
 @onready var gridmap = $"../GridMap"
 @onready var player = $"../charcontrol"
+const MOVE_TIME = 1.0
 var astar = AStar3D.new()
 var full = []
 var up = false
@@ -18,7 +19,6 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	
 	
 	pass
 
