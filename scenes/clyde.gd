@@ -4,15 +4,31 @@ extends CharacterBody3D
 @onready var player = $"../../../charcontrol"
 @onready var manager = $"../../../GameManager"
 @onready var anim_player: AnimationPlayer = $Samurai_Animations/AnimationPlayer
+@export var max_health: int = 1  
+@onready var collision_shape_3d: CollisionShape3D = $Samurai_Animations/Armature/Skeleton3D/Base_002/StaticBody3D/CollisionShape3D
 
 var pointpath = []
 var lastpoint = 0
 var scatter = true
 var scatterpath = []
 var nextposition = Vector3.ZERO
+var _health: int
 
 func _ready() -> void:
 	anim_player.play("Walking")
+	_health = max_health
+
+func take_damage() -> void:
+	_health -= 1
+	if _health <= 0:
+		_die()
+
+func _die() -> void:
+	_play_anim("Death")
+	set_process(false)
+	collision_shape_3d.set_deferred("disabled", true)  # stop collisions immediately
+	await anim_player.animation_finished
+	queue_free()
 
 func _process(delta: float) -> void:
 	if get_parent().movetimer > 0:
@@ -88,9 +104,7 @@ func _handle_ai_move(delta):
 	else:
 		pass
 
-func die() -> void:
-	_play_anim("Death")
-	set_process(false)
+
 
 func _play_anim(anim_name: String) -> void:
 	if anim_player.current_animation != anim_name:
