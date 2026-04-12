@@ -1,7 +1,7 @@
 extends Node3D
-@onready var gridmap = $"../GridMap"
-@onready var player = $"../charcontrol"
-@onready var pelletcontrol = $"../Altars"
+@onready var gridmap = $"../../GridMap"
+@onready var player = $"../../charcontrol"
+@onready var pelletcontrol = $"../../Altars"
 @onready var altars = pelletcontrol.get_children()
 var MOVE_TIME = 0.5
 var SCATTER_TIMER = 160

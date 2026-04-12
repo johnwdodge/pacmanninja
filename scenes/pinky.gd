@@ -1,7 +1,7 @@
 extends CharacterBody3D
 
 @onready var astar = get_parent().astar
-@onready var player = $"../../charcontrol"
+@onready var player = $"../../../charcontrol"
 @onready var MOVE_TIME = get_parent().MOVE_TIME
 @onready var movetimer = MOVE_TIME
 var pointpath = []

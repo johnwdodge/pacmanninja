@@ -1,10 +1,10 @@
 extends CharacterBody3D
 
 @onready var astar = get_parent().astar
-@onready var player = $"../../charcontrol"
+@onready var player = $"../../../charcontrol"
 #@onready var MOVE_TIME = get_parent().movetimer
-@onready var altars: Node3D = $"../../Altars"
-@onready var pellet_altar: Node3D = $"../../Altars/Pellet_Altar"
+@onready var manager = $"../../../GameManager"
+@onready var active = manager._active_altar
 
 var pointpath = []
 var lastpoint = 0
@@ -53,7 +53,7 @@ func _handle_ai_move(delta):
 		astar.set_point_weight_scale(lastpoint, 100.0)
 		pointpath = astar.get_point_path(mypos, playerpos)
 		if pointpath.size() < 8 and pointpath.size() > 3:
-			pointpath = astar.get_point_path(mypos, astar.get_closest_point(pellet_altar.global_position))
+			pointpath = astar.get_point_path(mypos, astar.get_closest_point(active.global_position))
 		if pointpath.size() > 1:
 			astar.set_point_weight_scale(lastpoint, 1.0)
 			lastpoint = mypos
