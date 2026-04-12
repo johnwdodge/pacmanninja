@@ -25,11 +25,13 @@ func _handle_ai_move(delta):
 					movetimer = MOVE_TIME
 					break
 		elif astar.get_point_path(mypos, playerpos):
+			astar.set_point_weight_scale(lastpoint, 100.0)
 			pointpath = astar.get_point_path(mypos, playerpos)
-			lastpoint = mypos
 			if pointpath.size() > 1:
+				astar.set_point_weight_scale(lastpoint, 1.0)
+				lastpoint = mypos
 				global_position = pointpath[1]
-			movetimer = MOVE_TIME
+				movetimer = MOVE_TIME
 		else:
 			movetimer = MOVE_TIME
 		
