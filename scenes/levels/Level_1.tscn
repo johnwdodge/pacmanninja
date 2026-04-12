@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://dsyn7xs5eicaf"]
+[gd_scene format=3 uid="uid://dfosx500gg7vs"]
 
 [ext_resource type="Script" uid="uid://c62ie4g6d3yu3" path="res://scenes/levels/levelgeneric.gd" id="1_u8eek"]
 [ext_resource type="PackedScene" uid="uid://bx4kyblex8ucu" path="res://scenes/charcontrol.tscn" id="2_t1jjp"]
@@ -7,8 +7,9 @@
 [ext_resource type="PackedScene" uid="uid://dpte47om4tgm8" path="res://scenes/pellet_altar.tscn" id="5_jrjue"]
 [ext_resource type="PackedScene" uid="uid://crvcqm8a1iodv" path="res://models/Rock_Maze.glb" id="7_50olt"]
 [ext_resource type="PackedScene" uid="uid://d0q8yegn5n15n" path="res://scenes/base_ai.tscn" id="7_t1jjp"]
-[ext_resource type="PackedScene" path="res://scenes/lantern_light.tscn" id="7_u84xi"]
+[ext_resource type="PackedScene" uid="uid://0a4onxq3i78v" path="res://scenes/lantern_light.tscn" id="7_u84xi"]
 [ext_resource type="PackedScene" uid="uid://cp5bild4i70tr" path="res://models/Rock_Outer.glb" id="8_50olt"]
+[ext_resource type="PackedScene" uid="uid://55dik0higonf" path="res://ziggurat.tscn" id="10_jrjue"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_5idrc"]
 sky_top_color = Color(0.37023658, 0.14835694, 0.11441777, 1)
@@ -53,7 +54,7 @@ data = {
 metadata/_editor_floor_ = Vector3(0, 0, 0)
 
 [node name="Base_AI" parent="." unique_id=1594229394 instance=ExtResource("7_t1jjp")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.00749, 0.29999924, -7.516738)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.089531, 0.29999924, -9.023363)
 
 [node name="Rock_Maze" parent="." unique_id=646958150 instance=ExtResource("7_50olt")]
 
@@ -71,6 +72,54 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 17, 0)
 
 [node name="Lantern_Light9" parent="Lights" unique_id=966385013 instance=ExtResource("7_u84xi")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 17, 23.775398)
+
+[node name="Lantern_Light13" parent="Lights" unique_id=163173039 instance=ExtResource("7_u84xi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33, 21.531725, 15.775398)
+
+[node name="Lantern_Light14" parent="Lights" unique_id=1303320717 instance=ExtResource("7_u84xi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33, 21.531725, 32.7754)
+
+[node name="Lantern_Light15" parent="Lights" unique_id=1620091584 instance=ExtResource("7_u84xi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 21.531725, 32.7754)
+
+[node name="Lantern_Light16" parent="Lights" unique_id=829278609 instance=ExtResource("7_u84xi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 21.531725, 15.775398)
+
+[node name="Lantern_Light17" parent="Lights" unique_id=546939690 instance=ExtResource("7_u84xi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33, 21.531725, -50.2246)
+
+[node name="Lantern_Light18" parent="Lights" unique_id=1785363301 instance=ExtResource("7_u84xi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33, 21.531725, -33.2246)
+
+[node name="Lantern_Light19" parent="Lights" unique_id=148703374 instance=ExtResource("7_u84xi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 21.531725, -33.2246)
+
+[node name="Lantern_Light20" parent="Lights" unique_id=351492844 instance=ExtResource("7_u84xi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 21.531725, -50.2246)
+
+[node name="Lantern_Light21" parent="Lights" unique_id=1321478919 instance=ExtResource("7_u84xi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33, 21.531725, -50.2246)
+
+[node name="Lantern_Light22" parent="Lights" unique_id=2005007218 instance=ExtResource("7_u84xi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33, 21.531725, -33.2246)
+
+[node name="Lantern_Light23" parent="Lights" unique_id=1132360997 instance=ExtResource("7_u84xi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -51, 21.531725, -33.2246)
+
+[node name="Lantern_Light24" parent="Lights" unique_id=112158888 instance=ExtResource("7_u84xi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -51, 21.531725, -50.2246)
+
+[node name="Lantern_Light25" parent="Lights" unique_id=907875692 instance=ExtResource("7_u84xi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33, 21.531725, 15.775398)
+
+[node name="Lantern_Light26" parent="Lights" unique_id=1302895192 instance=ExtResource("7_u84xi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33, 21.531725, 32.7754)
+
+[node name="Lantern_Light27" parent="Lights" unique_id=1356119280 instance=ExtResource("7_u84xi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -51, 21.531725, 32.7754)
+
+[node name="Lantern_Light28" parent="Lights" unique_id=594374270 instance=ExtResource("7_u84xi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -51, 21.531725, 15.775398)
 
 [node name="Lantern_Light10" parent="Lights" unique_id=2034018148 instance=ExtResource("7_u84xi")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.973068, 17, 23.775398)
@@ -103,7 +152,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.83155, 17, -40.419315)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.078285, 17, -18.200638)
 
 [node name="Rock_Outer2" parent="." unique_id=1554373848 instance=ExtResource("8_50olt")]
-visible = false
 
 [node name="Altars" type="Node3D" parent="." unique_id=666046499]
 
@@ -118,3 +166,6 @@ transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 24.047295, 12.307938, 1
 
 [node name="Pellet_Altar4" parent="Altars" unique_id=2120887759 groups=["pellet_altar"] instance=ExtResource("5_jrjue")]
 transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, -38.84905, 12.775177, 23.609947)
+
+[node name="ziggurat" parent="." unique_id=1971136172 instance=ExtResource("10_jrjue")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -9, 0, -9)
