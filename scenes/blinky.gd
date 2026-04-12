@@ -7,6 +7,7 @@ extends CharacterBody3D
 var pointpath = []
 var lastpoint = 0
 var scatter = true
+var scatterpath = []
 
 func _process(delta: float) -> void:
 	if get_parent().movetimer > 0:
@@ -14,9 +15,26 @@ func _process(delta: float) -> void:
 	else:
 		if get_parent().scatter:
 			scatter = true
+		if scatter:
+			_handle_scatter(astar.get_closest_point(get_parent().altars.pick_random().global_position))
 		else:
 			_handle_ai_move(delta)
+			
 
+func _handle_scatter(point):
+	var mypos = astar.get_closest_point(global_position)
+	if not scatterpath:
+		scatterpath = astar.get_id_path(mypos, point)
+		scatterpath.remove_at(0)
+		global_position = astar.get_point_position(scatterpath[0])
+		scatterpath.remove_at(0)
+	else:
+		global_position = astar.get_point_position(scatterpath[0])
+		scatterpath.remove_at(0)
+		if scatterpath.size() < 3:
+			scatterpath = []
+			scatter = false
+		
 func _handle_ai_move(delta):
 	var playerpos = astar.get_closest_point(player.global_position)
 	var mypos = astar.get_closest_point(global_position)

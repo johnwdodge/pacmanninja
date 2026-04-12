@@ -1,63 +1,6 @@
 [gd_scene format=3 uid="uid://d0q8yegn5n15n"]
 
 [ext_resource type="Script" uid="uid://b8ttdtj127f28" path="res://ai_base.gd" id="1_jnkxd"]
-[ext_resource type="Script" uid="uid://dofs6ulx1y0pd" path="res://scenes/blinky.gd" id="2_thg4o"]
-[ext_resource type="Script" uid="uid://cep31x527avtw" path="res://scenes/clyde.gd" id="3_i6bkx"]
-[ext_resource type="Script" uid="uid://253iklvp0df7" path="res://scenes/pinky.gd" id="3_irxxj"]
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_thg4o"]
-
-[sub_resource type="SphereMesh" id="SphereMesh_i6bkx"]
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_irxxj"]
 
 [node name="Base_AI" type="Node3D" unique_id=1594229394]
 script = ExtResource("1_jnkxd")
-
-[node name="Blinky" type="CharacterBody3D" parent="." unique_id=1321709079]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
-script = ExtResource("2_thg4o")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Blinky" unique_id=394751552]
-transform = Transform3D(1.3, 0, 0, 0, 1.3, 0, 0, 0, 1.3, 0, 1.3, 0)
-mesh = SubResource("CapsuleMesh_thg4o")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Blinky/MeshInstance3D" unique_id=731885860]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.18088675, 0.27494812, 0)
-mesh = SubResource("SphereMesh_i6bkx")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Blinky" unique_id=161547117]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-shape = SubResource("CapsuleShape3D_irxxj")
-
-[node name="Pinky" type="CharacterBody3D" parent="." unique_id=1231341134]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
-script = ExtResource("3_irxxj")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Pinky" unique_id=1391566441]
-transform = Transform3D(1.3, 0, 0, 0, 1.3, 0, 0, 0, 1.3, 0, 1.3, 0)
-mesh = SubResource("CapsuleMesh_thg4o")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Pinky/MeshInstance3D" unique_id=849595995]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.18088675, 0.27494812, 0)
-mesh = SubResource("SphereMesh_i6bkx")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Pinky" unique_id=822664320]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-shape = SubResource("CapsuleShape3D_irxxj")
-
-[node name="Clyde" type="CharacterBody3D" parent="." unique_id=754964654]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
-script = ExtResource("3_i6bkx")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Clyde" unique_id=366242423]
-transform = Transform3D(1.3, 0, 0, 0, 1.3, 0, 0, 0, 1.3, 0, 1.3, 0)
-mesh = SubResource("CapsuleMesh_thg4o")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Clyde/MeshInstance3D" unique_id=452800809]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.18088675, 0.27494812, 0)
-mesh = SubResource("SphereMesh_i6bkx")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Clyde" unique_id=2066996343]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-shape = SubResource("CapsuleShape3D_irxxj")

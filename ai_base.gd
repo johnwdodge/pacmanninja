@@ -1,8 +1,18 @@
 extends Node3D
 @onready var gridmap = $"../GridMap"
 @onready var player = $"../charcontrol"
-const MOVE_TIME = 0.4
-const MOVE_COUNT = 100
+@onready var pelletcontrol = $"../Altars"
+@onready var altars = pelletcontrol.get_children()
+var MOVE_TIME = 0.5
+var SCATTER_TIMER = 120
+var SPAWN_TIMER = 40
+
+const AI_SCENES: Dictionary = {
+	"blinky":   preload("res://scenes/characters/blinky.tscn"),
+	"pinky":    preload("res://scenes/characters/pinky.tscn"),
+	"clyde":    preload("res://scenes/characters/clyde.tscn")
+}
+
 var astar = AStar3D.new()
 var scatter = false
 var full = []
@@ -11,12 +21,17 @@ var down = false
 var left = false
 var right = false
 var movetimer = MOVE_TIME
-var movecount = 50
+var scattertimer = SCATTER_TIMER
+var spawntimer = SPAWN_TIMER
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	_build_array()
 	_populate_astar()
 	_neighbor_find()
+	add_child(AI_SCENES["blinky"].instantiate())
+	add_child(AI_SCENES["pinky"].instantiate())
+	add_child(AI_SCENES["clyde"].instantiate())
 	pass # Replace with function body.
 
 
@@ -26,14 +41,25 @@ func _process(delta: float) -> void:
 		movetimer -= delta
 	else:
 		movetimer = MOVE_TIME
-		movecount -= 1
-	if movecount < 1:
+		scattertimer -= 1
+		spawntimer -= 1
+	if scattertimer < 1:
 		scatter = true
-	if movecount < 0:
+	if scattertimer < 0:
 		scatter = false
-		movecount = MOVE_COUNT
-	
-	
+		scattertimer = SCATTER_TIMER
+	if spawntimer < 0:
+		if not has_node("Blinky"):
+			add_child(AI_SCENES["blinky"].instantiate())
+		elif not has_node("Pinky"):
+			add_child(AI_SCENES["pinky"].instantiate())
+		elif not has_node("Clyde"):
+			add_child(AI_SCENES["clyde"].instantiate())
+		else:
+			var size = AI_SCENES.size()
+			var random_key = AI_SCENES.keys()[randi() % size]
+			add_child(AI_SCENES[random_key].instantiate())
+		spawntimer = SPAWN_TIMER
 	pass
 
 

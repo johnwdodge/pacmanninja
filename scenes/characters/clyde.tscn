@@ -43,13 +43,20 @@ shadow_mesh = SubResource("ArrayMesh_csae2")
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_o75o6"]
 
+[sub_resource type="SphereMesh" id="SphereMesh_w650a"]
+
 [node name="Clyde" type="CharacterBody3D" unique_id=273873120]
 script = ExtResource("1_47ye3")
 
 [node name="Base" type="MeshInstance3D" parent="." unique_id=1427725619]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0023041964, 0, 0)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0.002, 1, 0)
 mesh = SubResource("ArrayMesh_1qps3")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1689521801]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 2.8, 0)
 shape = SubResource("CapsuleShape3D_o75o6")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1860647448]
+transform = Transform3D(5, 0, 0, 0, -2.1855695e-07, 5, 0, -5, -2.1855695e-07, 0, 47.725235, 0)
+layers = 2
+mesh = SubResource("SphereMesh_w650a")
