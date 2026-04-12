@@ -55,7 +55,7 @@ data = {
 metadata/_editor_floor_ = Vector3(0, 0, 0)
 
 [node name="Base_AI" parent="." unique_id=1594229394 instance=ExtResource("7_t1jjp")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.089531, 0.29999924, -9.023363)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0.3, -9.023)
 
 [node name="Rock_Maze" parent="." unique_id=646958150 instance=ExtResource("7_50olt")]
 
