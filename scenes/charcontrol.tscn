@@ -6,6 +6,8 @@
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_ea30i"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u6b33"]
+
 [sub_resource type="QuadMesh" id="QuadMesh_rdlt6"]
 flip_faces = true
 size = Vector2(2, 2)
@@ -39,6 +41,7 @@ shape = SubResource("SphereShape3D_ea30i")
 cull_mask = 1048573
 
 [node name="Overlay" type="MeshInstance3D" parent="Head/Camera" unique_id=2008925700]
+material_override = SubResource("ShaderMaterial_u6b33")
 extra_cull_margin = 16384.0
 mesh = SubResource("QuadMesh_rdlt6")
 
