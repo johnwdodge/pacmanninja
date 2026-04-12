@@ -13,7 +13,8 @@ flip_faces = true
 size = Vector2(2, 2)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_u6b33"]
-height = 2.5092773
+radius = 2.0327148
+height = 4.454834
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u6b33"]
 albedo_color = Color(0, 1, 1, 1)
@@ -51,7 +52,7 @@ transform = Transform3D(0.09704686, 0.021947276, 0.0100112045, -0.02412275, 0.08
 [node name="AttackHurtbox" type="Area3D" parent="Head" unique_id=1621177623]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Head/AttackHurtbox" unique_id=1079102612]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, -1.113061e-08, -1.2702909)
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, -5.36521e-08, -2.2430692)
 shape = SubResource("CapsuleShape3D_u6b33")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=434291365]
