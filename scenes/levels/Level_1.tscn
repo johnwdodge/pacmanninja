@@ -68,7 +68,6 @@ light_color = Color(0.66555846, 0.16860592, 0, 1)
 light_energy = 0.5
 light_specular = 0.211
 light_bake_mode = 1
-light_cull_mask = 4294967294
 
 [node name="Lantern_Light" parent="Lights" unique_id=1191342081 instance=ExtResource("7_u84xi")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 17, 0)
