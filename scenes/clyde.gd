@@ -8,6 +8,7 @@ extends CharacterBody3D
 
 var pointpath = []
 var lastpoint = 0
+var scatter = true
 
 func _process(delta: float) -> void:
 	if get_parent().movetimer > 0:

@@ -6,12 +6,16 @@ extends CharacterBody3D
 @onready var movetimer = MOVE_TIME
 var pointpath = []
 var lastpoint = 0
+var scatter = true
 
 func _process(delta: float) -> void:
 	if get_parent().movetimer > 0:
 		pass
 	else:
-		_handle_ai_move(delta)
+		if get_parent().scatter:
+			scatter = true
+		else:
+			_handle_ai_move(delta)
 
 func _handle_ai_move(delta):
 	var playerpos = astar.get_closest_point(player.global_position)
