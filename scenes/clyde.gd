@@ -93,7 +93,7 @@ func _handle_ai_move(delta):
 				if ai.try_reserve(next_pos, self):
 					nextposition = next_pos
 				
-		if pointpath.size() <= 3:
+		if pointpath.size() <= 1:
 			_play_anim("Attack")
 		else:
 			_play_anim("Walking")
