@@ -91,6 +91,7 @@ func _handle_ai_move(delta):
 					nextposition = next_pos
 
 		if pointpath.size() <= 1:
+			_face_direction(global_position, player.global_position)  # ← here
 			_play_anim("Attack")
 		else:
 			_play_anim("Walking")
