@@ -1,13 +1,14 @@
 extends Node3D
 @onready var gridmap = $"../GridMap"
 @onready var player = $"../charcontrol"
+const MOVE_TIME = 0.5
 var astar = AStar3D.new()
 var full = []
 var up = false
 var down = false
 var left = false
 var right = false
-var MOVE_TIME = 0.5
+var movetimer = MOVE_TIME
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	_build_array()
@@ -18,6 +19,10 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	if movetimer > 0:
+		movetimer -= delta
+	else:
+		movetimer = MOVE_TIME
 	
 	
 	pass
