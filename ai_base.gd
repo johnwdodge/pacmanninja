@@ -29,9 +29,6 @@ func _ready() -> void:
 	_build_array()
 	_populate_astar()
 	_neighbor_find()
-	add_child(AI_SCENES["blinky"].instantiate())
-	add_child(AI_SCENES["pinky"].instantiate())
-	add_child(AI_SCENES["clyde"].instantiate())
 	pass # Replace with function body.
 
 
@@ -43,22 +40,21 @@ func _process(delta: float) -> void:
 		movetimer = MOVE_TIME
 		scattertimer -= 1
 		spawntimer -= 1
-	if scattertimer < 1:
-		scatter = true
-	if scattertimer < 0:
-		scatter = false
-		scattertimer = SCATTER_TIMER
-	if spawntimer < 0:
 		if not has_node("Blinky"):
 			add_child(AI_SCENES["blinky"].instantiate())
 		elif not has_node("Pinky"):
 			add_child(AI_SCENES["pinky"].instantiate())
 		elif not has_node("Clyde"):
 			add_child(AI_SCENES["clyde"].instantiate())
-		else:
-			var size = AI_SCENES.size()
-			var random_key = AI_SCENES.keys()[randi() % size]
-			add_child(AI_SCENES[random_key].instantiate())
+	if scattertimer < 1:
+		scatter = true
+	if scattertimer < 0:
+		scatter = false
+		scattertimer = SCATTER_TIMER
+	if spawntimer < 0:
+		var size = AI_SCENES.size()
+		var random_key = AI_SCENES.keys()[randi() % size]
+		add_child(AI_SCENES[random_key].instantiate())
 		spawntimer = SPAWN_TIMER
 	pass
 

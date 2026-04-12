@@ -2,10 +2,10 @@
 
 [ext_resource type="Script" uid="uid://cep31x527avtw" path="res://scenes/clyde.gd" id="1_47ye3"]
 [ext_resource type="Texture2D" uid="uid://y5up2bocrrs4" path="res://models/Samurai_Animations_Untitled.png" id="2_glbyl"]
-[ext_resource type="Animation" uid="uid://d4b6gagpb31c4" path="res://models/anims/Sam_Attack.anim" id="3_j6umr"]
-[ext_resource type="Animation" uid="uid://6ec40jk1l6dr" path="res://models/anims/Sam_Death.anim" id="4_244wk"]
-[ext_resource type="Animation" uid="uid://caxa06ac07tb5" path="res://models/anims/T_Pose.res" id="5_aohrj"]
-[ext_resource type="Animation" uid="uid://4wvsgxoqbb1o" path="res://models/anims/Sam_Walking.anim" id="6_tfpyu"]
+[ext_resource type="Animation" uid="uid://bj4j4ijagm41w" path="res://models/anims/Sam_Attack.anim" id="3_j6umr"]
+[ext_resource type="Animation" uid="uid://chmimm27xaxnc" path="res://models/anims/Sam_Death.anim" id="4_244wk"]
+[ext_resource type="Animation" uid="uid://dkyi5htw3hgdu" path="res://models/anims/T_Pose.res" id="5_aohrj"]
+[ext_resource type="Animation" uid="uid://btp2nto4yrint" path="res://models/anims/Sam_Walking.anim" id="6_tfpyu"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3jpau"]
 resource_name = "Material.001"

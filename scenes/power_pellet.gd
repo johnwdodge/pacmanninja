@@ -20,9 +20,7 @@ func _hide_pellet() -> void:
 	$Area3D/MeshInstance3D.visible = false
 	$"../OmniLight3D".visible = false
 	print("Pellet hidden, waiting 30s...")
-	await get_tree().create_timer(10.0).timeout
-	print("Timer done, respawning")
-	_respawn()
+	
 
 func _respawn() -> void:
 	$Area3D/CollisionShape3D.disabled = false

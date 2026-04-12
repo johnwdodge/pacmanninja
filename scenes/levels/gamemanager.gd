@@ -1,7 +1,8 @@
 # game_manager.gd
-# Attach to a Node in Level_1 named "GameManager"
 
 extends Node
+
+
 
 # ─────────────────────────────────────────────
 # Signals
@@ -13,7 +14,7 @@ signal wave_started(wave_number: int)
 # Scene references
 # ─────────────────────────────────────────────
 @onready var altars_root: Node3D = $"../Altars"
-@onready var spawn_area: Node3D  = $"../ziggurat/Spawn_Area"
+@onready var player = $"../charcontrol"
 
 # ─────────────────────────────────────────────
 # Score
@@ -22,7 +23,6 @@ var score: int = 0
 
 func add_kill(points: int = 1) -> void:
 	score += points
-	emit_signal("score_changed", score)
 	print("Score: ", score)
 
 

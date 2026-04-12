@@ -9,6 +9,7 @@ var pointpath = []
 var lastpoint = 0
 var scatter = true
 var scatterpath = []
+var nextposition = Vector3.ZERO
 
 func _ready() -> void:
 	anim_player.play("Walking")
@@ -23,7 +24,9 @@ func _process(delta: float) -> void:
 			_handle_scatter(astar.get_closest_point(get_parent().altars.pick_random().global_position))
 		else:
 			_handle_ai_move(delta)
-
+	global_position = global_position.lerp(nextposition, .5)
+	
+	
 func _handle_scatter(point):
 	var mypos = astar.get_closest_point(global_position)
 	if not scatterpath:
@@ -32,12 +35,12 @@ func _handle_scatter(point):
 		_play_anim("Walking")
 		var next_pos = astar.get_point_position(scatterpath[0])
 		_face_direction(global_position, next_pos)
-		global_position = next_pos
+		nextposition = next_pos
 		scatterpath.remove_at(0)
 	else:
 		var next_pos = astar.get_point_position(scatterpath[0])
 		_face_direction(global_position, next_pos)
-		global_position = next_pos
+		nextposition = next_pos
 		scatterpath.remove_at(0)
 		if scatterpath.size() < 3:
 			scatterpath = []
@@ -55,21 +58,29 @@ func _handle_ai_move(delta):
 				_play_anim("Walking")
 				var next_pos = astar.get_point_position(i)
 				_face_direction(global_position, next_pos)
-				global_position = next_pos
+				nextposition = next_pos
 				lastpoint = mypos
 				break
 	elif astar.get_point_path(mypos, playerpos):
 		astar.set_point_weight_scale(lastpoint, 100.0)
 		pointpath = astar.get_point_path(mypos, playerpos)
-		if pointpath.size() < 8 and pointpath.size() > 3:
+		if pointpath.size() > 12:
 			pointpath = astar.get_point_path(mypos, astar.get_closest_point(active.global_position))
 		if pointpath.size() > 1:
 			astar.set_point_weight_scale(lastpoint, 1.0)
 			lastpoint = mypos
 			var next_pos = pointpath[1]
 			_face_direction(global_position, next_pos)
-			global_position = next_pos
-
+			nextposition = next_pos
+		else:
+			pointpath = astar.get_point_path(mypos, playerpos)
+			if pointpath.size() > 1:
+				astar.set_point_weight_scale(lastpoint, 1.0)
+				lastpoint = mypos
+				var next_pos = pointpath[1]
+				_face_direction(global_position, next_pos)
+				nextposition = next_pos
+				
 		if pointpath.size() <= 3:
 			_play_anim("Attack")
 		else:

@@ -8,6 +8,7 @@ var pointpath = []
 var lastpoint = 0
 var scatter = true
 var scatterpath = []
+var nextposition = Vector3.ZERO
 
 func _process(delta: float) -> void:
 	if get_parent().movetimer > 0:
@@ -19,6 +20,7 @@ func _process(delta: float) -> void:
 			_handle_scatter(astar.get_closest_point(get_parent().altars.pick_random().global_position))
 		else:
 			_handle_ai_move(delta)
+	global_position = global_position.lerp(nextposition, .5)
 			
 
 func _handle_scatter(point):
@@ -26,10 +28,10 @@ func _handle_scatter(point):
 	if not scatterpath:
 		scatterpath = astar.get_id_path(mypos, point)
 		scatterpath.remove_at(0)
-		global_position = astar.get_point_position(scatterpath[0])
+		nextposition = astar.get_point_position(scatterpath[0])
 		scatterpath.remove_at(0)
 	else:
-		global_position = astar.get_point_position(scatterpath[0])
+		nextposition = astar.get_point_position(scatterpath[0])
 		scatterpath.remove_at(0)
 		if scatterpath.size() < 3:
 			scatterpath = []
@@ -42,7 +44,7 @@ func _handle_ai_move(delta):
 	if options.size() == 2:
 		for i in options:
 			if i != lastpoint:
-				global_position = astar.get_point_position(i)
+				nextposition = astar.get_point_position(i)
 				lastpoint = mypos
 #				movetimer = MOVE_TIME
 				break
@@ -52,7 +54,7 @@ func _handle_ai_move(delta):
 		if pointpath.size() > 1:
 			astar.set_point_weight_scale(lastpoint, 1.0)
 			lastpoint = mypos
-			global_position = pointpath[1]
+			nextposition = pointpath[1]
 #			movetimer = MOVE_TIME
 	else:
 #		movetimer = MOVE_TIME
