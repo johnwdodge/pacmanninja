@@ -40,14 +40,15 @@ func _process(delta: float) -> void:
 			_handle_scatter(astar.get_closest_point(get_parent().altars.pick_random().global_position))
 		else:
 			_handle_ai_move(delta)
-	global_position = global_position.lerp(nextposition, .5)
+	global_position = global_position.lerp(nextposition, .1)
 	
 	
 func _handle_scatter(point):
 	var mypos = astar.get_closest_point(global_position)
 	if not scatterpath:
 		scatterpath = astar.get_id_path(mypos, point)
-		scatterpath.remove_at(0)
+		if scatterpath.size() > 1:
+			scatterpath.remove_at(0)
 		_play_anim("Walking")
 		var next_pos = astar.get_point_position(scatterpath[0])
 		_face_direction(global_position, next_pos)
@@ -66,19 +67,9 @@ func _handle_ai_move(delta):
 	var active = manager._active_altar
 	var playerpos = astar.get_closest_point(player.global_position)
 	var mypos = astar.get_closest_point(global_position)
-	var options = astar.get_point_connections(mypos)
 
-	if options.size() == 2:
-		for i in options:
-			if i != lastpoint:
-				_play_anim("Walking")
-				var next_pos = astar.get_point_position(i)
-				_face_direction(global_position, next_pos)
-				nextposition = next_pos
-				lastpoint = mypos
-				break
-	elif astar.get_point_path(mypos, playerpos):
-		astar.set_point_weight_scale(lastpoint, 100.0)
+	if astar.get_point_path(mypos, playerpos):
+		astar.set_point_weight_scale(lastpoint, 5.0)
 		pointpath = astar.get_point_path(mypos, playerpos)
 		if pointpath.size() > 12:
 			pointpath = astar.get_point_path(mypos, astar.get_closest_point(active.global_position))
