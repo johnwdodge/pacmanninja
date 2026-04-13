@@ -53,9 +53,10 @@ func _die() -> void:
 	queue_free()
 
 func _process(delta: float) -> void:
-	if astar.are_points_connected(astar.get_closest_point(global_position), astar.get_closest_point(player.global_position)):
-		attack()
-		pass
+	if not attacking:
+		if astar.are_points_connected(astar.get_closest_point(global_position), astar.get_closest_point(player.global_position)):
+			attack()
+			pass
 	if get_parent().movetimer > 0:
 		pass
 	elif not attacking:
