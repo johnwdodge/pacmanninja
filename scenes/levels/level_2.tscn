@@ -1,11 +1,11 @@
-[gd_scene format=3 uid="uid://cf5gv8rojwrmg"]
+[gd_scene format=3 uid="uid://wage3orefffo"]
 
 [ext_resource type="Script" uid="uid://c62ie4g6d3yu3" path="res://scenes/levels/levelgeneric.gd" id="1_nt80m"]
 [ext_resource type="PackedScene" uid="uid://bx4kyblex8ucu" path="res://scenes/charcontrol.tscn" id="2_brxtv"]
 [ext_resource type="MeshLibrary" uid="uid://cwdmb4l2fk8le" path="res://tiles.meshlib" id="4_r88tb"]
 [ext_resource type="PackedScene" uid="uid://dpte47om4tgm8" path="res://scenes/pellet_altar.tscn" id="7_v8d84"]
 [ext_resource type="PackedScene" uid="uid://xbemqr2spiol" path="res://scenes/hud.tscn" id="8_8qukl"]
-[ext_resource type="PackedScene" uid="uid://55dik0higonf" path="res://ziggurat.tscn" id="8_gw1l3"]
+[ext_resource type="PackedScene" path="res://ziggurat.tscn" id="8_gw1l3"]
 [ext_resource type="PackedScene" uid="uid://c8vrilj1iwu6x" path="res://scenes/game_manager.tscn" id="10_sibr7"]
 [ext_resource type="PackedScene" uid="uid://d0q8yegn5n15n" path="res://scenes/base_ai.tscn" id="11_lkn2k"]
 

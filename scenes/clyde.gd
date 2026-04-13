@@ -55,7 +55,7 @@ func _die() -> void:
 func _process(delta: float) -> void:
 	if get_parent().movetimer > 0:
 		pass
-	if not attacking:
+	else:
 		if get_parent().scatter:
 			scatter = true
 		if scatter:
