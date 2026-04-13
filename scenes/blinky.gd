@@ -5,7 +5,8 @@ extends CharacterBody3D
 @onready var manager = $"../../../GameManager"
 @onready var anim_player: AnimationPlayer = $Samurai_Animations/AnimationPlayer
 @export var max_health: int = 1
-@onready var collision_shape_3d: CollisionShape3D = $Samurai_Animations/Armature/Skeleton3D/Base_002/StaticBody3D/CollisionShape3D
+@onready var collision_shape_3d: CollisionShape3D = $CollisionShape3D
+
 var pointpath = []
 var lastpoint = 0
 var scatter = true

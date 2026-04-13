@@ -488,7 +488,7 @@ bone_name = "mixamorig_RightHand"
 bone_idx = 14
 
 [node name="Cube" type="MeshInstance3D" parent="Samurai_Animations/Armature/Skeleton3D/BoneAttachment3D" unique_id=243017291]
-transform = Transform3D(-0.7956499, -1.3739829, 1.2245963, -1.8090895, 0.3383795, -0.7957506, 0.33861724, -1.4206318, -1.373924, 6.771553, 20.366749, -0.15243149)
+transform = Transform3D(-0.7956499, -1.3739829, 1.2245961, -1.8090895, 0.3383795, -0.79575056, 0.33861724, -1.4206318, -1.3739239, 6.771553, 20.366749, -0.15243149)
 mesh = SubResource("ArrayMesh_q00r8")
 
 [node name="Attack_Collision" type="Area3D" parent="Samurai_Animations/Armature/Skeleton3D/BoneAttachment3D/Cube" unique_id=985338606]

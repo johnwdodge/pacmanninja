@@ -19,7 +19,7 @@ const WALL_LENIENCE: float = 0.15
 const HEAD_STAND_HEIGHT: float = 1.8
 const HEAD_CROUCH_HEIGHT: float = 1.0
 const WALL_JUMP_AWAY_FORCE: float = 10.0
-const POWER_DURATION: float = 20
+const POWER_DURATION: float = 10
 const METER_REFILL: float = 2
 const SLIDE_DRAIN: float = 5
 const METER_SEGMENT: float = 200
@@ -31,6 +31,9 @@ const METER_REFILL_DELAY: float = 0.35
 const SWORD_SCENE = preload("res://scenes/weapons/magic_sword.tscn")
 const COYOTE_TIME: float = 0.2
 const AIRYOTE_TIME: float = 0.2
+const COMBO_MULTIPLIERS: Array[int] = [1, 2, 3, 4, 5]
+const COMBO_DECAY_TIME: float = 3.0       # seconds before combo drops
+const COMBO_POWER_EXTEND: float = .5     # seconds added to power per kill
 
 # ── References ────────────────────────────────────────
 
@@ -65,6 +68,8 @@ var _total_vel = _temp_vel.length()
 var _coyote_timer: float = COYOTE_TIME
 var _airyote_timer: float = AIRYOTE_TIME
 var _is_dead: bool = false
+var _combo_count: int = 0      # 0 = no combo, 1 = 2x, 2 = 3x, etc.
+var _combo_decay_timer: float = 0.0
 
 # ── State ─────────────────────────────────────────────
 
@@ -113,7 +118,21 @@ func _physics_process(delta: float) -> void:
 		_coyote_timer -= delta
 	_lerp_head(delta)
 	_tick_power(delta)
+	_tick_combo(delta)
 
+# ── Combo ─────────────────────────────────────────────
+
+func _tick_combo(delta: float) -> void:
+	if _combo_count == 0:
+		return
+	_combo_decay_timer -= delta
+	if _combo_decay_timer <= 0.0:
+		_combo_count = 0
+		_hud.set_combo(1)
+
+func get_score_multiplier() -> int:
+	return COMBO_MULTIPLIERS[_combo_count]
+	
 func _lerp_head(delta: float) -> void:
 	_head.position.y = lerp(_head.position.y, _target_head_height, delta * 10.0)
 
@@ -167,6 +186,16 @@ func _on_hurtbox_body_entered(body: Node3D) -> void:
 		return
 	if body.has_method("take_damage"):
 		body.take_damage()
+		_increment_combo()
+
+func _increment_combo() -> void:
+	_combo_count = mini(_combo_count + 1, COMBO_MULTIPLIERS.size() - 1)
+	_combo_decay_timer = COMBO_DECAY_TIME
+	# Extend power timer if currently powered
+	if _is_powered:
+		_power_timer = minf(_power_timer + COMBO_POWER_EXTEND, POWER_DURATION)
+	_hud.set_combo(COMBO_MULTIPLIERS[_combo_count])
+	
 func take_damage() -> void:
 	if _is_dead:
 		return

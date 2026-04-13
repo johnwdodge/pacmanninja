@@ -38,6 +38,7 @@ offset_right = 1069.0
 offset_bottom = 26.0
 
 [node name="DeathScreen" type="Control" parent="CanvasLayer" unique_id=638013351]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -68,3 +69,9 @@ offset_right = 704.0
 offset_bottom = 387.0
 theme_override_font_sizes/font_size = 22
 text = "Press R to Respawn"
+
+[node name="ComboLabel" type="Label" parent="CanvasLayer" unique_id=1266891125]
+offset_left = 1013.0
+offset_top = 48.0
+offset_right = 1053.0
+offset_bottom = 71.0
