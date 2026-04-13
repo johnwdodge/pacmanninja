@@ -15,6 +15,7 @@ var scatterpath = []
 var nextposition = Vector3.ZERO
 var _health: int
 @onready var attack_collision: Area3D = $Samurai_Animations/Armature/Skeleton3D/BoneAttachment3D/Cube/Attack_Collision
+@onready var attack_collision_shape: CollisionShape3D = $Samurai_Animations/Armature/Skeleton3D/BoneAttachment3D/Cube/Attack_Collision/CollisionShape
 
 
 
@@ -36,7 +37,8 @@ func _die() -> void:
 	manager.add_score(1)
 	_play_anim("Death")
 	set_process(false)
-	collision_shape_3d.set_deferred("disabled", true)
+	collision_shape_3d.disabled = true
+	attack_collision_shape.disabled = true
 	await anim_player.animation_finished
 	queue_free()
 
