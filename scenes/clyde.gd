@@ -82,7 +82,7 @@ func _handle_ai_move(delta):
 	if astar.get_point_path(mypos, playerpos):
 		astar.set_point_weight_scale(lastpoint, 5.0)
 		pointpath = astar.get_point_path(mypos, playerpos)
-		if pointpath.size() > 12:
+		if pointpath.size() > 17:
 				pointpath = astar.get_point_path(mypos, astar.get_closest_point(active.global_position))
 		if pointpath.size() > 1:
 			astar.set_point_weight_scale(lastpoint, 1.0)

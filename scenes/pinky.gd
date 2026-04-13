@@ -91,13 +91,14 @@ func _handle_ai_move(delta):
 				_face_direction(global_position, next_pos)
 				if ai.try_reserve(next_pos, self):
 					nextposition = next_pos
-		if pointpath.size() <= 1:
+			else:
+				ai.try_reserve(mypos, self)
+		if pointpath.size() <= 2:
 			_face_direction(global_position, player.global_position)
 			_play_anim("Attack")
 		else:
 			_play_anim("Walking")
-	else:
-		ai.try_reserve(mypos, self)
+	
 
 func _play_anim(anim_name: String) -> void:
 	if anim_player.current_animation != anim_name:
