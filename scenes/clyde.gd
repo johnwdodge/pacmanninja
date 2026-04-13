@@ -10,6 +10,7 @@ extends CharacterBody3D
 
 var pointpath = []
 var lastpoint = 0
+var attacking = true
 var scatter = true
 var scatterpath = []
 var nextposition = Vector3.ZERO
@@ -18,9 +19,18 @@ var _health: int
 @onready var attack_collision_shape: CollisionShape3D = $Samurai_Animations/Armature/Skeleton3D/BoneAttachment3D/Cube/Attack_Collision/CollisionShape
 
 
+func attack():
+	_play_anim("Attack")
+	attacking = true
+	attack_collision_shape.disabled = false
+	_face_direction(global_position, player.global_position)
+	await anim_player.animation_finished
+	attack_collision_shape.disabled = true
+	attacking = false
 
 func _ready() -> void:
 	anim_player.play("Walking")
+	attack_collision_shape.disabled = true
 	max_health = manager.get_ai_health()
 	_health = max_health
 	attack_collision.body_entered.connect(_on_attack_hit)
@@ -43,9 +53,12 @@ func _die() -> void:
 	queue_free()
 
 func _process(delta: float) -> void:
+	if astar.are_points_connected(astar.get_closest_point(global_position), astar.get_closest_point(player.global_position)):
+		attack()
+		pass
 	if get_parent().movetimer > 0:
 		pass
-	else:
+	elif not attacking:
 		if get_parent().scatter:
 			scatter = true
 		if scatter:
@@ -102,12 +115,9 @@ func _handle_ai_move(delta):
 				_face_direction(global_position, next_pos)
 				if ai.try_reserve(next_pos, self):
 					nextposition = next_pos
-		if pointpath.size() <= 1:
-			_play_anim("Attack")
-		else:
-			_play_anim("Walking")
-	else:
-		ai.try_reserve(mypos, self)
+
+	_play_anim("Walking")
+
 
 func _play_anim(anim_name: String) -> void:
 	if anim_player.current_animation != anim_name:
