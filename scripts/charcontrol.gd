@@ -438,3 +438,11 @@ func _handle_mouse_look(event: InputEventMouseMotion) -> void:
 	rotate_y(-event.relative.x * MOUSE_SENSITIVITY)
 	_head.rotate_x(-event.relative.y * MOUSE_SENSITIVITY)
 	_head.rotation.x = clamp(_head.rotation.x, -deg_to_rad(MAX_LOOK_ANGLE), deg_to_rad(MAX_LOOK_ANGLE))
+func respawn() -> void:
+	_is_dead = false
+	global_position = Vector3(-3.3914185, 0, 0)  # your spawn position from the level file
+	velocity = Vector3.ZERO
+	set_physics_process(true)
+	set_process_input(true)
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	_hud.hide_death_screen()

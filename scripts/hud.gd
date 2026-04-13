@@ -39,7 +39,9 @@ func camerashow() -> void:
 func _process(_delta: float) -> void:
 	if _death_screen != null and _death_screen.visible:
 		if Input.is_action_just_pressed("respawn"):
-			get_tree().reload_current_scene()
+			get_tree().get_first_node_in_group("player").respawn()
 
 func show_death_screen() -> void:
 	_death_screen.show()
+func hide_death_screen() -> void:
+	_death_screen.hide()
