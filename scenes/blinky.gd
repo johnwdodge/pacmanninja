@@ -24,10 +24,11 @@ func _ready() -> void:
 
 func take_damage() -> void:
 	_health -= 1
-	if _health <= 0:
+	if _health == 0:
 		_die()
 
 func attack():
+	attacking = true
 	hurtbox.disabled = false
 	anim_player.play("Attack")
 	await anim_player.animation_finished
@@ -46,7 +47,6 @@ func _die() -> void:
 func _process(delta: float) -> void:
 	if attacking == false:
 		if astar.get_closest_point(player.global_position) in astar.get_point_connections(astar.get_closest_point(global_position)):
-			attacking = true
 			attack()
 			pass
 		if get_parent().movetimer > 0:
@@ -97,11 +97,7 @@ func _handle_ai_move(delta):
 			_face_direction(global_position, next_pos)
 			if ai.try_reserve(next_pos, self):
 				nextposition = next_pos
-		if pointpath.size() <= 1:
-			_face_direction(global_position, player.global_position)
-			_play_anim("Attack")
-		else:
-			_play_anim("Walking")
+		_play_anim("Walking")
 	else:
 		ai.try_reserve(mypos, self)
 
