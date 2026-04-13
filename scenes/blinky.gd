@@ -29,6 +29,7 @@ func take_damage() -> void:
 
 func attack():
 	attacking = true
+	_face_direction(global_position, player.global_position)
 	hurtbox.disabled = false
 	anim_player.play("Attack")
 	await anim_player.animation_finished
