@@ -1,14 +1,14 @@
 [gd_scene format=3 uid="uid://d3jesu25ox162"]
 
-[ext_resource type="Texture2D" uid="uid://bc7f3hwcpuwhe" path="res://assets/textures/orange_grid.png" id="1_jbqir"]
-[ext_resource type="Material" uid="uid://bcpx75tdlp5a1" path="res://assets/textures/black.tres" id="1_v45ci"]
-[ext_resource type="Material" uid="uid://gca4wayvmo56" path="res://assets/textures/green.tres" id="3_48ne7"]
-[ext_resource type="Material" uid="uid://bbyao1xr7m16h" path="res://assets/textures/orange.tres" id="3_v45ci"]
+[ext_resource type="Texture2D" uid="uid://bc7f3hwcpuwhe" path="res://textures/orange_grid.png" id="1_jbqir"]
+[ext_resource type="Material" uid="uid://bcpx75tdlp5a1" path="res://textures/black.tres" id="1_v45ci"]
+[ext_resource type="Material" uid="uid://gca4wayvmo56" path="res://textures/green.tres" id="3_48ne7"]
+[ext_resource type="Material" uid="uid://bbyao1xr7m16h" path="res://textures/orange.tres" id="3_v45ci"]
 [ext_resource type="PackedScene" uid="uid://bx4kyblex8ucu" path="res://scenes/charcontrol.tscn" id="5_48ne7"]
-[ext_resource type="PackedScene" uid="uid://dqy00primfpyv" path="res://assets/models/Pedestal.glb" id="6_cyt5c"]
+[ext_resource type="PackedScene" uid="uid://dqy00primfpyv" path="res://models/Pedestal.glb" id="6_cyt5c"]
 [ext_resource type="PackedScene" uid="uid://uigv2h0flxta" path="res://scenes/power_pellet.tscn" id="7_7x1jh"]
+[ext_resource type="PackedScene" uid="uid://xbemqr2spiol" path="res://scenes/hud.tscn" id="9_2mu0v"]
 [ext_resource type="PackedScene" uid="uid://dfyf2y41r0d4w" path="res://scenes/simple_ai.tscn" id="9_hfwtw"]
-[ext_resource type="PackedScene" uid="uid://baogvd37j7idx" path="res://hud.tscn" id="10_2mu0v"]
 
 [sub_resource type="Environment" id="Environment_48ne7"]
 
@@ -211,11 +211,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.333313, 0.6906471, 13.73212
 light_color = Color(1.1551381e-06, 0.592867, 0.5928671, 1)
 light_energy = 10.0
 
-[node name="HUD" parent="." unique_id=1202115306 instance=ExtResource("10_2mu0v")]
-
 [node name="charcontrol" parent="." unique_id=1193498515 instance=ExtResource("5_48ne7")]
 
 [node name="SimpleAI" parent="." unique_id=970802604 instance=ExtResource("9_hfwtw")]
 
 [node name="SimpleAI2" parent="." unique_id=767797233 instance=ExtResource("9_hfwtw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.03609, 0.8249316, 11.432221)
+
+[node name="HUD" parent="." unique_id=1202115306 instance=ExtResource("9_2mu0v")]
+
+[node name="Respawn_Marker" type="Marker3D" parent="." unique_id=1462644943]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 51, 13, -9)
