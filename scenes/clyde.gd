@@ -15,7 +15,6 @@ var scatter = true
 var scatterpath = []
 var nextposition = Vector3.ZERO
 var _health: int
-@onready var attack_collision: Area3D = $Samurai_Animations/Armature/Skeleton3D/BoneAttachment3D/Cube/Attack_Collision
 @onready var hurtbox: Area3D = $hurtbox
 @onready var hurtbox_col: CollisionShape3D = $hurtbox/hurtbox_col
 
@@ -27,8 +26,7 @@ func _ready() -> void:
 	anim_player.play("Walking")
 	max_health = manager.get_ai_health()
 	_health = max_health
-	attack_collision.body_entered.connect(_on_attack_hit)
-	attack_collision.monitoring = false
+
 
 func _on_attack_hit(body: Node3D) -> void:
 	if body.is_in_group("player"):
@@ -38,11 +36,9 @@ func take_damage() -> void:
 	if _health <= 0:
 		_die()
 func attack():
-	attack_collision.monitoring = true
 	anim_player.play("Attack")
 	await anim_player.animation_finished
 	attacking = false
-	attack_collision.monitoring = false
 	
 
 func _die() -> void:

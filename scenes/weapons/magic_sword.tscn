@@ -6,13 +6,10 @@
 resource_name = "Material.001"
 cull_mode = 2
 albedo_color = Color(0.33721253, 0.8717169, 0.9063555, 1)
-metallic = 1.0
-metallic_specular = 1.0
 roughness = 0.0
 emission = Color(0.3372549, 0.87058824, 0.90588236, 1)
 emission_energy_multiplier = 3.5
 emission_on_uv2 = true
-clearcoat_enabled = true
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_hhyhg"]
 _surfaces = [{
@@ -50,7 +47,7 @@ shadow_mesh = SubResource("ArrayMesh_hhyhg")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wekyt"]
 transparency = 1
-albedo_color = Color(1, 1, 1, 0.015686275)
+albedo_color = Color(0, 1, 1, 0.015686275)
 emission_enabled = true
 emission = Color(0, 1, 1, 1)
 emission_energy_multiplier = 4.0
@@ -81,6 +78,13 @@ colors = PackedColorArray(0.04742738, 0.28172335, 0.36743855, 1, 2.3102762e-06, 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_hoh20"]
 gradient = SubResource("Gradient_wekyt")
 
+[sub_resource type="Curve" id="Curve_wekyt"]
+_data = [Vector2(0.6354167, 1), 0.0, 0.0, 0, 0]
+point_count = 1
+
+[sub_resource type="CurveTexture" id="CurveTexture_hoh20"]
+curve = SubResource("Curve_wekyt")
+
 [sub_resource type="Curve" id="Curve_3w3us"]
 _limits = [-1.0, 1.0, 0.0, 1.0]
 _data = [Vector2(0, -1), 0.0, 0.0, 0, 0, Vector2(0.8716216, -1), 0.0, 0.0, 0, 0]
@@ -97,12 +101,11 @@ point_count = 2
 curve = SubResource("Curve_nly3a")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wekyt"]
-emission_shape_scale = Vector3(1, 0.13, 1)
 emission_shape = 3
 emission_box_extents = Vector3(0.09, 0.095, 3.48)
 direction = Vector3(0, 0, 0)
-spread = 118.588
-flatness = 0.941
+spread = 22.7
+flatness = 1.0
 initial_velocity_min = 1.0
 initial_velocity_max = 2.0
 gravity = Vector3(0, 2, 0)
@@ -112,18 +115,13 @@ scale_curve = SubResource("CurveTexture_2ar6o")
 color = Color(0, 0.4913122, 0.4913122, 1)
 color_ramp = SubResource("GradientTexture1D_hoh20")
 color_initial_ramp = SubResource("GradientTexture1D_hoh20")
+emission_curve = SubResource("CurveTexture_hoh20")
 hue_variation_min = -2.2351742e-08
 hue_variation_max = -2.2351742e-08
 hue_variation_curve = SubResource("CurveTexture_8xa00")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l33yi"]
-cull_mode = 2
-shading_mode = 0
-vertex_color_use_as_albedo = true
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_05djm"]
-material = SubResource("StandardMaterial3D_l33yi")
-size = Vector2(0.1, 0.1)
+[sub_resource type="BoxMesh" id="BoxMesh_wekyt"]
+size = Vector3(0.3, 0.3, 0.3)
 
 [sub_resource type="Skin" id="Skin_whylb"]
 
@@ -200,7 +198,7 @@ tracks/3/path = NodePath("Cube_001:mesh:surface_0/material:emission_energy_multi
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"handle_modes": PackedInt32Array(2, 0, 0, 2),
+"handle_modes": PackedInt32Array(0, 0, 0, 0),
 "points": PackedFloat32Array(2.5, 0, 0, 0.00016666666, 0.16666667, 3.5, -0.0005, 0, 0.0005, 0, 7.83, -0.0265, -0.72166663, 0, 0, 2.5, -0.033333335, 0.8883334, 0, 0),
 "times": PackedFloat32Array(0, 0.0009999999, 0.2, 0.4)
 }
@@ -220,15 +218,26 @@ transform = Transform3D(-4.371139e-09, 0.1, 0, -0.1, -4.371139e-09, 0, 0, 0, 0.1
 mesh = SubResource("ArrayMesh_kmeov")
 
 [node name="Cube_002" type="MeshInstance3D" parent="Cube_001" unique_id=2028618258]
-transform = Transform3D(1, -7.1054274e-15, 0, 7.1054274e-15, 1, 0, 0, 0, 1, 0, 0, 8.712929)
+transform = Transform3D(1, -1.0658141e-14, 0, 1.0658141e-14, 1, 0, 0, 0, 1, 0, 0, -0.56682897)
 mesh = SubResource("ArrayMesh_hoh20")
 
+[node name="OmniLight3D" type="OmniLight3D" parent="Cube_001/Cube_002" unique_id=187723360]
+transform = Transform3D(10, -1.1368684e-13, 0, -8.526513e-14, 10.000002, 0, 0, 0, 10.000002, -32.605133, -1.66893e-06, 2.6539712)
+light_color = Color(0.03529412, 1, 1, 1)
+omni_range = 3.3465672
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="Cube_001/Cube_002" unique_id=1162399810]
+transform = Transform3D(10, -8.526513e-14, 0, -1.1368684e-13, 10.000002, 0, 0, 0, 10.000002, -6.8862348, -5.9604645e-07, -0.7052232)
+light_color = Color(0.03529412, 1, 1, 1)
+omni_range = 3.3465672
+
 [node name="GPUParticles3D" type="GPUParticles3D" parent="." unique_id=1954303435]
-transform = Transform3D(1.029225, 4.3862595e-08, 0.031265557, 0.06429281, -0.054095767, -0.49896175, 0.0035832308, 0.97061217, -0.027808964, 0.17216927, 1.4175237, 0.047124863)
+transform = Transform3D(-0.0035832764, -0.9706123, 0.027808964, -0.108160585, -0.053338997, -0.49719298, 1.0255433, -0.009016827, -0.05234012, 0.17216931, 1.4175237, 0.077988625)
 amount = 50
 speed_scale = 1.5
+local_coords = true
 process_material = SubResource("ParticleProcessMaterial_wekyt")
-draw_pass_1 = SubResource("PlaneMesh_05djm")
+draw_pass_1 = SubResource("BoxMesh_wekyt")
 draw_skin = SubResource("Skin_whylb")
 
 [node name="Area3D" type="Area3D" parent="." unique_id=1330804404]
