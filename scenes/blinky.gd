@@ -25,7 +25,7 @@ func _ready() -> void:
 	hurtbox.body_entered.connect(_on_hurtbox_body_entered)
 	
 func _on_hurtbox_body_entered(body: Node3D) -> void:
-	if body == player:
+	if body == player and player._is_powered == false:
 		player.take_damage()
 
 func take_damage() -> void:
@@ -35,6 +35,7 @@ func take_damage() -> void:
 
 func attack():
 	hurtbox_col.disabled = false
+	_face_direction(global_position, player.global_position)
 	anim_player.play("Attack")
 	await anim_player.animation_finished
 	attacking = false
@@ -58,6 +59,7 @@ func _process(delta: float) -> void:
 		if get_parent().movetimer > 0:
 			pass
 		else:
+			_play_anim("Walking")
 			if get_parent().scatter:
 				scatter = true
 			if scatter:
