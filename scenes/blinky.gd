@@ -24,29 +24,33 @@ func _ready() -> void:
 	hurtbox_col.disabled = true
 	hurtbox.body_entered.connect(_on_hurtbox_body_entered)
 	
-func _on_hurtbox_body_entered(body: Node3D) -> void:
-	if body == player and player._is_powered == false:
-		player.take_damage()
 
 func take_damage() -> void:
 	_health -= 1
-	if _health <= 0:
+	if _health == 0:
 		_die()
 
 func attack():
 	hurtbox_col.disabled = false
 	_face_direction(global_position, player.global_position)
+	velocity = (global_position.direction_to(player.global_position).normalized() *3)
 	anim_player.play("Attack")
 	await anim_player.animation_finished
+	velocity = Vector3.ZERO
 	attacking = false
 	hurtbox_col.disabled = true
+	
+func _on_hurtbox_body_entered(body: Node3D) -> void:
+	if body == player and player._is_powered == false:
+		player.take_damage()
 	
 
 func _die() -> void:
 	manager.add_score(1)
+	hurtbox_col.disabled = true
 	_play_anim("Death")
 	set_process(false)
-	collision_shape_3d.set_deferred("disabled", true)
+	collision_shape_3d.disabled = true
 	await anim_player.animation_finished
 	queue_free()
 
@@ -54,6 +58,7 @@ func _process(delta: float) -> void:
 	if attacking == false:
 		if astar.get_closest_point(player.global_position) in astar.get_point_connections(astar.get_closest_point(global_position)):
 			attacking = true
+			_handle_ai_move(delta)
 			attack()
 			pass
 		if get_parent().movetimer > 0:
@@ -68,6 +73,7 @@ func _process(delta: float) -> void:
 				_handle_ai_move(delta)
 		global_position = global_position.lerp(nextposition, .1)
 	else:
+		global_position = global_position.lerp(nextposition, .1)
 		pass
 
 func _handle_scatter(point):
