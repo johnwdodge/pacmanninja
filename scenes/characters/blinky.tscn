@@ -47,7 +47,7 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_csae2")
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_tcu7v"]
-height = 2.2861328
+height = 1.9521484
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1mary"]
 albedo_color = Color(1, 0, 0, 1)
@@ -287,7 +287,7 @@ _data = {
 }
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_8o5v0"]
-size = Vector3(1.1182861, 0.8322754, 1.3311462)
+size = Vector3(1.1182861, 0.8322754, 1.154953)
 
 [node name="Blinky" type="CharacterBody3D" unique_id=18759844]
 script = ExtResource("1_sui20")
@@ -298,16 +298,16 @@ visible = false
 mesh = SubResource("ArrayMesh_1qps3")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1119108462]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 2.3058593, 0)
+transform = Transform3D(2.75, 0, 0, 0, 2.75, 0, 0, 0, 2.75, 0, 2.7289097, 0)
 shape = SubResource("CapsuleShape3D_tcu7v")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=189815518]
-transform = Transform3D(5, 0, 0, 0, -2.1855695e-07, 5, 0, -5, -2.1855695e-07, 0, 47.725235, 0)
+transform = Transform3D(7.5, 0, 0, 0, -3.278354e-07, 7.5, 0, -7.5, -3.278354e-07, 0, 47.725235, 0)
 layers = 2
 mesh = SubResource("SphereMesh_1mary")
 
 [node name="Samurai_Animations" type="Node3D" parent="." unique_id=1609363381]
-transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0, 0.09130585, 0)
+transform = Transform3D(3.5, 0, 0, 0, 3.5, 0, 0, 0, 3.5, 0, -0.094004154, 0)
 
 [node name="Armature" type="Node3D" parent="Samurai_Animations" unique_id=967542737]
 transform = Transform3D(0.01, 0, 0, 0, 0, -0.01, 0, 0.01, 0, 0, 0, 0)
@@ -508,7 +508,7 @@ bone_name = "mixamorig_RightHand"
 bone_idx = 14
 
 [node name="Cube" type="MeshInstance3D" parent="Samurai_Animations/Armature/Skeleton3D/SwordAttachment3D" unique_id=243017291]
-transform = Transform3D(-0.9523396, -1.6445657, 1.4657602, -2.165359, 0.40501764, -0.9524605, 0.40530214, -1.7004013, -1.6444956, 6.771553, 20.366749, -0.15243149)
+transform = Transform3D(-0.9523396, -1.6445657, 1.46576, -2.165359, 0.40501764, -0.95246047, 0.40530214, -1.7004013, -1.6444955, 6.771553, 20.366749, -0.15243149)
 mesh = SubResource("ArrayMesh_q00r8")
 
 [node name="BoneAttachment3D" type="BoneAttachment3D" parent="Samurai_Animations/Armature/Skeleton3D" unique_id=540137519]
@@ -517,16 +517,17 @@ bone_name = "mixamorig_Head"
 bone_idx = 5
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Samurai_Animations/Armature/Skeleton3D/BoneAttachment3D" unique_id=1635261436]
-transform = Transform3D(40.000015, -4.7683716e-07, -2.0980835e-05, -4.7683716e-07, 40.000023, -1.9073486e-06, 1.9073486e-06, 9.536743e-07, 40.000004, -2.4243598, 23.030884, -14.538723)
+transform = Transform3D(28.57143, -1.5003607e-06, -1.2990087e-05, -9.713694e-07, 28.571436, -3.8146973e-06, 1.4789402e-06, 0, 28.57144, 0, -13, 0)
 layers = 495
 light_color = Color(1, 0, 0, 1)
-omni_range = 5.1100154
+omni_range = 6.3
+omni_attenuation = 0.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Samurai_Animations" unique_id=125964723]
 libraries/ = SubResource("AnimationLibrary_ycqq1")
 
 [node name="hurtbox" type="Area3D" parent="." unique_id=509215541]
 
-[node name="hurtbox_col" type="CollisionShape3D" parent="hurtbox" unique_id=1995634835]
-transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, -0.04650879, 1.9963379, 4.02947)
+[node name="hurtbox_col" type="CollisionShape3D" parent="hurtbox" unique_id=401321138]
+transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, -0.04650879, 1.9963379, 3.5008903)
 shape = SubResource("BoxShape3D_8o5v0")

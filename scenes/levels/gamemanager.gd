@@ -10,10 +10,10 @@ var _active_altar: Node = null
 var score: int = 0
 
 # --- Difficulty Tiers ---
-const SCORE_THRESHOLDS: Array  = [0, 10, 20, 35, 50, 70]
-const MOVE_TIME_BY_TIER: Array  = [0.50, 0.45, 0.40, 0.35, 0.30, 0.25]
-const SPAWN_TIMER_BY_TIER: Array = [40,   35,   28,   22,   16,   5  ]
-const HEALTH_BY_TIER: Array      = [1,    1,    1,    1,    1,    1   ]
+const SCORE_THRESHOLDS: Array  = [0, 10, 20, 35, 50, 70, 100, 150]
+const MOVE_TIME_BY_TIER: Array  = [0.60, 0.55, 0.50, 0.45, 0.40, 0.35, 0.3, 0.25]
+const SPAWN_TIMER_BY_TIER: Array = [50,   45,   40,   35,   30,  20,  10,  5]
+const HEALTH_BY_TIER: Array      = [1,    1,    1,    1,    1,    1,   1,   1]
 
 # --- Equal-distribution spawn queue ---
 const AI_TYPES: Array = ["blinky", "pinky", "clyde"]
