@@ -35,6 +35,7 @@ script = ExtResource("1_menol")
 [node name="Area3D" type="Area3D" parent="." unique_id=684927336]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=899531127]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 shape = SubResource("SphereShape3D_menol")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Area3D" unique_id=1061955248]
