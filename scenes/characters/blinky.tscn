@@ -509,7 +509,7 @@ bone_name = "mixamorig_RightHand"
 bone_idx = 14
 
 [node name="Cube" type="MeshInstance3D" parent="Samurai_Animations/Armature/Skeleton3D/SwordAttachment3D" unique_id=243017291]
-transform = Transform3D(-0.7956003, -1.3738977, 1.2245203, -1.8089768, 0.3383585, -0.7957013, 0.33859614, -1.4205436, -1.3738389, 6.771553, 20.366749, -0.15243149)
+transform = Transform3D(-0.9523396, -1.6445657, 1.4657602, -2.165359, 0.40501764, -0.9524605, 0.40530214, -1.7004013, -1.6444956, 6.771553, 20.366749, -0.15243149)
 mesh = SubResource("ArrayMesh_q00r8")
 
 [node name="BoneAttachment3D" type="BoneAttachment3D" parent="Samurai_Animations/Armature/Skeleton3D" unique_id=540137519]
