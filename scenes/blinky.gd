@@ -33,7 +33,6 @@ func take_damage() -> void:
 func attack():
 	hurtbox_col.disabled = false
 	_face_direction(global_position, player.global_position)
-	velocity = (global_position.direction_to(player.global_position).normalized() *3)
 	anim_player.play("Attack")
 	await anim_player.animation_finished
 	velocity = Vector3.ZERO
@@ -58,7 +57,6 @@ func _process(delta: float) -> void:
 	if attacking == false:
 		if astar.get_closest_point(player.global_position) in astar.get_point_connections(astar.get_closest_point(global_position)):
 			attacking = true
-			_handle_ai_move(delta)
 			attack()
 			pass
 		if get_parent().movetimer > 0:
@@ -73,7 +71,8 @@ func _process(delta: float) -> void:
 				_handle_ai_move(delta)
 		global_position = global_position.lerp(nextposition, .1)
 	else:
-		global_position = global_position.lerp(nextposition, .1)
+		global_position = global_position.lerp(player.global_position, .025)
+		_face_direction(global_position, player.global_position)
 		pass
 
 func _handle_scatter(point):
