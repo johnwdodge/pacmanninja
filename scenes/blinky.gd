@@ -35,7 +35,6 @@ func attack():
 	_face_direction(global_position, player.global_position)
 	anim_player.play("Attack")
 	await anim_player.animation_finished
-	velocity = Vector3.ZERO
 	attacking = false
 	hurtbox_col.disabled = true
 	
