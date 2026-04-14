@@ -71,7 +71,6 @@ func _process(delta: float) -> void:
 				_handle_ai_move(delta)
 		global_position = global_position.lerp(nextposition, .1)
 	else:
-		global_position = global_position.lerp(player.global_position, .025)
 		_face_direction(global_position, player.global_position)
 		pass
 

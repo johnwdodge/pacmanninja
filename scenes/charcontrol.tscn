@@ -39,6 +39,7 @@ shape = SubResource("SphereShape3D_ea30i")
 
 [node name="Camera" type="Camera3D" parent="Head" unique_id=1395685839]
 cull_mask = 1048573
+fov = 90.0
 
 [node name="Overlay" type="MeshInstance3D" parent="Head/Camera" unique_id=2008925700]
 material_override = SubResource("ShaderMaterial_u6b33")

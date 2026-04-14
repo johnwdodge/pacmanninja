@@ -26,8 +26,11 @@ var reserved_points: Dictionary = {}
 
 func _ready() -> void:
 	_build_array()
+	print("array built")
 	_populate_astar()
+	print("astar populated")
 	_neighbor_find()
+	print("neighbors found")
 
 func _process(delta: float) -> void:
 	if movetimer > 0:
@@ -90,7 +93,7 @@ func _build_array():
 	var ysort = []
 	var zsort = []
 	var counter = 0
-	print(grid)
+	print("meshes got")
 	for i in range(grid.size()):
 		if (i%2) == 0:
 			vectors.append([grid[i]])
@@ -184,7 +187,6 @@ func _populate_astar():
 						else:
 							astar.add_point(counter, full[i][j][k][0].origin, 1.0)
 						full[i][j][k].append(counter)
-						print(full[i][j][k][1].resource_name)
 					else: full[i][j][k].append([])
 
 func _neighbor_find():
