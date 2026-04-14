@@ -6,8 +6,8 @@ extends CharacterBody3D
 @onready var anim_player: AnimationPlayer = $Samurai_Animations/AnimationPlayer
 @export var max_health: int = 1
 @onready var collision_shape_3d: CollisionShape3D = $CollisionShape3D
-
-
+@onready var hurtbox_col: CollisionShape3D = $hurtbox/hurtbox_col
+@onready var hurtbox: Area3D = $hurtbox
 
 var pointpath = []
 var lastpoint = 0
@@ -15,36 +15,65 @@ var scatter = true
 var scatterpath = []
 var nextposition = Vector3.ZERO
 var _health: int
+var attacking = false
 
 func _ready() -> void:
 	anim_player.play("Walking")
 	max_health = manager.get_ai_health()
 	_health = max_health
+	hurtbox_col.disabled = true
+	hurtbox.body_entered.connect(_on_hurtbox_body_entered)
+	
 
 func take_damage() -> void:
 	_health -= 1
-	if _health <= 0:
+	if _health == 0:
 		_die()
+
+func attack():
+	hurtbox_col.disabled = false
+	_face_direction(global_position, player.global_position)
+	anim_player.play("Attack")
+	await anim_player.animation_finished
+	velocity = Vector3.ZERO
+	attacking = false
+	hurtbox_col.disabled = true
+	
+func _on_hurtbox_body_entered(body: Node3D) -> void:
+	if body == player and player._is_powered == false:
+		player.take_damage()
+	
 
 func _die() -> void:
 	manager.add_score(1)
+	hurtbox_col.disabled = true
 	_play_anim("Death")
 	set_process(false)
-	collision_shape_3d.set_deferred("disabled", true)
+	collision_shape_3d.disabled = true
 	await anim_player.animation_finished
 	queue_free()
 
 func _process(delta: float) -> void:
-	if get_parent().movetimer > 0:
-		pass
-	else:
-		if get_parent().scatter:
-			scatter = true
-		if scatter:
-			_handle_scatter(astar.get_closest_point(manager.altars.pick_random().global_position))
+	if attacking == false:
+		if astar.get_closest_point(player.global_position) in astar.get_point_connections(astar.get_closest_point(global_position)):
+			attacking = true
+			attack()
+			pass
+		if get_parent().movetimer > 0:
+			pass
 		else:
-			_handle_ai_move(delta)
-	global_position = global_position.lerp(nextposition, .1)
+			_play_anim("Walking")
+			if get_parent().scatter:
+				scatter = true
+			if scatter:
+				_handle_scatter(astar.get_closest_point(manager.altars.pick_random().global_position))
+			else:
+				_handle_ai_move(delta)
+		global_position = global_position.lerp(nextposition, .1)
+	else:
+		global_position = global_position.lerp(player.global_position, .025)
+		_face_direction(global_position, player.global_position)
+		pass
 
 func _handle_scatter(point):
 	var mypos = astar.get_closest_point(global_position)

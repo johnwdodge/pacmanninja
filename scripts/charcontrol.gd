@@ -196,7 +196,7 @@ func _increment_combo() -> void:
 	if _is_powered:
 		_power_timer = minf(_power_timer + COMBO_POWER_EXTEND, POWER_DURATION)
 	_hud.set_combo(COMBO_MULTIPLIERS[_combo_count])
-	
+
 func take_damage() -> void:
 	if _is_dead:
 		return

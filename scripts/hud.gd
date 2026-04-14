@@ -5,13 +5,11 @@ extends Node
 @onready var _subviewport: SubViewport = $CanvasLayer/MapContainer/MapPort
 @onready var _viewport: SubViewportContainer = $CanvasLayer/MapContainer
 @onready var _death_screen: Control = $CanvasLayer/DeathScreen
-@onready var cam = $"../MiniCam"
 @onready var _score: Label = $CanvasLayer/Score
 
 func _ready() -> void:
 	add_to_group("hud")
 	set_powered(false)
-	cam.size = 150
 	_progress_bar.max_value = 1.0
 	_progress_bar.value = 1.0
 	set_score(0)
