@@ -5,13 +5,13 @@ extends Node
 @onready var _subviewport: SubViewport = $CanvasLayer/MapContainer/MapPort
 @onready var _viewport: SubViewportContainer = $CanvasLayer/MapContainer
 @onready var _death_screen: Control = $CanvasLayer/DeathScreen
-@onready var _combo_label: Label = $CanvasLayer/ComboLabel
-
+@onready var cam = $"../MiniCam"
 @onready var _score: Label = $CanvasLayer/Score
 
 func _ready() -> void:
 	add_to_group("hud")
 	set_powered(false)
+	cam.size = 150
 	_progress_bar.max_value = 1.0
 	_progress_bar.value = 1.0
 	set_score(0)
@@ -19,12 +19,6 @@ func _ready() -> void:
 func set_powered(powered: bool) -> void:
 	_powered_label.visible = powered
 
-func set_combo(multiplier: int) -> void:
-	if multiplier <= 1:
-		_combo_label.visible = false
-	else:
-		_combo_label.visible = true
-		_combo_label.text = "%dX" % multiplier
 func set_meter(value: float, max_value: float) -> void:
 	_progress_bar.value = value / max_value  # normalized 0–1
 
