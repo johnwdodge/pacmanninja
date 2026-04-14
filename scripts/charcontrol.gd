@@ -21,7 +21,7 @@ const HEAD_CROUCH_HEIGHT: float = 1.0
 const WALL_JUMP_AWAY_FORCE: float = 10.0
 const POWER_DURATION: float = 10
 const METER_REFILL: float = 2
-const SLIDE_DRAIN: float = 5
+const SLIDE_DRAIN: float = 4
 const METER_SEGMENT: float = 200
 const METER_SIZE: float = 800
 const WALLJUMP_TIMEOUT: float = 0.03
@@ -446,7 +446,7 @@ func _input(event: InputEvent) -> void:
 		return
 	if event is InputEventKey or event is InputEventMouseButton:
 		if event.is_action_pressed("crouch"):
-			if is_on_floor() and _direction and _current_meter > METER_SEGMENT:
+			if is_on_floor() and _direction:
 				change_state(State.slide)
 		if event.is_action_pressed("sprint"):
 			if state not in [State.wall, State.slide, State.dash]:

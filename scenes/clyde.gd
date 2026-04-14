@@ -41,6 +41,7 @@ func attack():
 	
 func _on_hurtbox_body_entered(body: Node3D) -> void:
 	if body == player and player._is_powered == false:
+		attacking = false
 		player.take_damage()
 	
 
