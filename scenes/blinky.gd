@@ -6,7 +6,8 @@ extends CharacterBody3D
 @onready var anim_player: AnimationPlayer = $Samurai_Animations/AnimationPlayer
 @export var max_health: int = 1
 @onready var collision_shape_3d: CollisionShape3D = $CollisionShape3D
-@onready var hurtbox = $"hurtbox"
+@onready var hurtbox_col: CollisionShape3D = $hurtbox/hurtbox_col
+@onready var hurtbox: Area3D = $hurtbox
 
 var pointpath = []
 var lastpoint = 0
@@ -20,7 +21,12 @@ func _ready() -> void:
 	anim_player.play("Walking")
 	max_health = manager.get_ai_health()
 	_health = max_health
-	hurtbox.disabled = true
+	hurtbox_col.disabled = true
+	hurtbox.body_entered.connect(_on_hurtbox_body_entered)
+	
+func _on_hurtbox_body_entered(body: Node3D) -> void:
+	if body == player:
+		player.take_damage()
 
 func take_damage() -> void:
 	_health -= 1
@@ -28,11 +34,11 @@ func take_damage() -> void:
 		_die()
 
 func attack():
-	hurtbox.disabled = false
+	hurtbox_col.disabled = false
 	anim_player.play("Attack")
 	await anim_player.animation_finished
 	attacking = false
-	hurtbox.disabled = true
+	hurtbox_col.disabled = true
 	
 
 func _die() -> void:

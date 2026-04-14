@@ -46,8 +46,6 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_csae2")
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_8o5v0"]
-
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_tcu7v"]
 height = 2.328125
 
@@ -288,6 +286,8 @@ _data = {
 &"Walking": ExtResource("7_w3gcf")
 }
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_8o5v0"]
+
 [node name="Blinky" type="CharacterBody3D" unique_id=18759844]
 script = ExtResource("1_sui20")
 
@@ -295,10 +295,6 @@ script = ExtResource("1_sui20")
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0.002, 0, 0)
 visible = false
 mesh = SubResource("ArrayMesh_1qps3")
-
-[node name="hurtbox" type="CollisionShape3D" parent="." unique_id=2040105731]
-transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, 0, 2, 2.396)
-shape = SubResource("BoxShape3D_8o5v0")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1119108462]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 2.2638671, 0)
@@ -527,3 +523,9 @@ omni_range = 5.1100154
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Samurai_Animations" unique_id=125964723]
 libraries/ = SubResource("AnimationLibrary_ycqq1")
+
+[node name="hurtbox" type="Area3D" parent="." unique_id=509215541]
+
+[node name="hurtbox_col" type="CollisionShape3D" parent="hurtbox" unique_id=2040105731]
+transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, 0, 2, 2.396)
+shape = SubResource("BoxShape3D_8o5v0")
