@@ -45,6 +45,7 @@ const COMBO_POWER_EXTEND: float = .5     # seconds added to power per kill
 @onready var _attack_hurtbox: Area3D = $Head/AttackHurtbox
 @onready var _sword_anchor: Node3D = $Head/SwordAnchor
 @onready var hud: Node = $"../HUD"
+@onready var _respawn_marker: Marker3D = $"../Respawn_Marker"
 
 # ── Variables ─────────────────────────────────────────────
 
@@ -469,7 +470,7 @@ func _handle_mouse_look(event: InputEventMouseMotion) -> void:
 	_head.rotation.x = clamp(_head.rotation.x, -deg_to_rad(MAX_LOOK_ANGLE), deg_to_rad(MAX_LOOK_ANGLE))
 func respawn() -> void:
 	_is_dead = false
-	global_position = Vector3(-3.3914185, 0, 0)  # your spawn position from the level file
+	global_position = _respawn_marker.global_position  # your spawn position from the level file
 	velocity = Vector3.ZERO
 	set_physics_process(true)
 	set_process_input(true)
