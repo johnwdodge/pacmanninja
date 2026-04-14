@@ -32,7 +32,7 @@ func take_damage() -> void:
 
 func attack():
 	hurtbox_col.disabled = false
-	_face_direction(global_position, player.global_position)
+	_face_direction(global_position, astar.get_point_position(astar.get_closest_point(player.global_position)))
 	anim_player.play("Attack")
 	await anim_player.animation_finished
 	attacking = false
@@ -70,7 +70,6 @@ func _process(delta: float) -> void:
 				_handle_ai_move(delta)
 		global_position = global_position.lerp(nextposition, .1)
 	else:
-		_face_direction(global_position, player.global_position)
 		pass
 
 func _handle_scatter(point):
