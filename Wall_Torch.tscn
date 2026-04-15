@@ -69,4 +69,5 @@ omni_range = 21.0
 layers = 24
 light_color = Color(0.7173577, 0.33695626, 1, 1)
 light_energy = 3.0
+light_indirect_energy = 3.0
 omni_range = 21.0

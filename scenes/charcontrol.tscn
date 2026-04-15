@@ -35,6 +35,11 @@ shape = SubResource("SphereShape3D_ea30i")
 cull_mask = 1048549
 fov = 100.0
 
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Head" unique_id=891515620]
+light_color = Color(0, 1, 1, 1)
+light_specular = 0.5
+light_cull_mask = 4294966783
+
 [node name="SwordAnchor" type="Node3D" parent="Head" unique_id=311773373]
 transform = Transform3D(0.11645623, 0.026336731, 0.012013446, -0.028613849, 0.09719598, 0.06429764, 0.0043810904, -0.06526343, 0.100605614, 0.139, -0.2556431, -0.25442976)
 

@@ -12,6 +12,7 @@ extends Node
 @onready var overlay = $CanvasLayer/TextureRect
 @onready var cameras = $CanvasLayer/cameras
 @onready var cameras2 = $CanvasLayer/cameras2
+@onready var light = $"../charcontrol/Head/DirectionalLight3D"
 
 func _ready() -> void:
 	add_to_group("hud")
@@ -48,11 +49,13 @@ func _process(_delta: float) -> void:
 	
 	if player._is_powered:
 		_camera_fun()
-		overlay.visible = true
+		#overlay.visible = true
+		light.visible = true
 		cameras.visible = true
 		cameras2.visible = true
 	else:
 		overlay.visible = false
+		light.visible = false
 		cameras.visible = false
 		cameras2.visible = false
 
