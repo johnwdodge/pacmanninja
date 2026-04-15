@@ -85,3 +85,14 @@ offset_top = 69.0
 offset_right = 140.0
 offset_bottom = 100.0
 text = "Return"
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1727146627]
+z_index = -4
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.28118682, 0.28118688, 0.28118682, 1)

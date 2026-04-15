@@ -491,6 +491,7 @@ func reset() -> void:
 	if _sword_instance:
 		_sword_instance.queue_free()
 		_sword_instance = null
+	_hud.set_score(manager.score)
 	_hud.hide_death_screen()
 	_hud.set_powered(false)
 	_hud.set_meter(METER_SIZE, METER_SIZE)

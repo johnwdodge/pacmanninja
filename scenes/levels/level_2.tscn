@@ -290,3 +290,4 @@ transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -32.
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -32.95834, 29.498928, -33.80587)
 
 [node name="Base_AI" parent="." unique_id=1594229394 instance=ExtResource("11_lkn2k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.822531, 0, -9.017492)

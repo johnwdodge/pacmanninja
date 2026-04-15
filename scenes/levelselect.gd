@@ -10,7 +10,7 @@ var level2 = preload("res://scenes/levels/Level_1.tscn")
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-	if manager.max_score < 5:
+	if manager.max_score < 50:
 		lvl2.visible = false
 	else: label.visible = false
 	lvl1.pressed.connect(lvl1launch)

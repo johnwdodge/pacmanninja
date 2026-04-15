@@ -2,7 +2,8 @@ extends Node
 
 # --- Scene References ---
 @onready var player = $"charcontrol"
-@onready var hud = $HUD
+@onready var hud = $HUD/CanvasLayer
+@onready var HUD = $/HUD
 @onready var breaks = $breakbeats
 @onready var hardcore = $hardcore
 @onready var siren = $siren
@@ -68,6 +69,7 @@ func _process(_delta: float) -> void:
 		
 # --- Pellet Management ---
 func open_main_menu() -> void:
+	hud.visible = false
 	if _current_menu:
 		_current_menu.queue_free()
 	_current_menu = mainmenu.instantiate()
@@ -75,6 +77,7 @@ func open_main_menu() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 func open_options() -> void:
+	hud.visible = false
 	if _current_menu:
 		_current_menu.queue_free()
 	_current_menu = options.instantiate()
@@ -82,6 +85,7 @@ func open_options() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 func level_select():
+	hud.visible = false
 	if _current_menu:
 		_current_menu.queue_free()
 	_current_menu = levelsel.instantiate()
@@ -95,9 +99,22 @@ func close_menu() -> void:
 	if current_level:
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
+func pause() -> void:
+	if current_level:
+		current_level.process_mode = Node.PROCESS_MODE_DISABLED
+		current_level.visible = false
+	open_main_menu()
+
+func unpause() -> void:
+	hud.visible = true
+	if current_level:
+		current_level.process_mode = Node.PROCESS_MODE_INHERIT
+		current_level.visible = true
+	close_menu()
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+
 func _respawn():
 	score = 0
-	hud.set_score(score)
 	_active_altar = null
 	current_level.queue_free()
 	current_level = null
@@ -106,11 +123,17 @@ func _respawn():
 	player.reset()
 
 func _load_level(level):
+	hud.visible = true
 	currentscene = level
 	close_menu()
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	if current_level:
+		score = 0
+		HUD.set_score(score)
+		_active_altar = null
 		current_level.queue_free()
+		current_level = null
+		await get_tree().process_frame
 	current_level = level.instantiate()
 	add_child(current_level)
 	playerspawn = get_tree().get_first_node_in_group("spawnpoint")
@@ -168,9 +191,9 @@ func get_ai_health() -> int:
 # --- Score ---
 func add_score(amount: int = 1) -> void:
 	score += amount
-	var hud = get_tree().get_first_node_in_group("hud")
-	if hud:
-		hud.set_score(score)
+	var HUD = get_tree().get_first_node_in_group("hud")
+	if HUD:
+		HUD.set_score(score)
 
 # --- Spawn queue ---
 func next_ai_type() -> String:
@@ -184,4 +207,4 @@ func _refill_queue() -> void:
 	
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("pause"):
-		open_main_menu()
+		pause()

@@ -28,7 +28,7 @@ var reserved_points: Dictionary = {}
 func _ready() -> void:
 	_build_array()
 #	save_array(full, "res://leveldata")
-#	manager = get_tree().get_first_node_in_group("game_manager")
+	manager = get_tree().get_first_node_in_group("game_manager")
 #	full = load_array("res://leveldata")
 	print("array built")
 	_populate_astar()
