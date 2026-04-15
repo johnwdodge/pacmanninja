@@ -88,7 +88,6 @@ transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 51, 
 [node name="Sunlight" type="DirectionalLight3D" parent="." unique_id=1261985]
 transform = Transform3D(0.2243503, 0.561016, -0.7968235, -0.0494867, 0.82317084, 0.565633, 0.97325134, -0.08746767, 0.21244138, 0, 17.728292, 0)
 light_color = Color(0.60389465, 0.21692187, 9.62615e-08, 1)
-light_energy = 2.0
 
 [node name="Wall Torches" type="Node" parent="." unique_id=454741684]
 
