@@ -1,60 +1,36 @@
 [gd_scene format=3 uid="uid://dic0l03bxu6sc"]
 
-[ext_resource type="PackedScene" path="res://models/Menu_Scene.glb" id="1_wu84c"]
-[ext_resource type="PackedScene" uid="uid://dpte47om4tgm8" path="res://scenes/pellet_altar.tscn" id="2_8ln24"]
-[ext_resource type="PackedScene" uid="uid://c1l7dl5cfwj5b" path="res://scenes/characters/blinky_test.tscn" id="3_rtw2f"]
-[ext_resource type="Script" path="res://scenes/characters/blinky_test.gd" id="4_oa1go"]
+[ext_resource type="Script" uid="uid://bw4q1av6w002i" path="res://main_menu.gd" id="1_l6cm7"]
 
-[node name="Launch_Menu" type="Node3D" unique_id=1692737682]
+[node name="MainMenu" type="Node" unique_id=849665728]
+script = ExtResource("1_l6cm7")
 
-[node name="Menu_Scene" parent="." unique_id=2046698112 instance=ExtResource("1_wu84c")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0015172958, -0.0012102127, -0.00010681152)
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=822327085]
 
-[node name="Camera3D" type="Camera3D" parent="." unique_id=1109730642]
-transform = Transform3D(-0.6225146, 0.081804834, -0.778321, 0, 0.9945219, 0.104528464, 0.7826082, 0.065070495, -0.61910444, 7.313, -4.412, 12.27)
-fov = 65.0
-
-[node name="Pellet_Altar" parent="." unique_id=900777205 instance=ExtResource("2_8ln24")]
-transform = Transform3D(2.875, 0, 0, 0, 2.875, 0, 0, 0, 2.875, 20.51979, -7.372611, 22.003557)
-
-[node name="Blinky" parent="." unique_id=18759844 instance=ExtResource("3_rtw2f")]
-transform = Transform3D(0.51763815, 0, -1.9318516, 0, 2, 0, 1.9318516, 0, 0.51763815, 37.11978, -7.7701273, 28.00086)
-script = ExtResource("4_oa1go")
-
-[node name="Point A" type="Marker3D" parent="." unique_id=860631208]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 0, 28)
-
-[node name="Point B" type="Marker3D" parent="." unique_id=1364647895]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 28)
-
-[node name="Point C" type="Marker3D" parent="." unique_id=296749870]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 40)
-
-[node name="Point D" type="Marker3D" parent="." unique_id=770367932]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 48, 0, 40)
-
-[node name="Point E" type="Marker3D" parent="." unique_id=764797676]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 48, 0, 28)
-
-[node name="Point F" type="Marker3D" parent="." unique_id=836774776]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 0, 28)
-
-[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=530159563]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -128.0
-offset_top = 181.0
-offset_right = 139.0
-offset_bottom = 217.0
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=876444156]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+color = Color(0.46229059, 0.46229059, 0.46229059, 1)
+metadata/_edit_use_anchors_ = true
 
-[node name="Button" type="Button" parent="VBoxContainer" unique_id=639433237]
-layout_mode = 2
-text = "Play Game"
+[node name="Label" type="Label" parent="CanvasLayer" unique_id=1567881449]
+offset_left = 441.0
+offset_top = 178.0
+offset_right = 724.0
+offset_bottom = 267.0
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 50
+text = "Ninja Game"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer" unique_id=1019283490]
-layout_mode = 2
+[node name="Button" type="Button" parent="CanvasLayer" unique_id=892835648]
+offset_left = 478.0
+offset_top = 351.0
+offset_right = 699.0
+offset_bottom = 403.0
+text = "Start Game"
