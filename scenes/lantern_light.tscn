@@ -17,7 +17,19 @@ mesh = SubResource("CylinderMesh_fatf2")
 
 [node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=972980797]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
-light_color = Color(0.87424874, 0.3573443, 0.0990564, 1)
+layers = 4
+light_color = Color(0.82419497, 0.40457907, 0.18705082, 1)
 light_energy = 10.0
+spot_range = 27.5
+spot_angle = 38.0
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="." unique_id=655696565]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+layers = 8
+light_color = Color(6.3532593e-06, 0.7127483, 0.92371684, 1)
+light_energy = 16.0
+light_indirect_energy = 16.0
+light_volumetric_fog_energy = 16.0
+light_size = 1.0
 spot_range = 27.5
 spot_angle = 38.0

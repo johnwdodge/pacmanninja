@@ -28,6 +28,7 @@ func _ready() -> void:
 #	_build_array()
 #	save_array(full, "res://leveldata")
 	full = load_array("res://leveldata")
+	print(full)
 	print("array built")
 	_populate_astar()
 	print("astar populated")

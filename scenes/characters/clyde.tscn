@@ -548,6 +548,7 @@ bone_idx = 5
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Samurai_Animations/Armature/Skeleton3D/BoneAttachment3D2" unique_id=1110850291]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -13, 0)
+layers = 25
 light_color = Color(1, 0.49803922, 0, 1)
 omni_range = 6.3
 omni_attenuation = 0.0

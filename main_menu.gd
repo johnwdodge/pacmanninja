@@ -5,6 +5,8 @@ extends Node
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	_start_button.pressed.connect(_on_start_pressed)
+
+
 	
 func _on_start_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/levels/level_2.tscn")

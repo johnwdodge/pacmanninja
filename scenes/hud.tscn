@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://xbemqr2spiol"]
 
 [ext_resource type="Script" uid="uid://bc3p5nk7xf6vu" path="res://scripts/hud.gd" id="1_ahhtf"]
-[ext_resource type="Shader" path="res://scenes/powered_shader.tres" id="2_5ysmq"]
+[ext_resource type="Shader" uid="uid://dw6cuyrwnmn7b" path="res://scenes/powered_shader.tres" id="2_5ysmq"]
 [ext_resource type="Texture2D" uid="uid://bqj0tr87k6el0" path="res://Powered_Overlay.png" id="2_oo0fn"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5ysmq"]
@@ -78,31 +78,49 @@ offset_right = 1053.0
 offset_bottom = 71.0
 
 [node name="cameras" type="SubViewportContainer" parent="CanvasLayer" unique_id=158208612]
-visible = false
-offset_right = 40.0
-offset_bottom = 40.0
+modulate = Color(1, 1, 1, 0.39215687)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
 
 [node name="cam1" type="SubViewport" parent="CanvasLayer/cameras" unique_id=1438522707]
 handle_input_locally = false
 size = Vector2i(1152, 648)
-render_target_update_mode = 0
+render_target_update_mode = 4
 
 [node name="fancycam" type="Camera3D" parent="CanvasLayer/cameras/cam1" unique_id=1703078829]
+cull_mask = 1048561
+fov = 100.0
 
-[node name="cam2" type="SubViewport" parent="CanvasLayer/cameras" unique_id=600777174]
+[node name="cameras2" type="SubViewportContainer" parent="CanvasLayer" unique_id=98505170]
+modulate = Color(1, 1, 1, 0.34509805)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="cam2" type="SubViewport" parent="CanvasLayer/cameras2" unique_id=2114327503]
 handle_input_locally = false
-render_target_update_mode = 0
+size = Vector2i(1152, 648)
+render_target_update_mode = 4
 
-[node name="fancycam2" type="Camera3D" parent="CanvasLayer/cameras/cam2" unique_id=709289874]
+[node name="fancycam2" type="Camera3D" parent="CanvasLayer/cameras2/cam2" unique_id=342092407]
+cull_mask = 1048553
+fov = 100.0
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer" unique_id=1156246490]
-visible = false
 modulate = Color(1, 1, 1, 0.078431375)
 self_modulate = Color(0.33660764, 0.3366076, 0.3366076, 0.21960784)
 material = SubResource("ShaderMaterial_5ysmq")
-offset_left = -140.0
-offset_top = -76.0
-offset_right = 1303.0
-offset_bottom = 719.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("2_oo0fn")
 expand_mode = 1

@@ -32,7 +32,7 @@ shape = SubResource("SphereShape3D_ea30i")
 [node name="Head" type="Node3D" parent="." unique_id=1678947778]
 
 [node name="Camera" type="Camera3D" parent="Head" unique_id=1395685839]
-cull_mask = 1048573
+cull_mask = 1048549
 fov = 100.0
 
 [node name="SwordAnchor" type="Node3D" parent="Head" unique_id=311773373]

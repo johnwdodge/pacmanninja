@@ -1,29 +1,25 @@
-[gd_scene format=3 uid="uid://duwpywu0ym4yn"]
+[gd_scene format=3 uid="uid://ds3x5moaujq21"]
 
-[ext_resource type="Script" uid="uid://c62ie4g6d3yu3" path="res://scenes/levels/levelgeneric.gd" id="1_nt80m"]
-[ext_resource type="PackedScene" uid="uid://bx4kyblex8ucu" path="res://scenes/charcontrol.tscn" id="2_brxtv"]
-[ext_resource type="MeshLibrary" uid="uid://cwdmb4l2fk8le" path="res://tiles.meshlib" id="4_r88tb"]
-[ext_resource type="PackedScene" uid="uid://dpte47om4tgm8" path="res://scenes/pellet_altar.tscn" id="7_v8d84"]
-[ext_resource type="PackedScene" uid="uid://xbemqr2spiol" path="res://scenes/hud.tscn" id="8_8qukl"]
-[ext_resource type="PackedScene" uid="uid://55dik0higonf" path="res://ziggurat.tscn" id="8_gw1l3"]
-[ext_resource type="PackedScene" uid="uid://bubxwb0jtn6s2" path="res://models/Pagoda.glb" id="10_nt80m"]
-[ext_resource type="PackedScene" uid="uid://x508nr7ty5iy" path="res://Wall_Torch.tscn" id="10_qsp8v"]
-[ext_resource type="PackedScene" uid="uid://c8vrilj1iwu6x" path="res://scenes/game_manager.tscn" id="10_sibr7"]
-[ext_resource type="PackedScene" uid="uid://d0q8yegn5n15n" path="res://scenes/base_ai.tscn" id="11_lkn2k"]
-[ext_resource type="PackedScene" uid="uid://bcbrhf3n3hrgf" path="res://models/Walls_n_stuff.glb" id="11_nt80m"]
-[ext_resource type="PackedScene" uid="uid://b4cbwihm36e6l" path="res://models/Floor.glb" id="12_brxtv"]
-[ext_resource type="PackedScene" uid="uid://b2maid3tjcman" path="res://models/Rock_Shell.glb" id="13_tv7cl"]
-[ext_resource type="PackedScene" uid="uid://0a4onxq3i78v" path="res://scenes/lantern_light.tscn" id="14_r88tb"]
+[ext_resource type="Script" uid="uid://c62ie4g6d3yu3" path="res://scenes/levels/levelgeneric.gd" id="1_37tdl"]
+[ext_resource type="PackedScene" uid="uid://bx4kyblex8ucu" path="res://scenes/charcontrol.tscn" id="2_ijaud"]
+[ext_resource type="MeshLibrary" uid="uid://cwdmb4l2fk8le" path="res://tiles.meshlib" id="3_al8ev"]
+[ext_resource type="PackedScene" uid="uid://55dik0higonf" path="res://ziggurat.tscn" id="4_c8xtn"]
+[ext_resource type="PackedScene" uid="uid://c8vrilj1iwu6x" path="res://scenes/game_manager.tscn" id="5_qoxc7"]
+[ext_resource type="PackedScene" uid="uid://d0q8yegn5n15n" path="res://scenes/base_ai.tscn" id="6_vjf6t"]
+[ext_resource type="PackedScene" uid="uid://dpte47om4tgm8" path="res://scenes/pellet_altar.tscn" id="7_b5f8w"]
+[ext_resource type="PackedScene" uid="uid://x508nr7ty5iy" path="res://Wall_Torch.tscn" id="9_x8ip7"]
+[ext_resource type="PackedScene" uid="uid://bubxwb0jtn6s2" path="res://models/Pagoda.glb" id="10_obnoa"]
+[ext_resource type="PackedScene" uid="uid://bcbrhf3n3hrgf" path="res://models/Walls_n_stuff.glb" id="11_ofa36"]
+[ext_resource type="PackedScene" uid="uid://b4cbwihm36e6l" path="res://models/Floor.glb" id="12_jxa0l"]
+[ext_resource type="PackedScene" uid="uid://b2maid3tjcman" path="res://models/Rock_Shell.glb" id="13_sr43n"]
+[ext_resource type="PackedScene" uid="uid://0a4onxq3i78v" path="res://scenes/lantern_light.tscn" id="14_m8j1d"]
 
 [node name="Level_2" type="Node3D" unique_id=1870202360]
-script = ExtResource("1_nt80m")
-
-[node name="charcontrol" parent="." unique_id=1193498515 instance=ExtResource("2_brxtv")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 50.60858, 16.049404, -9)
+script = ExtResource("1_37tdl")
 
 [node name="GridMap" type="GridMap" parent="." unique_id=545385537]
 visible = false
-mesh_library = ExtResource("4_r88tb")
+mesh_library = ExtResource("3_al8ev")
 cell_size = Vector3(6, 6, 6)
 cell_center_y = false
 cell_scale = 3.0
@@ -32,41 +28,39 @@ data = {
 }
 metadata/_editor_floor_ = Vector3(0, 0, 0)
 
-[node name="ziggurat" parent="." unique_id=1971136172 instance=ExtResource("8_gw1l3")]
+[node name="ziggurat" parent="." unique_id=1971136172 instance=ExtResource("4_c8xtn")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -9, 0, -9)
 
-[node name="GameManager" parent="." unique_id=255393809 instance=ExtResource("10_sibr7")]
+[node name="GameManager" parent="." unique_id=255393809 instance=ExtResource("5_qoxc7")]
 
-[node name="Base_AI" parent="GameManager" unique_id=1594229394 instance=ExtResource("11_lkn2k")]
+[node name="Base_AI" parent="GameManager" unique_id=1594229394 instance=ExtResource("6_vjf6t")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0.3, -9.023)
 
 [node name="Altars" type="Node3D" parent="." unique_id=101837673]
 
-[node name="Pellet_Altar" parent="Altars" unique_id=900777205 groups=["pellet_altar"] instance=ExtResource("7_v8d84")]
+[node name="Pellet_Altar" parent="Altars" unique_id=900777205 groups=["pellet_altar"] instance=ExtResource("7_b5f8w")]
 transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, -58.418587, 12.307938, -57.505783)
 
-[node name="Pellet_Altar6" parent="Altars" unique_id=563249096 groups=["pellet_altar"] instance=ExtResource("7_v8d84")]
+[node name="Pellet_Altar6" parent="Altars" unique_id=563249096 groups=["pellet_altar"] instance=ExtResource("7_b5f8w")]
 transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 39.581413, 12.307938, -57.505783)
 
-[node name="Pellet_Altar2" parent="Altars" unique_id=228947438 groups=["pellet_altar"] instance=ExtResource("7_v8d84")]
+[node name="Pellet_Altar2" parent="Altars" unique_id=228947438 groups=["pellet_altar"] instance=ExtResource("7_b5f8w")]
 transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, -58.418587, 12.307938, 38.494217)
 
-[node name="Pellet_Altar3" parent="Altars" unique_id=1460039568 groups=["pellet_altar"] instance=ExtResource("7_v8d84")]
+[node name="Pellet_Altar3" parent="Altars" unique_id=1460039568 groups=["pellet_altar"] instance=ExtResource("7_b5f8w")]
 transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 39.292747, 12.307938, 39.009926)
 
-[node name="Pellet_Altar4" parent="Altars" unique_id=1432153695 groups=["pellet_altar"] instance=ExtResource("7_v8d84")]
+[node name="Pellet_Altar4" parent="Altars" unique_id=1432153695 groups=["pellet_altar"] instance=ExtResource("7_b5f8w")]
 transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, -32.55559, -1.0964928, 15.836124)
 
-[node name="Pellet_Altar5" parent="Altars" unique_id=282026612 instance=ExtResource("7_v8d84")]
+[node name="Pellet_Altar5" parent="Altars" unique_id=282026612 instance=ExtResource("7_b5f8w")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 14.976527, 0.3168745, -33.364223)
 
-[node name="Pellet_Altar8" parent="Altars" unique_id=327518037 instance=ExtResource("7_v8d84")]
+[node name="Pellet_Altar8" parent="Altars" unique_id=327518037 instance=ExtResource("7_b5f8w")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -33.02347, 0.3168745, -33.364223)
 
-[node name="Pellet_Altar7" parent="Altars" unique_id=810339969 instance=ExtResource("7_v8d84")]
+[node name="Pellet_Altar7" parent="Altars" unique_id=810339969 instance=ExtResource("7_b5f8w")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 11.976528, 0.3168745, 13.6357765)
-
-[node name="HUD" parent="." unique_id=1202115306 instance=ExtResource("8_8qukl")]
 
 [node name="Respawn_Marker" type="Marker3D" parent="." unique_id=587253658]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 51, 13, -9)
@@ -83,210 +77,214 @@ light_color = Color(1, 0, 0, 1)
 
 [node name="Wall Torches" type="Node" parent="." unique_id=454741684]
 
-[node name="Wall_Torch" parent="Wall Torches" unique_id=1094614920 instance=ExtResource("10_qsp8v")]
+[node name="Wall_Torch" parent="Wall Torches" unique_id=1094614920 instance=ExtResource("9_x8ip7")]
 transform = Transform3D(0.1, 0, 0, 0, 0.07500187, -0.06614166, 0, 0.06614166, 0.07500187, 0, 3.96415, -5.7095237)
 
-[node name="Wall_Torch4" parent="Wall Torches" unique_id=2034333761 instance=ExtResource("10_qsp8v")]
+[node name="Wall_Torch4" parent="Wall Torches" unique_id=2034333761 instance=ExtResource("9_x8ip7")]
 transform = Transform3D(-0.099999994, -5.782287e-09, -6.5568715e-09, 0, 0.075001866, -0.06614165, 8.742277e-09, -0.06614165, -0.075001866, 0, 3.96415, -12.290054)
 
-[node name="Wall_Torch5" parent="Wall Torches" unique_id=2012437916 instance=ExtResource("10_qsp8v")]
+[node name="Wall_Torch5" parent="Wall Torches" unique_id=2012437916 instance=ExtResource("9_x8ip7")]
 transform = Transform3D(-0.099999994, -5.782287e-09, -6.5568715e-09, 0, 0.075001866, -0.06614165, 8.742277e-09, -0.06614165, -0.075001866, 6, 3.96415, -12.203528)
 
-[node name="Wall_Torch27" parent="Wall Torches" unique_id=193860044 instance=ExtResource("10_qsp8v")]
+[node name="Wall_Torch27" parent="Wall Torches" unique_id=193860044 instance=ExtResource("9_x8ip7")]
 transform = Transform3D(-0.099999994, -5.782287e-09, -6.5568715e-09, 0, 0.075001866, -0.06614165, 8.742277e-09, -0.06614165, -0.075001866, 6, 3.96415, -48.194195)
 
-[node name="Wall_Torch30" parent="Wall Torches" unique_id=961202451 instance=ExtResource("10_qsp8v")]
+[node name="Wall_Torch30" parent="Wall Torches" unique_id=961202451 instance=ExtResource("9_x8ip7")]
 transform = Transform3D(-0.099999994, -5.782287e-09, -6.5568715e-09, 0, 0.075001866, -0.06614165, 8.742277e-09, -0.06614165, -0.075001866, 6, 3.96415, -54.194195)
 
-[node name="Wall_Torch28" parent="Wall Torches" unique_id=1849211797 instance=ExtResource("10_qsp8v")]
+[node name="Wall_Torch28" parent="Wall Torches" unique_id=1849211797 instance=ExtResource("9_x8ip7")]
 transform = Transform3D(-0.099999994, -5.782287e-09, -6.5568715e-09, 0, 0.075001866, -0.06614165, 8.742277e-09, -0.06614165, -0.075001866, -9, 3.96415, -48.194195)
 
-[node name="Wall_Torch29" parent="Wall Torches" unique_id=378054247 instance=ExtResource("10_qsp8v")]
+[node name="Wall_Torch29" parent="Wall Torches" unique_id=378054247 instance=ExtResource("9_x8ip7")]
 transform = Transform3D(-0.099999994, -5.782287e-09, -6.5568715e-09, 0, 0.075001866, -0.06614165, 8.742277e-09, -0.06614165, -0.075001866, -24, 3.96415, -48.194195)
 
-[node name="Wall_Torch31" parent="Wall Torches" unique_id=1265456162 instance=ExtResource("10_qsp8v")]
+[node name="Wall_Torch31" parent="Wall Torches" unique_id=1265456162 instance=ExtResource("9_x8ip7")]
 transform = Transform3D(-0.099999994, -5.782287e-09, -6.5568715e-09, 0, 0.075001866, -0.06614165, 8.742277e-09, -0.06614165, -0.075001866, -24, 3.96415, -54.194195)
 
-[node name="Wall_Torch40" parent="Wall Torches" unique_id=1975287728 instance=ExtResource("10_qsp8v")]
+[node name="Wall_Torch40" parent="Wall Torches" unique_id=1975287728 instance=ExtResource("9_x8ip7")]
 transform = Transform3D(-0.099999994, -1.734686e-08, -1.9670615e-08, 7.816205e-16, 0.075001866, -0.06614165, 2.622683e-08, -0.06614165, -0.075001866, -24, 3.96415, 29.70494)
 
-[node name="Wall_Torch41" parent="Wall Torches" unique_id=1855392208 instance=ExtResource("10_qsp8v")]
+[node name="Wall_Torch41" parent="Wall Torches" unique_id=1855392208 instance=ExtResource("9_x8ip7")]
 transform = Transform3D(-0.099999994, -5.7822858e-09, -6.5568724e-09, 7.816205e-16, 0.075001866, -0.06614165, 8.742276e-09, -0.06614165, -0.075001866, -24, 3.96415, 35.70593)
 
-[node name="Wall_Torch42" parent="Wall Torches" unique_id=1859389878 instance=ExtResource("10_qsp8v")]
+[node name="Wall_Torch42" parent="Wall Torches" unique_id=1859389878 instance=ExtResource("9_x8ip7")]
 transform = Transform3D(-0.099999994, -1.734686e-08, -1.9670615e-08, 7.816205e-16, 0.075001866, -0.06614165, 2.622683e-08, -0.06614165, -0.075001866, -9, 3.96415, 29.920977)
 
-[node name="Wall_Torch43" parent="Wall Torches" unique_id=936501542 instance=ExtResource("10_qsp8v")]
+[node name="Wall_Torch43" parent="Wall Torches" unique_id=936501542 instance=ExtResource("9_x8ip7")]
 transform = Transform3D(-0.099999994, -5.7822858e-09, -6.5568724e-09, 7.816205e-16, 0.075001866, -0.06614165, 8.742276e-09, -0.06614165, -0.075001866, 6, 3.96415, 29.726526)
 
-[node name="Wall_Torch44" parent="Wall Torches" unique_id=888740054 instance=ExtResource("10_qsp8v")]
+[node name="Wall_Torch44" parent="Wall Torches" unique_id=888740054 instance=ExtResource("9_x8ip7")]
 transform = Transform3D(-0.09659257, -0.017118735, -0.01941193, 7.816205e-16, 0.075001866, -0.06614165, 0.02588193, -0.063887924, -0.07244623, 6, 3.96415, 35.828617)
 
-[node name="Wall_Torch7" parent="Wall Torches" unique_id=29143418 instance=ExtResource("10_qsp8v")]
+[node name="Wall_Torch7" parent="Wall Torches" unique_id=29143418 instance=ExtResource("9_x8ip7")]
 transform = Transform3D(-0.099999994, -5.782287e-09, -6.5568715e-09, 0, 0.075001866, -0.06614165, 8.742277e-09, -0.06614165, -0.075001866, 6, 3.96415, -18.20353)
 
-[node name="Wall_Torch19" parent="Wall Torches" unique_id=10204193 instance=ExtResource("10_qsp8v")]
+[node name="Wall_Torch19" parent="Wall Torches" unique_id=10204193 instance=ExtResource("9_x8ip7")]
 transform = Transform3D(-4.371138e-09, 0.06614165, 0.075001866, 2.6054013e-16, 0.075001866, -0.06614165, -0.099999994, -2.8911435e-09, -3.2784355e-09, 0, 3.96415, -24.20353)
 
-[node name="Wall_Torch24" parent="Wall Torches" unique_id=6658786 instance=ExtResource("10_qsp8v")]
+[node name="Wall_Torch24" parent="Wall Torches" unique_id=6658786 instance=ExtResource("9_x8ip7")]
 transform = Transform3D(-4.371138e-09, 0.06614165, 0.075001866, 2.6054013e-16, 0.075001866, -0.06614165, -0.099999994, -2.8911435e-09, -3.2784355e-09, -6, 3.96415, -24.20353)
 
-[node name="Wall_Torch25" parent="Wall Torches" unique_id=2119758385 instance=ExtResource("10_qsp8v")]
+[node name="Wall_Torch25" parent="Wall Torches" unique_id=2119758385 instance=ExtResource("9_x8ip7")]
 transform = Transform3D(-4.371138e-09, 0.06614165, 0.075001866, 2.6054013e-16, 0.075001866, -0.06614165, -0.099999994, -2.8911435e-09, -3.2784355e-09, -18, 3.96415, -24.20353)
 
-[node name="Wall_Torch26" parent="Wall Torches" unique_id=1225071793 instance=ExtResource("10_qsp8v")]
+[node name="Wall_Torch26" parent="Wall Torches" unique_id=1225071793 instance=ExtResource("9_x8ip7")]
 transform = Transform3D(1.3113415e-08, -0.06614165, -0.075001866, 3.908102e-16, 0.075001866, -0.06614165, 0.099999994, 8.67343e-09, 9.835307e-09, -12, 3.96415, -24.20353)
 
-[node name="Wall_Torch6" parent="Wall Torches" unique_id=1385275968 instance=ExtResource("10_qsp8v")]
+[node name="Wall_Torch6" parent="Wall Torches" unique_id=1385275968 instance=ExtResource("9_x8ip7")]
 transform = Transform3D(-0.099999994, -5.782287e-09, -6.5568715e-09, 0, 0.075001866, -0.06614165, 8.742277e-09, -0.06614165, -0.075001866, 12, 3.96415, -12.4127)
 
-[node name="Wall_Torch11" parent="Wall Torches" unique_id=229074307 instance=ExtResource("10_qsp8v")]
+[node name="Wall_Torch11" parent="Wall Torches" unique_id=229074307 instance=ExtResource("9_x8ip7")]
 transform = Transform3D(-0.099999994, -5.782287e-09, -6.5568715e-09, 0, 0.075001866, -0.06614165, 8.742277e-09, -0.06614165, -0.075001866, -30.021273, 3.96415, -12.290054)
 
-[node name="Wall_Torch12" parent="Wall Torches" unique_id=1970226541 instance=ExtResource("10_qsp8v")]
+[node name="Wall_Torch12" parent="Wall Torches" unique_id=1970226541 instance=ExtResource("9_x8ip7")]
 transform = Transform3D(-0.099999994, -5.782287e-09, -6.5568715e-09, 0, 0.075001866, -0.06614165, 8.742277e-09, -0.06614165, -0.075001866, -24.021273, 3.96415, -12.203528)
 
-[node name="Wall_Torch13" parent="Wall Torches" unique_id=64832102 instance=ExtResource("10_qsp8v")]
+[node name="Wall_Torch13" parent="Wall Torches" unique_id=64832102 instance=ExtResource("9_x8ip7")]
 transform = Transform3D(-0.099999994, -5.782287e-09, -6.5568715e-09, 0, 0.075001866, -0.06614165, 8.742277e-09, -0.06614165, -0.075001866, -18.021273, 3.96415, -12.4127)
 
-[node name="Wall_Torch10" parent="Wall Torches" unique_id=729969847 instance=ExtResource("10_qsp8v")]
+[node name="Wall_Torch10" parent="Wall Torches" unique_id=729969847 instance=ExtResource("9_x8ip7")]
 transform = Transform3D(-0.099999994, -5.782287e-09, -6.5568715e-09, 0, 0.075001866, -0.06614165, 8.742277e-09, -0.06614165, -0.075001866, 12, 3.96415, -18.4127)
 
-[node name="Wall_Torch2" parent="Wall Torches" unique_id=1951791503 instance=ExtResource("10_qsp8v")]
+[node name="Wall_Torch2" parent="Wall Torches" unique_id=1951791503 instance=ExtResource("9_x8ip7")]
 transform = Transform3D(0.1, 0, 0, 0, 0.07500187, -0.06614166, 0, 0.06614166, 0.07500187, 6, 3.96415, -5.7095237)
 
-[node name="Wall_Torch3" parent="Wall Torches" unique_id=1944838379 instance=ExtResource("10_qsp8v")]
+[node name="Wall_Torch3" parent="Wall Torches" unique_id=1944838379 instance=ExtResource("9_x8ip7")]
 transform = Transform3D(0.1, 0, 0, 0, 0.07500187, -0.06614166, 0, 0.06614166, 0.07500187, 12, 3.96415, -5.7095237)
 
-[node name="Wall_Torch14" parent="Wall Torches" unique_id=368167331 instance=ExtResource("10_qsp8v")]
+[node name="Wall_Torch14" parent="Wall Torches" unique_id=368167331 instance=ExtResource("9_x8ip7")]
 transform = Transform3D(0.1, 0, 0, 0, 0.07500187, -0.06614166, 0, 0.06614166, 0.07500187, -30.03313, 3.96415, -5.8014984)
 
-[node name="Wall_Torch18" parent="Wall Torches" unique_id=17939165 instance=ExtResource("10_qsp8v")]
+[node name="Wall_Torch18" parent="Wall Torches" unique_id=17939165 instance=ExtResource("9_x8ip7")]
 transform = Transform3D(0.1, 0, 0, 0, 0.07500187, -0.06614166, 0, 0.06614166, 0.07500187, -30.03313, 3.96415, 0.19850159)
 
-[node name="Wall_Torch15" parent="Wall Torches" unique_id=868387875 instance=ExtResource("10_qsp8v")]
+[node name="Wall_Torch15" parent="Wall Torches" unique_id=868387875 instance=ExtResource("9_x8ip7")]
 transform = Transform3D(0.1, 0, 0, 0, 0.07500187, -0.06614166, 0, 0.06614166, 0.07500187, -24.03313, 3.96415, -5.8014984)
 
-[node name="Wall_Torch17" parent="Wall Torches" unique_id=742396031 instance=ExtResource("10_qsp8v")]
+[node name="Wall_Torch17" parent="Wall Torches" unique_id=742396031 instance=ExtResource("9_x8ip7")]
 transform = Transform3D(0.1, 0, 0, 0, 0.07500187, -0.06614166, 0, 0.06614166, 0.07500187, -24.03313, 3.96415, 0.19850159)
 
-[node name="Wall_Torch16" parent="Wall Torches" unique_id=441090433 instance=ExtResource("10_qsp8v")]
+[node name="Wall_Torch16" parent="Wall Torches" unique_id=441090433 instance=ExtResource("9_x8ip7")]
 transform = Transform3D(0.1, 0, 0, 0, 0.07500187, -0.06614166, 0, 0.06614166, 0.07500187, -18.03313, 3.96415, -5.8014984)
 
-[node name="Wall_Torch8" parent="Wall Torches" unique_id=1108510324 instance=ExtResource("10_qsp8v")]
+[node name="Wall_Torch8" parent="Wall Torches" unique_id=1108510324 instance=ExtResource("9_x8ip7")]
 transform = Transform3D(0.1, 0, 0, 0, 0.07500187, -0.06614166, 0, 0.06614166, 0.07500187, 6, 3.96415, 0.29047632)
 
-[node name="Wall_Torch20" parent="Wall Torches" unique_id=352755986 instance=ExtResource("10_qsp8v")]
+[node name="Wall_Torch20" parent="Wall Torches" unique_id=352755986 instance=ExtResource("9_x8ip7")]
 transform = Transform3D(-4.3711386e-09, 0.06614165, 0.075001866, 0, 0.075001866, -0.06614165, -0.099999994, -2.8911435e-09, -3.2784357e-09, 0, 3.96415, 6.2904763)
 
-[node name="Wall_Torch23" parent="Wall Torches" unique_id=1261392405 instance=ExtResource("10_qsp8v")]
+[node name="Wall_Torch23" parent="Wall Torches" unique_id=1261392405 instance=ExtResource("9_x8ip7")]
 transform = Transform3D(-4.3711386e-09, 0.06614165, 0.075001866, 0, 0.075001866, -0.06614165, -0.099999994, -2.8911435e-09, -3.2784357e-09, -6, 3.96415, 6.2904763)
 
-[node name="Wall_Torch21" parent="Wall Torches" unique_id=1178458722 instance=ExtResource("10_qsp8v")]
+[node name="Wall_Torch21" parent="Wall Torches" unique_id=1178458722 instance=ExtResource("9_x8ip7")]
 transform = Transform3D(1.3113416e-08, -0.06614165, -0.075001866, 1.3027008e-16, 0.075001866, -0.06614165, 0.099999994, 8.67343e-09, 9.835308e-09, -18, 3.96415, 6.2904763)
 
-[node name="Wall_Torch22" parent="Wall Torches" unique_id=222269219 instance=ExtResource("10_qsp8v")]
+[node name="Wall_Torch22" parent="Wall Torches" unique_id=222269219 instance=ExtResource("9_x8ip7")]
 transform = Transform3D(1.3113416e-08, -0.06614165, -0.075001866, 1.3027008e-16, 0.075001866, -0.06614165, 0.099999994, 8.67343e-09, 9.835308e-09, -12, 3.96415, 6.2904763)
 
-[node name="Wall_Torch32" parent="Wall Torches" unique_id=1555066156 instance=ExtResource("10_qsp8v")]
+[node name="Wall_Torch32" parent="Wall Torches" unique_id=1555066156 instance=ExtResource("9_x8ip7")]
 transform = Transform3D(1.3113416e-08, -0.06614165, -0.075001866, 1.3027008e-16, 0.075001866, -0.06614165, 0.099999994, 8.67343e-09, 9.835308e-09, 48, 3.96415, 6.2904763)
 
-[node name="Wall_Torch33" parent="Wall Torches" unique_id=698848059 instance=ExtResource("10_qsp8v")]
+[node name="Wall_Torch33" parent="Wall Torches" unique_id=698848059 instance=ExtResource("9_x8ip7")]
 transform = Transform3D(1.3113416e-08, -0.06614165, -0.075001866, 1.3027008e-16, 0.075001866, -0.06614165, 0.099999994, 8.67343e-09, 9.835308e-09, 48, 3.96415, -0.7095237)
 
-[node name="Wall_Torch34" parent="Wall Torches" unique_id=134184323 instance=ExtResource("10_qsp8v")]
+[node name="Wall_Torch34" parent="Wall Torches" unique_id=134184323 instance=ExtResource("9_x8ip7")]
 transform = Transform3D(1.3113416e-08, -0.06614165, -0.075001866, 1.3027008e-16, 0.075001866, -0.06614165, 0.099999994, 8.67343e-09, 9.835308e-09, 48, 3.96415, -17.478497)
 
-[node name="Wall_Torch35" parent="Wall Torches" unique_id=996267642 instance=ExtResource("10_qsp8v")]
+[node name="Wall_Torch35" parent="Wall Torches" unique_id=996267642 instance=ExtResource("9_x8ip7")]
 transform = Transform3D(1.3113416e-08, -0.06614165, -0.075001866, 1.3027008e-16, 0.075001866, -0.06614165, 0.099999994, 8.67343e-09, 9.835308e-09, 48, 3.96415, -24.478497)
 
-[node name="Wall_Torch36" parent="Wall Torches" unique_id=280373063 instance=ExtResource("10_qsp8v")]
+[node name="Wall_Torch36" parent="Wall Torches" unique_id=280373063 instance=ExtResource("9_x8ip7")]
 transform = Transform3D(-4.371139e-09, 0.06614165, 0.075001866, 5.210803e-16, 0.075001866, -0.06614165, -0.099999994, -2.891142e-09, -3.2784362e-09, -65.821976, 3.96415, -24.478497)
 
-[node name="Wall_Torch37" parent="Wall Torches" unique_id=561643785 instance=ExtResource("10_qsp8v")]
+[node name="Wall_Torch37" parent="Wall Torches" unique_id=561643785 instance=ExtResource("9_x8ip7")]
 transform = Transform3D(-4.371139e-09, 0.06614165, 0.075001866, 5.210803e-16, 0.075001866, -0.06614165, -0.099999994, -2.891142e-09, -3.2784362e-09, -65.821976, 3.96415, -17.478497)
 
-[node name="Wall_Torch38" parent="Wall Torches" unique_id=630935922 instance=ExtResource("10_qsp8v")]
+[node name="Wall_Torch38" parent="Wall Torches" unique_id=630935922 instance=ExtResource("9_x8ip7")]
 transform = Transform3D(-4.371139e-09, 0.06614165, 0.075001866, 5.210803e-16, 0.075001866, -0.06614165, -0.099999994, -2.891142e-09, -3.2784362e-09, -65.821976, 3.96415, -0.70952415)
 
-[node name="Wall_Torch39" parent="Wall Torches" unique_id=1338992736 instance=ExtResource("10_qsp8v")]
+[node name="Wall_Torch39" parent="Wall Torches" unique_id=1338992736 instance=ExtResource("9_x8ip7")]
 transform = Transform3D(-4.371139e-09, 0.06614165, 0.075001866, 5.210803e-16, 0.075001866, -0.06614165, -0.099999994, -2.891142e-09, -3.2784362e-09, -65.821976, 3.96415, 6.290476)
 
-[node name="Wall_Torch9" parent="Wall Torches" unique_id=859728700 instance=ExtResource("10_qsp8v")]
+[node name="Wall_Torch9" parent="Wall Torches" unique_id=859728700 instance=ExtResource("9_x8ip7")]
 transform = Transform3D(0.1, 0, 0, 0, 0.07500187, -0.06614166, 0, 0.06614166, 0.07500187, 12, 3.96415, 0.29047632)
 
 [node name="Map_Meshes" type="Node" parent="." unique_id=2088088964]
 
-[node name="Pagoda" parent="Map_Meshes" unique_id=1408689064 instance=ExtResource("10_nt80m")]
+[node name="Pagoda" parent="Map_Meshes" unique_id=1408689064 instance=ExtResource("10_obnoa")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0, -0.905)
 
-[node name="Pagoda2" parent="Map_Meshes" unique_id=733527508 instance=ExtResource("10_nt80m")]
+[node name="Pagoda2" parent="Map_Meshes" unique_id=733527508 instance=ExtResource("10_obnoa")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -16.795, 0, 40.128)
 
-[node name="Pagoda3" parent="Map_Meshes" unique_id=2088314656 instance=ExtResource("10_nt80m")]
+[node name="Pagoda3" parent="Map_Meshes" unique_id=2088314656 instance=ExtResource("10_obnoa")]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -57.87, 0, -17.062)
 
-[node name="Pagoda4" parent="Map_Meshes" unique_id=147939936 instance=ExtResource("10_nt80m")]
+[node name="Pagoda4" parent="Map_Meshes" unique_id=147939936 instance=ExtResource("10_obnoa")]
 transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, -1, 0, -57.847)
 
-[node name="Walls_n_stuff" parent="Map_Meshes" unique_id=976500325 instance=ExtResource("11_nt80m")]
+[node name="Walls_n_stuff" parent="Map_Meshes" unique_id=976500325 instance=ExtResource("11_ofa36")]
 
-[node name="Floor" parent="Map_Meshes" unique_id=825965448 instance=ExtResource("12_brxtv")]
+[node name="Floor" parent="Map_Meshes" unique_id=825965448 instance=ExtResource("12_jxa0l")]
 
-[node name="Rock_Shell" parent="Map_Meshes" unique_id=1420203154 instance=ExtResource("13_tv7cl")]
+[node name="Rock_Shell" parent="Map_Meshes" unique_id=1420203154 instance=ExtResource("13_sr43n")]
 
 [node name="Lanterns" type="Node" parent="." unique_id=375063462]
 
-[node name="Lantern_Light" parent="Lanterns" unique_id=1191342081 instance=ExtResource("14_r88tb")]
+[node name="Lantern_Light" parent="Lanterns" unique_id=1191342081 instance=ExtResource("14_m8j1d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -57, 29.498928, -9)
 
-[node name="Lantern_Light3" parent="Lanterns" unique_id=462546468 instance=ExtResource("14_r88tb")]
+[node name="Lantern_Light3" parent="Lanterns" unique_id=462546468 instance=ExtResource("14_m8j1d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -57, 29.498928, -32.875015)
 
-[node name="Lantern_Light2" parent="Lanterns" unique_id=577769763 instance=ExtResource("14_r88tb")]
+[node name="Lantern_Light2" parent="Lanterns" unique_id=577769763 instance=ExtResource("14_m8j1d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -57, 29.498928, 15)
 
-[node name="Lantern_Light4" parent="Lanterns" unique_id=7243780 instance=ExtResource("14_r88tb")]
+[node name="Lantern_Light4" parent="Lanterns" unique_id=7243780 instance=ExtResource("14_m8j1d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 39, 29.498928, -9)
 
-[node name="Lantern_Light17" parent="Lanterns" unique_id=1206481880 instance=ExtResource("14_r88tb")]
+[node name="Lantern_Light17" parent="Lanterns" unique_id=1206481880 instance=ExtResource("14_m8j1d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.872406, 29.498928, -9)
 
-[node name="Lantern_Light5" parent="Lanterns" unique_id=1050889138 instance=ExtResource("14_r88tb")]
+[node name="Lantern_Light5" parent="Lanterns" unique_id=1050889138 instance=ExtResource("14_m8j1d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 39, 29.498928, -32.875015)
 
-[node name="Lantern_Light6" parent="Lanterns" unique_id=116533123 instance=ExtResource("14_r88tb")]
+[node name="Lantern_Light6" parent="Lanterns" unique_id=116533123 instance=ExtResource("14_m8j1d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 39, 29.498928, 15)
 
-[node name="Lantern_Light7" parent="Lanterns" unique_id=535748511 instance=ExtResource("14_r88tb")]
+[node name="Lantern_Light7" parent="Lanterns" unique_id=535748511 instance=ExtResource("14_m8j1d")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -8.958339, 29.498928, 39.04166)
 
-[node name="Lantern_Light8" parent="Lanterns" unique_id=1509230714 instance=ExtResource("14_r88tb")]
+[node name="Lantern_Light8" parent="Lanterns" unique_id=1509230714 instance=ExtResource("14_m8j1d")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 14.916676, 29.498928, 39.041664)
 
-[node name="Lantern_Light16" parent="Lanterns" unique_id=747063038 instance=ExtResource("14_r88tb")]
+[node name="Lantern_Light16" parent="Lanterns" unique_id=747063038 instance=ExtResource("14_m8j1d")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 14.916676, 29.498928, 14.397297)
 
-[node name="Lantern_Light9" parent="Lanterns" unique_id=1549228026 instance=ExtResource("14_r88tb")]
+[node name="Lantern_Light9" parent="Lanterns" unique_id=1549228026 instance=ExtResource("14_m8j1d")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -32.95834, 29.498928, 39.04166)
 
-[node name="Lantern_Light15" parent="Lanterns" unique_id=530431157 instance=ExtResource("14_r88tb")]
+[node name="Lantern_Light15" parent="Lanterns" unique_id=530431157 instance=ExtResource("14_m8j1d")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -32.95834, 29.498928, 15.530373)
 
-[node name="Lantern_Light10" parent="Lanterns" unique_id=1735535393 instance=ExtResource("14_r88tb")]
+[node name="Lantern_Light10" parent="Lanterns" unique_id=1735535393 instance=ExtResource("14_m8j1d")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -8.958339, 29.498928, -57.95834)
 
-[node name="Lantern_Light11" parent="Lanterns" unique_id=401762824 instance=ExtResource("14_r88tb")]
+[node name="Lantern_Light11" parent="Lanterns" unique_id=401762824 instance=ExtResource("14_m8j1d")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 14.916676, 29.498928, -57.958336)
 
-[node name="Lantern_Light13" parent="Lanterns" unique_id=333977152 instance=ExtResource("14_r88tb")]
+[node name="Lantern_Light13" parent="Lanterns" unique_id=333977152 instance=ExtResource("14_m8j1d")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 14.916676, 29.498928, -33.389446)
 
-[node name="Lantern_Light12" parent="Lanterns" unique_id=1021761814 instance=ExtResource("14_r88tb")]
+[node name="Lantern_Light12" parent="Lanterns" unique_id=1021761814 instance=ExtResource("14_m8j1d")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -32.95834, 29.498928, -57.95834)
 
-[node name="Lantern_Light14" parent="Lanterns" unique_id=1509768776 instance=ExtResource("14_r88tb")]
+[node name="Lantern_Light14" parent="Lanterns" unique_id=1509768776 instance=ExtResource("14_m8j1d")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -32.95834, 29.498928, -33.80587)
 
 [node name="menucam" type="Camera3D" parent="." unique_id=527190010]
-transform = Transform3D(-0.7126578, 0.20950699, -0.6694966, 0.023832908, 0.96104246, 0.27537176, 0.70110685, 0.18028975, -0.6898876, -57.028675, 38.846516, -57.508816)
+transform = Transform3D(-0.6992526, 0.46026075, -0.54699713, -0.012586494, 0.75711995, 0.6531546, 0.7147639, 0.46360487, -0.523625, -51.19042, 38.846516, -52.220547)
+cull_mask = 1048549
+fov = 80.0
+
+[node name="charcontrol" parent="." unique_id=1193498515 instance=ExtResource("2_ijaud")]

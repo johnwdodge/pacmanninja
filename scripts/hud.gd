@@ -7,9 +7,11 @@ extends Node
 @onready var _death_screen: Control = $CanvasLayer/DeathScreen
 @onready var _combo_label: Label = $CanvasLayer/ComboLabel
 @onready var cam1 = $CanvasLayer/cameras/cam1/fancycam
-@onready var cam2 = $CanvasLayer/cameras/cam2/fancycam2
+@onready var cam2 = $CanvasLayer/cameras2/cam2/fancycam2
 @onready var _score: Label = $CanvasLayer/Score
 @onready var overlay = $CanvasLayer/TextureRect
+@onready var cameras = $CanvasLayer/cameras
+@onready var cameras2 = $CanvasLayer/cameras2
 
 func _ready() -> void:
 	add_to_group("hud")
@@ -42,21 +44,24 @@ func _process(_delta: float) -> void:
 	if _death_screen != null and _death_screen.visible:
 		if Input.is_action_just_pressed("respawn"):
 			get_tree().get_first_node_in_group("player").respawn()
-#	_camera_fun()
+	_camera_fun()
 	
-#	if player._is_powered:
-#		overlay.visible = true
-#	else:
-#		overlay.visible = false
-		
+	if player._is_powered:
+		overlay.visible = true
+		cameras.visible = true
+		cameras2.visible = true
+	else:
+		overlay.visible = false
+		cameras.visible = false
+		cameras2.visible = false
 
 func show_death_screen() -> void:
 	_death_screen.show()
 func hide_death_screen() -> void:
 	_death_screen.hide()
 	
-func _camera_fun():
-	cam1.global_position.lerp(head.global_position, .01)
-#	cam1.basis.lerp(head.basis, .1)
-	cam2.globalwa_position.lerp(head.global_position, .015)
-#	cam2.basis.lerp(head.basis, .15)
+func _camera_fun() -> void:
+	cam1.global_position = cam1.global_position.lerp(head.global_position, .15)
+	cam1.global_basis = cam1.global_basis.slerp(head.global_basis, .35)
+	cam2.global_basis = cam2.global_basis.slerp(head.global_basis, .45)
+	cam2.global_position = cam2.global_position.lerp(head.global_position, .25)
