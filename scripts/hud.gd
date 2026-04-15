@@ -49,11 +49,13 @@ func _process(_delta: float) -> void:
 	
 	if player._is_powered:
 		_camera_fun()
-		#overlay.visible = true
+		head.cull_mask = 25
+		overlay.visible = true
 		light.visible = true
-		cameras.visible = true
-		cameras2.visible = true
+#		cameras.visible = true
+#		cameras2.visible = true
 	else:
+		head.cull_mask = 5
 		overlay.visible = false
 		light.visible = false
 		cameras.visible = false
@@ -67,5 +69,5 @@ func hide_death_screen() -> void:
 func _camera_fun() -> void:
 	cam1.global_position = cam1.global_position.lerp(head.global_position, .15)
 	cam1.global_basis = cam1.global_basis.slerp(head.global_basis, .35)
-	cam2.global_basis = cam2.global_basis.slerp(head.global_basis, .45)
-	cam2.global_position = cam2.global_position.lerp(head.global_position, .25)
+#	cam2.global_basis = cam2.global_basis.slerp(head.global_basis, .45)
+#	cam2.global_position = cam2.global_position.lerp(head.global_position, .25)
