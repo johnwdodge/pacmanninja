@@ -100,7 +100,7 @@ func _build_array():
 		if (i%2) == 0:
 			vectors.append([grid[i]])
 		else:
-			vectors[(i-1)/2].append(grid[i])
+			vectors[(i-1)/2].append(grid[i].resource_name)
 	for i in range(vectors.size()):
 		vectors.sort_custom(sorty)
 	for i in range(vectors.size()):
@@ -150,7 +150,7 @@ func _build_array():
 
 #----- astar shit -----------------------------------------------------------
 func rampcheck(tile):
-	if tile.resource_name in ["Pagoda_Ramp_Lower_Cube_019",
+	if tile in ["Pagoda_Ramp_Lower_Cube_019",
 "Pagoda_Ramp_Upper_Cube_016",
 "2x3_Ramp_Bottom_Cube_024",
 "2x3_Ramp_Middle_Cube_028",
@@ -164,25 +164,25 @@ func _populate_astar():
 		for j in range(full[i].size()):
 			for k in range(full[i][j].size()):
 				if full[i][j][k]:
-					if (full[i][j][k][1].resource_name != "Bound_Wall_Cube_013") and (full[i][j][k][1].resource_name != "Pagoda_Wall_Window_Corner_Cube_031"):
+					if (full[i][j][k][1] != "Bound_Wall_Cube_013") and (full[i][j][k][1] != "Pagoda_Wall_Window_Corner_Cube_031"):
 						counter += 1
-						if full[i][j][k][1].resource_name == "Pagoda_Ramp_Lower_Cube_019":
+						if full[i][j][k][1] == "Pagoda_Ramp_Lower_Cube_019":
 							var temp = full[i][j][k][0].origin
 							temp.y += 1.3
 							astar.add_point(counter, temp, 1.0)
-						elif full[i][j][k][1].resource_name == "Pagoda_Ramp_Upper_Cube_016":
+						elif full[i][j][k][1] == "Pagoda_Ramp_Upper_Cube_016":
 							var temp = full[i][j][k][0].origin
 							temp.y += 4.5
 							astar.add_point(counter, temp, 1.0)
-						elif full[i][j][k][1].resource_name == "2x3_Ramp_Bottom_Cube_024":
+						elif full[i][j][k][1] == "2x3_Ramp_Bottom_Cube_024":
 							var temp = full[i][j][k][0].origin
 							temp.y += 2.3
 							astar.add_point(counter, temp, 1.0)
-						elif full[i][j][k][1].resource_name == "2x3_Ramp_Middle_Cube_028":
+						elif full[i][j][k][1] == "2x3_Ramp_Middle_Cube_028":
 							var temp = full[i][j][k][0].origin
 							temp.y += 6.2
 							astar.add_point(counter, temp, 1.0)
-						elif full[i][j][k][1].resource_name == "2x3_Ramp_Top_Cube_029":
+						elif full[i][j][k][1] == "2x3_Ramp_Top_Cube_029":
 							var temp = full[i][j][k][0].origin
 							temp.y += 10.1
 							astar.add_point(counter, temp, 1.0)
@@ -218,7 +218,7 @@ func _neighbor_find():
 				else: right = false
 				if current:
 					if current[2]:
-						if current[1].resource_name == "Floor_Tile_Cube":
+						if current[1] == "Floor_Tile_Cube":
 							if down and rampcheck(down[1]):
 								astar.connect_points(current[2], down[2])
 							if up and rampcheck(up[1]):
@@ -227,7 +227,7 @@ func _neighbor_find():
 								astar.connect_points(current[2], right[2])
 							if left:
 								astar.connect_points(current[2], left[2])
-						if current[1].resource_name == "Single_Wall_Tile_Cube_006":
+						if current[1] == "Single_Wall_Tile_Cube_006":
 							if current[0].basis.z.x > 0:
 								if down and rampcheck(down[1]):
 									astar.connect_points(current[2], down[2])
@@ -258,7 +258,7 @@ func _neighbor_find():
 									astar.connect_points(current[2], left[2])
 							else:
 								print("YOU HAVE FUCKED UP")
-						if current[1].resource_name == "Corridor_Tile_Cube_003":
+						if current[1] == "Corridor_Tile_Cube_003":
 							if abs(current[0].basis.z.x) > 0:
 								if up:
 									astar.connect_points(current[2], up[2])
@@ -271,7 +271,7 @@ func _neighbor_find():
 									astar.connect_points(current[2], right[2])
 							else:
 								print("YOU HAVE FUCKED UP")
-						if current[1].resource_name in ["Corner_Tile_Cube_002", "Corner_Hole_One_Cube_002", "Corner_Hole_Two_Cube_005"]:
+						if current[1] in ["Corner_Tile_Cube_002", "Corner_Hole_One_Cube_002", "Corner_Hole_Two_Cube_005"]:
 							if current[0].basis.z.z > 0:
 								if up and rampcheck(up[1]):
 									astar.connect_points(current[2], up[2])
@@ -294,7 +294,7 @@ func _neighbor_find():
 									astar.connect_points(current[2], right[2])
 							else:
 								print("YOU HAVE FUCKED UP")
-						if current[1].resource_name in ["Pagoda_Ramp_Lower_Cube_019", "2x3_Ramp_Bottom_Cube_024", "2x3_Ramp_Middle_Cube_028"]:
+						if current[1] in ["Pagoda_Ramp_Lower_Cube_019", "2x3_Ramp_Bottom_Cube_024", "2x3_Ramp_Middle_Cube_028"]:
 							if abs(current[0].basis.z.z) > 0:
 								if up:
 									astar.connect_points(current[2], up[2], true)
@@ -307,7 +307,7 @@ func _neighbor_find():
 									astar.connect_points(current[2], right[2], true)
 							else:
 								print("YOU HAVE FUCKED UP")
-						if current[1].resource_name == "Pagoda_Ramp_Upper_Cube_016":
+						if current[1] == "Pagoda_Ramp_Upper_Cube_016":
 							if current[0].basis.z.z > 0:
 								astar.connect_points(current[2], full[i+1][j+1][k][2])
 							elif current[0].basis.z.z < 0:
@@ -318,7 +318,7 @@ func _neighbor_find():
 								astar.connect_points(current[2], full[i+1][j][k-1][2])
 							else:
 								print("YOU HAVE FUCKED UP")
-						if current[1].resource_name == "2x3_Ramp_Top_Cube_029":
+						if current[1] == "2x3_Ramp_Top_Cube_029":
 							if current[0].basis.z.z > 0:
 								astar.connect_points(current[2], full[i+2][j+1][k][2])
 							elif current[0].basis.z.z < 0:

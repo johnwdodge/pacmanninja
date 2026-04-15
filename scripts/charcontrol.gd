@@ -470,7 +470,7 @@ func _handle_mouse_look(event: InputEventMouseMotion) -> void:
 	_head.rotation.x = clamp(_head.rotation.x, -deg_to_rad(MAX_LOOK_ANGLE), deg_to_rad(MAX_LOOK_ANGLE))
 func respawn() -> void:
 	_is_dead = false
-	global_position = _respawn_marker.global_position  # your spawn position from the level file
+	get_parent().get_tree().reload_current_scene()  # your spawn position from the level file
 	velocity = Vector3.ZERO
 	set_physics_process(true)
 	set_process_input(true)
