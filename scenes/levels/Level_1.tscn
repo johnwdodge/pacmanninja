@@ -1,46 +1,16 @@
 [gd_scene format=3 uid="uid://dsyn7xs5eicaf"]
 
-[ext_resource type="Script" uid="uid://c62ie4g6d3yu3" path="res://scenes/levels/levelgeneric.gd" id="1_u8eek"]
-[ext_resource type="PackedScene" uid="uid://bx4kyblex8ucu" path="res://scenes/charcontrol.tscn" id="2_t1jjp"]
 [ext_resource type="MeshLibrary" uid="uid://cwdmb4l2fk8le" path="res://tiles.meshlib" id="4_u84xi"]
 [ext_resource type="PackedScene" uid="uid://dpte47om4tgm8" path="res://scenes/pellet_altar.tscn" id="5_jrjue"]
 [ext_resource type="PackedScene" uid="uid://crvcqm8a1iodv" path="res://models/Rock_Maze.glb" id="7_50olt"]
 [ext_resource type="PackedScene" uid="uid://d0q8yegn5n15n" path="res://scenes/base_ai.tscn" id="7_t1jjp"]
 [ext_resource type="PackedScene" uid="uid://0a4onxq3i78v" path="res://scenes/lantern_light.tscn" id="7_u84xi"]
+[ext_resource type="Script" uid="uid://dvqggdfc225mu" path="res://scenes/levels/respawn_marker.gd" id="8_50olt"]
+[ext_resource type="Script" uid="uid://t70lfg2uxvwc" path="res://scenes/cheatytestlevelai.gd" id="8_u84xi"]
 [ext_resource type="PackedScene" uid="uid://55dik0higonf" path="res://ziggurat.tscn" id="10_jrjue"]
 [ext_resource type="PackedScene" uid="uid://b1ew684gw7ovl" path="res://scenes/weapons/rock_outer.tscn" id="10_ra48x"]
-[ext_resource type="PackedScene" uid="uid://c8vrilj1iwu6x" path="res://scenes/game_manager.tscn" id="10_y54f7"]
-[ext_resource type="PackedScene" uid="uid://xbemqr2spiol" path="res://scenes/hud.tscn" id="11_ra48x"]
-
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_5idrc"]
-sky_top_color = Color(0.37023658, 0.14835694, 0.11441777, 1)
-sky_horizon_color = Color(0.17937541, 0.12658587, 0.108669795, 1)
-sky_cover_modulate = Color(0, 0, 0, 1)
-use_debanding = false
-energy_multiplier = 0.15
-
-[sub_resource type="Sky" id="Sky_goahl"]
-sky_material = SubResource("ProceduralSkyMaterial_5idrc")
-
-[sub_resource type="Environment" id="Environment_722hl"]
-background_mode = 2
-sky = SubResource("Sky_goahl")
-ambient_light_color = Color(0.34320906, 0.16857147, 0.335666, 1)
 
 [node name="Level_1" type="Node3D" unique_id=1870202360]
-script = ExtResource("1_u8eek")
-
-[node name="charcontrol" parent="." unique_id=1193498515 instance=ExtResource("2_t1jjp")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.3914185, 0, 0)
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=149384713]
-environment = SubResource("Environment_722hl")
-
-[node name="MiniCam" type="Camera3D" parent="." unique_id=400815345]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -9, 80.53117, -9)
-cull_mask = 1048571
-projection = 1
-size = 90.0
 
 [node name="GridMap" type="GridMap" parent="." unique_id=545385537]
 visible = false
@@ -169,9 +139,12 @@ transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -9, 
 [node name="Rock_Outer2" parent="." unique_id=1554373848 instance=ExtResource("10_ra48x")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.3914185, 0, 0)
 
-[node name="GameManager" parent="." unique_id=255393809 instance=ExtResource("10_y54f7")]
+[node name="Base_AI" parent="." unique_id=1594229394 instance=ExtResource("7_t1jjp")]
+script = ExtResource("8_u84xi")
 
-[node name="Base_AI" parent="GameManager" unique_id=1594229394 instance=ExtResource("7_t1jjp")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0.3, -9.023)
+[node name="SpawnPoint" type="Node3D" parent="." unique_id=178431928]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 51, 13.28599, -9)
+script = ExtResource("8_50olt")
 
-[node name="HUD" parent="." unique_id=1202115306 instance=ExtResource("11_ra48x")]
+[node name="Camera3D" type="Camera3D" parent="." unique_id=603912507]
+transform = Transform3D(0.78693503, 0, -0.61703587, 0, 1, 0, 0.61703587, 0, 0.78693503, -26.034, 17.003, 16.194)

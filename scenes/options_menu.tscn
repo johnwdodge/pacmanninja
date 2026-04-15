@@ -1,0 +1,87 @@
+[gd_scene format=3 uid="uid://c5k6vdowop3v5"]
+
+[ext_resource type="Script" uid="uid://dl3gkk6gbkok4" path="res://scenes/options_menu.gd" id="1_liyum"]
+
+[node name="OptionsMenu" type="Control" unique_id=2032716309]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_liyum")
+
+[node name="graphics" type="CheckButton" parent="." unique_id=59303920]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.33200002
+anchor_top = 0.5
+anchor_right = 0.67
+anchor_bottom = 0.5
+offset_left = -0.46401978
+offset_top = 156.0
+offset_right = 0.15997314
+offset_bottom = 187.0
+text = "Vapor Trails (sucks with integrated graphics)"
+
+[node name="fullscreen" type="CheckButton" parent="." unique_id=1215801437]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.33200002
+anchor_top = 0.5
+anchor_right = 0.67
+anchor_bottom = 0.5
+offset_left = 3.5359802
+offset_top = 86.0
+offset_right = 4.159973
+offset_bottom = 117.0
+text = "fullscreen"
+
+[node name="volume" type="HSlider" parent="." unique_id=396982013]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -188.5
+offset_top = -55.0
+offset_right = 188.5
+offset_bottom = 55.0
+grow_horizontal = 2
+grow_vertical = 2
+max_value = 1.0
+step = 0.001
+
+[node name="Label" type="Label" parent="volume" unique_id=1877026215]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 148.0
+offset_top = -7.0
+offset_right = -152.0
+offset_bottom = 23.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 21
+text = "Volume"
+
+[node name="Label" type="Label" parent="." unique_id=2020678410]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -80.0
+offset_top = 56.0
+offset_right = 80.0
+offset_bottom = 114.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 42
+text = "Options"
+
+[node name="Return" type="Button" parent="." unique_id=973967914]
+layout_mode = 0
+offset_left = 78.0
+offset_top = 69.0
+offset_right = 140.0
+offset_bottom = 100.0
+text = "Return"

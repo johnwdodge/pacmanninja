@@ -1,5 +1,6 @@
 extends CharacterBody3D
 
+var manager = get_parent()
 # ── Settings ──────────────────────────────────────────
 const ACCEL: float = 9.0
 const AIR_ACCEL: float = 4
@@ -84,7 +85,6 @@ func change_state(newstate) -> void:
 
 func _ready() -> void:
 	add_to_group("player")
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	_crouching_collision.disabled = true
 	_attack_hurtbox.monitoring = false
 	_attack_hurtbox.monitorable = false
@@ -208,6 +208,9 @@ func take_damage() -> void:
 	_die()
 
 func _die() -> void:
+	manager = get_parent()
+	if manager.score > manager.max_score:
+		manager.max_score = manager.score
 	_is_dead = true
 	set_physics_process(false)
 	set_process_input(false)
@@ -473,11 +476,21 @@ func _handle_mouse_look(event: InputEventMouseMotion) -> void:
 	rotate_y(-event.relative.x * MOUSE_SENSITIVITY)
 	_head.rotate_x(-event.relative.y * MOUSE_SENSITIVITY)
 	_head.rotation.x = clamp(_head.rotation.x, -deg_to_rad(MAX_LOOK_ANGLE), deg_to_rad(MAX_LOOK_ANGLE))
-func respawn() -> void:
+
+func reset() -> void:
 	_is_dead = false
-	get_parent().get_tree().reload_current_scene()  # your spawn position from the level file
+	_is_powered = false
+	_power_timer = 0.0
+	_current_meter = METER_SIZE
+	_invin = false
 	velocity = Vector3.ZERO
+	state = State.idle
 	set_physics_process(true)
 	set_process_input(true)
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	if _sword_instance:
+		_sword_instance.queue_free()
+		_sword_instance = null
 	_hud.hide_death_screen()
+	_hud.set_powered(false)
+	_hud.set_meter(METER_SIZE, METER_SIZE)

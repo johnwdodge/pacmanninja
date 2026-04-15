@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://dic0l03bxu6sc"]
 
 [ext_resource type="Script" uid="uid://bw4q1av6w002i" path="res://main_menu.gd" id="1_l6cm7"]
-[ext_resource type="PackedScene" uid="uid://bpab7s0h8oujc" path="res://scenes/levels/menulevel.tscn" id="2_ekxnf"]
 
 [node name="MainMenu" type="Node" unique_id=849665728]
 script = ExtResource("1_l6cm7")
@@ -15,7 +14,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.46229059, 0.46229059, 0.46229059, 1)
+color = Color(0.4627451, 0.4627451, 0.4627451, 0)
 metadata/_edit_use_anchors_ = true
 
 [node name="Label" type="Label" parent="CanvasLayer" unique_id=1567881449]
@@ -31,10 +30,29 @@ vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="Button" type="Button" parent="CanvasLayer" unique_id=892835648]
-offset_left = 478.0
-offset_top = 351.0
-offset_right = 699.0
-offset_bottom = 403.0
-text = "Start Game"
+offset_left = 479.0
+offset_top = 354.0
+offset_right = 700.0
+offset_bottom = 406.0
+text = "Level Select"
 
-[node name="Level_2" parent="." unique_id=1870202360 instance=ExtResource("2_ekxnf")]
+[node name="Button2" type="Button" parent="CanvasLayer" unique_id=1736514468]
+offset_left = 480.0
+offset_top = 411.0
+offset_right = 701.0
+offset_bottom = 463.0
+text = "Options"
+
+[node name="Button3" type="Button" parent="CanvasLayer" unique_id=618084753]
+offset_left = 479.0
+offset_top = 468.0
+offset_right = 700.0
+offset_bottom = 520.0
+text = "README (no, actually)"
+
+[node name="Button4" type="Button" parent="CanvasLayer" unique_id=222190699]
+offset_left = 478.0
+offset_top = 527.0
+offset_right = 699.0
+offset_bottom = 579.0
+text = "exit"

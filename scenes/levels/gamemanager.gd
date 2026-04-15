@@ -2,12 +2,14 @@ extends Node
 
 # --- Scene References ---
 @onready var player = $"charcontrol"
+@onready var hud = $HUD
 @onready var breaks = $breakbeats
 @onready var hardcore = $hardcore
 @onready var siren = $siren
 @onready var tapestop = $"tape stop"
 
 const PELLET_DELAY = 3
+var max_score = 0
 var _pellet_timer = PELLET_DELAY
 var altars: Array = []
 var _active_altar: Node = null
@@ -28,13 +30,15 @@ const AI_TYPES: Array = ["blinky", "pinky", "clyde"]
 var _spawn_queue: Array = []
 var playerspawn = null
 var _current_menu = null
-var level2 = preload("res://scenes/levels/level_2.tscn")
 var mainmenu = preload("res://scenes/main_menu.tscn")
-
+var options = preload("res://scenes/options_menu.tscn")
+var levelsel = preload ("res://scenes/levelselect.tscn")
+var currentscene = null
 
 func _ready() -> void:
 	add_to_group("game_manager")
-	_load_level(level2)
+#	_load_level(level2)
+	open_main_menu()
 
 func _process(_delta: float) -> void:
 	if current_level:
@@ -62,22 +66,49 @@ func _process(_delta: float) -> void:
 		if not siren.is_playing():
 			siren.play()
 		
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("Fullscreen"):
-		var mode := DisplayServer.window_get_mode()
-		var is_window: bool = mode != DisplayServer.WINDOW_MODE_FULLSCREEN
-		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN if is_window else DisplayServer.WINDOW_MODE_WINDOWED)
-
 # --- Pellet Management ---
 func open_main_menu() -> void:
 	if _current_menu:
 		_current_menu.queue_free()
-	current_level.queue_free()
 	_current_menu = mainmenu.instantiate()
 	add_child(_current_menu)
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
+func open_options() -> void:
+	if _current_menu:
+		_current_menu.queue_free()
+	_current_menu = options.instantiate()
+	add_child(_current_menu)
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+
+func level_select():
+	if _current_menu:
+		_current_menu.queue_free()
+	_current_menu = levelsel.instantiate()
+	add_child(_current_menu)
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	
+func close_menu() -> void:
+	if _current_menu:
+		_current_menu.queue_free()
+		_current_menu = null
+	if current_level:
+		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+
+func _respawn():
+	score = 0
+	hud.set_score(score)
+	_active_altar = null
+	current_level.queue_free()
+	current_level = null
+	await get_tree().process_frame
+	_load_level(currentscene)
+	player.reset()
+
 func _load_level(level):
+	currentscene = level
+	close_menu()
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	if current_level:
 		current_level.queue_free()
 	current_level = level.instantiate()
@@ -150,3 +181,7 @@ func next_ai_type() -> String:
 func _refill_queue() -> void:
 	_spawn_queue = AI_TYPES.duplicate()
 	_spawn_queue.shuffle()
+	
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("pause"):
+		open_main_menu()

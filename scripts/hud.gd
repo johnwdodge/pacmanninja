@@ -45,7 +45,7 @@ func set_score(value: int) -> void:
 func _process(_delta: float) -> void:
 	if _death_screen != null and _death_screen.visible:
 		if Input.is_action_just_pressed("respawn"):
-			get_tree().get_first_node_in_group("player").respawn()
+			manager._respawn()
 	
 	
 	if player._is_powered:
