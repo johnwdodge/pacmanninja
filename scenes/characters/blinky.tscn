@@ -71,7 +71,7 @@ albedo_color = Color(1, 0.34273612, 0.14551288, 1)
 metallic = 1.0
 roughness = 0.0
 emission_enabled = true
-emission = Color(1, 0.06402009, 0.009729829, 1)
+emission = Color(0, 1, 0.16078432, 1)
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_6f5fj"]
 resource_name = "Samurai_Animations_HumanoidBase_NotOverlapping_006"
@@ -189,9 +189,9 @@ bind/24/pose = Transform3D(-99.620125, -3.4341688, -7.999164, -7.9854226, -0.534
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r4dq5"]
 transparency = 1
 shading_mode = 2
-albedo_color = Color(1, 0, 0, 0.003921569)
+albedo_color = Color(0, 1, 0.16078432, 0.003921569)
 emission_enabled = true
-emission = Color(1, 0, 0, 1)
+emission = Color(0, 1, 0.16078432, 1)
 emission_energy_multiplier = 16.0
 proximity_fade_distance = 0.01
 
@@ -232,10 +232,10 @@ blend_shape_mode = 0
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uvn3x"]
 resource_name = "Material"
 cull_mode = 2
-albedo_color = Color(1, 0, 0, 1)
+albedo_color = Color(0, 1, 0.16078432, 1)
 roughness = 0.5984252
 emission_enabled = true
-emission = Color(1, 0, 0, 1)
+emission = Color(0, 1, 0.16078432, 1)
 emission_energy_multiplier = 2.5
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8o5v0"]
@@ -519,7 +519,7 @@ bone_idx = 5
 [node name="OmniLight3D" type="OmniLight3D" parent="Samurai_Animations/Armature/Skeleton3D/BoneAttachment3D" unique_id=1635261436]
 transform = Transform3D(28.57143, -1.5003607e-06, -1.2990087e-05, -9.713694e-07, 28.571436, -3.8146973e-06, 1.4789402e-06, 0, 28.57144, 0, -13, 0)
 layers = 495
-light_color = Color(1, 0, 0, 1)
+light_color = Color(0, 1, 0.16078432, 1)
 omni_range = 6.3
 omni_attenuation = 0.0
 
