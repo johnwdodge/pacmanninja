@@ -6,8 +6,8 @@ extends Node
 @onready var _progress_bar: ProgressBar = $CanvasLayer/ProgressBar
 @onready var _death_screen: Control = $CanvasLayer/DeathScreen
 @onready var _combo_label: Label = $CanvasLayer/ComboLabel
-@onready var cam1 = $cameras/cam1/fancycam
-@onready var cam2 = $cameras/cam2/fancycam2
+@onready var cam1 = $CanvasLayer/cameras/cam1/fancycam
+@onready var cam2 = $CanvasLayer/cameras/cam2/fancycam2
 @onready var _score: Label = $CanvasLayer/Score
 
 func _ready() -> void:
@@ -52,6 +52,6 @@ func hide_death_screen() -> void:
 	
 func _camera_fun():
 	cam1.global_position.lerp(head.global_position, .01)
-	cam1.basis.lerp(head.basis, .1)
+#	cam1.basis.lerp(head.basis, .1)
 	cam2.global_position.lerp(head.global_position, .015)
-	cam2.basis.lerp(head.basis, .15)
+#	cam2.basis.lerp(head.basis, .15)
