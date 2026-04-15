@@ -5,7 +5,7 @@
 [ext_resource type="MeshLibrary" uid="uid://cwdmb4l2fk8le" path="res://tiles.meshlib" id="4_r88tb"]
 [ext_resource type="PackedScene" uid="uid://dpte47om4tgm8" path="res://scenes/pellet_altar.tscn" id="7_v8d84"]
 [ext_resource type="PackedScene" uid="uid://xbemqr2spiol" path="res://scenes/hud.tscn" id="8_8qukl"]
-[ext_resource type="PackedScene" path="res://ziggurat.tscn" id="8_gw1l3"]
+[ext_resource type="PackedScene" uid="uid://55dik0higonf" path="res://ziggurat.tscn" id="8_gw1l3"]
 [ext_resource type="PackedScene" uid="uid://bubxwb0jtn6s2" path="res://models/Pagoda.glb" id="10_nt80m"]
 [ext_resource type="PackedScene" uid="uid://x508nr7ty5iy" path="res://Wall_Torch.tscn" id="10_qsp8v"]
 [ext_resource type="PackedScene" uid="uid://c8vrilj1iwu6x" path="res://scenes/game_manager.tscn" id="10_sibr7"]
