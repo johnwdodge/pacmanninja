@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://duwpywu0ym4yn"]
 
 [ext_resource type="Script" uid="uid://c62ie4g6d3yu3" path="res://scenes/levels/levelgeneric.gd" id="1_nt80m"]
-[ext_resource type="Script" uid="uid://f4dkmn66ncl8" path="res://scenes/levels/altars.gd" id="4_brxtv"]
+[ext_resource type="Script" path="res://scenes/levels/altars.gd" id="4_brxtv"]
 [ext_resource type="MeshLibrary" uid="uid://cwdmb4l2fk8le" path="res://tiles.meshlib" id="4_r88tb"]
-[ext_resource type="Script" uid="uid://dvqggdfc225mu" path="res://scenes/levels/respawn_marker.gd" id="6_tv7cl"]
+[ext_resource type="Script" path="res://scenes/levels/respawn_marker.gd" id="6_tv7cl"]
 [ext_resource type="PackedScene" uid="uid://dpte47om4tgm8" path="res://scenes/pellet_altar.tscn" id="7_v8d84"]
 [ext_resource type="PackedScene" uid="uid://55dik0higonf" path="res://ziggurat.tscn" id="8_gw1l3"]
 [ext_resource type="PackedScene" uid="uid://bubxwb0jtn6s2" path="res://models/Pagoda.glb" id="10_nt80m"]
