@@ -44,10 +44,10 @@ func _process(_delta: float) -> void:
 			get_tree().get_first_node_in_group("player").respawn()
 #	_camera_fun()
 	
-	if player._is_powered:
-		overlay.visible = true
-	else:
-		overlay.visible = false
+#	if player._is_powered:
+#		overlay.visible = true
+#	else:
+#		overlay.visible = false
 		
 
 func show_death_screen() -> void:

@@ -96,6 +96,7 @@ render_target_update_mode = 0
 [node name="fancycam2" type="Camera3D" parent="CanvasLayer/cameras/cam2" unique_id=709289874]
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer" unique_id=1156246490]
+visible = false
 modulate = Color(1, 1, 1, 0.078431375)
 self_modulate = Color(0.33660764, 0.3366076, 0.3366076, 0.21960784)
 material = SubResource("ShaderMaterial_5ysmq")
