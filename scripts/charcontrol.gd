@@ -71,6 +71,7 @@ var _airyote_timer: float = AIRYOTE_TIME
 var _is_dead: bool = false
 var _combo_count: int = 0      # 0 = no combo, 1 = 2x, 2 = 3x, etc.
 var _combo_decay_timer: float = 0.0
+var _invin = false
 
 # ── State ─────────────────────────────────────────────
 
@@ -120,6 +121,7 @@ func _physics_process(delta: float) -> void:
 	_lerp_head(delta)
 	_tick_power(delta)
 	_tick_combo(delta)
+	
 
 # ── Combo ─────────────────────────────────────────────
 
@@ -154,7 +156,10 @@ func _handle_idle() -> void:
 # ── Power ─────────────────────────────────────────────
 
 func apply_power() -> void:
+	_invin = true
+	await get_tree().create_timer(1.5).timeout
 	_is_powered = true
+	_invin = false
 	_power_timer = POWER_DURATION
 	_hud.set_powered(true)
 	if _sword_instance == null:

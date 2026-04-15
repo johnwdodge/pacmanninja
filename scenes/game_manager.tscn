@@ -1,6 +1,24 @@
 [gd_scene format=3 uid="uid://c8vrilj1iwu6x"]
 
 [ext_resource type="Script" uid="uid://y7bs3rqtj480" path="res://scenes/levels/gamemanager.gd" id="1_hwd4i"]
+[ext_resource type="AudioStream" uid="uid://v75fi5ab3rif" path="res://coyuyo.mp3" id="2_eaq8r"]
+[ext_resource type="AudioStream" uid="uid://q8wtqfrwg7em" path="res://LOTM - Vivangel.mp3" id="3_ternb"]
+[ext_resource type="AudioStream" uid="uid://cp6nh2lmmamuk" path="res://dub siren.mp3" id="4_q8mjp"]
+[ext_resource type="AudioStream" uid="uid://dssbe1nm7awch" path="res://tapestop.mp3" id="5_jdad8"]
 
 [node name="GameManager" type="Node" unique_id=255393809]
 script = ExtResource("1_hwd4i")
+
+[node name="breakbeats" type="AudioStreamPlayer" parent="." unique_id=1723078929]
+stream = ExtResource("2_eaq8r")
+
+[node name="hardcore" type="AudioStreamPlayer" parent="." unique_id=772891117]
+stream = ExtResource("3_ternb")
+volume_db = -3.0
+
+[node name="siren" type="AudioStreamPlayer" parent="." unique_id=498276168]
+stream = ExtResource("4_q8mjp")
+volume_db = -4.0
+
+[node name="tape stop" type="AudioStreamPlayer" parent="." unique_id=187258]
+stream = ExtResource("5_jdad8")

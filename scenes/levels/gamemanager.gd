@@ -3,6 +3,11 @@ extends Node
 # --- Scene References ---
 @onready var pelletcontrol = $"../Altars"
 @onready var player = $"../charcontrol"
+@onready var breaks = $breakbeats
+@onready var hardcore = $hardcore
+@onready var siren = $siren
+@onready var tapestop = $"tape stop"
+
 var altars: Array = []
 var _active_altar: Node = null
 
@@ -29,10 +34,26 @@ func _ready() -> void:
 		pellet.pellet_collected.connect(_on_pellet_collected.bind(altar))
 
 func _process(_delta: float) -> void:
-	if not player._is_powered:
+	if not player._is_powered and not player._invin:
 		var active_pellet = _active_altar.get_node("PowerPellet")
 		if active_pellet._is_hidden:
 			_activate_random_pellet()
+	
+	if player._power_timer <= 1.5 and player._power_timer > 0:
+		hardcore.stop()
+		if not tapestop.is_playing():
+			tapestop.play()
+	if player._is_powered == false:
+		if not breaks.is_playing():
+			breaks.play()
+	if player._is_powered == true:
+		if not hardcore.is_playing() and not tapestop.is_playing():
+			hardcore.play()
+	if player._invin == true:
+		breaks.stop()
+		if not siren.is_playing():
+			siren.play()
+		
 	# Next pellet activates once player power expires (checked in _process)
 # --- Pellet Management ---
 func _hide_all_pellets() -> void:
