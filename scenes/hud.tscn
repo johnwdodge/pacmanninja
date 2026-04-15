@@ -1,108 +1,60 @@
 [gd_scene format=3 uid="uid://xbemqr2spiol"]
 
-[ext_resource type="Script" uid="uid://bc3p5nk7xf6vu" path="res://scripts/hud.gd" id="1_ahhtf"]
-[ext_resource type="Shader" path="res://scenes/powered_shader.tres" id="2_5ysmq"]
-[ext_resource type="Texture2D" uid="uid://bqj0tr87k6el0" path="res://Powered_Overlay.png" id="2_oo0fn"]
+[ext_resource type="PackedScene" path="res://models/Menu_Scene.glb" id="1_6fi6k"]
+[ext_resource type="PackedScene" uid="uid://dpte47om4tgm8" path="res://scenes/pellet_altar.tscn" id="2_uo2fv"]
+[ext_resource type="PackedScene" uid="uid://c1l7dl5cfwj5b" path="res://scenes/characters/blinky_test.tscn" id="3_047uy"]
+[ext_resource type="Script" path="res://scenes/characters/blinky_test.gd" id="4_5pdws"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_5ysmq"]
-shader = ExtResource("2_5ysmq")
-shader_parameter/aura_color = Color(0, 0.8, 1, 1)
-shader_parameter/edge_width = 0.35
-shader_parameter/noise_scale = 12.0
-shader_parameter/noise_speed = 1.2
-shader_parameter/spike_sharpness = 3.5
-shader_parameter/pulse_speed = 2.0
-shader_parameter/pulse_strength = 0.08
-shader_parameter/intensity = 1.0
+[node name="Launch_Menu" type="Node3D" unique_id=1692737682]
 
-[node name="HUD" type="Node" unique_id=1202115306]
-script = ExtResource("1_ahhtf")
+[node name="Menu_Scene" parent="." unique_id=2046698112 instance=ExtResource("1_6fi6k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0015172958, -0.0012102127, -0.00010681152)
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=592995193]
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1109730642]
+transform = Transform3D(-0.6225146, 0.081804834, -0.778321, 0, 0.9945219, 0.104528464, 0.7826082, 0.065070495, -0.61910444, 7.313, -4.412, 12.27)
+fov = 65.0
 
-[node name="Label" type="Label" parent="CanvasLayer" unique_id=1227660011]
-offset_right = 40.0
-offset_bottom = 23.0
-text = "POWERED"
+[node name="Pellet_Altar" parent="." unique_id=900777205 instance=ExtResource("2_uo2fv")]
+transform = Transform3D(2.875, 0, 0, 0, 2.875, 0, 0, 0, 2.875, 20.51979, -7.372611, 22.003557)
 
-[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer" unique_id=457463349]
-offset_left = -1.0
-offset_top = 23.0
-offset_right = 261.0
-offset_bottom = 50.0
-max_value = 800.0
+[node name="Blinky" parent="." unique_id=18759844 instance=ExtResource("3_047uy")]
+transform = Transform3D(0.51763815, 0, -1.9318516, 0, 2, 0, 1.9318516, 0, 0.51763815, 37.11978, -7.7701273, 28.00086)
+script = ExtResource("4_5pdws")
 
-[node name="Score" type="Label" parent="CanvasLayer" unique_id=1171843681]
-offset_left = 1029.0
-offset_top = 3.0
-offset_right = 1069.0
-offset_bottom = 26.0
+[node name="Point A" type="Marker3D" parent="." unique_id=860631208]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 0, 28)
 
-[node name="DeathScreen" type="Control" parent="CanvasLayer" unique_id=638013351]
-visible = false
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+[node name="Point B" type="Marker3D" parent="." unique_id=1364647895]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 28)
+
+[node name="Point C" type="Marker3D" parent="." unique_id=296749870]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 40)
+
+[node name="Point D" type="Marker3D" parent="." unique_id=770367932]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 48, 0, 40)
+
+[node name="Point E" type="Marker3D" parent="." unique_id=764797676]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 48, 0, 28)
+
+[node name="Point F" type="Marker3D" parent="." unique_id=836774776]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 0, 28)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=530159563]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = 181.0
+offset_right = 139.0
+offset_bottom = 217.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer/DeathScreen" unique_id=91616452]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-color = Color(0, 0, 0, 0.003921569)
+[node name="Button" type="Button" parent="VBoxContainer" unique_id=639433237]
+layout_mode = 2
+text = "Play Game"
 
-[node name="Label" type="Label" parent="CanvasLayer/DeathScreen" unique_id=1662549188]
-layout_mode = 0
-offset_left = 487.0
-offset_top = 280.0
-offset_right = 731.0
-offset_bottom = 394.0
-theme_override_font_sizes/font_size = 50
-text = "YOU DIED"
-
-[node name="Label2" type="Label" parent="CanvasLayer/DeathScreen" unique_id=479728749]
-layout_mode = 0
-offset_left = 497.0
-offset_top = 356.0
-offset_right = 704.0
-offset_bottom = 387.0
-theme_override_font_sizes/font_size = 22
-text = "Press R to Respawn"
-
-[node name="ComboLabel" type="Label" parent="CanvasLayer" unique_id=1266891125]
-offset_left = 1013.0
-offset_top = 48.0
-offset_right = 1053.0
-offset_bottom = 71.0
-
-[node name="cameras" type="SubViewportContainer" parent="CanvasLayer" unique_id=158208612]
-visible = false
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="cam1" type="SubViewport" parent="CanvasLayer/cameras" unique_id=1438522707]
-handle_input_locally = false
-size = Vector2i(1152, 648)
-render_target_update_mode = 0
-
-[node name="fancycam" type="Camera3D" parent="CanvasLayer/cameras/cam1" unique_id=1703078829]
-
-[node name="cam2" type="SubViewport" parent="CanvasLayer/cameras" unique_id=600777174]
-handle_input_locally = false
-render_target_update_mode = 0
-
-[node name="fancycam2" type="Camera3D" parent="CanvasLayer/cameras/cam2" unique_id=709289874]
-
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer" unique_id=1156246490]
-visible = false
-modulate = Color(1, 1, 1, 0.078431375)
-self_modulate = Color(0.33660764, 0.3366076, 0.3366076, 0.21960784)
-material = SubResource("ShaderMaterial_5ysmq")
-offset_left = -140.0
-offset_top = -76.0
-offset_right = 1303.0
-offset_bottom = 719.0
-texture = ExtResource("2_oo0fn")
-expand_mode = 1
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer" unique_id=1019283490]
+layout_mode = 2
