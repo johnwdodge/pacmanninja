@@ -9,6 +9,7 @@ extends Node
 @onready var cam1 = $CanvasLayer/cameras/cam1/fancycam
 @onready var cam2 = $CanvasLayer/cameras/cam2/fancycam2
 @onready var _score: Label = $CanvasLayer/Score
+@onready var overlay = $CanvasLayer/TextureRect
 
 func _ready() -> void:
 	add_to_group("hud")
@@ -41,8 +42,12 @@ func _process(_delta: float) -> void:
 	if _death_screen != null and _death_screen.visible:
 		if Input.is_action_just_pressed("respawn"):
 			get_tree().get_first_node_in_group("player").respawn()
-	_camera_fun()
-#	if player.is_powered:
+#	_camera_fun()
+	
+	if player._is_powered:
+		overlay.visible = true
+	else:
+		overlay.visible = false
 		
 
 func show_death_screen() -> void:
@@ -53,5 +58,5 @@ func hide_death_screen() -> void:
 func _camera_fun():
 	cam1.global_position.lerp(head.global_position, .01)
 #	cam1.basis.lerp(head.basis, .1)
-	cam2.global_position.lerp(head.global_position, .015)
+	cam2.globalwa_position.lerp(head.global_position, .015)
 #	cam2.basis.lerp(head.basis, .15)

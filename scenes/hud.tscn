@@ -96,8 +96,12 @@ render_target_update_mode = 0
 [node name="fancycam2" type="Camera3D" parent="CanvasLayer/cameras/cam2" unique_id=709289874]
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer" unique_id=1156246490]
+modulate = Color(1, 1, 1, 0.078431375)
+self_modulate = Color(0.33660764, 0.3366076, 0.3366076, 0.21960784)
 material = SubResource("ShaderMaterial_5ysmq")
-offset_right = 1150.0
-offset_bottom = 650.0
+offset_left = -140.0
+offset_top = -76.0
+offset_right = 1303.0
+offset_bottom = 719.0
 texture = ExtResource("2_oo0fn")
 expand_mode = 1
