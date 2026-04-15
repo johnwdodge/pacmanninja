@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://d0q8yegn5n15n" path="res://scenes/base_ai.tscn" id="11_lkn2k"]
 [ext_resource type="PackedScene" uid="uid://bcbrhf3n3hrgf" path="res://models/Walls_n_stuff.glb" id="11_nt80m"]
 [ext_resource type="PackedScene" uid="uid://b4cbwihm36e6l" path="res://models/Floor.glb" id="12_brxtv"]
+[ext_resource type="PackedScene" uid="uid://b2maid3tjcman" path="res://models/Rock_Shell.glb" id="13_tv7cl"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_nt80m"]
 sky_top_color = Color(1, 0.5759292, 0.46746898, 1)
@@ -170,3 +171,5 @@ transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, -1, 
 [node name="Walls_n_stuff" parent="Map_Meshes" unique_id=976500325 instance=ExtResource("11_nt80m")]
 
 [node name="Floor" parent="Map_Meshes" unique_id=825965448 instance=ExtResource("12_brxtv")]
+
+[node name="Rock_Shell" parent="Map_Meshes" unique_id=1420203154 instance=ExtResource("13_tv7cl")]
