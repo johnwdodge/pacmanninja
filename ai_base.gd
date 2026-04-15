@@ -25,7 +25,9 @@ var spawntimer: int = 40
 var reserved_points: Dictionary = {}
 
 func _ready() -> void:
-	_build_array()
+#	_build_array()
+#	save_array(full, "res://leveldata")
+	full = load_array("res://leveldata")
 	print("array built")
 	_populate_astar()
 	print("astar populated")
@@ -327,5 +329,17 @@ func _neighbor_find():
 								astar.connect_points(current[2], full[i+2][j][k-1][2])
 							else:
 								print("YOU HAVE FUCKED UP")
+func save_array(my_array: Array, path: String):
+	# Open the file for writing (creates it if it doesn't exist)
+	var file = FileAccess.open(path, FileAccess.WRITE)
+	if file:
+		file.store_var(my_array) # Stores the entire array in binary format
+		file.close()
 
-#----- AI functions --------------------------------------------------
+func load_array(path: String) -> Array:
+	if FileAccess.file_exists(path):
+		var file = FileAccess.open(path, FileAccess.READ)
+		var my_array = file.get_var()
+		file.close()
+		return my_array
+	return []
