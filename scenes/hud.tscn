@@ -1,28 +1,24 @@
 [gd_scene format=3 uid="uid://xbemqr2spiol"]
 
 [ext_resource type="Script" uid="uid://bc3p5nk7xf6vu" path="res://scripts/hud.gd" id="1_ahhtf"]
+[ext_resource type="Shader" uid="uid://dw6cuyrwnmn7b" path="res://scenes/powered_shader.tres" id="2_5ysmq"]
+[ext_resource type="Texture2D" uid="uid://bqj0tr87k6el0" path="res://Powered_Overlay.png" id="2_oo0fn"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6fi6k"]
+shader = ExtResource("2_5ysmq")
+shader_parameter/aura_color = Color(0, 0.8, 1, 1)
+shader_parameter/edge_width = 0.35
+shader_parameter/noise_scale = 12.0
+shader_parameter/noise_speed = 1.2
+shader_parameter/spike_sharpness = 3.5
+shader_parameter/pulse_speed = 2.0
+shader_parameter/pulse_strength = 0.08
+shader_parameter/intensity = 1.0
 
 [node name="HUD" type="Node" unique_id=1202115306]
 script = ExtResource("1_ahhtf")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=592995193]
-
-[node name="MapContainer" type="SubViewportContainer" parent="CanvasLayer" unique_id=2052695426]
-modulate = Color(1, 1, 1, 0.7294118)
-self_modulate = Color(1, 1, 1, 0.7019608)
-offset_left = 283.0
-offset_right = 933.0
-offset_bottom = 650.0
-
-[node name="MapPort" type="SubViewport" parent="CanvasLayer/MapContainer" unique_id=833109480]
-handle_input_locally = false
-size = Vector2i(650, 650)
-render_target_update_mode = 4
-
-[node name="Label" type="Label" parent="CanvasLayer" unique_id=1227660011]
-offset_right = 40.0
-offset_bottom = 23.0
-text = "POWERED"
 
 [node name="ProgressBar" type="ProgressBar" parent="CanvasLayer" unique_id=457463349]
 offset_left = -1.0
@@ -31,11 +27,19 @@ offset_right = 261.0
 offset_bottom = 50.0
 max_value = 800.0
 
-[node name="Score" type="Label" parent="CanvasLayer" unique_id=1171843681]
-offset_left = 1029.0
-offset_top = 3.0
-offset_right = 1069.0
-offset_bottom = 26.0
+[node name="Label" type="Label" parent="CanvasLayer/ProgressBar" unique_id=1227660011]
+layout_mode = 0
+offset_left = 1.0
+offset_top = -23.0
+offset_right = 79.0
+text = "POWERED"
+
+[node name="Score" type="Label" parent="CanvasLayer/ProgressBar" unique_id=1171843681]
+layout_mode = 0
+offset_left = 1030.0
+offset_top = -20.0
+offset_right = 1070.0
+offset_bottom = 3.0
 
 [node name="DeathScreen" type="Control" parent="CanvasLayer" unique_id=638013351]
 visible = false
@@ -76,6 +80,7 @@ offset_top = 48.0
 offset_right = 1053.0
 offset_bottom = 71.0
 
+<<<<<<< Updated upstream
 [node name="cameras" type="SubViewportContainer" parent="CanvasLayer" unique_id=158208612]
 offset_right = 40.0
 offset_bottom = 40.0
@@ -92,3 +97,12 @@ handle_input_locally = false
 render_target_update_mode = 4
 
 [node name="fancycam2" type="Camera3D" parent="CanvasLayer/cameras/cam2" unique_id=709289874]
+=======
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer" unique_id=54723328]
+z_index = -6
+material = SubResource("ShaderMaterial_6fi6k")
+offset_right = 1155.0
+offset_bottom = 657.0
+texture = ExtResource("2_oo0fn")
+expand_mode = 1
+>>>>>>> Stashed changes

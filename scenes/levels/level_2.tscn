@@ -14,18 +14,6 @@
 [ext_resource type="PackedScene" uid="uid://b4cbwihm36e6l" path="res://models/Floor.glb" id="12_brxtv"]
 [ext_resource type="PackedScene" uid="uid://b2maid3tjcman" path="res://models/Rock_Shell.glb" id="13_tv7cl"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_nt80m"]
-sky_top_color = Color(1, 0.5759292, 0.46746898, 1)
-sky_horizon_color = Color(1, 0.47587502, 0.3362216, 1)
-
-[sub_resource type="Sky" id="Sky_brxtv"]
-sky_material = SubResource("ProceduralSkyMaterial_nt80m")
-
-[sub_resource type="Environment" id="Environment_tv7cl"]
-sky = SubResource("Sky_brxtv")
-ambient_light_source = 3
-ambient_light_color = Color(1, 0.3372549, 0, 1)
-
 [node name="Level_2" type="Node3D" unique_id=1870202360]
 script = ExtResource("1_nt80m")
 
@@ -149,9 +137,6 @@ transform = Transform3D(0.1, 0, 0, 0, 0.07500187, -0.06614166, 0, 0.06614166, 0.
 
 [node name="Rock_Shell2" type="MeshInstance3D" parent="." unique_id=475142277]
 transform = Transform3D(31.988344, 0, 0, 0, 0, -31.988344, 0, 62.4279, 0, 62.527924, 0, -11.532182)
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=28972953]
-environment = SubResource("Environment_tv7cl")
 
 [node name="Map_Meshes" type="Node" parent="." unique_id=2088088964]
 

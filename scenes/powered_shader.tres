@@ -1,0 +1,64 @@
+[gd_resource type="Shader" format=3 uid="uid://dw6cuyrwnmn7b"]
+
+[resource]
+code = "shader_type canvas_item;
+
+uniform vec4 aura_color : source_color = vec4(0.0, 0.8, 1.0, 1.0);
+uniform float edge_width : hint_range(0.0, 0.6) = 0.35;
+uniform float noise_scale : hint_range(1.0, 40.0) = 12.0;
+uniform float noise_speed : hint_range(0.0, 5.0) = 1.2;
+uniform float spike_sharpness : hint_range(1.0, 8.0) = 3.5;
+uniform float pulse_speed : hint_range(0.0, 5.0) = 2.0;
+uniform float pulse_strength : hint_range(0.0, 0.3) = 0.08;
+uniform float intensity : hint_range(0.0, 1.0) = 1.0;
+
+// simple hash noise
+vec2 hash2(vec2 p) {
+	p = vec2(dot(p, vec2(127.1, 311.7)), dot(p, vec2(269.5, 183.3)));
+	return fract(sin(p) * 43758.5453);
+}
+
+float voronoi(vec2 p) {
+	vec2 i = floor(p);
+	vec2 f = fract(p);
+	float md = 8.0;
+	for (int x = -1; x <= 1; x++) {
+		for (int y = -1; y <= 1; y++) {
+			vec2 g = vec2(float(x), float(y));
+			vec2 o = hash2(i + g);
+			o = 0.5 + 0.5 * sin(TIME * noise_speed + 6.2831 * o);
+			float d = length(g + o - f);
+			md = min(md, d);
+		}
+	}
+	return md;
+}
+
+void fragment() {
+	// distance from each edge, 0 at edge 1 at center
+	float dx = min(UV.x, 1.0 - UV.x);
+	float dy = min(UV.y, 1.0 - UV.y);
+	float edge = min(dx, dy);
+
+	// animated edge width with pulse
+	float pulse = sin(TIME * pulse_speed) * pulse_strength;
+	float width = edge_width + pulse;
+
+	// voronoi noise sampled along the border
+	vec2 noise_uv = UV * noise_scale + TIME * vec2(0.3, 0.5) * noise_speed;
+	float n = voronoi(noise_uv);
+
+	// shape the aura: only visible near edges, spiked by noise
+	float mask = 1.0 - smoothstep(0.0, width, edge + n * 0.15);
+	mask = pow(mask, spike_sharpness);
+
+	// second layer crawling opposite direction for complexity
+	vec2 noise_uv2 = UV * (noise_scale * 0.7) - TIME * vec2(0.2, 0.4) * noise_speed;
+	float n2 = voronoi(noise_uv2);
+	float mask2 = 1.0 - smoothstep(0.0, width * 0.8, edge + n2 * 0.18);
+	mask2 = pow(mask2, spike_sharpness + 1.0);
+
+	float final_mask = clamp(mask + mask2 * 0.6, 0.0, 1.0) * intensity;
+
+	COLOR = vec4(aura_color.rgb, aura_color.a * final_mask);
+}"

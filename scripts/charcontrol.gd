@@ -46,6 +46,7 @@ const COMBO_POWER_EXTEND: float = .5     # seconds added to power per kill
 @onready var _sword_anchor: Node3D = $Head/SwordAnchor
 @onready var hud: Node = $"../HUD"
 @onready var _respawn_marker: Marker3D = $"../Respawn_Marker"
+@onready var _aura_mat: ShaderMaterial = $"../HUD/CanvasLayer/AuraRect".material
 
 # ── Variables ─────────────────────────────────────────────
 
