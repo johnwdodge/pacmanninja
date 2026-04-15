@@ -30,6 +30,10 @@ buses/default_bus_layout="uid://4v66ribwg48x"
 
 settings/stdout/print_fps=true
 
+[display]
+
+mouse_cursor/name="Ninja Pac Man"
+
 [global_group]
 
 player=""

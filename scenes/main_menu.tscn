@@ -15,15 +15,15 @@ script = ExtResource("1_l6cm7")
 [node name="Menu_Scene" parent="Node3D" unique_id=1624689360 instance=ExtResource("1_wu84c")]
 
 [node name="Camera3D" type="Camera3D" parent="Node3D" unique_id=1918479516]
-transform = Transform3D(-0.9099612, -0.043347258, -0.41242164, 0, 0.9945219, -0.104528464, 0.41469336, -0.095116846, -0.90497637, 9.505, -4.73, 7.055)
+transform = Transform3D(-0.80901706, -0.015386423, -0.5875838, 0, 0.99965733, -0.02617695, 0.5877852, -0.0211776, -0.80873984, 9.505, -4.73, 7.055)
 current = true
-fov = 44.9
+fov = 50.4
 
 [node name="Pellet_Altar" parent="Node3D" unique_id=900777205 instance=ExtResource("2_8ln24")]
 transform = Transform3D(3.5, 0, 0, 0, 3.5, 0, 0, 0, 3.5, 20.108, -7.41, 21.928)
 
 [node name="Blinky" parent="Node3D" unique_id=18759844 instance=ExtResource("3_rtw2f")]
-transform = Transform3D(-2.493286, 0, -0.18309553, 0, 2.4999998, 0, 0.18309553, 0, -2.493286, 13.217, -7.744, 27.342)
+transform = Transform3D(1.2499999, 0, -2.1650636, 0, 2.5, 0, 2.1650636, 0, 1.2499999, 41.976894, -7.743738, 27.341576)
 script = ExtResource("4_oa1go")
 walk_speed = 3.0
 
