@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://xbemqr2spiol"]
 
 [ext_resource type="Script" uid="uid://bc3p5nk7xf6vu" path="res://scripts/hud.gd" id="1_ahhtf"]
-[ext_resource type="Shader" uid="uid://dw6cuyrwnmn7b" path="res://scenes/powered_shader.tres" id="2_5ysmq"]
+[ext_resource type="Shader" path="res://scenes/powered_shader.tres" id="2_5ysmq"]
 [ext_resource type="Texture2D" uid="uid://bqj0tr87k6el0" path="res://Powered_Overlay.png" id="2_oo0fn"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5ysmq"]
@@ -19,18 +19,6 @@ shader_parameter/intensity = 1.0
 script = ExtResource("1_ahhtf")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=592995193]
-
-[node name="MapContainer" type="SubViewportContainer" parent="CanvasLayer" unique_id=2052695426]
-modulate = Color(1, 1, 1, 0.7294118)
-self_modulate = Color(1, 1, 1, 0.7019608)
-offset_left = 283.0
-offset_right = 933.0
-offset_bottom = 650.0
-
-[node name="MapPort" type="SubViewport" parent="CanvasLayer/MapContainer" unique_id=833109480]
-handle_input_locally = false
-size = Vector2i(650, 650)
-render_target_update_mode = 4
 
 [node name="Label" type="Label" parent="CanvasLayer" unique_id=1227660011]
 offset_right = 40.0
@@ -90,19 +78,20 @@ offset_right = 1053.0
 offset_bottom = 71.0
 
 [node name="cameras" type="SubViewportContainer" parent="CanvasLayer" unique_id=158208612]
+visible = false
 offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="cam1" type="SubViewport" parent="CanvasLayer/cameras" unique_id=1438522707]
 handle_input_locally = false
 size = Vector2i(1152, 648)
-render_target_update_mode = 4
+render_target_update_mode = 0
 
 [node name="fancycam" type="Camera3D" parent="CanvasLayer/cameras/cam1" unique_id=1703078829]
 
 [node name="cam2" type="SubViewport" parent="CanvasLayer/cameras" unique_id=600777174]
 handle_input_locally = false
-render_target_update_mode = 4
+render_target_update_mode = 0
 
 [node name="fancycam2" type="Camera3D" parent="CanvasLayer/cameras/cam2" unique_id=709289874]
 
