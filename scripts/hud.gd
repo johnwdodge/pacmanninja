@@ -44,9 +44,10 @@ func _process(_delta: float) -> void:
 	if _death_screen != null and _death_screen.visible:
 		if Input.is_action_just_pressed("respawn"):
 			get_tree().get_first_node_in_group("player").respawn()
-	_camera_fun()
+	
 	
 	if player._is_powered:
+		_camera_fun()
 		overlay.visible = true
 		cameras.visible = true
 		cameras2.visible = true
