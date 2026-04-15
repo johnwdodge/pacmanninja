@@ -1,18 +1,46 @@
 [gd_scene format=3 uid="uid://dic0l03bxu6sc"]
 
 [ext_resource type="Script" uid="uid://bw4q1av6w002i" path="res://main_menu.gd" id="1_l6cm7"]
+[ext_resource type="PackedScene" uid="uid://rshxh7ur36xd" path="res://models/Menu_Scene.glb" id="1_wu84c"]
+[ext_resource type="PackedScene" uid="uid://dpte47om4tgm8" path="res://scenes/pellet_altar.tscn" id="2_8ln24"]
+[ext_resource type="PackedScene" uid="uid://c1l7dl5cfwj5b" path="res://scenes/characters/blinky_test.tscn" id="3_rtw2f"]
+[ext_resource type="Script" uid="uid://ymdpvsm1t48c" path="res://scenes/characters/blinky_test.gd" id="4_oa1go"]
 
-[node name="MainMenu" type="Control" unique_id=1487592332]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="MainMenu" type="Node" unique_id=366140711]
 script = ExtResource("1_l6cm7")
 
-[node name="Label" type="Label" parent="." unique_id=1024287511]
-layout_mode = 0
+[node name="Node3D" type="Node3D" parent="." unique_id=302927442]
+
+[node name="Menu_Scene" parent="Node3D" unique_id=1624689360 instance=ExtResource("1_wu84c")]
+
+[node name="Camera3D" type="Camera3D" parent="Node3D" unique_id=1918479516]
+transform = Transform3D(-0.80901706, -0.015386423, -0.5875838, 0, 0.99965733, -0.02617695, 0.5877852, -0.0211776, -0.80873984, 9.505, -4.73, 7.055)
+current = true
+fov = 50.4
+
+[node name="Pellet_Altar" parent="Node3D" unique_id=900777205 instance=ExtResource("2_8ln24")]
+transform = Transform3D(3.5, 0, 0, 0, 3.5, 0, 0, 0, 3.5, 20.108, -7.41, 21.928)
+
+[node name="Blinky" parent="Node3D" unique_id=18759844 instance=ExtResource("3_rtw2f")]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 41.976894, -7.743738, 27.341576)
+script = ExtResource("4_oa1go")
+walk_speed = 3.0
+
+[node name="Marker3D" type="Marker3D" parent="Node3D" unique_id=43532934]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 39.658897, -7.4221373, 28)
+
+[node name="Marker3D2" type="Marker3D" parent="Node3D" unique_id=711542587]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, -7.4221373, 28)
+
+[node name="Marker3D3" type="Marker3D" parent="Node3D" unique_id=1503646571]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.322273, -7.4221373, 10.605217)
+
+[node name="Marker3D4" type="Marker3D" parent="Node3D" unique_id=264268016]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50.91043, -7.4221373, 9.696531)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=895733493]
+
+[node name="Label" type="Label" parent="CanvasLayer" unique_id=1024287511]
 offset_left = 441.0
 offset_top = 178.0
 offset_right = 724.0
@@ -23,49 +51,44 @@ text = "Ninja Game"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Button" type="Button" parent="." unique_id=2135886627]
-layout_mode = 0
+[node name="Button" type="Button" parent="CanvasLayer" unique_id=2135886627]
 offset_left = 479.0
 offset_top = 354.0
 offset_right = 700.0
 offset_bottom = 406.0
 text = "Level Select"
 
-[node name="Button2" type="Button" parent="." unique_id=1551682967]
-layout_mode = 0
+[node name="Button2" type="Button" parent="CanvasLayer" unique_id=1551682967]
 offset_left = 480.0
 offset_top = 411.0
 offset_right = 701.0
 offset_bottom = 463.0
 text = "Options"
 
-[node name="Button3" type="Button" parent="." unique_id=2075262924]
-layout_mode = 0
+[node name="Button3" type="Button" parent="CanvasLayer" unique_id=2075262924]
 offset_left = 481.0
 offset_top = 467.0
 offset_right = 702.0
 offset_bottom = 519.0
 text = "README (no, actually)"
 
-[node name="Button4" type="Button" parent="." unique_id=1389138816]
-layout_mode = 0
+[node name="Button4" type="Button" parent="CanvasLayer" unique_id=1389138816]
 offset_left = 1075.0
 offset_top = 582.0
 offset_right = 1131.0
 offset_bottom = 634.0
 text = "exit"
 
-[node name="Button5" type="Button" parent="." unique_id=1778793774]
-layout_mode = 0
+[node name="Button5" type="Button" parent="CanvasLayer" unique_id=1778793774]
 offset_left = 482.0
 offset_top = 524.0
 offset_right = 703.0
 offset_bottom = 576.0
 text = "Return"
 
-[node name="ColorRect2" type="ColorRect" parent="." unique_id=1659326527]
+[node name="ColorRect2" type="ColorRect" parent="CanvasLayer" unique_id=1659326527]
+visible = false
 z_index = -4
-layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -74,8 +97,7 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0.28118682, 0.28118688, 0.28118682, 1)
 
-[node name="HighScore" type="Label" parent="." unique_id=932596852]
-layout_mode = 0
+[node name="HighScore" type="Label" parent="CanvasLayer" unique_id=932596852]
 offset_left = 444.0
 offset_top = 83.0
 offset_right = 534.0

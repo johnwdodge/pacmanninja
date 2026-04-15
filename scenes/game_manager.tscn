@@ -31,5 +31,6 @@ volume_db = 3.0
 bus = &"music"
 
 [node name="charcontrol" parent="." unique_id=1193498515 instance=ExtResource("6_q8mjp")]
+transform = Transform3D(0.52954906, 0, 0.84827924, 0, 1, 0, -0.84827924, 0, 0.52954906, 0, 0, 0)
 
 [node name="HUD" parent="." unique_id=1202115306 instance=ExtResource("8_jdad8")]

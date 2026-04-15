@@ -1,0 +1,107 @@
+[gd_scene format=3 uid="uid://b15g50m3iok7g"]
+
+[ext_resource type="Script" uid="uid://by54pqg1nc154" path="res://scenes/readme.gd" id="1_42t5d"]
+
+[node name="Readme" type="Control" unique_id=173603404]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_42t5d")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1844602686]
+
+[node name="Button5" type="Button" parent="CanvasLayer" unique_id=1829192474]
+z_index = 2
+z_as_relative = false
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -110.5
+offset_top = -93.0
+offset_right = 110.5
+offset_bottom = -41.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Return"
+
+[node name="ColorRect2" type="ColorRect" parent="CanvasLayer" unique_id=848455735]
+visible = false
+z_index = -4
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.28118682, 0.28118688, 0.28118682, 1)
+
+[node name="Label" type="Label" parent="CanvasLayer" unique_id=996163520]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -367.0
+offset_top = 37.0
+offset_right = 371.0
+offset_bottom = 166.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 21
+text = "Stone samurais possessed by ancient spirits have awoken to hunt you down. You cannot harm them unless you reach a Spirit Shard altar first. Collect one to summon a Spectral Blade: 10 seconds of invincibility, faster stamina, and the power to strike back."
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/Label" unique_id=1044104425]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -282.5
+offset_top = 311.0
+offset_right = 296.5
+offset_bottom = 518.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 19
+text = "Stamina powers your slides, dashes, and wall jumps.
+Spectral Blade lasts 10 seconds. Don't waste it.
+Ground slam into a slide to combo across the cave fast.
+Wall jump costs stamina."
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Label2" type="Label" parent="CanvasLayer/Label" unique_id=336220320]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -232.5
+offset_top = 197.0
+offset_right = -36.5
+offset_bottom = 298.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 19
+text = "WASD: Move
+Ctrl + Move: Slide
+LMB: Attack"
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Label3" type="Label" parent="CanvasLayer/Label" unique_id=403637547]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 48.5
+offset_top = 197.0
+offset_right = 303.5
+offset_bottom = 298.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 19
+text = "Space: Jump
+Ctrl + In Air: Ground Slam
+R: Restart"
+vertical_alignment = 1
+autowrap_mode = 2

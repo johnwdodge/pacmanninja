@@ -59,7 +59,7 @@ transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -33.02347, 0.3168745, -33.364
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 11.976528, 0.3168745, 13.6357765)
 
 [node name="SpawnPoint" type="Node3D" parent="." unique_id=356343718]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 51, 13.28599, -9)
+transform = Transform3D(-0.1723417, 0, 0.98503727, 0, 1, 0, -0.98503727, 0, -0.1723417, 51, 13.740091, -9)
 script = ExtResource("6_tv7cl")
 
 [node name="Sunlight" type="DirectionalLight3D" parent="." unique_id=1261985]
@@ -145,6 +145,21 @@ transform = Transform3D(-0.099999994, -5.782287e-09, -6.5568715e-09, 0, 0.075001
 [node name="Wall_Torch10" parent="Wall Torches" unique_id=729969847 instance=ExtResource("10_qsp8v")]
 transform = Transform3D(-0.099999994, -5.782287e-09, -6.5568715e-09, 0, 0.075001866, -0.06614165, 8.742277e-09, -0.06614165, -0.075001866, 12, 3.96415, -18.4127)
 
+[node name="Wall_Torch45" parent="Wall Torches" unique_id=379888567 instance=ExtResource("10_qsp8v")]
+transform = Transform3D(-0.099999994, -5.782287e-09, -6.5568715e-09, 0, 0.075001866, -0.06614165, 8.742277e-09, -0.06614165, -0.075001866, 33.396023, 3.96415, -47.78821)
+
+[node name="Wall_Torch46" parent="Wall Torches" unique_id=144528320 instance=ExtResource("10_qsp8v")]
+transform = Transform3D(0.099999994, 1.1564573e-08, 1.3113743e-08, 2.6054016e-16, 0.075001866, -0.06614165, -1.7484554e-08, 0.06614165, 0.075001866, 52.266075, 19.407585, -71.117905)
+
+[node name="Wall_Torch47" parent="Wall Torches" unique_id=389417982 instance=ExtResource("10_qsp8v")]
+transform = Transform3D(0.099999994, 1.1564573e-08, 1.3113743e-08, 2.6054016e-16, 0.075001866, -0.06614165, -1.7484554e-08, 0.06614165, 0.075001866, -66.733925, 19.407585, -71.117905)
+
+[node name="Wall_Torch48" parent="Wall Torches" unique_id=1242573490 instance=ExtResource("10_qsp8v")]
+transform = Transform3D(-0.099999994, -5.7822858e-09, -6.5568724e-09, 7.816205e-16, 0.075001866, -0.06614165, 8.742276e-09, -0.06614165, -0.075001866, -66.733925, 19.407585, 53.89371)
+
+[node name="Wall_Torch49" parent="Wall Torches" unique_id=2022098908 instance=ExtResource("10_qsp8v")]
+transform = Transform3D(-0.099999994, -5.7822858e-09, -6.5568724e-09, 7.816205e-16, 0.075001866, -0.06614165, 8.742276e-09, -0.06614165, -0.075001866, 52.266075, 19.407585, 53.89371)
+
 [node name="Wall_Torch2" parent="Wall Torches" unique_id=1951791503 instance=ExtResource("10_qsp8v")]
 transform = Transform3D(0.1, 0, 0, 0, 0.07500187, -0.06614166, 0, 0.06614166, 0.07500187, 6, 3.96415, -5.7095237)
 visible = false
@@ -222,6 +237,9 @@ transform = Transform3D(0.1, 0, 0, 0, 0.07500187, -0.06614166, 0, 0.06614166, 0.
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0, -0.905)
 
 [node name="Pagoda2" parent="Map_Meshes" unique_id=733527508 instance=ExtResource("10_nt80m")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -16.795, 0, 40.128)
+
+[node name="Pagoda5" parent="Map_Meshes" unique_id=1242095229 instance=ExtResource("10_nt80m")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -16.795, 0, 40.128)
 
 [node name="Pagoda3" parent="Map_Meshes" unique_id=2088314656 instance=ExtResource("10_nt80m")]

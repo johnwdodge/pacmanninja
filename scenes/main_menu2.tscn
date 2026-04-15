@@ -1,0 +1,84 @@
+[gd_scene format=3 uid="uid://hu8462elioxw"]
+
+[ext_resource type="Script" uid="uid://bw4q1av6w002i" path="res://main_menu.gd" id="1_tqay6"]
+
+[node name="MainMenu" type="Control" unique_id=1487592332]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_tqay6")
+
+[node name="Label" type="Label" parent="." unique_id=1024287511]
+layout_mode = 0
+offset_left = 441.0
+offset_top = 178.0
+offset_right = 724.0
+offset_bottom = 267.0
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 50
+text = "Ninja Game"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="." unique_id=2135886627]
+layout_mode = 0
+offset_left = 479.0
+offset_top = 354.0
+offset_right = 700.0
+offset_bottom = 406.0
+text = "Level Select"
+
+[node name="Button2" type="Button" parent="." unique_id=1551682967]
+layout_mode = 0
+offset_left = 480.0
+offset_top = 411.0
+offset_right = 701.0
+offset_bottom = 463.0
+text = "Options"
+
+[node name="Button3" type="Button" parent="." unique_id=2075262924]
+layout_mode = 0
+offset_left = 481.0
+offset_top = 467.0
+offset_right = 702.0
+offset_bottom = 519.0
+text = "README (no, actually)"
+
+[node name="Button4" type="Button" parent="." unique_id=1389138816]
+layout_mode = 0
+offset_left = 1075.0
+offset_top = 582.0
+offset_right = 1131.0
+offset_bottom = 634.0
+text = "exit"
+
+[node name="Button5" type="Button" parent="." unique_id=1778793774]
+layout_mode = 0
+offset_left = 482.0
+offset_top = 524.0
+offset_right = 703.0
+offset_bottom = 576.0
+text = "Return"
+
+[node name="ColorRect2" type="ColorRect" parent="." unique_id=1659326527]
+z_index = -4
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.28118682, 0.28118688, 0.28118682, 1)
+
+[node name="HighScore" type="Label" parent="." unique_id=932596852]
+layout_mode = 0
+offset_left = 444.0
+offset_top = 83.0
+offset_right = 534.0
+offset_bottom = 138.0
+theme_override_font_sizes/font_size = 40
+text = "TEST"

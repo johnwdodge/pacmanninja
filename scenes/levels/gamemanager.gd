@@ -34,6 +34,7 @@ var _current_menu = null
 var mainmenu = preload("res://scenes/main_menu.tscn")
 var options = preload("res://scenes/options_menu.tscn")
 var levelsel = preload ("res://scenes/levelselect.tscn")
+var readme = preload ("res://scenes/readme.tscn")
 var currentscene = null
 
 func _ready() -> void:
@@ -84,6 +85,14 @@ func open_options() -> void:
 	add_child(_current_menu)
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
+func open_readme() -> void:
+	hud.visible = false
+	if _current_menu:
+		_current_menu.queue_free()
+	_current_menu = readme.instantiate()
+	add_child(_current_menu)
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+
 func level_select():
 	hud.visible = false
 	if _current_menu:
@@ -129,7 +138,6 @@ func _load_level(level):
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	if current_level:
 		score = 0
-		HUD.set_score(score)
 		_active_altar = null
 		current_level.queue_free()
 		current_level = null
