@@ -5,6 +5,8 @@
 [ext_resource type="AudioStream" uid="uid://q8wtqfrwg7em" path="res://LOTM - Vivangel.mp3" id="3_ternb"]
 [ext_resource type="AudioStream" uid="uid://cp6nh2lmmamuk" path="res://dub siren.mp3" id="4_q8mjp"]
 [ext_resource type="AudioStream" uid="uid://dssbe1nm7awch" path="res://tapestop.mp3" id="5_jdad8"]
+[ext_resource type="PackedScene" uid="uid://bx4kyblex8ucu" path="res://scenes/charcontrol.tscn" id="6_q8mjp"]
+[ext_resource type="PackedScene" uid="uid://xbemqr2spiol" path="res://scenes/hud.tscn" id="8_jdad8"]
 
 [node name="GameManager" type="Node" unique_id=255393809]
 script = ExtResource("1_hwd4i")
@@ -22,3 +24,7 @@ volume_db = -4.0
 
 [node name="tape stop" type="AudioStreamPlayer" parent="." unique_id=187258]
 stream = ExtResource("5_jdad8")
+
+[node name="charcontrol" parent="." unique_id=1193498515 instance=ExtResource("6_q8mjp")]
+
+[node name="HUD" parent="." unique_id=1202115306 instance=ExtResource("8_jdad8")]

@@ -44,7 +44,6 @@ const COMBO_POWER_EXTEND: float = .5     # seconds added to power per kill
 @onready var _hud: Node = $"../HUD"
 @onready var _attack_hurtbox: Area3D = $Head/AttackHurtbox
 @onready var _sword_anchor: Node3D = $Head/SwordAnchor
-@onready var hud: Node = $"../HUD"
 
 
 # ── Variables ─────────────────────────────────────────────
@@ -84,6 +83,7 @@ func change_state(newstate) -> void:
 # ── Ready ─────────────────────────────────────────────
 
 func _ready() -> void:
+	add_to_group("player")
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	_crouching_collision.disabled = true
 	_attack_hurtbox.monitoring = false

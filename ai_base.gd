@@ -1,7 +1,8 @@
 extends Node3D
-@onready var gridmap = $"../../GridMap"
-@onready var player = $"../../charcontrol"
-@onready var manager = $"../../GameManager"
+@onready var gridmap = $"../GridMap"      
+@onready var pelletcontrol = $"../Altars"  
+@onready var player = get_tree().get_first_node_in_group("player")
+@onready var manager = get_tree().get_first_node_in_group("game_manager")
 
 const AI_SCENES: Dictionary = {
 	"blinky":   preload("res://scenes/characters/blinky.tscn"),

@@ -1,17 +1,18 @@
 extends Node
 
 # --- Scene References ---
-@onready var pelletcontrol = $"../Altars"
-@onready var player = $"../charcontrol"
+@onready var player = $"charcontrol"
 @onready var breaks = $breakbeats
 @onready var hardcore = $hardcore
 @onready var siren = $siren
 @onready var tapestop = $"tape stop"
 
-const PELLET_DELAY = 10
+const PELLET_DELAY = 3
 var _pellet_timer = PELLET_DELAY
 var altars: Array = []
 var _active_altar: Node = null
+var fancy = false
+var current_level = null
 
 # --- Score ---
 var score: int = 0
@@ -25,25 +26,26 @@ const HEALTH_BY_TIER: Array      = [1,    1,    1,    1,    1,    1,   1,   1]
 # --- Equal-distribution spawn queue ---
 const AI_TYPES: Array = ["blinky", "pinky", "clyde"]
 var _spawn_queue: Array = []
+var playerspawn = null
+var _current_menu = null
+var level2 = preload("res://scenes/levels/level_2.tscn")
+var mainmenu = preload("res://scenes/main_menu.tscn")
+
 
 func _ready() -> void:
-	altars = pelletcontrol.get_children()
-	_refill_queue()
-	_hide_all_pellets()
-	_activate_random_pellet()
-	for altar in altars:
-		var pellet = altar.get_node("PowerPellet")
-		pellet.pellet_collected.connect(_on_pellet_collected.bind(altar))
+	add_to_group("game_manager")
+	_load_level(level2)
 
 func _process(_delta: float) -> void:
-	if not player._is_powered and not player._invin:
-		var active_pellet = _active_altar.get_node("PowerPellet")
-		if active_pellet._is_hidden:
-			if _pellet_timer <= 0:
-				_activate_random_pellet()
-				_pellet_timer = PELLET_DELAY 
-			else:
-				_pellet_timer -= _delta
+	if current_level:
+		if not player._is_powered and not player._invin:
+			var active_pellet = _active_altar.get_node("PowerPellet")
+			if active_pellet._is_hidden:
+				if _pellet_timer <= 0:
+					_activate_random_pellet()
+					_pellet_timer = PELLET_DELAY 
+				else:
+					_pellet_timer -= _delta
 	
 	if player._power_timer <= 1.5 and player._power_timer > 0:
 		hardcore.stop()
@@ -67,6 +69,32 @@ func _input(event: InputEvent) -> void:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN if is_window else DisplayServer.WINDOW_MODE_WINDOWED)
 
 # --- Pellet Management ---
+func open_main_menu() -> void:
+	if _current_menu:
+		_current_menu.queue_free()
+	current_level.queue_free()
+	_current_menu = mainmenu.instantiate()
+	add_child(_current_menu)
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+
+func _load_level(level):
+	if current_level:
+		current_level.queue_free()
+	current_level = level.instantiate()
+	add_child(current_level)
+	playerspawn = get_tree().get_first_node_in_group("spawnpoint")
+	player.global_position = playerspawn.global_position
+	var altar_container = get_tree().get_first_node_in_group("altars")
+	altars = altar_container.get_children()
+	_active_altar = altars[0]
+	_refill_queue()
+	_hide_all_pellets()
+	_activate_random_pellet()
+	for altar in altars:
+		var pellet = altar.get_node("PowerPellet")
+		pellet.pellet_collected.connect(_on_pellet_collected.bind(altar))
+	
+	
 func _hide_all_pellets() -> void:
 	for altar in altars:
 		var pellet = altar.get_node("PowerPellet")

@@ -2,8 +2,8 @@ extends CharacterBody3D
 
 @onready var astar = get_parent().astar
 @onready var ai = get_parent()
-@onready var player = $"../../../charcontrol"
-@onready var manager = $"../../../GameManager"
+@onready var player = get_tree().get_first_node_in_group("player")
+@onready var manager = get_tree().get_first_node_in_group("game_manager")
 @onready var anim_player: AnimationPlayer = $Samurai_Animations/AnimationPlayer
 @export var max_health: int = 1
 @onready var collision_shape_3d: CollisionShape3D = $CollisionShape3D
