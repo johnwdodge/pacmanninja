@@ -8,6 +8,8 @@ extends Node
 @onready var siren = $siren
 @onready var tapestop = $"tape stop"
 
+const PELLET_DELAY = 10
+var _pellet_timer = 0
 var altars: Array = []
 var _active_altar: Node = null
 
@@ -37,7 +39,11 @@ func _process(_delta: float) -> void:
 	if not player._is_powered and not player._invin:
 		var active_pellet = _active_altar.get_node("PowerPellet")
 		if active_pellet._is_hidden:
-			_activate_random_pellet()
+			if _pellet_timer <= 0:
+				_activate_random_pellet()
+				_pellet_timer = PELLET_DELAY 
+			else:
+				_pellet_timer -= _delta
 	
 	if player._power_timer <= 1.5 and player._power_timer > 0:
 		hardcore.stop()
@@ -54,7 +60,6 @@ func _process(_delta: float) -> void:
 		if not siren.is_playing():
 			siren.play()
 		
-	# Next pellet activates once player power expires (checked in _process)
 # --- Pellet Management ---
 func _hide_all_pellets() -> void:
 	for altar in altars:
@@ -63,7 +68,6 @@ func _hide_all_pellets() -> void:
 
 func _activate_random_pellet() -> void:
 	var available = altars.filter(func(a): return not a.get_node("PowerPellet")._is_hidden)
-	# All hidden — pick a random one and force-show it
 	var candidates = altars.duplicate()
 	if _active_altar != null:
 		candidates.erase(_active_altar)
