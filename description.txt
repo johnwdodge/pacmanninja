@@ -1,0 +1,17 @@
+You're a ninja plundering an ancient tomb for its valuable treasures, unfortunately there appear to be some enchanted stone samurai trying to kill you in the process, oh no!
+
+The samurai will kill you in a single hit, so you'll want to make sure to avoid them as you collect the spirit shards, which will empower you, make you invincible for 15 seconds and give you the chance to fight back with your spectral blade.
+
+The game's movement is inspired by ULTRAKILL, its very fast and the gameplay is centered around using all of your movement abilities to both evade your enemies as they hunt you down, and chase them down to end them when the tables turn. You can wallslide, dash through the air or on the ground, wall jump, quickfall and slam to the ground, or slide through holes in the walls (or just slide around for more speed!). There's quite a bit going on under the hood with the movement, play around with it and try to find the fastest ways to get around.
+
+Move with WASD
+Slide and Ground Slam with Ctrl
+Dash with Shift
+Click to attack
+and press escape to pause
+
+You can check the readme in the main/pause menu if you ever need a refresher
+
+Also, the stone samurai have a few distinct personalities, see if you can figure out how they're different!
+
+Trespasser was developed by a team of two, MajorTunaFish on asset design and ayalink on programming. It's our first game jam submission, so we hope you enjoy!
