@@ -283,7 +283,7 @@ _data = {
 }
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_qju51"]
-size = Vector3(1.1182861, 0.8322754, 1.154953)
+size = Vector3(1.1182861, 1.098999, 1.154953)
 
 [node name="Pinky" type="CharacterBody3D" unique_id=739864106]
 script = ExtResource("1_o40jm")
@@ -527,5 +527,5 @@ libraries/ = SubResource("AnimationLibrary_ycqq1")
 [node name="hurtbox" type="Area3D" parent="." unique_id=2087713512]
 
 [node name="hurtbox_col" type="CollisionShape3D" parent="hurtbox" unique_id=1402584791]
-transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, -0.04650879, 1.9963379, 3.5008903)
+transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, -0.04650879, 2.7965088, 3.5008903)
 shape = SubResource("BoxShape3D_qju51")

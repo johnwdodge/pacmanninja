@@ -287,7 +287,7 @@ _data = {
 }
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_8o5v0"]
-size = Vector3(1.1182861, 0.8322754, 1.154953)
+size = Vector3(1.1182861, 1.098999, 1.154953)
 
 [node name="Blinky" type="CharacterBody3D" unique_id=18759844]
 script = ExtResource("1_sui20")
@@ -528,6 +528,6 @@ libraries/ = SubResource("AnimationLibrary_ycqq1")
 
 [node name="hurtbox" type="Area3D" parent="." unique_id=509215541]
 
-[node name="hurtbox_col" type="CollisionShape3D" parent="hurtbox" unique_id=401321138]
-transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, -0.04650879, 1.9963379, 3.5008903)
+[node name="hurtbox_col" type="CollisionShape3D" parent="hurtbox" unique_id=784960854]
+transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, -0.04650879, 2.7965088, 3.5008903)
 shape = SubResource("BoxShape3D_8o5v0")
