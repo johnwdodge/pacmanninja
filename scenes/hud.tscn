@@ -75,3 +75,20 @@ offset_left = 1013.0
 offset_top = 48.0
 offset_right = 1053.0
 offset_bottom = 71.0
+
+[node name="cameras" type="SubViewportContainer" parent="CanvasLayer" unique_id=158208612]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="cam1" type="SubViewport" parent="CanvasLayer/cameras" unique_id=1438522707]
+handle_input_locally = false
+size = Vector2i(1152, 648)
+render_target_update_mode = 4
+
+[node name="fancycam" type="Camera3D" parent="CanvasLayer/cameras/cam1" unique_id=1703078829]
+
+[node name="cam2" type="SubViewport" parent="CanvasLayer/cameras" unique_id=600777174]
+handle_input_locally = false
+render_target_update_mode = 4
+
+[node name="fancycam2" type="Camera3D" parent="CanvasLayer/cameras/cam2" unique_id=709289874]

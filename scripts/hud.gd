@@ -1,12 +1,13 @@
 extends Node
 
 @onready var _powered_label: Label = $CanvasLayer/Label
+@onready var player = $"../charcontrol"
+@onready var head = $"../charcontrol/Head/Camera"
 @onready var _progress_bar: ProgressBar = $CanvasLayer/ProgressBar
-@onready var _subviewport: SubViewport = $CanvasLayer/MapContainer/MapPort
-@onready var _viewport: SubViewportContainer = $CanvasLayer/MapContainer
 @onready var _death_screen: Control = $CanvasLayer/DeathScreen
 @onready var _combo_label: Label = $CanvasLayer/ComboLabel
-
+@onready var cam1 = $cameras/cam1/fancycam
+@onready var cam2 = $cameras/cam2/fancycam2
 @onready var _score: Label = $CanvasLayer/Score
 
 func _ready() -> void:
@@ -15,6 +16,7 @@ func _ready() -> void:
 	_progress_bar.max_value = 1.0
 	_progress_bar.value = 1.0
 	set_score(0)
+	
 
 func set_powered(powered: bool) -> void:
 	_powered_label.visible = powered
@@ -34,21 +36,22 @@ func set_progress(value: float, max_value: float) -> void:
 func set_score(value: int) -> void:
 	_score.text = "SCORE: %d" % value
 
-func display_camera(camera: Camera3D) -> void:
-	camera.reparent(_subviewport)
-
-func camerahide() -> void:
-	_viewport.hide()
-
-func camerashow() -> void:
-	_viewport.show()
 
 func _process(_delta: float) -> void:
 	if _death_screen != null and _death_screen.visible:
 		if Input.is_action_just_pressed("respawn"):
 			get_tree().get_first_node_in_group("player").respawn()
+	_camera_fun()
+#	if player.is_powered:
+		
 
 func show_death_screen() -> void:
 	_death_screen.show()
 func hide_death_screen() -> void:
 	_death_screen.hide()
+	
+func _camera_fun():
+	cam1.global_position.lerp(head.global_position, .01)
+	cam1.basis.lerp(head.basis, .1)
+	cam2.global_position.lerp(head.global_position, .015)
+	cam2.basis.lerp(head.basis, .15)

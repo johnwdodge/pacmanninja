@@ -6,8 +6,6 @@ extends Node3D
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	minimap.size = 126
-	hud.display_camera(minimap)
-	hud.camerahide()
 	pass # Replace with function body.
 
 
@@ -16,8 +14,5 @@ func _process(delta: float) -> void:
 	pass
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("map"):
-		hud.camerashow()
-	if event.is_action_released("map"):
-		hud.camerahide()
+	pass
 	

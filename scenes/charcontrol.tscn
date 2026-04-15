@@ -6,12 +6,6 @@
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_ea30i"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_u6b33"]
-
-[sub_resource type="QuadMesh" id="QuadMesh_rdlt6"]
-flip_faces = true
-size = Vector2(2, 2)
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_u6b33"]
 size = Vector3(6, 6, 6)
 
@@ -40,11 +34,6 @@ shape = SubResource("SphereShape3D_ea30i")
 [node name="Camera" type="Camera3D" parent="Head" unique_id=1395685839]
 cull_mask = 1048573
 fov = 100.0
-
-[node name="Overlay" type="MeshInstance3D" parent="Head/Camera" unique_id=2008925700]
-material_override = SubResource("ShaderMaterial_u6b33")
-extra_cull_margin = 16384.0
-mesh = SubResource("QuadMesh_rdlt6")
 
 [node name="SwordAnchor" type="Node3D" parent="Head" unique_id=311773373]
 transform = Transform3D(0.09704686, 0.021947276, 0.0100112045, -0.02412275, 0.088294834, 0.040275503, 0, -0.04150109, 0.09098165, 0.13877034, -0.121343136, -0.44938323)

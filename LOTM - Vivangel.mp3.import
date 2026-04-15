@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://q8wtqfrwg7em"
+path="res://.godot/imported/LOTM - Vivangel.mp3-7b8f0349f9bd09462bd13928863f077d.mp3str"
+
+[deps]
+
+source_file="res://LOTM - Vivangel.mp3"
+dest_files=["res://.godot/imported/LOTM - Vivangel.mp3-7b8f0349f9bd09462bd13928863f077d.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
