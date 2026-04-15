@@ -1,9 +1,10 @@
-extends Control
-@onready var graphics = $graphics
-@onready var volume = $volume
-@onready var fullscreen = $fullscreen
-@onready var _return: Button = $Return
+extends Node
+@onready var graphics = $CanvasLayer/graphics
+@onready var volume = $CanvasLayer/volume
+@onready var fullscreen = $CanvasLayer/fullscreen
+@onready var _return: Button = $CanvasLayer/Return
 @onready var manager = get_tree().get_first_node_in_group("game_manager")
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -12,8 +13,6 @@ func _ready() -> void:
 	graphics.toggled.connect(_on_graphics_toggled)
 	volume.value_changed.connect(_audio_changed)
 	_return.pressed.connect(manager.open_main_menu)
-	var breaks = manager.get_child(0)
-	breaks.play()
 	pass
 	
 

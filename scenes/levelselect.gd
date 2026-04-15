@@ -1,8 +1,8 @@
-extends Control
+extends Node
 
-@onready var lvl1 = $Button
-@onready var lvl2 = $Button2
-@onready var back = $back
+@onready var lvl1 = $CanvasLayer/Button
+@onready var lvl2 = $CanvasLayer/Button2
+@onready var back = $CanvasLayer/back
 @onready var label = $Label
 @onready var manager = get_tree().get_first_node_in_group("game_manager")
 var level1 = "res://scenes/levels/level_2.tscn"

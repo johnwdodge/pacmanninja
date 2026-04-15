@@ -1,18 +1,46 @@
 [gd_scene format=3 uid="uid://c5k6vdowop3v5"]
 
 [ext_resource type="Script" uid="uid://dl3gkk6gbkok4" path="res://scenes/options_menu.gd" id="1_liyum"]
+[ext_resource type="PackedScene" uid="uid://rshxh7ur36xd" path="res://models/Menu_Scene.glb" id="2_3xsyx"]
+[ext_resource type="PackedScene" uid="uid://dpte47om4tgm8" path="res://scenes/pellet_altar.tscn" id="3_dhn0l"]
+[ext_resource type="PackedScene" uid="uid://c1l7dl5cfwj5b" path="res://scenes/characters/blinky_test.tscn" id="4_k61yy"]
+[ext_resource type="Script" uid="uid://ymdpvsm1t48c" path="res://scenes/characters/blinky_test.gd" id="5_7txom"]
 
-[node name="OptionsMenu" type="Control" unique_id=2032716309]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="OptionsMenu" type="Node" unique_id=39528095]
 script = ExtResource("1_liyum")
 
-[node name="graphics" type="CheckButton" parent="." unique_id=59303920]
-layout_mode = 1
+[node name="Node3D" type="Node3D" parent="." unique_id=118256341]
+
+[node name="Menu_Scene" parent="Node3D" unique_id=1624689360 instance=ExtResource("2_3xsyx")]
+
+[node name="Camera3D" type="Camera3D" parent="Node3D" unique_id=205584431]
+transform = Transform3D(-0.80901706, -0.015386423, -0.5875838, 0, 0.99965733, -0.02617695, 0.5877852, -0.0211776, -0.80873984, 9.505, -4.73, 7.055)
+current = true
+fov = 50.4
+
+[node name="Pellet_Altar" parent="Node3D" unique_id=900777205 instance=ExtResource("3_dhn0l")]
+transform = Transform3D(3.5, 0, 0, 0, 3.5, 0, 0, 0, 3.5, 20.108, -7.41, 21.928)
+
+[node name="Blinky" parent="Node3D" unique_id=18759844 instance=ExtResource("4_k61yy")]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 41.976894, -7.743738, 27.341576)
+script = ExtResource("5_7txom")
+walk_speed = 3.0
+
+[node name="Marker3D" type="Marker3D" parent="Node3D" unique_id=167498097]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 39.658897, -7.4221373, 28)
+
+[node name="Marker3D2" type="Marker3D" parent="Node3D" unique_id=2046822234]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, -7.4221373, 28)
+
+[node name="Marker3D3" type="Marker3D" parent="Node3D" unique_id=1864295684]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.322273, -7.4221373, 10.605217)
+
+[node name="Marker3D4" type="Marker3D" parent="Node3D" unique_id=765121937]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50.91043, -7.4221373, 9.696531)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1563890103]
+
+[node name="graphics" type="CheckButton" parent="CanvasLayer" unique_id=59303920]
 anchors_preset = -1
 anchor_left = 0.33200002
 anchor_top = 0.5
@@ -24,8 +52,7 @@ offset_right = 0.15997314
 offset_bottom = 187.0
 text = "Vapor Trails (sucks with integrated graphics)"
 
-[node name="fullscreen" type="CheckButton" parent="." unique_id=1215801437]
-layout_mode = 1
+[node name="fullscreen" type="CheckButton" parent="CanvasLayer" unique_id=1215801437]
 anchors_preset = -1
 anchor_left = 0.33200002
 anchor_top = 0.5
@@ -37,8 +64,7 @@ offset_right = 4.159973
 offset_bottom = 117.0
 text = "fullscreen"
 
-[node name="volume" type="HSlider" parent="." unique_id=396982013]
-layout_mode = 1
+[node name="volume" type="HSlider" parent="CanvasLayer" unique_id=396982013]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -54,7 +80,7 @@ max_value = 1.0
 step = 0.001
 value = 0.3
 
-[node name="Label" type="Label" parent="volume" unique_id=1877026215]
+[node name="Label" type="Label" parent="CanvasLayer/volume" unique_id=1877026215]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -66,8 +92,7 @@ grow_horizontal = 2
 theme_override_font_sizes/font_size = 21
 text = "Volume"
 
-[node name="Label" type="Label" parent="." unique_id=2020678410]
-layout_mode = 1
+[node name="Label" type="Label" parent="CanvasLayer" unique_id=2020678410]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -79,21 +104,9 @@ grow_horizontal = 2
 theme_override_font_sizes/font_size = 42
 text = "Options"
 
-[node name="Return" type="Button" parent="." unique_id=973967914]
-layout_mode = 0
+[node name="Return" type="Button" parent="CanvasLayer" unique_id=973967914]
 offset_left = 78.0
 offset_top = 69.0
 offset_right = 140.0
 offset_bottom = 100.0
 text = "Return"
-
-[node name="ColorRect" type="ColorRect" parent="." unique_id=1727146627]
-z_index = -4
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-color = Color(0.28118682, 0.28118688, 0.28118682, 1)

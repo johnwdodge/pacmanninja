@@ -1,53 +1,120 @@
 [gd_scene format=3 uid="uid://dpcsyglbp1cpu"]
 
 [ext_resource type="Script" uid="uid://dfnx827qk36kk" path="res://scenes/levelselect.gd" id="1_xuh2y"]
+[ext_resource type="PackedScene" uid="uid://rshxh7ur36xd" path="res://models/Menu_Scene.glb" id="2_nqdjo"]
+[ext_resource type="Texture2D" uid="uid://crecaferenb6p" path="res://models/anims/Level_2.png" id="2_vttqt"]
+[ext_resource type="Texture2D" uid="uid://qgegsqs25tcb" path="res://scenes/levels/the_Maze.png" id="3_4kdbh"]
+[ext_resource type="PackedScene" uid="uid://dpte47om4tgm8" path="res://scenes/pellet_altar.tscn" id="3_rsw7q"]
+[ext_resource type="PackedScene" uid="uid://c1l7dl5cfwj5b" path="res://scenes/characters/blinky_test.tscn" id="4_n4sav"]
+[ext_resource type="Script" uid="uid://ymdpvsm1t48c" path="res://scenes/characters/blinky_test.gd" id="5_ey6kh"]
 
-[node name="Control" type="Control" unique_id=784744937]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="Control" type="Node" unique_id=695225465]
 script = ExtResource("1_xuh2y")
 
-[node name="Label" type="Label" parent="." unique_id=149718592]
-layout_mode = 0
-offset_left = 472.0
-offset_top = 363.0
-offset_right = 654.0
-offset_bottom = 412.0
+[node name="Node3D" type="Node3D" parent="." unique_id=895177676]
+
+[node name="Menu_Scene" parent="Node3D" unique_id=1624689360 instance=ExtResource("2_nqdjo")]
+
+[node name="Camera3D" type="Camera3D" parent="Node3D" unique_id=1045428122]
+transform = Transform3D(-0.80901706, -0.015386423, -0.5875838, 0, 0.99965733, -0.02617695, 0.5877852, -0.0211776, -0.80873984, 9.505, -4.73, 7.055)
+current = true
+fov = 50.4
+
+[node name="Pellet_Altar" parent="Node3D" unique_id=900777205 instance=ExtResource("3_rsw7q")]
+transform = Transform3D(3.5, 0, 0, 0, 3.5, 0, 0, 0, 3.5, 20.108, -7.41, 21.928)
+
+[node name="Blinky" parent="Node3D" unique_id=18759844 instance=ExtResource("4_n4sav")]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 41.976894, -7.743738, 27.341576)
+script = ExtResource("5_ey6kh")
+walk_speed = 3.0
+
+[node name="Marker3D" type="Marker3D" parent="Node3D" unique_id=1862113513]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 39.658897, -7.4221373, 28)
+
+[node name="Marker3D2" type="Marker3D" parent="Node3D" unique_id=1269234436]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, -7.4221373, 28)
+
+[node name="Marker3D3" type="Marker3D" parent="Node3D" unique_id=1808405596]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.322273, -7.4221373, 10.605217)
+
+[node name="Marker3D4" type="Marker3D" parent="Node3D" unique_id=478410855]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50.91043, -7.4221373, 9.696531)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=363350631]
+
+[node name="Label" type="Label" parent="CanvasLayer" unique_id=149718592]
+offset_left = 777.0
+offset_top = 468.0
+offset_right = 959.0
+offset_bottom = 517.0
 text = "Score more than 50
 to unlock our test level!"
 horizontal_alignment = 1
 
-[node name="Button" type="Button" parent="." unique_id=505633589]
-layout_mode = 0
-offset_left = 496.0
-offset_top = 279.0
-offset_right = 618.0
-offset_bottom = 310.0
+[node name="Button" type="Button" parent="CanvasLayer" unique_id=505633589]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 249.0
+offset_top = -173.0
+offset_right = 371.0
+offset_bottom = -142.0
+grow_vertical = 0
 text = "Skyward Paths"
 
-[node name="Button2" type="Button" parent="." unique_id=155845570]
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Button" unique_id=970284350]
 layout_mode = 0
-offset_left = 519.0
-offset_top = 374.0
-offset_right = 601.0
-offset_bottom = 405.0
+offset_left = -119.0
+offset_top = -309.0
+offset_right = 245.70203
+offset_bottom = -37.0
+texture = ExtResource("2_vttqt")
+expand_mode = 1
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Button/TextureRect" unique_id=157815908]
+z_index = -1
+layout_mode = 0
+offset_left = -10.0
+offset_top = -11.0
+offset_right = 377.0
+offset_bottom = 283.0
+color = Color(0, 0, 0, 1)
+
+[node name="Button2" type="Button" parent="CanvasLayer" unique_id=155845570]
+offset_left = 825.0
+offset_top = 475.0
+offset_right = 907.0
+offset_bottom = 506.0
 text = "The Maze"
 
-[node name="back" type="Button" parent="." unique_id=1109860141]
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Button2" unique_id=216562470]
+z_index = -1
 layout_mode = 0
+offset_left = -153.0
+offset_top = -320.0
+offset_right = 234.0
+offset_bottom = -26.0
+color = Color(0, 0, 0, 1)
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Button2/ColorRect" unique_id=101234048]
+layout_mode = 0
+offset_left = 13.0
+offset_top = 11.0
+offset_right = 378.0
+offset_bottom = 282.0
+texture = ExtResource("3_4kdbh")
+expand_mode = 1
+
+[node name="back" type="Button" parent="CanvasLayer" unique_id=1109860141]
 offset_left = 31.0
 offset_top = 29.0
 offset_right = 93.0
 offset_bottom = 60.0
 text = "Return"
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=424763999]
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=424763999]
+visible = false
 z_index = -4
-layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

@@ -71,6 +71,7 @@ func _process(_delta: float) -> void:
 # --- Pellet Management ---
 func open_main_menu() -> void:
 	hud.visible = false
+	player.set_physics_process(false)
 	if _current_menu:
 		_current_menu.queue_free()
 	_current_menu = mainmenu.instantiate()
@@ -116,6 +117,7 @@ func pause() -> void:
 
 func unpause() -> void:
 	hud.visible = true
+	player.set_physics_process(true)
 	if current_level:
 		current_level.process_mode = Node.PROCESS_MODE_INHERIT
 		current_level.visible = true
@@ -132,17 +134,20 @@ func _respawn():
 	player.reset()
 
 func _load_level(level):
+	player.set_physics_process(true)
 	hud.visible = true
 	currentscene = level
 	close_menu()
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	if current_level:
 		score = 0
+		player.reset()
 		_active_altar = null
 		current_level.queue_free()
 		current_level = null
 		await get_tree().process_frame
 	current_level = level.instantiate()
+	
 	add_child(current_level)
 	playerspawn = get_tree().get_first_node_in_group("spawnpoint")
 	player.global_position = playerspawn.global_position

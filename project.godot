@@ -14,10 +14,13 @@ warnings/check_invalid_track_paths=false
 
 [application]
 
-config/name="Ninja Pac Man"
-run/main_scene="uid://dic0l03bxu6sc"
+config/name="Trespasser"
+run/main_scene="uid://c8vrilj1iwu6x"
 config/features=PackedStringArray("4.6", "Forward Plus")
+boot_splash/bg_color=Color(0, 0, 0, 1)
+boot_splash/image="uid://57xdtafdc2gk"
 config/icon="uid://ba7f7bac8lh6j"
+boot_splash/minimum_display_time=1000
 
 [audio]
 

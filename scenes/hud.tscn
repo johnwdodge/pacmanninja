@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bc3p5nk7xf6vu" path="res://scripts/hud.gd" id="1_ahhtf"]
 [ext_resource type="Shader" uid="uid://dw6cuyrwnmn7b" path="res://scenes/powered_shader.tres" id="2_5ysmq"]
+[ext_resource type="FontFile" uid="uid://d3fj2jy27yco7" path="res://models/tiles/Sukajan Brush Demo.otf" id="2_6fi6k"]
 [ext_resource type="Texture2D" uid="uid://bqj0tr87k6el0" path="res://Powered_Overlay.png" id="2_oo0fn"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5ysmq"]
@@ -27,6 +28,7 @@ script = ExtResource("1_ahhtf")
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=592995193]
 
 [node name="Label" type="Label" parent="CanvasLayer" unique_id=1227660011]
+visible = false
 offset_right = 40.0
 offset_bottom = 23.0
 
@@ -59,6 +61,7 @@ offset_right = 36.0
 offset_bottom = 28.0
 grow_horizontal = 2
 grow_vertical = 0
+theme_override_fonts/font = ExtResource("2_6fi6k")
 text = "STAMINA"
 
 [node name="Score" type="Label" parent="CanvasLayer" unique_id=1171843681]
@@ -108,6 +111,7 @@ theme_override_font_sizes/font_size = 22
 text = "Press R to Try Again"
 
 [node name="ComboLabel" type="Label" parent="CanvasLayer" unique_id=1266891125]
+visible = false
 offset_left = 1013.0
 offset_top = 48.0
 offset_right = 1053.0

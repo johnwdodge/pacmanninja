@@ -36,7 +36,8 @@ func set_meter(value: float, max_value: float) -> void:
 	_progress_bar.value = value / max_value  # normalized 0–1
 
 func set_progress(value: float, max_value: float) -> void:
-	_powered_label.text = "POWERED  %.1fs" % value
+#	_powered_label.text = "POWERED  %.1fs" % value
+	return
 
 func set_score(value: int) -> void:
 	_score.text = "SCORE: %d" % value
