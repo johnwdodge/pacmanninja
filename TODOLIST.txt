@@ -3,8 +3,7 @@ GAMEPLAY:
 0: make enemy movement speed sync with cool BPMs
 	let me worry about this one its going to be extremely gay or extremely easy
 	i might need to fuck with total level scale but im not really bugging about it
-	(if each square was about 30% smaller, it would make their slowest movement speed 150bpm relative to where it is now)
-	(this is ideal)
+	(just fucked with speed for the time being, peep "grind level design")
 
 1: refactor code base
 	make AIs call parent functions and make it so their pathfinding is the only unique bit in their scripts
@@ -38,6 +37,9 @@ GAMEPLAY:
 	try to solve the problem of being able to just fly over enemies adnaus, incentivize CONSTANT movement
 	ideas currently for this are making levels more aerially closed off, or making aerial movement require high skill
 	this would mean things like walljump courses and whatnot above areas
+	pathways should make it clear when an enemy is on the other side of them, this could be done with window shit
+	alternatively, they're long corridors with egress points
+	we could also add a spotlight to the AIs that saturates a few spaces in front of them 
 
 6: add aerial enemy
 	once a better structure for level design is found we can start integrating aerial enemies, since we'll have a better idea of how to use them
