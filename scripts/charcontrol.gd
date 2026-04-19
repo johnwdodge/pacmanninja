@@ -85,6 +85,7 @@ func change_state(newstate) -> void:
 
 func _ready() -> void:
 	add_to_group("player")
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	_crouching_collision.disabled = true
 	_attack_hurtbox.monitoring = false
 	_attack_hurtbox.monitorable = false
