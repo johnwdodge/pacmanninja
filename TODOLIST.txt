@@ -1,0 +1,94 @@
+GAMEPLAY:
+
+0: make enemy movement speed sync with cool BPMs
+	let me worry about this one its going to be extremely gay or extremely easy
+	i might need to fuck with total level scale but im not really bugging about it
+	(if each square was about 30% smaller, it would make their slowest movement speed 150bpm relative to where it is now)
+	(this is ideal)
+
+1: refactor code base
+	make AIs call parent functions and make it so their pathfinding is the only unique bit in their scripts
+	put all tracking load on gamemanager (timing for player being powered, etc.)
+	make the tree as agnostic as possible (load shit in as groups)
+
+	
+2: make trackable states for player "style" actions
+	being close to an enemy (track this off grid, probably exact distance between the global position of each enemy and the player)
+	being airborne
+	being above max speed
+	wall jumping
+	sliding through holes
+	having an enemy attack you without killing you
+	killing an enemy
+	killing an enemy out of a dash, slide, slam or walljump (different bonus for each)
+	
+3: apply point values to these
+	make point values add to a constantly decaying value that can be tracked as a meter
+	make specific cutoff points where the meter decays more quickly once reached
+	tie enemy spawn rates to these cutoff points
+	toy around with the values till it feels right, it should be hard to max the meter out
+	
+4: add turret enemy
+	this will be used in level design, itll just spew fire in a direction every however many movement ticks
+	we can use the logic to make a mobile turret enemy that sprays fire in a direction and is mobile, honestly either could come first
+
+5: grind level design
+	look into deathmatch game mode maps in quake, unreal, and other arena shooters
+	try to mimick the interconnectedness of these
+	try to solve the problem of being able to just fly over enemies adnaus, incentivize CONSTANT movement
+	ideas currently for this are making levels more aerially closed off, or making aerial movement require high skill
+	this would mean things like walljump courses and whatnot above areas
+
+6: add aerial enemy
+	once a better structure for level design is found we can start integrating aerial enemies, since we'll have a better idea of how to use them
+	i dont want them to be a crutch for poor level design, but having good aerial hazards is a good idea
+	theres a world where turret enemies can just take the place of this, but i have no idea if thats the world we live in
+	
+7: more movement tech
+	airstrafing is the most obvious one
+	above change should make source style bhopping viable, this should get a style meter point value
+	make sliding have stronger accel and decel in relation to ramps, and give it more velocity inheritance
+	above change should make wavedashing viable, but we'll need to tech a little bit to make it work nicely
+	wavedashing should also get style meter points
+	
+8: leaderboards
+	leaderboards need to have a "recording" associated with them
+	we can do this with arrays that say where enemies spawn and the places that they move, the times they attack, etc.
+	engine behavior SHOULD be deterministic, so tracking this and exact player inputs should give a replay that has very small data footprint.
+	theres a world where this doesnt work how we want it to, but its not worth worrying about too much until we get there
+	it is important however, to try and maintain deterministic behavior in the engine so that this is possible when we do
+	
+9: multiplayer
+	dawg i have no idea how to do this but it would just need to have multiple players active in a level at once
+	they have to manage AI enemies while racing to the power pellet, then avoid whoever has the pellet
+	or attack the person who doesnt
+	afaik there are netcode modules for godot and this should be relatively trivial to implement in the grand scheme of things
+	
+ASSETS (order is completely arbitrary here):
+	
+1: more legible enemy attack
+	an overhead swing would probably be ideal
+	we could also just fill the hitbox with a "glow" associated with the enemies color
+	this will just need playing around with to find the ideal solution
+
+2: spawn animation
+	we need some sort of animation that goes to the skybox that indicates that an enemy has spawned in a location
+	this is implemented by spawning a oneshot animation player at the same location as the spawned enemy in ai_base
+	i personally think a little lightning strike would be cool, but im not married to that idea
+
+3: many more gridmap tiles
+	its going to be trivial to add existing pathfinding information to gridmap tiles
+	this means i can just add any new "single wall" tiles to the existing logic for them
+	this means any aesthetic shit can just be done in level design
+	having different styles of tile, including ones that have windows through them, or multiple long tiles that loop for windows would be really sick
+	this lowers overall level creation time since once we have the assets we dont need to texture them afterwards, and longterm gives the option of doing player created levels
+	try putting a slight (tasteful) shadow at the edge of them so that players can identify the grid and have a better intuition for enemy attack distance
+	
+THINGS TO THINK ABOUT (order also arbitrary)
+
+1: way to make enemy positions more legible
+	maybe give wallhacks when powered?
+	minimap worst case?
+	"windows" in certain points of the level could go a long way towards solving this?
+	mgs4 style "enemy indicator" glow on the screen in the direction of enemies within a certain amount of tiles from you?
+
