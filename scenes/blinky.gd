@@ -11,13 +11,14 @@ extends CharacterBody3D
 
 var pointpath = []
 var lastpoint = 0
-var scatter = true
+var scatter = false
 var attacking = false
 var scatterpath = []
-var nextposition = Vector3.ZERO
+var nextposition: Vector3
 var _health: int
 
 func _ready() -> void:
+	lastpoint = astar.get_closest_point(global_position)
 	anim_player.play("Walking")
 	max_health = manager.get_ai_health()
 	_health = max_health
@@ -64,13 +65,9 @@ func _process(delta: float) -> void:
 			pass
 		else:
 			_play_anim("Walking")
-			if get_parent().scatter:
-				scatter = true
-			if scatter:
-				_handle_scatter(astar.get_closest_point(manager.altars.pick_random().global_position))
-			else:
-				_handle_ai_move(delta)
-		global_position = global_position.lerp(nextposition, .1)
+			_handle_ai_move(delta)
+		if nextposition:
+			global_position = global_position.lerp(nextposition, .1)
 	else:
 		pass
 
@@ -99,6 +96,7 @@ func _handle_scatter(point):
 func _handle_ai_move(delta):
 	var playerpos = astar.get_closest_point(player.global_position)
 	var mypos = astar.get_closest_point(global_position)
+	print(mypos)
 	if astar.get_point_path(mypos, playerpos):
 		astar.set_point_weight_scale(lastpoint, 8.0)
 		pointpath = astar.get_point_path(mypos, playerpos)

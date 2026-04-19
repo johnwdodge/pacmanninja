@@ -46,12 +46,8 @@ func _process(delta: float) -> void:
 		reserved_points.clear()
 		scattertimer -= 1
 		spawntimer -= 1
-		if not has_node("Blinky"):
-			_spawn_ai("blinky")
-		elif not has_node("Pinky"):
-			_spawn_ai("pinky")
-		elif not has_node("Clyde"):
-			_spawn_ai("clyde")
+		if get_child_count() < 5:
+			_spawn_ai(manager.next_ai_type())
 	if scattertimer < 1:
 		scatter = true
 	if scattertimer < 0:
@@ -64,6 +60,7 @@ func _process(delta: float) -> void:
 func _spawn_ai(type: String) -> void:
 	var ai_instance = AI_SCENES[type].instantiate()
 	add_child(ai_instance)
+	ai_instance.global_position = findgoodspawn()
 
 func try_reserve(id, ai):
 	if reserved_points.has(id):
@@ -75,6 +72,20 @@ func release_point(id, ai):
 	if reserved_points.get(id) == ai:
 		reserved_points.erase(id)
 
+#------spawning-------
+
+func findgoodspawn() -> Vector3:
+	var points = astar.get_point_ids()
+	points = Array(points)
+	var haspoint = false
+	var trypoint = 0
+	while haspoint == false:
+		trypoint = points.pop_at(randi() % points.size())
+		if astar.get_point_path(trypoint, astar.get_closest_point(player.global_position)).size() > 20:
+			haspoint = true
+			print("spawn")
+			print(trypoint)
+	return astar.get_point_position(trypoint)
 
 #--------- array creation --------------------------------------------------------------
 
