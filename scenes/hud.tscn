@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://xbemqr2spiol"]
 
 [ext_resource type="Script" uid="uid://bc3p5nk7xf6vu" path="res://scripts/hud.gd" id="1_ahhtf"]
-[ext_resource type="Shader" uid="uid://dw6cuyrwnmn7b" path="res://scenes/powered_shader.tres" id="2_5ysmq"]
+[ext_resource type="Shader" path="res://scenes/powered_shader.tres" id="2_5ysmq"]
 [ext_resource type="FontFile" uid="uid://d3fj2jy27yco7" path="res://models/tiles/Sukajan Brush Demo.otf" id="2_6fi6k"]
 [ext_resource type="Texture2D" uid="uid://bqj0tr87k6el0" path="res://Powered_Overlay.png" id="2_oo0fn"]
 
