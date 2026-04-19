@@ -58,15 +58,16 @@ func _die() -> void:
 
 func _process(delta: float) -> void:
 	if attacking == false:
-		if astar.get_closest_point(player.global_position) in astar.get_point_connections(astar.get_closest_point(global_position)):
-			attacking = true
-			attack()
-			pass
 		if get_parent().movetimer > 0:
 			pass
 		else:
-			_play_anim("Walking")
-			_handle_ai_move(delta)
+			if astar.get_closest_point(player.global_position) in astar.get_point_connections(astar.get_closest_point(global_position)):
+				attacking = true
+				attack()
+				pass
+			else: 
+				_play_anim("Walking")
+				_handle_ai_move(delta)
 		if nextposition:
 			global_position = global_position.lerp(nextposition, .1)
 	else:
