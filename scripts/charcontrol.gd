@@ -35,7 +35,7 @@ const SLAM_JUMP_WINDOW = 0.05
 const SLIDE_DRAIN: float = 4
 const SLIDE_DURATION: float = 5.0
 const SLIDE_SPEED: float = 30.0
-const SLOPE_ACCEL: float = 1.3
+const SLOPE_ACCEL: float = .5
 
 const SPEEDY_TIMER: float = 1.0
 const AIR_TIMER: float = 2.0
@@ -118,6 +118,7 @@ func _ready() -> void:
 # ── Physics ───────────────────────────────────────────
 
 func _physics_process(delta: float) -> void:
+	print(_total_vel)
 	_temp_vel = Vector3(velocity.x, 0, velocity.z)
 	_total_vel = _temp_vel.length()
 	match state:
@@ -412,11 +413,20 @@ func _handle_slide(delta: float) -> void:
 			if floornorm.dot(velocity.normalized()) > -0.1:
 				apply_floor_snap()
 				velocity.y -= 2
-				velocity.x = _direction.x * (SLIDE_SPEED * SLOPE_ACCEL)
-				velocity.z = _direction.z * (SLIDE_SPEED * SLOPE_ACCEL)
+				if _total_vel < SLIDE_SPEED:
+					velocity.x = _direction.x * SLIDE_SPEED
+					velocity.z = _direction.z * SLIDE_SPEED
+				else:
+					velocity.x += (_direction.x * SLOPE_ACCEL)
+					velocity.z += (_direction.z * SLOPE_ACCEL)
 			else:
-				velocity.x = _direction.x * (SLIDE_SPEED / SLOPE_ACCEL)
-				velocity.z = _direction.z * (SLIDE_SPEED / SLOPE_ACCEL)
+				velocity.x -= (_direction.x * SLOPE_ACCEL)
+				velocity.z -= (_direction.z * SLOPE_ACCEL)
+			if Input.is_action_just_released("crouch"):
+				change_state(State.idle)
+				return
+			move_and_slide()
+			return
 		if _total_vel < SLIDE_SPEED:
 			velocity.x = _direction.x * SLIDE_SPEED
 			velocity.z = _direction.z * SLIDE_SPEED
