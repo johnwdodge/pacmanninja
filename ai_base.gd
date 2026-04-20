@@ -46,7 +46,7 @@ func _process(delta: float) -> void:
 		reserved_points.clear()
 		scattertimer -= 1
 		spawntimer -= 1
-		if get_child_count() < 5:
+		if get_child_count() < manager.get_min_ai():
 			_spawn_ai(manager.next_ai_type())
 	if scattertimer < 1:
 		scatter = true
