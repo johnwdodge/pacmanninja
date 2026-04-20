@@ -96,6 +96,7 @@ signal risky(factor)
 signal dashjump
 signal slamjump
 signal holeslide
+signal pivot
 
 # ── State ─────────────────────────────────────────────
 
@@ -413,13 +414,17 @@ func _handle_slide(delta: float) -> void:
 			if floornorm.dot(velocity.normalized()) > -0.1:
 				apply_floor_snap()
 				velocity.y -= 2
-				if _total_vel < SLIDE_SPEED:
-					velocity.x = _direction.x * SLIDE_SPEED
-					velocity.z = _direction.z * SLIDE_SPEED
-				else:
-					velocity.x += (_direction.x * SLOPE_ACCEL)
-					velocity.z += (_direction.z * SLOPE_ACCEL)
+				velocity.x += (_direction.x * SLOPE_ACCEL)
+				velocity.z += (_direction.z * SLOPE_ACCEL)
 			else:
+				var tempvel = velocity
+				tempvel.y = 0
+				if tempvel.length() < 1:
+					_direction = -_direction
+					velocity.x = _direction.x * 2
+					velocity.z = _direction.z * 2
+					pivot.emit()
+					return
 				velocity.x -= (_direction.x * SLOPE_ACCEL)
 				velocity.z -= (_direction.z * SLOPE_ACCEL)
 			if Input.is_action_just_released("crouch"):
