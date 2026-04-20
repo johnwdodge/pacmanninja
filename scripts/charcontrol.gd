@@ -3,35 +3,49 @@ extends CharacterBody3D
 var manager = get_parent()
 # ── Settings ──────────────────────────────────────────
 const ACCEL: float = 12.0
-const AIR_ACCEL: float = 4
-const AIR_DECEL: float = 1
 const DECEL: float = 3.0
 const MAX_SPEED: float = 22.0
+
+const AIR_ACCEL: float = 4
+const AIR_DECEL: float = 1
+const AIRYOTE_TIME: float = 0.2
+const COYOTE_TIME: float = 0.2
+
 const CROUCH_SPEED: float = 8.0
-const JUMP_VELOCITY: float = 12.0
-const MOUSE_SENSITIVITY: float = 0.002
+const DASH_SPEED: float = 75.0
+const DASH_DURATION: float = 0.125
+
+const HEAD_CROUCH_HEIGHT: float = 1.0
+const HEAD_STAND_HEIGHT: float = 1.8
+
+const JUMP_VELOCITY: float = 15.0
 const MAX_LOOK_ANGLE: float = 89.0
+
+const METER_SEGMENT: float = 200
+const METER_SIZE: float = 800
+const METER_REFILL: float = 2
+const METER_REFILL_DELAY: float = 0.35
+const MOUSE_SENSITIVITY: float = 0.002
+const POWER_DURATION: float = 15
+
+const SLAM_SPEED: float = 100.0
+const SLAM_UP: float = 0.05
+const SLAM_JUMP_WINDOW = 0.05
+
+const SLIDE_DRAIN: float = 4
 const SLIDE_DURATION: float = 5.0
 const SLIDE_SPEED: float = 30.0
 const SLOPE_ACCEL: float = 1.3
-const DASH_SPEED: float = 75.0
-const DASH_DURATION: float = 0.125
-const WALL_LENIENCE: float = 0.15
-const HEAD_STAND_HEIGHT: float = 1.8
-const HEAD_CROUCH_HEIGHT: float = 1.0
-const WALL_JUMP_AWAY_FORCE: float = 10.0
-const POWER_DURATION: float = 15
-const METER_REFILL: float = 2
-const SLIDE_DRAIN: float = 4
-const METER_SEGMENT: float = 200
-const METER_SIZE: float = 800
+
+const SPEEDY_TIMER: float = 1.0
+const AIR_TIMER: float = 2.0
+
+const WALL_JUMP_AWAY_FORCE: float = 15.0
 const WALLJUMP_TIMEOUT: float = 0.03
-const SLAM_UP: float = 0.05
-const SLAM_SPEED: float = 100.0
-const METER_REFILL_DELAY: float = 0.35
+const WALL_LENIENCE: float = 0.15
+
 const SWORD_SCENE = preload("res://scenes/weapons/magic_sword.tscn")
-const COYOTE_TIME: float = 0.2
-const AIRYOTE_TIME: float = 0.2
+
 const COMBO_MULTIPLIERS: Array[int] = [1, 2, 3, 4, 5]
 const COMBO_DECAY_TIME: float = 3.0       # seconds before combo drops
 const COMBO_POWER_EXTEND: float = .5     # seconds added to power per kill
@@ -72,6 +86,16 @@ var _is_dead: bool = false
 var _combo_count: int = 0      # 0 = no combo, 1 = 2x, 2 = 3x, etc.
 var _combo_decay_timer: float = 0.0
 var _invin = false
+var speedytimer: float = 0.0
+var airtimer: float = 1.0
+var slamwindow: float = 0.05
+
+signal speedy
+signal airtime
+signal risky(factor)
+signal dashjump
+signal slamjump
+signal holeslide
 
 # ── State ─────────────────────────────────────────────
 
@@ -122,8 +146,35 @@ func _physics_process(delta: float) -> void:
 	_lerp_head(delta)
 	_tick_power(delta)
 	_tick_combo(delta)
-	
 
+#---checkers ---------------------
+func is_speedy(delta) -> void:
+	if _total_vel > MAX_SPEED:
+		if speedytimer > 0:
+			speedytimer -= delta
+		else:
+			speedy.emit()
+	else:
+		speedytimer = SPEEDY_TIMER
+
+func is_risky(delta) -> void:
+	var total = 0
+	var enemies = get_tree().get_nodes_in_group("enemy")
+	for enemy in enemies:
+		if global_position.distance_to(enemy.global_position) < 18:
+			total += 1
+	if total:
+		risky.emit(total)
+
+func is_airtime(delta) -> void:
+	if is_on_floor_only():
+		airtimer = AIR_TIMER
+	else:
+		if airtimer > 0:
+			airtimer -= delta
+		else:
+			airtime.emit()
+			
 # ── Combo ─────────────────────────────────────────────
 
 func _tick_combo(delta: float) -> void:
@@ -143,7 +194,7 @@ func _lerp_head(delta: float) -> void:
 func _apply_gravity(delta: float) -> void:
 	velocity.y -= _gravity * delta
 	if velocity.y < 0:
-		velocity.y -= (_gravity * 0.7) * delta
+		velocity.y -= (_gravity * 3.5) * delta
 
 # ── Idle ──────────────────────────────────────────────
 
@@ -262,9 +313,17 @@ func _handle_air(delta) -> void:
 func _handle_jump() -> void:
 	if _coyote_timer > 0:
 		_coyote_timer = 0
+		if state == State.slam and _current_meter > METER_SEGMENT:
+			_current_meter -= METER_SEGMENT
+			velocity.y = (JUMP_VELOCITY * 1.5)
+			slamjump.emit()
+			slamwindow = SLAM_JUMP_WINDOW
+			state = State.idle
+			return
 		velocity.y = JUMP_VELOCITY
 		if state == State.dash:
 			_current_meter -= METER_SEGMENT
+			dashjump.emit()
 			change_state(State.idle)
 	if _airyote_timer > 0 and ((state == State.air) or (state == State.wall)):
 		if _current_meter > METER_SEGMENT:
@@ -333,8 +392,8 @@ func _handle_dash(delta: float) -> void:
 		velocity.z = _direction.z * DASH_SPEED
 		velocity.y = 0
 	else:
-		velocity.x = _direction.x * (MAX_SPEED + 7)
-		velocity.z = _direction.z * (MAX_SPEED + 7)
+		velocity.x = _direction.x * (MAX_SPEED + 10)
+		velocity.z = _direction.z * (MAX_SPEED + 10)
 		change_state(State.idle)
 	move_and_slide()
 
@@ -405,7 +464,11 @@ func _handle_slam(delta) -> void:
 				else:
 					change_state(State.move)
 			else:
-				change_state(State.move)
+				if slamwindow > 0:
+					slamwindow -= delta
+				else:
+					slamwindow = SLAM_JUMP_WINDOW
+					change_state(State.move)
 	move_and_slide()
 
 # ── Movement ──────────────────────────────────────────

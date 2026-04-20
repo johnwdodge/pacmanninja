@@ -18,6 +18,8 @@ var nextposition: Vector3
 var _health: int
 
 func _ready() -> void:
+	add_to_group("enemy")
+	add_to_group("blinky")
 	lastpoint = astar.get_closest_point(global_position)
 	anim_player.play("Walking")
 	max_health = manager.get_ai_health()
@@ -97,7 +99,6 @@ func _handle_scatter(point):
 func _handle_ai_move(delta):
 	var playerpos = astar.get_closest_point(player.global_position)
 	var mypos = astar.get_closest_point(global_position)
-	print(mypos)
 	if astar.get_point_path(mypos, playerpos):
 		astar.set_point_weight_scale(lastpoint, 8.0)
 		pointpath = astar.get_point_path(mypos, playerpos)

@@ -9,7 +9,7 @@ extends Node
 @onready var siren = $siren
 @onready var tapestop = $"tape stop"
 
-const PELLET_DELAY = 3
+const PELLET_DELAY = 1
 var max_score = 0
 var _pellet_timer = PELLET_DELAY
 var altars: Array = []
@@ -68,7 +68,8 @@ func _process(_delta: float) -> void:
 		breaks.stop()
 		if not siren.is_playing():
 			siren.play()
-		
+
+	
 # --- Pellet Management ---
 func open_main_menu() -> void:
 	hud.visible = false

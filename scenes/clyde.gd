@@ -19,6 +19,8 @@ var _health: int
 @onready var hurtbox_col: CollisionShape3D = $hurtbox/hurtbox_col
 
 func _ready() -> void:
+	add_to_group("enemy")
+	add_to_group("clyde")
 	lastpoint = astar.get_closest_point(global_position)
 	anim_player.play("Walking")
 	max_health = manager.get_ai_health()

@@ -18,6 +18,8 @@ var _health: int
 var attacking = false
 
 func _ready() -> void:
+	add_to_group("enemy")
+	add_to_group("pinky")
 	lastpoint = astar.get_closest_point(global_position)
 	anim_player.play("Walking")
 	max_health = manager.get_ai_health()
