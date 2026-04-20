@@ -21,10 +21,10 @@ var current_level = null
 var score: int = 0
 
 # --- Difficulty Tiers ---
-const SCORE_THRESHOLDS: Array  = [0, 10, 20, 35, 50, 70, 100, 150]
-const MOVE_TIME_BY_TIER: Array  = [0.40, 0.36, 0.33, 0.3, 0.26, 0.23, 0.2, 0.2]
-const SPAWN_TIMER_BY_TIER: Array = [50,   45,   40,   35,   30,  20,  10,  5]
-const HEALTH_BY_TIER: Array      = [1,    1,    1,    1,    1,    1,   1,   1]
+const SCORE_THRESHOLDS: Array  = [0, 20, 60, 100]
+const MOVE_TIME_BY_TIER: Array  = [0.4,  0.33333333333, 0.28571428571, .25]
+const SPAWN_TIMER_BY_TIER: Array = [50, 35, 20, 10]
+const HEALTH_BY_TIER: Array      = [1,    1,    1,    1]
 
 # --- Equal-distribution spawn queue ---
 const AI_TYPES: Array = ["blinky", "pinky", "clyde"]
