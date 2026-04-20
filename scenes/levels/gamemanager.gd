@@ -22,7 +22,8 @@ var score: int = 0
 
 # --- Difficulty Tiers ---
 const SCORE_THRESHOLDS: Array  = [0, 20, 60, 100]
-const MOVE_TIME_BY_TIER: Array  = [0.4,  0.33333333333, 0.28571428571, .25]
+const MOVE_TIME_BY_TIER: Array  = [0.4, 0.35294117647,  0.31578947368, 0.28571428571]
+#150, 170, 190, 210
 const SPAWN_TIMER_BY_TIER: Array = [50, 35, 20, 10]
 const HEALTH_BY_TIER: Array      = [1,    1,    1,    1]
 const MIN_BY_TIER: Array         = [3, 5, 7, 10]

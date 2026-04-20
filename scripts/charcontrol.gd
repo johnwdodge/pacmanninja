@@ -119,7 +119,6 @@ func _ready() -> void:
 # ── Physics ───────────────────────────────────────────
 
 func _physics_process(delta: float) -> void:
-	print(_total_vel)
 	_temp_vel = Vector3(velocity.x, 0, velocity.z)
 	_total_vel = _temp_vel.length()
 	match state:
@@ -140,7 +139,6 @@ func _physics_process(delta: float) -> void:
 		State.walljump:
 			_handle_walljump(delta)
 	_update_meter(delta)
-	#print(_total_vel)
 	if is_on_floor():
 		_coyote_timer = COYOTE_TIME
 	else:
