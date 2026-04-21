@@ -16,6 +16,11 @@ extends Node
 @onready var light = $"../charcontrol/Head/DirectionalLight3D"
 
 func _ready() -> void:
+	player.dashjump.connect(handler)
+	player.slamjump.connect(handler)
+	player.risky.connect(handler)
+	player.airtime.connect(handler)
+	player.speedy.connect(handler)
 	add_to_group("hud")
 	set_powered(false)
 	_progress_bar.max_value = 1.0
@@ -42,6 +47,8 @@ func set_progress(value: float, max_value: float) -> void:
 func set_score(value: int) -> void:
 	_score.text = "SCORE: %d" % value
 
+func handler() -> void:
+	print("did something stylish")
 
 func _process(_delta: float) -> void:
 	if _death_screen != null and _death_screen.visible:

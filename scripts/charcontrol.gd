@@ -146,6 +146,9 @@ func _physics_process(delta: float) -> void:
 	_lerp_head(delta)
 	_tick_power(delta)
 	_tick_combo(delta)
+	is_airtime(delta)
+	is_risky(delta)
+	is_speedy(delta)
 
 #---checkers ---------------------
 func is_speedy(delta) -> void:
