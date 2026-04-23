@@ -2,12 +2,13 @@ extends CharacterBody3D
 
 var manager = get_parent()
 # ── Settings ──────────────────────────────────────────
-const ACCEL: float = 12.0
+const ACCEL: float = 10 * MAX_SPEED
 const DECEL: float = 3.0
 const MAX_SPEED: float = 22.0
+const FRICTION: float = 5.5
 
-const AIR_ACCEL: float = 4
-const AIR_DECEL: float = 1
+const AIR_ACCEL: float = 8
+const AIR_FRICTION: float = 0.1
 const AIRYOTE_TIME: float = 0.2
 const COYOTE_TIME: float = 0.2
 
@@ -30,12 +31,13 @@ const POWER_DURATION: float = 15
 
 const SLAM_SPEED: float = 100.0
 const SLAM_UP: float = 0.05
-const SLAM_JUMP_WINDOW = 0.05
+const SLAM_JUMP_WINDOW = 0.1
 
 const SLIDE_DRAIN: float = 4
 const SLIDE_DURATION: float = 5.0
 const SLIDE_SPEED: float = 30.0
-const SLOPE_ACCEL: float = .5
+const SLOPE_ACCEL: float = .8
+const SLOPE_DECEL: float = .4
 
 const SPEEDY_TIMER: float = 1.0
 const AIR_TIMER: float = 2.0
@@ -88,7 +90,7 @@ var _combo_decay_timer: float = 0.0
 var _invin = false
 var speedytimer: float = 0.0
 var airtimer: float = 1.0
-var slamwindow: float = 0.05
+var slamwindow: float = 0.1
 
 signal speedy
 signal airtime
@@ -121,6 +123,7 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	_temp_vel = Vector3(velocity.x, 0, velocity.z)
 	_total_vel = _temp_vel.length()
+	print(_total_vel)
 	match state:
 		State.idle:
 			_handle_idle()
@@ -149,6 +152,8 @@ func _physics_process(delta: float) -> void:
 	is_airtime(delta)
 	is_risky(delta)
 	is_speedy(delta)
+	if slamwindow:
+		slamwindow -= delta
 
 #---checkers ---------------------
 func is_speedy(delta) -> void:
@@ -197,7 +202,7 @@ func _lerp_head(delta: float) -> void:
 func _apply_gravity(delta: float) -> void:
 	velocity.y -= _gravity * delta
 	if velocity.y < 0:
-		velocity.y -= (_gravity * 3.5) * delta
+		velocity.y -= (_gravity * 2) * delta
 
 # ── Idle ──────────────────────────────────────────────
 
@@ -304,23 +309,26 @@ func _handle_air(delta) -> void:
 	_apply_gravity(delta)
 	var input_dir := Input.get_vector("move_left", "move_right", "move_forward", "move_back")
 	_direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-	if _direction:
-		if _total_vel < MAX_SPEED:
-			velocity.x = lerp(velocity.x, _direction.x * MAX_SPEED, AIR_ACCEL * delta)
-			velocity.z = lerp(velocity.z, _direction.z * MAX_SPEED, AIR_ACCEL * delta)
-		else:
-			velocity.x = lerp(velocity.x, _direction.x * MAX_SPEED, AIR_DECEL * delta)
-			velocity.z = lerp(velocity.z, _direction.z * MAX_SPEED, AIR_DECEL * delta)
+	var horvel = update_velocity_air(_direction, AIR_ACCEL, delta)
+	velocity.x = horvel.x
+	velocity.z = horvel.z
+#	if _direction:
+#		if _total_vel < MAX_SPEED:
+#			velocity.x = lerp(velocity.x, _direction.x * MAX_SPEED, AIR_ACCEL * delta)
+#			velocity.z = lerp(velocity.z, _direction.z * MAX_SPEED, AIR_ACCEL * delta)
+#		else:
+#			velocity.x = lerp(velocity.x, _direction.x * MAX_SPEED, AIR_DECEL * delta)
+#			velocity.z = lerp(velocity.z, _direction.z * MAX_SPEED, AIR_DECEL * delta)
 	move_and_slide()
 
 func _handle_jump() -> void:
 	if _coyote_timer > 0:
 		_coyote_timer = 0
-		if state == State.slam and _current_meter > METER_SEGMENT:
+		if slamwindow > 0 and _current_meter > METER_SEGMENT:
 			_current_meter -= METER_SEGMENT
 			velocity.y = (JUMP_VELOCITY * 1.5)
 			slamjump.emit()
-			slamwindow = SLAM_JUMP_WINDOW
+			slamwindow = 0
 			state = State.idle
 			return
 		velocity.y = JUMP_VELOCITY
@@ -367,13 +375,14 @@ func _handle_wall_slide(delta) -> void:
 		if Input.is_action_pressed("move_back") or Input.is_action_pressed("move_left") or Input.is_action_pressed("move_right"):
 			_wall_timer = WALL_LENIENCE
 	else: _airyote_timer -= delta
+	velocity = update_velocity_ground(_direction, MAX_SPEED, delta)
 	if _direction:
-		if _total_vel < MAX_SPEED:
-			velocity.x = lerp(velocity.x, _direction.x * MAX_SPEED, ACCEL * delta)
-			velocity.z = lerp(velocity.z, _direction.z * MAX_SPEED, ACCEL * delta)
-		else:
-			velocity.x = lerp(velocity.x, _direction.x * MAX_SPEED, DECEL * delta)
-			velocity.z = lerp(velocity.z, _direction.z * MAX_SPEED, DECEL * delta)
+#		if _total_vel < MAX_SPEED:
+#			velocity.x = lerp(velocity.x, _direction.x * MAX_SPEED, ACCEL * delta)
+#			velocity.z = lerp(velocity.z, _direction.z * MAX_SPEED, ACCEL * delta)
+#		else:
+#			velocity.x = lerp(velocity.x, _direction.x * MAX_SPEED, DECEL * delta)
+#			velocity.z = lerp(velocity.z, _direction.z * MAX_SPEED, DECEL * delta)
 		if not is_on_wall_only():
 			_wall_timer -= delta
 	else:
@@ -426,8 +435,8 @@ func _handle_slide(delta: float) -> void:
 					velocity.z = _direction.z * 2
 					pivot.emit()
 					return
-				velocity.x -= (_direction.x * SLOPE_ACCEL)
-				velocity.z -= (_direction.z * SLOPE_ACCEL)
+				velocity.x -= (_direction.x * SLOPE_DECEL)
+				velocity.z -= (_direction.z * SLOPE_DECEL)
 			if Input.is_action_just_released("crouch"):
 				change_state(State.idle)
 				return
@@ -437,8 +446,8 @@ func _handle_slide(delta: float) -> void:
 			velocity.x = _direction.x * SLIDE_SPEED
 			velocity.z = _direction.z * SLIDE_SPEED
 		else:
-			velocity.x = lerp(velocity.x, _direction.x * SLIDE_SPEED, AIR_DECEL * delta)
-			velocity.z = lerp(velocity.z, _direction.z * SLIDE_SPEED, AIR_DECEL * delta)
+			velocity.x = lerp(velocity.x, _direction.x * SLIDE_SPEED, AIR_FRICTION * delta)
+			velocity.z = lerp(velocity.z, _direction.z * SLIDE_SPEED, AIR_FRICTION * delta)
 		if Input.is_action_just_released("crouch"):
 			change_state(State.idle)
 			return
@@ -472,6 +481,7 @@ func _handle_slam(delta) -> void:
 	else:
 		velocity.y = -SLAM_SPEED
 		if is_on_floor():
+			slamwindow = SLAM_JUMP_WINDOW
 			if Input.is_action_pressed("crouch"):
 				var input_dir := Input.get_vector("move_left", "move_right", "move_forward", "move_back")
 				_direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
@@ -480,11 +490,7 @@ func _handle_slam(delta) -> void:
 				else:
 					change_state(State.move)
 			else:
-				if slamwindow > 0:
-					slamwindow -= delta
-				else:
-					slamwindow = SLAM_JUMP_WINDOW
-					change_state(State.move)
+				change_state(State.move)
 	move_and_slide()
 
 # ── Movement ──────────────────────────────────────────
@@ -497,29 +503,31 @@ func _handle_movement(delta: float) -> void:
 	_direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if _is_crouching:
 		_current_speed = CROUCH_SPEED
+#	else:
+#		if _current_speed > MAX_SPEED:
+#			_current_speed -= DECEL
+#		else:
+#			_current_speed += ACCEL
+	#if _direction:
+	if _direction.dot(-global_transform.basis.z.normalized()) > -0.1:
+		velocity = update_velocity_ground(_direction, MAX_SPEED, delta)
+#				if _total_vel < MAX_SPEED:
+#					velocity.x = lerp(velocity.x, _direction.x * MAX_SPEED, ACCEL * delta)
+#					velocity.z = lerp(velocity.z, _direction.z * MAX_SPEED, ACCEL * delta)
+#				else:
+#					velocity.x = lerp(velocity.x, _direction.x * MAX_SPEED, DECEL * delta)
+#					velocity.z = lerp(velocity.z, _direction.z * MAX_SPEED, DECEL * delta)
 	else:
-		if _current_speed > MAX_SPEED:
-			_current_speed -= DECEL
-		else:
-			_current_speed += ACCEL
-	if _direction:
-			if _direction.dot(-global_transform.basis.z.normalized()) > -0.1:
-				if _total_vel < MAX_SPEED:
-					velocity.x = lerp(velocity.x, _direction.x * MAX_SPEED, ACCEL * delta)
-					velocity.z = lerp(velocity.z, _direction.z * MAX_SPEED, ACCEL * delta)
-				else:
-					velocity.x = lerp(velocity.x, _direction.x * MAX_SPEED, DECEL * delta)
-					velocity.z = lerp(velocity.z, _direction.z * MAX_SPEED, DECEL * delta)
-			else:
-				if _total_vel < (MAX_SPEED * 0.8):
-					velocity.x = lerp(velocity.x, _direction.x * (MAX_SPEED * 0.8), ACCEL * delta)
-					velocity.z = lerp(velocity.z, _direction.z * (MAX_SPEED * 0.8), ACCEL * delta)
-				else:
-					velocity.x = lerp(velocity.x, _direction.x * (MAX_SPEED * 0.8), DECEL * delta)
-					velocity.z = lerp(velocity.z, _direction.z * (MAX_SPEED * 0.8), DECEL * delta)
-	else:
-		velocity.x = lerp(velocity.x, 0.0, ACCEL * delta)
-		velocity.z = lerp(velocity.z, 0.0, ACCEL * delta)
+		velocity = update_velocity_ground(_direction, MAX_SPEED * 0.8, delta)
+#				if _total_vel < (MAX_SPEED * 0.8):
+#					velocity.x = lerp(velocity.x, _direction.x * (MAX_SPEED * 0.8), ACCEL * delta)
+#					velocity.z = lerp(velocity.z, _direction.z * (MAX_SPEED * 0.8), ACCEL * delta)
+#				else:
+#					velocity.x = lerp(velocity.x, _direction.x * (MAX_SPEED * 0.8), DECEL * delta)
+#					velocity.z = lerp(velocity.z, _direction.z * (MAX_SPEED * 0.8), DECEL * delta)
+	#else:
+		#velocity.x = lerp(velocity.x, 0.0, 10 * delta)
+		#velocity.z = lerp(velocity.z, 0.0, 10 * delta)
 	if _has_ceiling_obstruction():
 		_set_crouch(true)
 	else:
@@ -575,3 +583,40 @@ func reset() -> void:
 	_hud.hide_death_screen()
 	_hud.set_powered(false)
 	_hud.set_meter(METER_SIZE, METER_SIZE)
+	
+func accelerate(wish_dir: Vector3, max_velocity: float, delta):
+	# Get our current speed as a projection of velocity onto the wish_dir
+	var current_speed = _temp_vel.dot(wish_dir)
+	# How much we accelerate is the difference between the max speed and the current speed
+	# clamped to be between 0 and MAX_ACCELERATION which is intended to stop you from going too fast
+	var add_speed = clamp(max_velocity - current_speed, 0, ACCEL * delta)
+	
+	return velocity + add_speed * wish_dir
+
+func update_velocity_ground(wish_dir: Vector3, maxvel: float,delta):
+	# Apply friction when on the ground and then accelerate
+	
+	if _total_vel != 0:
+		var control = max(DECEL, _total_vel)
+		var drop = control * FRICTION * delta
+		
+		# Scale the velocity based on friction
+		_temp_vel *= max(_total_vel - drop, 0) / _total_vel
+		velocity.x = _temp_vel.x
+		velocity.z = _temp_vel.z
+	
+	return accelerate(wish_dir, maxvel, delta)
+
+func update_velocity_air(wish_dir: Vector3, maxvel: float,delta):
+	# Apply friction when on the ground and then accelerate
+	
+	if _total_vel != 0:
+		var control = max(DECEL, _total_vel)
+		var drop = control * AIR_FRICTION * delta
+		
+		# Scale the velocity based on friction
+		_temp_vel *= max(_total_vel - drop, 0) / _total_vel
+		velocity.x = _temp_vel.x
+		velocity.z = _temp_vel.z
+	
+	return accelerate(wish_dir, maxvel, delta)
